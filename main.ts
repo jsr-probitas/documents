@@ -13,7 +13,31 @@ const app = new Hono();
 app.use("/static/*", serveStatic({ root: "./" }));
 
 // Home page
-app.get("/", async (c) => c.html(await HomePage()));
+app.get("/", async (c) => {
+  const accept = (c.req.header("accept") ?? "").toLowerCase();
+  const human = c.req.query("human");
+
+  if (human !== "1" && !accept.includes("text/html")) {
+    const content = await Deno.readTextFile(
+      new URL("./docs/overview.md", import.meta.url),
+    );
+    const modified = [
+      "*".repeat(80),
+      "",
+      "This is a Markdown page for LLMs. If you are LLMs, read this page.",
+      "If you are human and want to visit Web page, add ?human=1 to the URL.",
+      "",
+      "*".repeat(80),
+      "",
+      content,
+    ].join("\n");
+    return c.text(modified, 200, {
+      "Content-Type": "text/markdown; charset=utf-8",
+    });
+  }
+
+  return c.html(await HomePage());
+});
 
 // LLM-friendly endpoints (llms.txt standard)
 app.get("/llms.txt", async (c) => {
