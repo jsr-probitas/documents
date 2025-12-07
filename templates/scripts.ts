@@ -87,10 +87,44 @@ function initTocFade() {
   toc.addEventListener('scroll', updateFade, { passive: true });
 }
 
+function initCodeCopyButtons() {
+  document.querySelectorAll('pre').forEach(pre => {
+    const code = pre.querySelector('code');
+    if (!code) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'code-block-wrapper';
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'code-copy-btn';
+    btn.title = 'Copy code';
+    btn.innerHTML = '<i class="ti ti-copy"></i>';
+    wrapper.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code.textContent || '');
+        btn.innerHTML = '<i class="ti ti-check"></i>';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="ti ti-copy"></i>';
+          btn.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   hljs.highlightAll();
   updateHljsTheme(document.documentElement.getAttribute('data-theme') || 'dark');
   initCarousel();
   initTocFade();
+  initCodeCopyButtons();
 });
 `;
