@@ -14,6 +14,7 @@ import {
   loadPackageDoc,
   type PackageGroup,
 } from "../../data/api-pages.ts";
+import { parseApiMarkdown } from "../../lib/markdown.ts";
 import { Layout } from "../Layout.tsx";
 import { mainScript } from "../scripts.ts";
 import { ApiToc, DocNodeRenderer, PackageSidebar } from "./components.tsx";
@@ -207,9 +208,16 @@ export async function PackagePage({ packageName }: PackagePageProps) {
                 </header>
 
                 {doc.moduleDoc && (
-                  <div class="module-doc">
-                    <p>{doc.moduleDoc}</p>
-                  </div>
+                  <div
+                    class="module-doc markdown-content"
+                    dangerouslySetInnerHTML={{
+                      __html: parseApiMarkdown(doc.moduleDoc, {
+                        typeToPackage,
+                        localTypes,
+                        currentPackage: packageName,
+                      }),
+                    }}
+                  />
                 )}
 
                 <div class="api-install">

@@ -21,7 +21,10 @@ import {
   getParamDocs,
   getReturnDoc,
 } from "../../lib/api-docs.ts";
-import { parseMarkdown } from "../../lib/markdown.ts";
+import {
+  type ApiMarkdownOptions,
+  parseApiMarkdown,
+} from "../../lib/markdown.ts";
 import {
   formatClassSignature,
   formatConstructorSignature,
@@ -389,7 +392,13 @@ export function ParamList(
               {doc && (
                 <div
                   class="param-desc api-markdown"
-                  dangerouslySetInnerHTML={{ __html: parseMarkdown(doc) }}
+                  dangerouslySetInnerHTML={{
+                    __html: parseApiMarkdown(doc, {
+                      localTypes,
+                      typeToPackage,
+                      currentPackage,
+                    }),
+                  }}
                 />
               )}
             </li>
@@ -404,14 +413,20 @@ export function ParamList(
 // JSDoc Display
 // ============================================================================
 
-interface DescriptionProps {
+interface DescriptionProps extends TypeLinkContext {
   text?: string;
 }
 
-export function Description({ text }: DescriptionProps) {
+export function Description(
+  { text, localTypes, typeToPackage, currentPackage }: DescriptionProps,
+) {
   if (!text) return null;
-  // Parse as Markdown for rich formatting
-  const html = parseMarkdown(text);
+  // Parse as Markdown for rich formatting with JSDoc link support
+  const html = parseApiMarkdown(text, {
+    localTypes,
+    typeToPackage,
+    currentPackage,
+  });
   return (
     <div
       class="api-description api-markdown"
@@ -420,12 +435,20 @@ export function Description({ text }: DescriptionProps) {
   );
 }
 
-interface ExamplesProps {
+interface ExamplesProps extends TypeLinkContext {
   examples: string[];
 }
 
-export function Examples({ examples }: ExamplesProps) {
+export function Examples(
+  { examples, localTypes, typeToPackage, currentPackage }: ExamplesProps,
+) {
   if (examples.length === 0) return null;
+
+  const mdOptions: ApiMarkdownOptions = {
+    localTypes,
+    typeToPackage,
+    currentPackage,
+  };
 
   return (
     <div class="api-examples">
@@ -434,7 +457,7 @@ export function Examples({ examples }: ExamplesProps) {
         const trimmed = example.trim();
         // Always parse as markdown - examples may contain description text
         // followed by code blocks (e.g., "Basic usage\n```ts\n...")
-        const html = parseMarkdown(trimmed);
+        const html = parseApiMarkdown(trimmed, mdOptions);
         return (
           <div
             key={i}
@@ -490,7 +513,12 @@ export function FunctionDoc(
         </pre>
       </div>
 
-      <Description text={description} />
+      <Description
+        text={description}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       <ParamList
         params={def.params}
@@ -515,7 +543,12 @@ export function FunctionDoc(
         </div>
       )}
 
-      <Examples examples={examples} />
+      <Examples
+        examples={examples}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       {/* Additional overloads */}
       {hasOverloads && (
@@ -573,7 +606,14 @@ function FunctionOverloadItem(
           </code>
         </pre>
       </div>
-      {description && <Description text={description} />}
+      {description && (
+        <Description
+          text={description}
+          localTypes={localTypes}
+          typeToPackage={typeToPackage}
+          currentPackage={currentPackage}
+        />
+      )}
       <ParamList
         params={def.params}
         paramDocs={paramDocs}
@@ -640,8 +680,18 @@ export function ClassDoc(
         </pre>
       </div>
 
-      <Description text={description} />
-      <Examples examples={examples} />
+      <Description
+        text={description}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
+      <Examples
+        examples={examples}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       {/* Constructor */}
       {def.constructors.length > 0 && (
@@ -658,7 +708,11 @@ export function ClassDoc(
                 <div
                   class="constructor-desc api-markdown"
                   dangerouslySetInnerHTML={{
-                    __html: parseMarkdown(ctor.jsDoc.doc),
+                    __html: parseApiMarkdown(ctor.jsDoc.doc, {
+                      localTypes,
+                      typeToPackage,
+                      currentPackage,
+                    }),
                   }}
                 />
               )}
@@ -699,7 +753,13 @@ export function ClassDoc(
                   {desc && (
                     <div
                       class="property-desc api-markdown"
-                      dangerouslySetInnerHTML={{ __html: parseMarkdown(desc) }}
+                      dangerouslySetInnerHTML={{
+                        __html: parseApiMarkdown(desc, {
+                          localTypes,
+                          typeToPackage,
+                          currentPackage,
+                        }),
+                      }}
                     />
                   )}
                 </li>
@@ -754,7 +814,13 @@ function MethodDisplay(
       {method.jsDoc?.doc && (
         <div
           class="method-desc api-markdown"
-          dangerouslySetInnerHTML={{ __html: parseMarkdown(method.jsDoc.doc) }}
+          dangerouslySetInnerHTML={{
+            __html: parseApiMarkdown(method.jsDoc.doc, {
+              localTypes,
+              typeToPackage,
+              currentPackage,
+            }),
+          }}
         />
       )}
       {method.params && method.params.length > 0 && (
@@ -803,8 +869,18 @@ export function InterfaceDoc(
         </pre>
       </div>
 
-      <Description text={description} />
-      <Examples examples={examples} />
+      <Description
+        text={description}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
+      <Examples
+        examples={examples}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       {/* Properties */}
       {def.properties.length > 0 && (
@@ -835,7 +911,13 @@ export function InterfaceDoc(
                   {desc && (
                     <div
                       class="property-desc api-markdown"
-                      dangerouslySetInnerHTML={{ __html: parseMarkdown(desc) }}
+                      dangerouslySetInnerHTML={{
+                        __html: parseApiMarkdown(desc, {
+                          localTypes,
+                          typeToPackage,
+                          currentPackage,
+                        }),
+                      }}
                     />
                   )}
                 </li>
@@ -905,7 +987,12 @@ export function TypeAliasDoc(
         </pre>
       </div>
 
-      <Description text={description} />
+      <Description
+        text={description}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       <RelatedTypes
         typeRefs={typeRefs}
@@ -953,7 +1040,12 @@ export function VariableDoc(
         </pre>
       </div>
 
-      <Description text={description} />
+      <Description
+        text={description}
+        localTypes={localTypes}
+        typeToPackage={typeToPackage}
+        currentPackage={currentPackage}
+      />
 
       <RelatedTypes
         typeRefs={typeRefs}

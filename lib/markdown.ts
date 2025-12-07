@@ -34,6 +34,81 @@ export function parseMarkdown(content: string): string {
   return marked.parse(content, { async: false }) as string;
 }
 
+/**
+ * Options for parsing API documentation markdown
+ */
+export interface ApiMarkdownOptions {
+  /** Map of type names to package names for cross-package linking */
+  typeToPackage?: Map<string, string>;
+  /** Set of local type names in the current package */
+  localTypes?: Set<string>;
+  /** Current package name (e.g., "builder") */
+  currentPackage?: string;
+}
+
+/**
+ * Process JSDoc link tags ({@link name} and {@linkcode name}) to HTML links
+ *
+ * Supports formats:
+ * - {@link TypeName} - creates a link with regular text
+ * - {@linkcode TypeName} - creates a link with code formatting
+ * - {@link TypeName description} - link with custom description text
+ */
+function processJsDocLinks(
+  content: string,
+  options: ApiMarkdownOptions,
+): string {
+  const { typeToPackage, localTypes, currentPackage } = options;
+
+  // Match {@link name} or {@linkcode name} with optional description
+  // Pattern: {@link(code)? name (optional description)}
+  // Name must not contain } or whitespace
+  const linkPattern = /\{@(link|linkcode)\s+([^\s}]+)(?:\s+([^}]+))?\}/g;
+
+  return content.replace(linkPattern, (_, tag, name, description) => {
+    const isCode = tag === "linkcode";
+    const displayText = description?.trim() || name;
+
+    // Determine the target URL
+    let href: string | null = null;
+
+    // Check if it's a local type in the current package
+    if (localTypes?.has(name) && currentPackage) {
+      href = `/api/${currentPackage}#${name.toLowerCase()}`;
+    } // Check if it's in another package
+    else if (typeToPackage?.has(name)) {
+      const targetPackage = typeToPackage.get(name)!;
+      href = `/api/${targetPackage}#${name.toLowerCase()}`;
+    } // Default: link to current package anchor (best effort)
+    else if (currentPackage) {
+      href = `/api/${currentPackage}#${name.toLowerCase()}`;
+    }
+
+    // Format the display text
+    const formattedText = isCode ? `<code>${displayText}</code>` : displayText;
+
+    // Return link or just formatted text if no href could be determined
+    if (href) {
+      return `<a href="${href}" class="type-link">${formattedText}</a>`;
+    }
+    return formattedText;
+  });
+}
+
+/**
+ * Parse API documentation markdown with JSDoc link support
+ *
+ * This function processes JSDoc {@link} and {@linkcode} tags before
+ * parsing as markdown, creating proper links to API documentation.
+ */
+export function parseApiMarkdown(
+  content: string,
+  options: ApiMarkdownOptions = {},
+): string {
+  const processed = processJsDocLinks(content, options);
+  return parseMarkdown(processed);
+}
+
 /** Read and parse a markdown file */
 export async function readMarkdownFile(path: string): Promise<string> {
   const content = await Deno.readTextFile(path);

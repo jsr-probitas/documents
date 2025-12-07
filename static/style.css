@@ -1333,6 +1333,76 @@ body:has(.api-layout) .global-header {
   line-height: 1.7;
 }
 
+.module-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+}
+
+.module-doc th,
+.module-doc td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.module-doc th {
+  background: var(--bg-primary);
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.module-doc td {
+  color: var(--text-primary);
+}
+
+.module-doc td code {
+  font-size: 0.8rem;
+  color: var(--accent-light);
+}
+
+.module-doc tbody tr:hover {
+  background: var(--bg-primary);
+}
+
+.module-doc h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 1.5rem 0 0.75rem;
+}
+
+.module-doc h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 1.25rem 0 0.5rem;
+}
+
+.module-doc h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 1rem 0 0.5rem;
+}
+
+.module-doc h4,
+.module-doc h5,
+.module-doc h6 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0.75rem 0 0.5rem;
+}
+
+.module-doc h1:first-child,
+.module-doc h2:first-child,
+.module-doc h3:first-child,
+.module-doc h4:first-child {
+  margin-top: 0;
+}
+
 /* Installation Block */
 .api-install {
   margin-bottom: 2rem;
