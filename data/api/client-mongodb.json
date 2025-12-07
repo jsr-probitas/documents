@@ -2,15 +2,116 @@
   "name": "client-mongodb",
   "specifier": "@probitas/client-mongodb",
   "version": "0.2.0",
+  "moduleDoc": "MongoDB client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides a MongoDB client with fluent assertion APIs, designed for\nintegration testing of applications using MongoDB.\n\n## Features\n\n- **CRUD Operations**: find, findOne, insertOne, insertMany, updateOne, updateMany, deleteOne, deleteMany\n- **Aggregations**: Full aggregation pipeline support\n- **Sessions**: Transaction support with sessions\n- **Fluent Assertions**: `expectMongoResult()` for testing MongoDB operations\n- **Type Safety**: Generic type parameters for document types\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-mongodb\n```\n\n## Quick Start\n\n```ts\nimport { createMongoClient, expectMongoResult } from \"@probitas/client-mongodb\";\n\nconst client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\n// Get a collection\nconst users = client.collection<{ name: string; email: string }>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", email: \"alice@example.com\" });\nexpectMongoResult(insertResult).ok().hasInsertedId();\n\n// Find documents\nconst findResult = await users.find({ name: \"Alice\" });\nexpectMongoResult(findResult).ok().countAtLeast(1);\n\n// Find one document\nconst user = await users.findOne({ name: \"Alice\" });\nexpectMongoResult(user).ok().dataContains({ email: \"alice@example.com\" });\n\nawait client.close();\n```\n\n## Transactions\n\n```ts\nawait client.withSession(async (session) => {\n  session.startTransaction();\n  try {\n    const accounts = client.collection(\"accounts\");\n    await accounts.updateOne(\n      { _id: \"from\" },\n      { $inc: { balance: -100 } },\n      { session }\n    );\n    await accounts.updateOne(\n      { _id: \"to\" },\n      { $inc: { balance: 100 } },\n      { session }\n    );\n    await session.commitTransaction();\n  } catch (error) {\n    await session.abortTransaction();\n    throw error;\n  }\n});\n```\n\n## Using with `using` Statement\n\n```ts\nawait using client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await client.collection(\"test\").findOne({});\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [MongoDB](https://www.mongodb.com/)\n",
   "exports": [
+    {
+      "name": "MongoConnectionConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 8,
+        "col": 0,
+        "byteIndex": 200
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB connection configuration.\n\nExtends CommonConnectionConfig with MongoDB-specific options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonConnectionConfig",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonConnectionConfig"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "database",
+            "jsDoc": {
+              "doc": "Database name to connect to."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 320
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "authSource",
+            "jsDoc": {
+              "doc": "Authentication database."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 393
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "replicaSet",
+            "jsDoc": {
+              "doc": "Replica set name."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 461
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
     {
       "name": "Document",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 7,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 29,
         "col": 0,
-        "byteIndex": 132
+        "byteIndex": 563
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -56,10 +157,10 @@
       "name": "Filter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 14,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 36,
         "col": 0,
-        "byteIndex": 354
+        "byteIndex": 785
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -93,10 +194,10 @@
       "name": "UpdateFilter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 21,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 43,
         "col": 0,
-        "byteIndex": 579
+        "byteIndex": 1010
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -130,10 +231,10 @@
       "name": "MongoDocs",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 26,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 48,
         "col": 0,
-        "byteIndex": 678
+        "byteIndex": 1109
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -166,10 +267,10 @@
             "name": "first",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 27,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 49,
               "col": 2,
-              "byteIndex": 737
+              "byteIndex": 1168
             },
             "params": [],
             "optional": false,
@@ -198,10 +299,10 @@
             "name": "firstOrThrow",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 28,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 50,
               "col": 2,
-              "byteIndex": 763
+              "byteIndex": 1194
             },
             "params": [],
             "optional": false,
@@ -219,10 +320,10 @@
             "name": "last",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 29,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 51,
               "col": 2,
-              "byteIndex": 784
+              "byteIndex": 1215
             },
             "params": [],
             "optional": false,
@@ -251,10 +352,10 @@
             "name": "lastOrThrow",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 30,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 52,
               "col": 2,
-              "byteIndex": 809
+              "byteIndex": 1240
             },
             "params": [],
             "optional": false,
@@ -283,10 +384,10 @@
       "name": "MongoFindResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 36,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 58,
         "col": 0,
-        "byteIndex": 872
+        "byteIndex": 1303
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -301,10 +402,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 37,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 59,
               "col": 2,
-              "byteIndex": 923
+              "byteIndex": 1354
             },
             "params": [],
             "readonly": true,
@@ -323,10 +424,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 38,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 60,
               "col": 2,
-              "byteIndex": 954
+              "byteIndex": 1385
             },
             "params": [],
             "readonly": true,
@@ -342,10 +443,10 @@
           {
             "name": "docs",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 39,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 61,
               "col": 2,
-              "byteIndex": 978
+              "byteIndex": 1409
             },
             "params": [],
             "readonly": true,
@@ -373,10 +474,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 40,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 62,
               "col": 2,
-              "byteIndex": 1009
+              "byteIndex": 1440
             },
             "params": [],
             "readonly": true,
@@ -411,10 +512,10 @@
       "name": "MongoInsertOneResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 46,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 68,
         "col": 0,
-        "byteIndex": 1068
+        "byteIndex": 1499
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -429,10 +530,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 47,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 69,
               "col": 2,
-              "byteIndex": 1110
+              "byteIndex": 1541
             },
             "params": [],
             "readonly": true,
@@ -451,10 +552,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 48,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 70,
               "col": 2,
-              "byteIndex": 1143
+              "byteIndex": 1574
             },
             "params": [],
             "readonly": true,
@@ -470,10 +571,10 @@
           {
             "name": "insertedId",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 49,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 71,
               "col": 2,
-              "byteIndex": 1167
+              "byteIndex": 1598
             },
             "params": [],
             "readonly": true,
@@ -489,10 +590,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 50,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 72,
               "col": 2,
-              "byteIndex": 1198
+              "byteIndex": 1629
             },
             "params": [],
             "readonly": true,
@@ -515,10 +616,10 @@
       "name": "MongoInsertManyResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 56,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 78,
         "col": 0,
-        "byteIndex": 1258
+        "byteIndex": 1689
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -533,10 +634,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 57,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 79,
               "col": 2,
-              "byteIndex": 1301
+              "byteIndex": 1732
             },
             "params": [],
             "readonly": true,
@@ -555,10 +656,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 58,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 80,
               "col": 2,
-              "byteIndex": 1334
+              "byteIndex": 1765
             },
             "params": [],
             "readonly": true,
@@ -574,10 +675,10 @@
           {
             "name": "insertedIds",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 59,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 81,
               "col": 2,
-              "byteIndex": 1358
+              "byteIndex": 1789
             },
             "params": [],
             "readonly": true,
@@ -604,10 +705,10 @@
           {
             "name": "insertedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 60,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 82,
               "col": 2,
-              "byteIndex": 1401
+              "byteIndex": 1832
             },
             "params": [],
             "readonly": true,
@@ -623,10 +724,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 61,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 83,
               "col": 2,
-              "byteIndex": 1435
+              "byteIndex": 1866
             },
             "params": [],
             "readonly": true,
@@ -649,10 +750,10 @@
       "name": "MongoUpdateResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 67,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 89,
         "col": 0,
-        "byteIndex": 1490
+        "byteIndex": 1921
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -667,10 +768,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 68,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 90,
               "col": 2,
-              "byteIndex": 1529
+              "byteIndex": 1960
             },
             "params": [],
             "readonly": true,
@@ -689,10 +790,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 69,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 91,
               "col": 2,
-              "byteIndex": 1562
+              "byteIndex": 1993
             },
             "params": [],
             "readonly": true,
@@ -708,10 +809,10 @@
           {
             "name": "matchedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 70,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 92,
               "col": 2,
-              "byteIndex": 1586
+              "byteIndex": 2017
             },
             "params": [],
             "readonly": true,
@@ -727,10 +828,10 @@
           {
             "name": "modifiedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 71,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 93,
               "col": 2,
-              "byteIndex": 1619
+              "byteIndex": 2050
             },
             "params": [],
             "readonly": true,
@@ -746,10 +847,10 @@
           {
             "name": "upsertedId",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 72,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 94,
               "col": 2,
-              "byteIndex": 1653
+              "byteIndex": 2084
             },
             "params": [],
             "readonly": true,
@@ -765,10 +866,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 73,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 95,
               "col": 2,
-              "byteIndex": 1685
+              "byteIndex": 2116
             },
             "params": [],
             "readonly": true,
@@ -791,10 +892,10 @@
       "name": "MongoDeleteResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 79,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 101,
         "col": 0,
-        "byteIndex": 1740
+        "byteIndex": 2171
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -809,10 +910,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 80,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 102,
               "col": 2,
-              "byteIndex": 1779
+              "byteIndex": 2210
             },
             "params": [],
             "readonly": true,
@@ -831,10 +932,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 81,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 103,
               "col": 2,
-              "byteIndex": 1812
+              "byteIndex": 2243
             },
             "params": [],
             "readonly": true,
@@ -850,10 +951,10 @@
           {
             "name": "deletedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 82,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 104,
               "col": 2,
-              "byteIndex": 1836
+              "byteIndex": 2267
             },
             "params": [],
             "readonly": true,
@@ -869,10 +970,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 83,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 105,
               "col": 2,
-              "byteIndex": 1869
+              "byteIndex": 2300
             },
             "params": [],
             "readonly": true,
@@ -895,10 +996,10 @@
       "name": "MongoFindOneResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 89,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 111,
         "col": 0,
-        "byteIndex": 1925
+        "byteIndex": 2356
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -913,10 +1014,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 90,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 112,
               "col": 2,
-              "byteIndex": 1979
+              "byteIndex": 2410
             },
             "params": [],
             "readonly": true,
@@ -935,10 +1036,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 91,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 113,
               "col": 2,
-              "byteIndex": 2014
+              "byteIndex": 2445
             },
             "params": [],
             "readonly": true,
@@ -954,10 +1055,10 @@
           {
             "name": "doc",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 92,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 114,
               "col": 2,
-              "byteIndex": 2038
+              "byteIndex": 2469
             },
             "params": [],
             "readonly": true,
@@ -987,10 +1088,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 93,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 115,
               "col": 2,
-              "byteIndex": 2069
+              "byteIndex": 2500
             },
             "params": [],
             "readonly": true,
@@ -1025,10 +1126,10 @@
       "name": "MongoCountResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 99,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 121,
         "col": 0,
-        "byteIndex": 2123
+        "byteIndex": 2554
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1043,10 +1144,10 @@
           {
             "name": "type",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 100,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 122,
               "col": 2,
-              "byteIndex": 2161
+              "byteIndex": 2592
             },
             "params": [],
             "readonly": true,
@@ -1065,10 +1166,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 101,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 123,
               "col": 2,
-              "byteIndex": 2193
+              "byteIndex": 2624
             },
             "params": [],
             "readonly": true,
@@ -1084,10 +1185,10 @@
           {
             "name": "count",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 102,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 124,
               "col": 2,
-              "byteIndex": 2217
+              "byteIndex": 2648
             },
             "params": [],
             "readonly": true,
@@ -1103,10 +1204,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 103,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 125,
               "col": 2,
-              "byteIndex": 2243
+              "byteIndex": 2674
             },
             "params": [],
             "readonly": true,
@@ -1129,10 +1230,10 @@
       "name": "MongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 111,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 133,
         "col": 0,
-        "byteIndex": 2431
+        "byteIndex": 2862
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1236,10 +1337,10 @@
       "name": "MongoFindOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 123,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 145,
         "col": 0,
-        "byteIndex": 2665
+        "byteIndex": 3096
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1263,10 +1364,10 @@
           {
             "name": "sort",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 124,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 146,
               "col": 2,
-              "byteIndex": 2725
+              "byteIndex": 3156
             },
             "params": [],
             "readonly": true,
@@ -1313,10 +1414,10 @@
           {
             "name": "limit",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 125,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 147,
               "col": 2,
-              "byteIndex": 2767
+              "byteIndex": 3198
             },
             "params": [],
             "readonly": true,
@@ -1332,10 +1433,10 @@
           {
             "name": "skip",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 126,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 148,
               "col": 2,
-              "byteIndex": 2794
+              "byteIndex": 3225
             },
             "params": [],
             "readonly": true,
@@ -1351,10 +1452,10 @@
           {
             "name": "projection",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 127,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 149,
               "col": 2,
-              "byteIndex": 2820
+              "byteIndex": 3251
             },
             "params": [],
             "readonly": true,
@@ -1408,10 +1509,10 @@
       "name": "MongoUpdateOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 133,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 155,
         "col": 0,
-        "byteIndex": 2902
+        "byteIndex": 3333
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1435,10 +1536,10 @@
           {
             "name": "upsert",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 134,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 156,
               "col": 2,
-              "byteIndex": 2964
+              "byteIndex": 3395
             },
             "params": [],
             "readonly": true,
@@ -1461,14 +1562,24 @@
       "name": "MongoClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 140,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 184,
         "col": 0,
-        "byteIndex": 3034
+        "byteIndex": 3909
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "MongoDB client configuration"
+        "doc": "MongoDB client configuration.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "Using a connection string\n```ts\nconst config: MongoClientConfig = {\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n};\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Using a configuration object\n```ts\nconst config: MongoClientConfig = {\n  url: {\n    host: \"localhost\",\n    port: 27017,\n    username: \"admin\",\n    password: \"secret\",\n    authSource: \"admin\",\n  },\n  database: \"testdb\",\n};\n```"
+          }
+        ]
       },
       "kind": "interface",
       "interfaceDef": {
@@ -1486,31 +1597,51 @@
         "methods": [],
         "properties": [
           {
-            "name": "uri",
+            "name": "url",
+            "jsDoc": {
+              "doc": "MongoDB connection URL or configuration object."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 141,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 188,
               "col": 2,
-              "byteIndex": 3095
+              "byteIndex": 4035
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "MongoConnectionConfig",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoConnectionConfig"
+                  }
+                }
+              ]
             },
             "typeParams": []
           },
           {
             "name": "database",
+            "jsDoc": {
+              "doc": "Database name to connect to."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 142,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 193,
               "col": 2,
-              "byteIndex": 3119
+              "byteIndex": 4130
             },
             "params": [],
             "readonly": true,
@@ -1533,10 +1664,10 @@
       "name": "MongoSession",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 148,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 199,
         "col": 0,
-        "byteIndex": 3205
+        "byteIndex": 4216
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1551,10 +1682,10 @@
             "name": "collection",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 149,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 200,
               "col": 2,
-              "byteIndex": 3239
+              "byteIndex": 4250
             },
             "params": [
               {
@@ -1619,10 +1750,10 @@
       "name": "MongoCollection",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 155,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 206,
         "col": 0,
-        "byteIndex": 3359
+        "byteIndex": 4370
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1637,10 +1768,10 @@
             "name": "find",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 156,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 207,
               "col": 2,
-              "byteIndex": 3416
+              "byteIndex": 4427
             },
             "params": [
               {
@@ -1703,10 +1834,10 @@
             "name": "findOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 160,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 211,
               "col": 2,
-              "byteIndex": 3511
+              "byteIndex": 4522
             },
             "params": [
               {
@@ -1769,10 +1900,10 @@
             "name": "insertOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 164,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 215,
               "col": 2,
-              "byteIndex": 3608
+              "byteIndex": 4619
             },
             "params": [
               {
@@ -1843,10 +1974,10 @@
             "name": "insertMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 168,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 219,
               "col": 2,
-              "byteIndex": 3711
+              "byteIndex": 4722
             },
             "params": [
               {
@@ -1921,10 +2052,10 @@
             "name": "updateOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 172,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 223,
               "col": 2,
-              "byteIndex": 3819
+              "byteIndex": 4830
             },
             "params": [
               {
@@ -1991,10 +2122,10 @@
             "name": "updateMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 177,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 228,
               "col": 2,
-              "byteIndex": 3945
+              "byteIndex": 4956
             },
             "params": [
               {
@@ -2061,10 +2192,10 @@
             "name": "deleteOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 182,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 233,
               "col": 2,
-              "byteIndex": 4072
+              "byteIndex": 5083
             },
             "params": [
               {
@@ -2118,10 +2249,10 @@
             "name": "deleteMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 186,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 237,
               "col": 2,
-              "byteIndex": 4167
+              "byteIndex": 5178
             },
             "params": [
               {
@@ -2175,10 +2306,10 @@
             "name": "aggregate",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 190,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 241,
               "col": 2,
-              "byteIndex": 4263
+              "byteIndex": 5274
             },
             "params": [
               {
@@ -2257,10 +2388,10 @@
             "name": "countDocuments",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 194,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 245,
               "col": 2,
-              "byteIndex": 4372
+              "byteIndex": 5383
             },
             "params": [
               {
@@ -2333,10 +2464,10 @@
       "name": "MongoClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 203,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+        "line": 254,
         "col": 0,
-        "byteIndex": 4509
+        "byteIndex": 5520
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2360,10 +2491,10 @@
             "name": "collection",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 206,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 257,
               "col": 2,
-              "byteIndex": 4605
+              "byteIndex": 5616
             },
             "params": [
               {
@@ -2421,10 +2552,10 @@
             "name": "db",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 207,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 258,
               "col": 2,
-              "byteIndex": 4684
+              "byteIndex": 5695
             },
             "params": [
               {
@@ -2453,10 +2584,10 @@
             "name": "transaction",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 208,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 259,
               "col": 2,
-              "byteIndex": 4717
+              "byteIndex": 5728
             },
             "params": [
               {
@@ -2533,10 +2664,10 @@
             "name": "close",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 210,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 261,
               "col": 2,
-              "byteIndex": 4791
+              "byteIndex": 5802
             },
             "params": [],
             "optional": false,
@@ -2561,10 +2692,10 @@
           {
             "name": "config",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-              "line": 204,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/types.ts",
+              "line": 255,
               "col": 2,
-              "byteIndex": 4566
+              "byteIndex": 5577
             },
             "params": [],
             "readonly": true,
@@ -2590,7 +2721,7 @@
       "name": "MongoErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 95
@@ -2617,7 +2748,7 @@
           {
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 7,
               "col": 2,
               "byteIndex": 155
@@ -2643,7 +2774,7 @@
       "name": "MongoError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 13,
         "col": 0,
         "byteIndex": 237
@@ -2701,7 +2832,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 361
@@ -2723,7 +2854,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 285
@@ -2742,7 +2873,7 @@
             "isStatic": false,
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 334
@@ -2761,7 +2892,7 @@
       "name": "MongoConnectionError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 30,
         "col": 0,
         "byteIndex": 608
@@ -2804,7 +2935,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 767
@@ -2826,7 +2957,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 31,
               "col": 2,
               "byteIndex": 665
@@ -2849,7 +2980,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 716
@@ -2868,7 +2999,7 @@
       "name": "MongoQueryError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 42,
         "col": 0,
         "byteIndex": 929
@@ -2921,7 +3052,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 47,
               "col": 2,
               "byteIndex": 1104
@@ -2943,7 +3074,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 43,
               "col": 2,
               "byteIndex": 981
@@ -2966,7 +3097,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1027
@@ -2985,7 +3116,7 @@
             "isStatic": false,
             "name": "collection",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1072
@@ -3004,7 +3135,7 @@
       "name": "MongoDuplicateKeyError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 60,
         "col": 0,
         "byteIndex": 1349
@@ -3095,7 +3226,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1608
@@ -3117,7 +3248,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 61,
               "col": 2,
               "byteIndex": 1408
@@ -3140,7 +3271,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 62,
               "col": 2,
               "byteIndex": 1461
@@ -3173,7 +3304,7 @@
             "isStatic": false,
             "name": "keyPattern",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 63,
               "col": 2,
               "byteIndex": 1514
@@ -3206,7 +3337,7 @@
             "isStatic": false,
             "name": "keyValue",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1561
@@ -3225,7 +3356,7 @@
       "name": "MongoValidationError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 81,
         "col": 0,
         "byteIndex": 1953
@@ -3289,7 +3420,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 86,
               "col": 2,
               "byteIndex": 2160
@@ -3311,7 +3442,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 2010
@@ -3334,7 +3465,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 2061
@@ -3364,7 +3495,7 @@
             "isStatic": false,
             "name": "validationErrors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2111
@@ -3383,7 +3514,7 @@
       "name": "MongoWriteError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 99,
         "col": 0,
         "byteIndex": 2424
@@ -3433,7 +3564,7 @@
                             {
                               "name": "index",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                                 "line": 110,
                                 "col": 28,
                                 "byteIndex": 2730
@@ -3451,7 +3582,7 @@
                             {
                               "name": "code",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                                 "line": 110,
                                 "col": 43,
                                 "byteIndex": 2745
@@ -3469,7 +3600,7 @@
                             {
                               "name": "message",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                                 "line": 110,
                                 "col": 57,
                                 "byteIndex": 2759
@@ -3508,7 +3639,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 108,
               "col": 2,
               "byteIndex": 2668
@@ -3530,7 +3661,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 100,
               "col": 2,
               "byteIndex": 2476
@@ -3553,7 +3684,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2522
@@ -3578,7 +3709,7 @@
                         {
                           "name": "index",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                             "line": 103,
                             "col": 4,
                             "byteIndex": 2604
@@ -3596,7 +3727,7 @@
                         {
                           "name": "code",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                             "line": 104,
                             "col": 4,
                             "byteIndex": 2623
@@ -3614,7 +3745,7 @@
                         {
                           "name": "message",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
                             "line": 105,
                             "col": 4,
                             "byteIndex": 2641
@@ -3644,7 +3775,7 @@
             "isStatic": false,
             "name": "writeErrors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 102,
               "col": 2,
               "byteIndex": 2567
@@ -3663,7 +3794,7 @@
       "name": "MongoNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
         "line": 121,
         "col": 0,
         "byteIndex": 2986
@@ -3706,7 +3837,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 125,
               "col": 2,
               "byteIndex": 3140
@@ -3728,7 +3859,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 122,
               "col": 2,
               "byteIndex": 3041
@@ -3751,7 +3882,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/errors.ts",
               "line": 123,
               "col": 2,
               "byteIndex": 3090
@@ -3770,7 +3901,7 @@
       "name": "createMongoDocs",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/results.ts",
         "line": 7,
         "col": 0,
         "byteIndex": 154
@@ -3831,18 +3962,47 @@
       "name": "createMongoClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/client.ts",
-        "line": 201,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/client.ts",
+        "line": 306,
         "col": 0,
-        "byteIndex": 5019
+        "byteIndex": 7921
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Create a MongoDB client.\n",
+        "doc": "Create a new MongoDB client instance.\n\nThe client provides typed collection access, aggregation pipelines,\ntransaction support, and comprehensive CRUD operations.\n",
         "tags": [
           {
+            "kind": "param",
+            "name": "config",
+            "doc": "- MongoDB client configuration"
+          },
+          {
+            "kind": "return",
+            "doc": "A promise resolving to a new MongoDB client instance\n"
+          },
+          {
             "kind": "example",
-            "doc": "```typescript\nconst mongo = await createMongoClient({\n  uri: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst users = mongo.collection<{ name: string; age: number }>(\"users\");\nconst result = await users.find({ age: { $gte: 18 } });\nconsole.log(result.docs.first());\n\nawait mongo.close();\n```"
+            "doc": "Basic usage with connection string\n```ts\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst users = mongo.collection<{ name: string; age: number }>(\"users\");\nconst result = await users.find({ age: { $gte: 18 } });\nconsole.log(result.docs.first());\n\nawait mongo.close();\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Using connection config object\n```ts\nconst mongo = await createMongoClient({\n  url: {\n    host: \"localhost\",\n    port: 27017,\n    username: \"admin\",\n    password: \"secret\",\n    authSource: \"admin\",\n  },\n  database: \"testdb\",\n});\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Insert and query documents\n```ts\nconst users = mongo.collection<User>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nexpectMongoResult(insertResult).ok().hasInsertedId();\n\n// Find documents with projection and sorting\nconst findResult = await users.find(\n  { age: { $gte: 25 } },\n  { sort: { name: 1 }, limit: 10 }\n);\nexpectMongoResult(findResult).ok().hasContent();\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Transaction with auto-commit/rollback\n```ts\nawait mongo.transaction(async (session) => {\n  const users = session.collection<User>(\"users\");\n  await users.insertOne({ name: \"Bob\", age: 25 });\n  await users.updateOne({ name: \"Alice\" }, { $inc: { age: 1 } });\n});\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Aggregation pipeline\n```ts\nconst result = await users.aggregate<{ _id: string; avgAge: number }>([\n  { $group: { _id: \"$department\", avgAge: { $avg: \"$age\" } } },\n  { $sort: { avgAge: -1 } },\n]);\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Using `await using` for automatic cleanup\n```ts\nawait using mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await mongo.collection(\"users\").find({});\n// Client automatically closed when scope exits\n```"
           }
         ]
       },
@@ -3890,7 +4050,7 @@
       "name": "MongoFindResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 17,
         "col": 0,
         "byteIndex": 332
@@ -3908,7 +4068,7 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 18,
               "col": 2,
               "byteIndex": 383
@@ -3926,7 +4086,7 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 19,
               "col": 2,
               "byteIndex": 397
@@ -3944,7 +4104,7 @@
             "name": "noContent",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 20,
               "col": 2,
               "byteIndex": 414
@@ -3962,7 +4122,7 @@
             "name": "hasContent",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 21,
               "col": 2,
               "byteIndex": 435
@@ -3977,10 +4137,10 @@
             "typeParams": []
           },
           {
-            "name": "docs",
+            "name": "count",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 22,
               "col": 2,
               "byteIndex": 457
@@ -3988,7 +4148,7 @@
             "params": [
               {
                 "kind": "identifier",
-                "name": "count",
+                "name": "expected",
                 "optional": false,
                 "tsType": {
                   "repr": "number",
@@ -4006,18 +4166,18 @@
             "typeParams": []
           },
           {
-            "name": "docsAtLeast",
+            "name": "countAtLeast",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 23,
               "col": 2,
-              "byteIndex": 486
+              "byteIndex": 490
             },
             "params": [
               {
                 "kind": "identifier",
-                "name": "count",
+                "name": "min",
                 "optional": false,
                 "tsType": {
                   "repr": "number",
@@ -4035,18 +4195,18 @@
             "typeParams": []
           },
           {
-            "name": "docsAtMost",
+            "name": "countAtMost",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 24,
               "col": 2,
-              "byteIndex": 522
+              "byteIndex": 525
             },
             "params": [
               {
                 "kind": "identifier",
-                "name": "count",
+                "name": "max",
                 "optional": false,
                 "tsType": {
                   "repr": "number",
@@ -4064,13 +4224,13 @@
             "typeParams": []
           },
           {
-            "name": "docContains",
+            "name": "dataContains",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 25,
               "col": 2,
-              "byteIndex": 557
+              "byteIndex": 559
             },
             "params": [
               {
@@ -4105,13 +4265,13 @@
             "typeParams": []
           },
           {
-            "name": "docMatch",
+            "name": "dataMatch",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 26,
               "col": 2,
-              "byteIndex": 598
+              "byteIndex": 601
             },
             "params": [
               {
@@ -4169,10 +4329,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 27,
               "col": 2,
-              "byteIndex": 655
+              "byteIndex": 659
             },
             "params": [
               {
@@ -4209,10 +4369,10 @@
       "name": "MongoInsertResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 33,
         "col": 0,
-        "byteIndex": 754
+        "byteIndex": 758
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4227,10 +4387,10 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 34,
               "col": 2,
-              "byteIndex": 804
+              "byteIndex": 808
             },
             "params": [],
             "optional": false,
@@ -4245,10 +4405,10 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 35,
               "col": 2,
-              "byteIndex": 818
+              "byteIndex": 822
             },
             "params": [],
             "optional": false,
@@ -4263,10 +4423,10 @@
             "name": "insertedCount",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 36,
               "col": 2,
-              "byteIndex": 835
+              "byteIndex": 839
             },
             "params": [
               {
@@ -4292,10 +4452,10 @@
             "name": "hasInsertedId",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 37,
               "col": 2,
-              "byteIndex": 873
+              "byteIndex": 877
             },
             "params": [],
             "optional": false,
@@ -4310,10 +4470,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 38,
               "col": 2,
-              "byteIndex": 898
+              "byteIndex": 902
             },
             "params": [
               {
@@ -4346,10 +4506,10 @@
       "name": "MongoUpdateResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 44,
         "col": 0,
-        "byteIndex": 997
+        "byteIndex": 1001
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4364,10 +4524,10 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 45,
               "col": 2,
-              "byteIndex": 1047
+              "byteIndex": 1051
             },
             "params": [],
             "optional": false,
@@ -4382,10 +4542,10 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 46,
               "col": 2,
-              "byteIndex": 1061
+              "byteIndex": 1065
             },
             "params": [],
             "optional": false,
@@ -4400,10 +4560,10 @@
             "name": "matchedCount",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 47,
               "col": 2,
-              "byteIndex": 1078
+              "byteIndex": 1082
             },
             "params": [
               {
@@ -4429,10 +4589,10 @@
             "name": "modifiedCount",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 48,
               "col": 2,
-              "byteIndex": 1115
+              "byteIndex": 1119
             },
             "params": [
               {
@@ -4455,13 +4615,13 @@
             "typeParams": []
           },
           {
-            "name": "wasUpserted",
+            "name": "hasUpsertedId",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 49,
               "col": 2,
-              "byteIndex": 1153
+              "byteIndex": 1157
             },
             "params": [],
             "optional": false,
@@ -4476,10 +4636,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 50,
               "col": 2,
-              "byteIndex": 1176
+              "byteIndex": 1182
             },
             "params": [
               {
@@ -4512,10 +4672,10 @@
       "name": "MongoDeleteResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 56,
         "col": 0,
-        "byteIndex": 1275
+        "byteIndex": 1281
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4530,10 +4690,10 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 57,
               "col": 2,
-              "byteIndex": 1325
+              "byteIndex": 1331
             },
             "params": [],
             "optional": false,
@@ -4548,10 +4708,10 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 58,
               "col": 2,
-              "byteIndex": 1339
+              "byteIndex": 1345
             },
             "params": [],
             "optional": false,
@@ -4566,10 +4726,10 @@
             "name": "deletedCount",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 59,
               "col": 2,
-              "byteIndex": 1356
+              "byteIndex": 1362
             },
             "params": [
               {
@@ -4595,10 +4755,10 @@
             "name": "deletedAtLeast",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 60,
               "col": 2,
-              "byteIndex": 1393
+              "byteIndex": 1399
             },
             "params": [
               {
@@ -4624,10 +4784,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 61,
               "col": 2,
-              "byteIndex": 1432
+              "byteIndex": 1438
             },
             "params": [
               {
@@ -4660,10 +4820,10 @@
       "name": "MongoFindOneResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 67,
         "col": 0,
-        "byteIndex": 1532
+        "byteIndex": 1538
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4678,10 +4838,10 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 68,
               "col": 2,
-              "byteIndex": 1586
+              "byteIndex": 1592
             },
             "params": [],
             "optional": false,
@@ -4696,10 +4856,10 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 69,
               "col": 2,
-              "byteIndex": 1600
+              "byteIndex": 1606
             },
             "params": [],
             "optional": false,
@@ -4711,13 +4871,13 @@
             "typeParams": []
           },
           {
-            "name": "found",
+            "name": "hasContent",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 70,
               "col": 2,
-              "byteIndex": 1617
+              "byteIndex": 1623
             },
             "params": [],
             "optional": false,
@@ -4729,13 +4889,13 @@
             "typeParams": []
           },
           {
-            "name": "notFound",
+            "name": "noContent",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 71,
               "col": 2,
-              "byteIndex": 1634
+              "byteIndex": 1645
             },
             "params": [],
             "optional": false,
@@ -4747,13 +4907,13 @@
             "typeParams": []
           },
           {
-            "name": "docContains",
+            "name": "dataContains",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 72,
               "col": 2,
-              "byteIndex": 1654
+              "byteIndex": 1666
             },
             "params": [
               {
@@ -4788,13 +4948,13 @@
             "typeParams": []
           },
           {
-            "name": "docMatch",
+            "name": "dataMatch",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 73,
               "col": 2,
-              "byteIndex": 1695
+              "byteIndex": 1708
             },
             "params": [
               {
@@ -4843,10 +5003,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 74,
               "col": 2,
-              "byteIndex": 1740
+              "byteIndex": 1754
             },
             "params": [
               {
@@ -4883,10 +5043,10 @@
       "name": "MongoCountResultExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
         "line": 80,
         "col": 0,
-        "byteIndex": 1838
+        "byteIndex": 1852
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4901,10 +5061,10 @@
             "name": "ok",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 81,
               "col": 2,
-              "byteIndex": 1887
+              "byteIndex": 1901
             },
             "params": [],
             "optional": false,
@@ -4919,10 +5079,10 @@
             "name": "notOk",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 82,
               "col": 2,
-              "byteIndex": 1901
+              "byteIndex": 1915
             },
             "params": [],
             "optional": false,
@@ -4937,10 +5097,10 @@
             "name": "count",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 83,
               "col": 2,
-              "byteIndex": 1918
+              "byteIndex": 1932
             },
             "params": [
               {
@@ -4966,10 +5126,10 @@
             "name": "countAtLeast",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 84,
               "col": 2,
-              "byteIndex": 1951
+              "byteIndex": 1965
             },
             "params": [
               {
@@ -4995,10 +5155,10 @@
             "name": "countAtMost",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
               "line": 85,
               "col": 2,
-              "byteIndex": 1986
+              "byteIndex": 2000
             },
             "params": [
               {
@@ -5012,81 +5172,6 @@
                 }
               }
             ],
-            "optional": false,
-            "returnType": {
-              "repr": "this",
-              "kind": "this",
-              "this": true
-            },
-            "typeParams": []
-          },
-          {
-            "name": "countBetween",
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-              "line": 86,
-              "col": 2,
-              "byteIndex": 2020
-            },
-            "params": [
-              {
-                "kind": "identifier",
-                "name": "min",
-                "optional": false,
-                "tsType": {
-                  "repr": "number",
-                  "kind": "keyword",
-                  "keyword": "number"
-                }
-              },
-              {
-                "kind": "identifier",
-                "name": "max",
-                "optional": false,
-                "tsType": {
-                  "repr": "number",
-                  "kind": "keyword",
-                  "keyword": "number"
-                }
-              }
-            ],
-            "optional": false,
-            "returnType": {
-              "repr": "this",
-              "kind": "this",
-              "this": true
-            },
-            "typeParams": []
-          },
-          {
-            "name": "isEmpty",
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-              "line": 87,
-              "col": 2,
-              "byteIndex": 2068
-            },
-            "params": [],
-            "optional": false,
-            "returnType": {
-              "repr": "this",
-              "kind": "this",
-              "this": true
-            },
-            "typeParams": []
-          },
-          {
-            "name": "isNotEmpty",
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-              "line": 88,
-              "col": 2,
-              "byteIndex": 2087
-            },
-            "params": [],
             "optional": false,
             "returnType": {
               "repr": "this",
@@ -5099,10 +5184,10 @@
             "name": "durationLessThan",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-              "line": 89,
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
+              "line": 86,
               "col": 2,
-              "byteIndex": 2109
+              "byteIndex": 2034
             },
             "params": [
               {
@@ -5135,10 +5220,10 @@
       "name": "MongoExpectation",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-        "line": 497,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
+        "line": 469,
         "col": 0,
-        "byteIndex": 11597
+        "byteIndex": 10955
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -5418,10 +5503,10 @@
       "name": "expectMongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
-        "line": 541,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.2.0/expect.ts",
+        "line": 513,
         "col": 0,
-        "byteIndex": 13610
+        "byteIndex": 12975
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -5429,7 +5514,7 @@
         "tags": [
           {
             "kind": "example",
-            "doc": "```ts\n// For find result - returns MongoFindResultExpectation\nconst findResult = await users.find({ age: { $gte: 30 } });\nexpectMongoResult(findResult).ok().hasContent().docs(2);\n\n// For insert result - returns MongoInsertResultExpectation\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nexpectMongoResult(insertResult).ok().hasInsertedId();\n\n// For update result - returns MongoUpdateResultExpectation\nconst updateResult = await users.updateOne({ name: \"Alice\" }, { $set: { age: 31 } });\nexpectMongoResult(updateResult).ok().matchedCount(1).modifiedCount(1);\n\n// For delete result - returns MongoDeleteResultExpectation\nconst deleteResult = await users.deleteOne({ name: \"Alice\" });\nexpectMongoResult(deleteResult).ok().deletedCount(1);\n\n// For findOne result - returns MongoFindOneResultExpectation\nconst findOneResult = await users.findOne({ name: \"Alice\" });\nexpectMongoResult(findOneResult).ok().found().docContains({ name: \"Alice\" });\n\n// For count result - returns MongoCountResultExpectation\nconst countResult = await users.countDocuments();\nexpectMongoResult(countResult).ok().count(10);\n```"
+            "doc": "```ts\n// For find result - returns MongoFindResultExpectation\nconst findResult = await users.find({ age: { $gte: 30 } });\nexpectMongoResult(findResult).ok().hasContent().count(2);\n\n// For insert result - returns MongoInsertResultExpectation\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nexpectMongoResult(insertResult).ok().hasInsertedId();\n\n// For update result - returns MongoUpdateResultExpectation\nconst updateResult = await users.updateOne({ name: \"Alice\" }, { $set: { age: 31 } });\nexpectMongoResult(updateResult).ok().matchedCount(1).modifiedCount(1);\n\n// For delete result - returns MongoDeleteResultExpectation\nconst deleteResult = await users.deleteOne({ name: \"Alice\" });\nexpectMongoResult(deleteResult).ok().deletedCount(1);\n\n// For findOne result - returns MongoFindOneResultExpectation\nconst findOneResult = await users.findOne({ name: \"Alice\" });\nexpectMongoResult(findOneResult).ok().hasContent().dataContains({ name: \"Alice\" });\n\n// For count result - returns MongoCountResultExpectation\nconst countResult = await users.countDocuments();\nexpectMongoResult(countResult).ok().count(10);\n```"
           }
         ]
       },
@@ -5492,5 +5577,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-07T13:20:45.726Z"
+  "generatedAt": "2025-12-07T13:32:49.180Z"
 }

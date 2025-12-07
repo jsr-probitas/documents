@@ -2,20 +2,20 @@
   "name": "discover",
   "specifier": "@probitas/discover",
   "version": "0.2.4",
-  "moduleDoc": "Scenario file discovery module\n",
+  "moduleDoc": "Scenario file discovery utilities for Probitas.\n\nThis package provides utilities for discovering scenario files (`.probitas.ts`)\nfrom file paths and directories. It supports glob patterns for flexible file\nmatching and is used internally by the CLI to find scenarios to execute.\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package (recommended for most users)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/scenario](https://jsr.io/@probitas/scenario) | Load discovered files with `loadScenarios` |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | CLI that uses this discovery |\n\n## Core Function\n\n- {@linkcode discoverScenarioFiles} - Discover scenario files from paths\n\n## Configuration Type\n\n- {@linkcode DiscoverOptions} - Options for customizing discovery behavior\n\n## Default Behavior\n\nBy default, the discovery function:\n- Searches for files matching `**\\/*.probitas.ts` in directories\n- Returns direct file paths as-is (no pattern matching)\n- Returns absolute paths sorted alphabetically\n\n## Permissions\n\nRequires `--allow-read` permission to read the file system.\n",
   "exports": [
     {
       "name": "DiscoverOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
-        "line": 18,
+        "filename": "https://jsr.io/@probitas/discover/0.2.4/discover.ts",
+        "line": 20,
         "col": 0,
-        "byteIndex": 385
+        "byteIndex": 465
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Options for discovering scenario files"
+        "doc": "Options for discovering scenario files.\n\nControls which files are included or excluded when scanning directories."
       },
       "kind": "interface",
       "interfaceDef": {
@@ -26,13 +26,19 @@
           {
             "name": "includes",
             "jsDoc": {
-              "doc": "Include patterns (glob) for directory discovery"
+              "doc": "Glob patterns for files to include when scanning directories.\n\nUses standard glob syntax with `**` for recursive matching.\n",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default [\"**\\/*.probitas.ts\"]"
+                }
+              ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
-              "line": 20,
+              "filename": "https://jsr.io/@probitas/discover/0.2.4/discover.ts",
+              "line": 28,
               "col": 2,
-              "byteIndex": 479
+              "byteIndex": 692
             },
             "params": [],
             "computed": false,
@@ -58,13 +64,19 @@
           {
             "name": "excludes",
             "jsDoc": {
-              "doc": "Exclude patterns (glob)"
+              "doc": "Glob patterns for files to exclude.\n",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default []"
+                }
+              ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
-              "line": 23,
+              "filename": "https://jsr.io/@probitas/discover/0.2.4/discover.ts",
+              "line": 35,
               "col": 2,
-              "byteIndex": 545
+              "byteIndex": 800
             },
             "params": [],
             "computed": false,
@@ -97,36 +109,44 @@
       "name": "discoverScenarioFiles",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
-        "line": 49,
+        "filename": "https://jsr.io/@probitas/discover/0.2.4/discover.ts",
+        "line": 79,
         "col": 0,
-        "byteIndex": 1290
+        "byteIndex": 2140
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Discover scenario files from paths\n\nBehavior:\n- File path → Returns that file as absolute path\n- Directory path → Discovers files within using include patterns\n",
+        "doc": "Discover scenario files from paths (files or directories).\n\nHandles two input types:\n- **File path**: Returns the file directly (no pattern matching)\n- **Directory path**: Scans using include/exclude patterns\n",
         "tags": [
           {
             "kind": "param",
             "name": "paths",
-            "doc": "- Paths (files or directories) - shell has already expanded globs"
+            "doc": "- Array of file paths or directory paths to scan"
           },
           {
             "kind": "param",
             "name": "options",
-            "doc": "- Discovery options with includes/excludes patterns"
+            "doc": "- Include/exclude patterns for directory scanning"
           },
           {
             "kind": "return",
-            "doc": "Array of absolute file paths (sorted)\n"
+            "doc": "Array of absolute file paths, sorted alphabetically\n"
           },
           {
             "kind": "unsupported",
-            "value": "@requires --allow-read Permission to read files\n"
+            "value": "@remarks\n- Requires `--allow-read` permission\n- Non-existent paths are silently skipped\n- Duplicate files are automatically deduplicated\n- Output is always sorted for deterministic ordering\n"
           },
           {
             "kind": "example",
-            "doc": "// Specific files and directories\nawait discoverScenarioFiles([\"test.scenario.ts\", \"api/\"], {});\n\n// With custom patterns\nconst files = await discoverScenarioFiles([\"api/\"], {\n  includes: [\"test.ts\"],\n  excludes: [\"skip.ts\"]\n});"
+            "doc": "Discover from directories\n```ts\nimport { discoverScenarioFiles } from \"@probitas/discover\";\n\n// Use default patterns (*.probitas.ts)\nconst files = await discoverScenarioFiles([\"./tests\", \"./integration\"]);\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Discover with custom patterns\n```ts\nconst files = await discoverScenarioFiles([\"./src\"], {\n  includes: [\"**\\/*.test.ts\", \"**\\/*.spec.ts\"],\n  excludes: [\"**\\/__fixtures__/**\"]\n});\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "Mixed files and directories\n```ts\nconst files = await discoverScenarioFiles([\n  \"./tests/\",           // Scan directory\n  \"./smoke.probitas.ts\" // Include specific file\n]);\n```"
           }
         ]
       },
@@ -198,5 +218,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-07T13:20:46.809Z"
+  "generatedAt": "2025-12-07T13:32:50.278Z"
 }

@@ -2,7 +2,7 @@
   "name": "logger",
   "specifier": "@probitas/logger",
   "version": "0.2.4",
-  "moduleDoc": "Probitas logging utilities.\n\nThis package provides a unified logging interface for all Probitas packages\nusing LogTape as the underlying logging library.\n",
+  "moduleDoc": "Unified logging interface for Probitas packages.\n\nThis package provides a centralized logging system built on LogTape. It offers\nconsistent logging across all Probitas packages with configurable log levels,\npretty formatting, and hierarchical categories.\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package (recommended for most users)\n- [LogTape](https://jsr.io/@logtape/logtape) - Underlying logging library\n\n## Related Packages\n\nAll Probitas packages use this logger internally:\n[@probitas/runner](https://jsr.io/@probitas/runner),\n[@probitas/reporter](https://jsr.io/@probitas/reporter),\n[@probitas/discover](https://jsr.io/@probitas/discover),\n[@probitas/cli](https://jsr.io/@probitas/cli)\n\n## Core Functions\n\n- {@linkcode configureLogging} - Initialize the logging system with a log level\n- {@linkcode getLogger} - Get a logger instance for a category\n- {@linkcode resetLogging} - Reset logging configuration (for testing)\n\n## Types\n\n- {@linkcode Logger} - Logger interface from LogTape\n- {@linkcode LogLevel} - Available log levels\n\n## Log Levels\n\nFrom least to most verbose:\n- `\"fatal\"` - Critical errors that stop execution\n- `\"error\"` - Errors that don't stop execution\n- `\"warning\"` - Potential issues (default level)\n- `\"info\"` - Informational messages about execution\n- `\"debug\"` - Detailed debugging information\n\n## Category Hierarchy\n\nLoggers use hierarchical categories following the package structure:\n- `[\"probitas\"]` - Root category for all Probitas logs\n- `[\"probitas\", \"runner\"]` - Runner package logs\n- `[\"probitas\", \"cli\", \"run\"]` - Specific command logs\n",
   "exports": [
     {
       "name": "Logger",
@@ -2362,23 +2362,31 @@
       "name": "configureLogging",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.2/logger.ts",
-        "line": 34,
+        "filename": "https://jsr.io/@probitas/logger/0.2.4/logger.ts",
+        "line": 51,
         "col": 0,
-        "byteIndex": 810
+        "byteIndex": 1216
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Configure the logging system with the specified log level.\nCan be called multiple times; LogTape will handle reconfiguration.\n",
+        "doc": "Configure the logging system with the specified log level.\n\nInitializes LogTape with pretty-printed console output. Can be called\nmultiple times to change the log level during execution.\n",
         "tags": [
           {
             "kind": "param",
             "name": "level",
-            "doc": "- The minimum log level to output (default: \"warning\")\n- \"fatal\": Only fatal errors\n- \"warning\": Warnings, errors, and fatal (default)\n- \"info\": Info, warnings, errors, and fatal\n- \"debug\": All logs including debug\n"
+            "doc": "- Minimum log level to output\n"
+          },
+          {
+            "kind": "unsupported",
+            "value": "@remarks\nLog levels from least to most verbose:\n- `\"fatal\"`: Only critical errors that stop execution\n- `\"error\"`: Errors that don't stop execution\n- `\"warning\"`: Potential issues (default)\n- `\"info\"`: Informational messages about execution\n- `\"debug\"`: Detailed debugging information\n"
           },
           {
             "kind": "example",
-            "doc": "```ts\nimport { configureLogging } from \"@probitas/logger\";\n\nawait configureLogging(\"debug\");\n```"
+            "doc": "Basic configuration\n```ts\nimport { configureLogging } from \"@probitas/logger\";\n\n// Enable debug logging for troubleshooting\nawait configureLogging(\"debug\");\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "In test setup\n```ts\n// Suppress logs during tests\nawait configureLogging(\"fatal\");\n\n// ... run tests ...\n\nawait resetLogging();\n```"
           }
         ]
       },
@@ -2428,27 +2436,31 @@
       "name": "getLogger",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.2/logger.ts",
-        "line": 82,
+        "filename": "https://jsr.io/@probitas/logger/0.2.4/logger.ts",
+        "line": 115,
         "col": 0,
-        "byteIndex": 1939
+        "byteIndex": 2917
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Get a logger for the specified category path.\nCategories follow the package hierarchy.\n",
+        "doc": "Get a logger instance for the specified category.\n\nCategories follow a hierarchical structure matching the package organization.\nChild loggers inherit configuration from their parents.\n",
         "tags": [
           {
             "kind": "param",
             "name": "category",
-            "doc": "- Category segments (e.g., \"probitas\", \"cli\", \"run\")"
+            "doc": "- Category path segments (e.g., \"probitas\", \"runner\", \"step\")"
           },
           {
             "kind": "return",
-            "doc": "A logger instance\n"
+            "doc": "Logger instance with `debug`, `info`, `warning`, `error`, `fatal` methods\n"
           },
           {
             "kind": "example",
-            "doc": "```ts\nimport { getLogger } from \"@probitas/logger\";\n\nconst logger = getLogger(\"probitas\", \"cli\", \"run\");\nlogger.info(\"Starting run command\");\n```"
+            "doc": "Basic usage\n```ts\nimport { getLogger } from \"@probitas/logger\";\n\nconst logger = getLogger(\"probitas\", \"cli\", \"run\");\n\nlogger.info(\"Starting run command\");\nlogger.debug(\"Processing options\", { maxConcurrency: 4 });\nlogger.error(\"Failed to load scenario\", { file, error });\n```\n"
+          },
+          {
+            "kind": "example",
+            "doc": "In a module\n```ts\n// At module top level\nconst logger = getLogger(\"probitas\", \"runner\");\n\nexport function runScenario(scenario: ScenarioDefinition) {\n  logger.info(\"Running scenario\", { name: scenario.name });\n  // ...\n}\n```"
           }
         ]
       },
@@ -2492,18 +2504,18 @@
       "name": "resetLogging",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.2/logger.ts",
-        "line": 97,
+        "filename": "https://jsr.io/@probitas/logger/0.2.4/logger.ts",
+        "line": 138,
         "col": 0,
-        "byteIndex": 2256
+        "byteIndex": 3499
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Reset logging configuration.\nPrimarily used for testing to ensure clean state between tests.\n",
+        "doc": "Reset the logging configuration to its initial state.\n\nClears all configured sinks and loggers. Primarily used in tests\nto ensure clean state between test cases.\n",
         "tags": [
           {
             "kind": "example",
-            "doc": "```ts\nimport { resetLogging } from \"@probitas/logger\";\n\nawait resetLogging();\n```"
+            "doc": "Test cleanup\n```ts\nimport { configureLogging, resetLogging } from \"@probitas/logger\";\n\nDeno.test(\"my test\", async () => {\n  await configureLogging(\"fatal\");  // Suppress logs during test\n\n  // ... test code ...\n\n  await resetLogging();  // Clean up\n});\n```"
           }
         ]
       },
@@ -2531,5 +2543,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-07T13:20:46.938Z"
+  "generatedAt": "2025-12-07T13:32:50.408Z"
 }
