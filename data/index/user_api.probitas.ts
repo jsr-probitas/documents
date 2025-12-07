@@ -1,0 +1,44 @@
+import { client, expect, faker, scenario } from "probitas";
+
+export default scenario("User API Integration Test", {
+  tags: ["integration", "http", "postgres"],
+})
+  .resource("user", () => ({
+    id: faker.string.uuid(),
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+  }))
+  .resource("db", () =>
+    client.sql.postgres.createPostgresClient({
+      connection: {
+        host: "localhost",
+        port: 5432,
+        database: "app",
+        user: "testuser",
+        password: "testpassword",
+      },
+    }))
+  .resource("http", () =>
+    client.http.createHttpClient({
+      baseUrl: "http://localhost:8000",
+    }))
+  .setup(async (ctx) => {
+    const { db, user } = ctx.resources;
+    await db.query(
+      `INSERT INTO users (id, name, email) VALUES ($1, $2, $3)`,
+      [user.id, user.name, user.email],
+    );
+    return async () => {
+      await db.query(`DELETE FROM users WHERE id = $1`, [user.id]);
+    };
+  })
+  .step("GET /users/:id - fetch user", async (ctx) => {
+    const { http, user } = ctx.resources;
+    const res = await http.get(`/users/${user.id}`);
+
+    expect(res)
+      .ok()
+      .status(200)
+      .jsonContains({ id: user.id, name: user.name });
+  })
+  .build();
