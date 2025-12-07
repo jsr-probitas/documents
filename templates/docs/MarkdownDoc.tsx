@@ -11,10 +11,14 @@ interface MarkdownDocProps {
   content: string;
   /** Page title suffix (after " - Probitas Documentation") */
   titleSuffix?: string;
+  /** URL path for alternate markdown link */
+  markdownPath?: string;
 }
 
 /** Render a markdown document as a full page */
-export function MarkdownDoc({ content, titleSuffix }: MarkdownDocProps) {
+export function MarkdownDoc(
+  { content, titleSuffix, markdownPath }: MarkdownDocProps,
+) {
   // Extract title from content if not provided
   const title = titleSuffix ?? extractTitle(content) ?? "Documentation";
   const pageTitle = `${title} - Probitas Documentation`;
@@ -28,15 +32,29 @@ export function MarkdownDoc({ content, titleSuffix }: MarkdownDocProps) {
   // Parse markdown to HTML
   const html = parseMarkdown(content);
 
+  // Alternate markdown URL (append .md to path)
+  const alternateMarkdown = markdownPath ? `${markdownPath}.md` : undefined;
+
   return (
-    <Layout title={pageTitle}>
+    <Layout title={pageTitle} alternateMarkdown={alternateMarkdown}>
       <DocLayout
         sidebar={<TableOfContents items={tocItems} />}
       >
-        <article
-          class="doc-article markdown-body"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
+        <div class="doc-article-container">
+          {alternateMarkdown && (
+            <a
+              href={alternateMarkdown}
+              class="markdown-source-link"
+              title="View Markdown source"
+            >
+              <i class="ti ti-markdown" />
+            </a>
+          )}
+          <article
+            class="doc-article markdown-body"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </div>
       </DocLayout>
       <script dangerouslySetInnerHTML={{ __html: mainScript }} />
     </Layout>
@@ -47,7 +65,8 @@ export function MarkdownDoc({ content, titleSuffix }: MarkdownDocProps) {
 export async function MarkdownDocFromFile(
   filePath: string,
   titleSuffix?: string,
+  markdownPath?: string,
 ) {
   const content = await Deno.readTextFile(filePath);
-  return MarkdownDoc({ content, titleSuffix });
+  return MarkdownDoc({ content, titleSuffix, markdownPath });
 }

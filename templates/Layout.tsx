@@ -20,9 +20,13 @@ interface LayoutProps {
   children: Child;
   /** Show logo in header (default: true) */
   showLogo?: boolean;
+  /** URL path to alternate markdown source */
+  alternateMarkdown?: string;
 }
 
-export function Layout({ title, children, showLogo = true }: LayoutProps) {
+export function Layout(
+  { title, children, showLogo = true, alternateMarkdown }: LayoutProps,
+) {
   return (
     <html lang="en">
       <head>
@@ -43,6 +47,14 @@ export function Layout({ title, children, showLogo = true }: LayoutProps) {
           rel="stylesheet"
           href={`${CDN.hljs}/styles/github-dark.min.css`}
         />
+        {alternateMarkdown && (
+          <link
+            rel="alternate"
+            type="text/markdown"
+            href={alternateMarkdown}
+            title="Markdown source"
+          />
+        )}
         <script src={`${CDN.hljs}/highlight.min.js`} />
         <script src={`${CDN.hljs}/languages/typescript.min.js`} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />

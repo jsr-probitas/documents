@@ -14,8 +14,16 @@ app.get("/", async (c) => c.html(await HomePage()));
 // Documentation pages (markdown)
 for (const doc of docPages) {
   app.get(doc.path, async (c) => {
-    const page = await MarkdownDocFromFile(doc.file, doc.title);
+    const page = await MarkdownDocFromFile(doc.file, doc.title, doc.path);
     return c.html(page);
+  });
+
+  // Raw markdown endpoint (append .md to get source)
+  app.get(`${doc.path}.md`, async (c) => {
+    const content = await Deno.readTextFile(doc.file);
+    return c.text(content, 200, {
+      "Content-Type": "text/markdown; charset=utf-8",
+    });
   });
 }
 
