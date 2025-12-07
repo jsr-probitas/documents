@@ -16,8 +16,8 @@ export const features: Feature[] = [
       "Define tests as readable scenarios with resources, setup, and steps. Perfect for integration and E2E testing.",
   },
   {
-    icon: "🔌",
-    title: "Multi-protocol Support",
+    icon: "📡",
+    title: "Built-in Clients",
     description:
       "HTTP, gRPC, GraphQL, SQL databases, Redis, MongoDB, and message queues - all with consistent APIs.",
   },

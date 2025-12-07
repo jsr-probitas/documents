@@ -13,11 +13,13 @@ interface MarkdownDocProps {
   titleSuffix?: string;
   /** URL path for alternate markdown link */
   markdownPath?: string;
+  /** Page description for SEO and JSON-LD */
+  description?: string;
 }
 
 /** Render a markdown document as a full page */
 export function MarkdownDoc(
-  { content, titleSuffix, markdownPath }: MarkdownDocProps,
+  { content, titleSuffix, markdownPath, description }: MarkdownDocProps,
 ) {
   // Extract title from content if not provided
   const title = titleSuffix ?? extractTitle(content) ?? "Documentation";
@@ -36,7 +38,12 @@ export function MarkdownDoc(
   const alternateMarkdown = markdownPath ? `${markdownPath}.md` : undefined;
 
   return (
-    <Layout title={pageTitle} alternateMarkdown={alternateMarkdown}>
+    <Layout
+      title={pageTitle}
+      alternateMarkdown={alternateMarkdown}
+      description={description}
+      pagePath={markdownPath}
+    >
       <DocLayout
         sidebar={<TableOfContents items={tocItems} />}
       >
@@ -66,7 +73,8 @@ export async function MarkdownDocFromFile(
   filePath: string,
   titleSuffix?: string,
   markdownPath?: string,
+  description?: string,
 ) {
   const content = await Deno.readTextFile(filePath);
-  return MarkdownDoc({ content, titleSuffix, markdownPath });
+  return MarkdownDoc({ content, titleSuffix, markdownPath, description });
 }

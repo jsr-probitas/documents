@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { docPages } from "./data/docs.ts";
+import { generateLlmsFullTxt, generateLlmsTxt } from "./lib/llms.ts";
 import { MarkdownDocFromFile } from "./templates/docs/MarkdownDoc.tsx";
 import { HomePage } from "./templates/home.tsx";
 
@@ -11,10 +12,28 @@ app.use("/static/*", serveStatic({ root: "./" }));
 // Home page
 app.get("/", async (c) => c.html(await HomePage()));
 
+// LLM-friendly endpoints (llms.txt standard)
+app.get("/llms.txt", (c) => {
+  return c.text(generateLlmsTxt(), 200, {
+    "Content-Type": "text/markdown; charset=utf-8",
+  });
+});
+
+app.get("/llms-full.txt", async (c) => {
+  return c.text(await generateLlmsFullTxt(), 200, {
+    "Content-Type": "text/markdown; charset=utf-8",
+  });
+});
+
 // Documentation pages (markdown)
 for (const doc of docPages) {
   app.get(doc.path, async (c) => {
-    const page = await MarkdownDocFromFile(doc.file, doc.title, doc.path);
+    const page = await MarkdownDocFromFile(
+      doc.file,
+      doc.title,
+      doc.path,
+      doc.description,
+    );
     return c.html(page);
   });
 

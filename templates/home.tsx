@@ -128,10 +128,76 @@ function FeaturesSection() {
 function ClientsSection() {
   return (
     <section class="clients-section">
-      <h2>Supported Clients</h2>
-      <p>Test any backend service with built-in clients</p>
+      <div class="section-header">
+        <span class="section-icon">📡</span>
+        <h2>Built-in Clients</h2>
+      </div>
+      <p>Test any backend service with ready-to-use clients</p>
       <div class="client-grid">
         <ClientTags />
+      </div>
+    </section>
+  );
+}
+
+function AiFriendlySection() {
+  return (
+    <section class="ai-friendly-section">
+      <div class="section-header">
+        <span class="section-icon">🤖</span>
+        <h2>AI-Friendly Documentation</h2>
+      </div>
+      <p class="ai-friendly-description">
+        This documentation follows the{" "}
+        <a href="https://llmstxt.org/" target="_blank" rel="noopener">
+          llms.txt standard
+        </a>
+        , making it easy for AI assistants like Claude, ChatGPT, and GitHub
+        Copilot to understand and reference.
+      </p>
+
+      <div class="ai-friendly-grid">
+        <div class="ai-friendly-card">
+          <div class="ai-friendly-card-header">
+            <i class="ti ti-file-text" />
+            <span>/llms.txt</span>
+          </div>
+          <p>
+            An index of all documentation pages with descriptions. AI agents use
+            this as a "sitemap" to discover available content.
+          </p>
+          <a href="/llms.txt" class="ai-friendly-link">
+            View llms.txt <i class="ti ti-arrow-right" />
+          </a>
+        </div>
+
+        <div class="ai-friendly-card">
+          <div class="ai-friendly-card-header">
+            <i class="ti ti-file-stack" />
+            <span>/llms-full.txt</span>
+          </div>
+          <p>
+            Complete documentation in a single file. Perfect for loading entire
+            docs into an LLM's context window.
+          </p>
+          <a href="/llms-full.txt" class="ai-friendly-link">
+            View llms-full.txt <i class="ti ti-arrow-right" />
+          </a>
+        </div>
+
+        <div class="ai-friendly-card">
+          <div class="ai-friendly-card-header">
+            <i class="ti ti-markdown" />
+            <span>Raw Markdown</span>
+          </div>
+          <p>
+            Every documentation page has a <code>.md</code> endpoint (e.g.,{" "}
+            <code>/docs.md</code>) returning clean Markdown source.
+          </p>
+          <a href="/docs.md" class="ai-friendly-link">
+            Example: /docs.md <i class="ti ti-arrow-right" />
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -148,6 +214,7 @@ export async function HomePage() {
       <Hero sampleCodes={sampleCodes} />
       <FeaturesSection />
       <ClientsSection />
+      <AiFriendlySection />
       <script dangerouslySetInnerHTML={{ __html: mainScript }} />
     </Layout>
   );

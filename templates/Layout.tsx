@@ -2,7 +2,7 @@
  * Base HTML layout component
  */
 import type { Child } from "hono/jsx";
-import { docPages } from "../data/docs.ts";
+import { docPages, siteMetadata } from "../data/docs.ts";
 import { themeInitScript } from "./scripts.ts";
 
 const GITHUB_URL = "https://github.com/jsr-probitas/probitas";
@@ -22,16 +22,58 @@ interface LayoutProps {
   showLogo?: boolean;
   /** URL path to alternate markdown source */
   alternateMarkdown?: string;
+  /** Page description for SEO and JSON-LD */
+  description?: string;
+  /** Current page path for JSON-LD */
+  pagePath?: string;
+}
+
+function generateJsonLd(
+  title: string,
+  description: string,
+  pagePath?: string,
+): object {
+  const baseUrl = siteMetadata.baseUrl;
+  return {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": title,
+    "headline": title,
+    "description": description,
+    "url": pagePath ? `${baseUrl}${pagePath}` : baseUrl,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": siteMetadata.name,
+      "url": baseUrl,
+      "description": siteMetadata.description,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteMetadata.name,
+      "url": baseUrl,
+    },
+  };
 }
 
 export function Layout(
-  { title, children, showLogo = true, alternateMarkdown }: LayoutProps,
+  {
+    title,
+    children,
+    showLogo = true,
+    alternateMarkdown,
+    description,
+    pagePath,
+  }: LayoutProps,
 ) {
+  const pageDescription = description || siteMetadata.description;
+  const jsonLd = generateJsonLd(title, pageDescription, pagePath);
+
   return (
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content={pageDescription} />
         <title>{title}</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -55,6 +97,10 @@ export function Layout(
             title="Markdown source"
           />
         )}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script src={`${CDN.hljs}/highlight.min.js`} />
         <script src={`${CDN.hljs}/languages/typescript.min.js`} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
