@@ -16,6 +16,7 @@ html {
 [data-theme="dark"] {
   --bg-primary: #0f172a;
   --bg-card: #1e293b;
+  --bg-code: #1a1f35;
   --bg-code-header: rgba(0, 0, 0, 0.2);
   --text-primary: #e2e8f0;
   --text-heading: #ffffff;
@@ -37,6 +38,7 @@ html {
 [data-theme="light"] {
   --bg-primary: #f8fafc;
   --bg-card: #ffffff;
+  --bg-code: #f1f5f9;
   --bg-code-header: rgba(0, 0, 0, 0.05);
   --text-primary: #334155;
   --text-heading: #1e293b;
@@ -67,6 +69,7 @@ body {
   background-attachment: fixed;
   color: var(--text-primary);
   margin: 0;
+  min-width: 580px;
   min-height: 100vh;
   line-height: 1.6;
   transition: background 0.3s, color 0.3s;
@@ -78,27 +81,84 @@ a {
 }
 
 /* ========================================
-   Header
+   Scrollable Navigation (shared styles)
    ======================================== */
-header {
+.scrollable-nav {
+  position: fixed;
+  width: 200px;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  mask-image: linear-gradient(
+    to bottom,
+    var(--fade-top, transparent),
+    black 3rem,
+    black calc(100% - 3rem),
+    var(--fade-bottom, transparent)
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    var(--fade-top, transparent),
+    black 3rem,
+    black calc(100% - 3rem),
+    var(--fade-bottom, transparent)
+  );
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-top: -3rem;
+}
+
+.scrollable-nav.scroll-top {
+  --fade-top: black;
+}
+
+.scrollable-nav.scroll-bottom {
+  --fade-bottom: black;
+}
+
+.scrollable-nav::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scrollable-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-nav::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 1.5px;
+}
+
+.scrollable-nav:hover {
+  scrollbar-color: var(--border) transparent;
+}
+
+.scrollable-nav:hover::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+.scrollable-nav:hover::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ========================================
+   Global Header
+   ======================================== */
+.global-header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 /* Sticky header for documentation pages */
-.doc-layout ~ footer,
-.doc-layout {
-  /* Enable sticky header when doc-layout is present */
-}
-
-body:has(.doc-layout) header {
+body:has(.doc-layout) .global-header {
   position: sticky;
   padding: 1rem 2rem;
   background: var(--header-bg);
@@ -164,8 +224,9 @@ body:has(.doc-layout) header {
   gap: 0.75rem;
 }
 
-/* Theme toggle button */
-.theme-toggle {
+/* Icon button base style (shared by theme-toggle and github-link) */
+.theme-toggle,
+.github-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,17 +240,19 @@ body:has(.doc-layout) header {
   transition: all 0.2s;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.github-link:hover {
   color: var(--text-heading);
   border-color: var(--accent);
   background: rgba(99, 102, 241, 0.1);
 }
 
-.theme-toggle i {
+.theme-toggle i,
+.github-link i {
   font-size: 20px;
 }
 
-/* Show/hide sun/moon icons based on theme */
+/* Theme toggle: show/hide sun/moon icons based on theme */
 .theme-toggle .icon-sun {
   display: none;
 }
@@ -204,27 +267,8 @@ body:has(.doc-layout) header {
   display: none;
 }
 
-.github-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: all 0.2s;
-}
-
-.github-link:hover {
-  color: var(--text-heading);
-  border-color: var(--accent);
-  background: rgba(99, 102, 241, 0.1);
-}
-
-.github-link i {
-  font-size: 20px;
+.github-text {
+  display: none;
 }
 
 /* ========================================
@@ -573,7 +617,7 @@ a.client-tag:hover {
    ======================================== */
 .doc-layout {
   display: flex;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   gap: 3rem;
@@ -587,72 +631,9 @@ a.client-tag:hover {
 .doc-content {
   flex: 1;
   min-width: 0;
-  max-width: 800px;
 }
 
-/* Table of Contents */
-.toc {
-  position: fixed;
-  width: 200px;
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
-  scrollbar-width: none; /* Firefox: hide by default */
-  --fade-top: transparent;
-  --fade-bottom: transparent;
-  mask-image: linear-gradient(
-    to bottom,
-    var(--fade-top),
-    black 5rem,
-    black calc(100% - 5rem),
-    var(--fade-bottom)
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    var(--fade-top),
-    black 5rem,
-    black calc(100% - 5rem),
-    var(--fade-bottom)
-  );
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin-top: -3rem;
-}
-
-.toc.scroll-top {
-  --fade-top: black;
-}
-
-.toc.scroll-bottom {
-  --fade-bottom: black;
-}
-
-.toc::-webkit-scrollbar {
-  width: 3px;
-}
-
-.toc::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.toc::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 1.5px;
-}
-
-/* Show scrollbar on hover */
-.toc:hover {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent; /* Firefox */
-}
-
-.toc:hover::-webkit-scrollbar-thumb {
-  background: var(--border);
-}
-
-.toc:hover::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
-
+/* Table of Contents - extends .scrollable-nav */
 .toc h3 {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -844,41 +825,60 @@ a.client-tag:hover {
   font-size: 16px;
 }
 
-/* Parameter table */
-.param-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1rem 0;
-  font-size: 0.9rem;
+/* Parameter list */
+.param-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
 }
 
-.param-table th,
-.param-table td {
-  text-align: left;
-  padding: 0.75rem 1rem;
+.param-item {
+  padding: 0.75rem 0;
   border-bottom: 1px solid var(--border);
 }
 
-.param-table th {
-  background: var(--bg-primary);
-  color: var(--text-muted);
-  font-weight: 500;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.param-table td:first-child,
-.param-table td:nth-child(2) {
-  white-space: nowrap;
-}
-
-.param-table td:last-child {
-  color: var(--text-muted);
-}
-
-.param-table tr:last-child td {
+.param-item:last-child {
   border-bottom: none;
+}
+
+.param-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.param-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--text-heading);
+  background: var(--bg-code);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
+
+.param-type {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.param-type::before {
+  content: ": ";
+}
+
+.param-desc {
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.param-desc p {
+  margin: 0 0 0.5rem;
+}
+
+.param-desc p:last-child {
+  margin-bottom: 0;
 }
 
 /* Feature list in docs */
@@ -1052,8 +1052,1153 @@ a.client-tag:hover {
   font-size: 1rem;
 }
 
+/* ========================================
+   API Documentation Layout
+   ======================================== */
+.api-layout {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  gap: 2rem;
+}
+
+body:has(.api-layout) .global-header {
+  position: sticky;
+  top: 0;
+  padding: 1rem 2rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--bg-primary);
+  z-index: 50;
+}
+
+.api-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.api-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.api-main-with-toc {
+  display: flex;
+  gap: 2rem;
+}
+
+.api-main-with-toc .api-article-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.api-toc-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+/* Mobile Package Selector */
+.api-package-select-wrapper {
+  display: none; /* Hidden by default, shown on mobile */
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.api-package-select-wrapper > .ti-package {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-light);
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.api-package-select-wrapper > .ti-chevron-down {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: transform 0.2s;
+}
+
+.api-package-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.875rem 2.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.api-package-select:hover {
+  border-color: var(--accent);
+}
+
+.api-package-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.api-package-select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 0.5rem;
+}
+
+.api-package-select optgroup {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Package Navigation Sidebar - extends .scrollable-nav */
+.api-package-nav h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.package-group {
+  margin-bottom: 1.5rem;
+}
+
+.package-group h4 {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.package-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.package-group li {
+  margin: 0;
+}
+
+.package-group a {
+  display: block;
+  padding: 0.375rem 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.package-group a:hover {
+  color: var(--accent-light);
+}
+
+.package-group li.active a {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+/* API Article */
+.api-article-container {
+  position: relative;
+}
+
+.api-source-links {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.source-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.source-link:hover {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.source-link i {
+  font-size: 16px;
+}
+
+.api-article {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.api-article h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  background: none;
+  -webkit-text-fill-color: var(--text-heading);
+  color: var(--text-heading);
+}
+
+.api-intro {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+
+.api-intro strong {
+  color: var(--text-heading);
+}
+
+/* Package Header */
+.package-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: -2.5rem -2.5rem 1.5rem -2.5rem;
+  padding: 1.5rem 2.5rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  border-radius: 16px 16px 0 0;
+  z-index: 100;
+}
+
+.package-header h1 {
+  margin: 0;
+}
+
+.package-header .api-source-links {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+
+.package-header-meta {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.package-version {
+  background: var(--bg-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.jsr-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--accent-light);
+}
+
+.jsr-link i {
+  font-size: 0.9rem;
+}
+
+/* Module Doc */
+.module-doc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+/* Installation Block */
+.api-install {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.api-install h2 {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+.api-install pre {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.api-install pre code {
+  display: block;
+  padding: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+/* Package Grid (Index Page) */
+.package-group-section {
+  margin-bottom: 3rem;
+}
+
+.package-group-section h2 {
+  font-size: 1.25rem;
+  color: var(--text-heading);
+  margin: 0 0 1rem;
+}
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.package-card {
+  display: block;
+  position: relative;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+
+.package-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.package-card h3 {
+  font-size: 1rem;
+  color: var(--text-heading);
+  margin: 0 0 0.5rem;
+  padding-right: 3rem;
+}
+
+.package-meta {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.package-version {
+  background: var(--bg-card);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.package-exports {
+  color: var(--accent-light);
+}
+
+.package-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.package-counts .count-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.package-counts .count-item i {
+  font-size: 0.85rem;
+  color: var(--accent-light);
+}
+
+/* API Kind Section */
+.api-kind-section {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.api-kind-section:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.api-kind-section > h2 {
+  font-size: 1.5rem;
+  color: var(--text-heading);
+  margin: 0 0 1.5rem;
+}
+
+/* API Item (Function, Class, Interface, etc.) */
+.api-item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 7rem;
+}
+
+.api-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.api-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.api-kind {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.api-function .api-kind {
+  background: #3b82f6;
+}
+
+.api-class .api-kind {
+  background: #f59e0b;
+}
+
+.api-interface .api-kind {
+  background: #8b5cf6;
+}
+
+.api-type-alias .api-kind {
+  background: #10b981;
+}
+
+.api-variable .api-kind {
+  background: #6366f1;
+}
+
+.api-item-header h4 {
+  font-size: 1.25rem;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.anchor-link {
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.api-item-header:hover .anchor-link {
+  opacity: 1;
+}
+
+/* API Signature */
+.api-signature {
+  margin-bottom: 1rem;
+}
+
+.api-signature pre {
+  position: relative;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0;
+}
+
+/* Horizontal fade effect using mask-image on code element */
+.api-signature pre code.scroll-left {
+  mask-image: linear-gradient(to right, transparent, black 4rem, black);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4rem, black);
+}
+
+.api-signature pre code.scroll-right {
+  mask-image: linear-gradient(to left, transparent, black 4rem, black);
+  -webkit-mask-image: linear-gradient(to left, transparent, black 4rem, black);
+}
+
+.api-signature pre code.scroll-left.scroll-right {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 4rem,
+    black calc(100% - 4rem),
+    transparent
+  );
+}
+
+.api-signature pre code {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent
+    transparent; /* Firefox: transparent by default */
+}
+
+/* Scrollbar styles for code - always present, transparent by default */
+.api-signature pre code::-webkit-scrollbar {
+  height: 6px;
+}
+
+.api-signature pre code::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.api-signature pre code::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+/* Show scrollbar on hover */
+.api-signature pre code:hover {
+  scrollbar-color: var(--border) transparent; /* Firefox */
+}
+
+.api-signature pre code:hover::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+.api-signature pre code:hover::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* API Description */
+.api-description {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+.api-description p {
+  margin: 0 0 0.75rem;
+}
+
+.api-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* API Markdown (JSDoc rendered as Markdown) */
+.api-markdown h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 1rem 0 0.5rem;
+  border-bottom: none;
+}
+
+.api-markdown h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0.875rem 0 0.5rem;
+}
+
+.api-markdown h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0.75rem 0 0.375rem;
+}
+
+.api-markdown h4,
+.api-markdown h5,
+.api-markdown h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0.625rem 0 0.375rem;
+}
+
+.api-markdown h1:first-child,
+.api-markdown h2:first-child,
+.api-markdown h3:first-child,
+.api-markdown h4:first-child {
+  margin-top: 0;
+}
+
+.api-markdown ul,
+.api-markdown ol {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.api-markdown li {
+  margin: 0.25rem 0;
+}
+
+.api-markdown code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85em;
+  background: var(--bg-primary);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  color: var(--accent-light);
+}
+
+.api-markdown pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+}
+
+.api-markdown pre code {
+  display: block;
+  padding: 0.875rem 1rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.api-markdown blockquote {
+  margin: 0.75rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-primary);
+  color: var(--text-muted);
+}
+
+.api-markdown blockquote p {
+  margin: 0;
+}
+
+.api-markdown a {
+  color: var(--accent-light);
+}
+
+.api-markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.api-markdown th,
+.api-markdown td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.api-markdown th {
+  background: var(--bg-primary);
+  font-weight: 600;
+}
+
+/* API Parameters */
+.api-params {
+  margin: 1.5rem 0;
+}
+
+.api-params h5,
+.api-returns h5,
+.api-examples h5,
+.api-constructor h5,
+.api-properties h5,
+.api-methods h5 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+
+/* Property List (for class/interface properties) */
+.property-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
+}
+
+.property-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.property-item:last-child {
+  border-bottom: none;
+}
+
+.property-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.property-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--text-heading);
+  background: var(--bg-code);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
+
+.property-type {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.property-type::before {
+  content: ": ";
+}
+
+.property-desc {
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.property-desc p {
+  margin: 0 0 0.5rem;
+}
+
+.property-desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* Member badges (static, readonly) */
+.member-badge {
+  display: inline-block;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  padding: 0 0.375rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.param-optional {
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+/* Type Code */
+.type-code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent-light);
+  background: transparent;
+  padding: 0;
+}
+
+.type-unknown {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Type Links */
+.type-link {
+  color: var(--accent-light);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--accent-light);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.type-link:hover {
+  color: var(--accent);
+  border-bottom-style: solid;
+}
+
+.type-link-local {
+  color: var(--text-heading);
+  border-bottom-color: var(--text-muted);
+}
+
+.type-link-local:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.type-link-cross-package {
+  color: var(--accent);
+  border-bottom-color: var(--accent-light);
+}
+
+.type-link-cross-package:hover {
+  color: var(--accent-light);
+  border-bottom-style: solid;
+}
+
+/* Related Types (Links section) */
+.api-related-types {
+  margin: 1rem 0;
+}
+
+.api-related-types h5 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.api-related-types h5 i {
+  font-size: 0.9rem;
+}
+
+.related-types-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.related-types-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-primary);
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.related-types-list .type-link {
+  border-bottom: none;
+}
+
+.related-types-list .type-link:hover {
+  text-decoration: underline;
+}
+
+.related-type-package {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.related-type-package::before {
+  content: "(";
+}
+
+.related-type-package::after {
+  content: ")";
+}
+
+/* Type definition display */
+.type-definition {
+  display: inline;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+
+/* API Returns */
+.api-returns {
+  margin: 1rem 0;
+}
+
+.api-returns p {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+/* API Examples */
+.api-examples {
+  margin: 1.5rem 0;
+}
+
+.example-code {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+.example-code code {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Example from Markdown (already has pre from parseMarkdown) */
+.example-markdown pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+.example-markdown pre code {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Constructor */
+.api-constructor {
+  margin: 1.5rem 0;
+}
+
+.constructor-signature {
+  margin-bottom: 0.75rem;
+}
+
+.constructor-signature pre {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0;
+}
+
+.constructor-signature pre code {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.constructor-signature p {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Methods */
+.api-methods {
+  margin: 1.5rem 0;
+}
+
+.method-item {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.method-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.method-signature pre {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin: 0;
+}
+
+.method-signature pre code {
+  display: block;
+  padding: 0.625rem 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.method-desc {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* API TOC - extends .scrollable-nav */
+.api-toc h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+}
+
+.toc-group {
+  margin-bottom: 1.25rem;
+}
+
+.toc-group h4 {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.toc-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toc-group li {
+  margin: 0;
+}
+
+.toc-group a {
+  display: block;
+  padding: 0.25rem 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: "JetBrains Mono", monospace;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toc-group a:hover {
+  color: var(--accent-light);
+}
+
+/* No exports message */
+.no-exports {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Error page */
+.error-page {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.error-page h1 {
+  font-size: 2rem;
+}
+
+.error-page p {
+  color: var(--text-muted);
+  margin: 1rem 0;
+}
+
 /* Responsive */
+@media (max-width: 1200px) {
+  .api-main-with-toc {
+    flex-direction: column;
+  }
+
+  .api-toc-sidebar {
+    display: none;
+  }
+}
+
+/* ========================================
+   Tablet/Mobile Responsive (900px)
+   ======================================== */
 @media (max-width: 900px) {
+  /* Header */
+  .global-header {
+    padding: 1rem 1.5rem;
+  }
+
+  body:has(.doc-layout) .global-header {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .header-nav {
+    gap: 1rem;
+    margin-right: 1rem;
+  }
+
+  .header-nav a {
+    font-size: 0.85rem;
+  }
+
+  /* API Layout */
+  .api-layout {
+    flex-direction: column;
+    padding-top: 1.5rem;
+    gap: 0;
+  }
+
+  .api-sidebar {
+    width: 100%;
+  }
+
+  .api-package-select-wrapper {
+    display: block;
+  }
+
+  .api-package-nav {
+    display: none;
+  }
+
+  .package-group a {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--bg-primary);
+    border-radius: 4px;
+  }
+
+  .api-article {
+    padding: 1.5rem;
+  }
+
+  .api-article h1 {
+    font-size: 1.5rem;
+  }
+
+  .package-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Doc Layout */
   .doc-layout {
     flex-direction: column;
     padding-top: 1.5rem;
@@ -1074,4 +2219,95 @@ a.client-tag:hover {
   .doc-article h1 {
     font-size: 2rem;
   }
+}
+
+/* ========================================
+   Overloads (collapsible)
+   ======================================== */
+.overload-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.api-overloads {
+  margin-top: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.api-overloads summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-muted);
+  user-select: none;
+  list-style: none;
+}
+
+.api-overloads summary::-webkit-details-marker {
+  display: none;
+}
+
+.api-overloads summary i {
+  transition: transform 0.2s;
+}
+
+.api-overloads[open] summary i {
+  transform: rotate(90deg);
+}
+
+.api-overloads summary:hover {
+  color: var(--text-primary);
+}
+
+.overloads-content {
+  border-top: 1px solid var(--border);
+  padding: 1rem;
+}
+
+.overload-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.overload-item:last-child {
+  border-bottom: none;
+}
+
+.overload-header {
+  margin-bottom: 0.5rem;
+}
+
+.overload-index {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+}
+
+.overload-item .api-signature {
+  margin-bottom: 0.75rem;
+}
+
+.overload-item .api-signature pre {
+  background: var(--bg-primary);
+}
+
+.overload-item .api-description,
+.overload-item .api-params,
+.overload-item .api-returns {
+  font-size: 0.9rem;
+}
+
+.overload-item .api-params h5,
+.overload-item .api-returns h5 {
+  font-size: 0.8rem;
 }

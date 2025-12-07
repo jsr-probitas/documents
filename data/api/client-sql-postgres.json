@@ -1,0 +1,4265 @@
+{
+  "name": "client-sql-postgres",
+  "specifier": "@probitas/client-sql-postgres",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "PostgresTransaction",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+        "line": 14,
+        "col": 0,
+        "byteIndex": 343
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "PostgreSQL transaction implementation.\n\nWraps a postgres.js reserved connection to provide transaction semantics."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "jsDoc": {
+              "doc": "Creates a new PostgresTransaction.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- Reserved SQL connection from postgres.js"
+                }
+              ]
+            },
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "sql",
+                "optional": false,
+                "tsType": {
+                  "repr": "postgres.ReservedSql",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "postgres.ReservedSql"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 607
+            }
+          }
+        ],
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
+          {
+            "jsDoc": {
+              "doc": "Execute a query within the transaction.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "query",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "sql",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "params",
+                  "optional": true,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "array",
+                    "array": {
+                      "repr": "unknown",
+                      "kind": "keyword",
+                      "keyword": "unknown"
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "SqlQueryResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": [
+                          {
+                            "repr": "T",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "T"
+                            }
+                          }
+                        ],
+                        "typeName": "SqlQueryResult"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": [
+                {
+                  "name": "T",
+                  "default": {
+                    "repr": "Record",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "string",
+                          "kind": "keyword",
+                          "keyword": "string"
+                        },
+                        {
+                          "repr": "any",
+                          "kind": "keyword",
+                          "keyword": "any"
+                        }
+                      ],
+                      "typeName": "Record"
+                    }
+                  }
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1148
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Execute a query and return the first row or undefined.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "queryOne",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "sql",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "params",
+                  "optional": true,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "array",
+                    "array": {
+                      "repr": "unknown",
+                      "kind": "keyword",
+                      "keyword": "unknown"
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "",
+                      "kind": "union",
+                      "union": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        },
+                        {
+                          "repr": "undefined",
+                          "kind": "keyword",
+                          "keyword": "undefined"
+                        }
+                      ]
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": [
+                {
+                  "name": "T",
+                  "default": {
+                    "repr": "Record",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "string",
+                          "kind": "keyword",
+                          "keyword": "string"
+                        },
+                        {
+                          "repr": "any",
+                          "kind": "keyword",
+                          "keyword": "any"
+                        }
+                      ],
+                      "typeName": "Record"
+                    }
+                  }
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+              "line": 80,
+              "col": 2,
+              "byteIndex": 2027
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Commit the transaction."
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "commit",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+              "line": 91,
+              "col": 2,
+              "byteIndex": 2272
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Rollback the transaction."
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "rollback",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/transaction.ts",
+              "line": 106,
+              "col": 2,
+              "byteIndex": 2606
+            }
+          }
+        ],
+        "extends": null,
+        "implements": [
+          {
+            "repr": "SqlTransaction",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "SqlTransaction"
+            }
+          }
+        ],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "SqlQueryResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+        "line": 38,
+        "col": 0,
+        "byteIndex": 875
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQL query result with rows, metadata, and transformation methods."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "init",
+                "optional": false,
+                "tsType": {
+                  "repr": "SqlQueryResultInit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "SqlQueryResultInit"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1089
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 932
+            }
+          },
+          {
+            "tsType": {
+              "repr": "SqlRows",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "SqlRows"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "rows",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 956
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "rowCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 985
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1014
+            }
+          },
+          {
+            "tsType": {
+              "repr": "SqlQueryResultMetadata",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqlQueryResultMetadata"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "metadata",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1043
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [
+          {
+            "jsDoc": {
+              "doc": "Map rows to a new type."
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "map",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "mapper",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": false,
+                      "tsType": {
+                        "repr": "U",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "U"
+                        }
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "row",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "T",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "T"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "",
+                "kind": "array",
+                "array": {
+                  "repr": "U",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "U"
+                  }
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": [
+                {
+                  "name": "U"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 56,
+              "col": 2,
+              "byteIndex": 1348
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Create class instances from rows."
+            },
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "as",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "ctor",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "fnOrConstructor",
+                    "fnOrConstructor": {
+                      "constructor": true,
+                      "tsType": {
+                        "repr": "U",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "U"
+                        }
+                      },
+                      "params": [
+                        {
+                          "kind": "identifier",
+                          "name": "row",
+                          "optional": false,
+                          "tsType": {
+                            "repr": "T",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "T"
+                            }
+                          }
+                        }
+                      ],
+                      "typeParams": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "",
+                "kind": "array",
+                "array": {
+                  "repr": "U",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "U"
+                  }
+                }
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": [
+                {
+                  "name": "U"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 67,
+              "col": 2,
+              "byteIndex": 1563
+            }
+          }
+        ],
+        "extends": null,
+        "implements": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "any",
+                    "kind": "keyword",
+                    "keyword": "any"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            }
+          }
+        ],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "SqlIsolationLevel",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 92
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Transaction isolation level."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "read_uncommitted",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "read_uncommitted"
+              }
+            },
+            {
+              "repr": "read_committed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "read_committed"
+              }
+            },
+            {
+              "repr": "repeatable_read",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "repeatable_read"
+              }
+            },
+            {
+              "repr": "serializable",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "serializable"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqlQueryResultInit",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+        "line": 17,
+        "col": 0,
+        "byteIndex": 355
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for creating a SqlQueryResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Whether the query succeeded"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 435
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rows",
+            "jsDoc": {
+              "doc": "The result rows"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 485
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowCount",
+            "jsDoc": {
+              "doc": "Number of affected rows (for INSERT/UPDATE/DELETE)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 577
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "jsDoc": {
+              "doc": "Query execution duration in milliseconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 657
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "metadata",
+            "jsDoc": {
+              "doc": "Additional metadata"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 716
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "SqlQueryResultMetadata",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqlQueryResultMetadata"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SqlQueryResultMetadata",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 81
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Metadata for SQL query results."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "lastInsertId",
+            "jsDoc": {
+              "doc": "Last inserted ID (for INSERT statements)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 8,
+              "col": 2,
+              "byteIndex": 175
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "warnings",
+            "jsDoc": {
+              "doc": "Warning messages from the database"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 263
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqlTransaction",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+        "line": 24,
+        "col": 0,
+        "byteIndex": 513
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQL transaction interface.\nImplementations should provide actual database-specific transaction handling."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "query",
+            "jsDoc": {
+              "doc": "Execute a query within the transaction.",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 726
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "sql",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "params",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "SqlQueryResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "SqlQueryResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "any",
+                        "kind": "keyword",
+                        "keyword": "any"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "queryOne",
+            "jsDoc": {
+              "doc": "Execute a query and return the first row or undefined.",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1027
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "sql",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "params",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "union",
+                    "union": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      },
+                      {
+                        "repr": "undefined",
+                        "kind": "keyword",
+                        "keyword": "undefined"
+                      }
+                    ]
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "any",
+                        "kind": "keyword",
+                        "keyword": "any"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "commit",
+            "jsDoc": {
+              "doc": "Commit the transaction."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1176
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rollback",
+            "jsDoc": {
+              "doc": "Rollback the transaction."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1247
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqlTransactionOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+        "line": 15,
+        "col": 0,
+        "byteIndex": 258
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for starting a transaction."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "isolationLevel",
+            "jsDoc": {
+              "doc": "Isolation level for the transaction"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/transaction.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 346
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "SqlIsolationLevel",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqlIsolationLevel"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ConstraintError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 55,
+        "col": 0,
+        "byteIndex": 1210
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a constraint violation occurs."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "constraint",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "SqlErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1388
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 56,
+              "col": 2,
+              "byteIndex": 1260
+            }
+          },
+          {
+            "tsType": {
+              "repr": "constraint",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "constraint"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 1306
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "constraint",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1356
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "SqlError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "DeadlockError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 69,
+        "col": 0,
+        "byteIndex": 1603
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a deadlock is detected."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "SqlErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1744
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 1651
+            }
+          },
+          {
+            "tsType": {
+              "repr": "deadlock",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deadlock"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1695
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "SqlError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "QuerySyntaxError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 43,
+        "col": 0,
+        "byteIndex": 903
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a SQL query has syntax errors."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "SqlErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1047
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 954
+            }
+          },
+          {
+            "tsType": {
+              "repr": "query",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "query"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1001
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "SqlError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "SqlError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 24,
+        "col": 0,
+        "byteIndex": 481
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for SQL-specific errors.\nExtends ClientError with SQL-specific properties."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "kind",
+                "optional": false,
+                "tsType": {
+                  "repr": "SqlErrorKind",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlErrorKind"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "SqlErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 645
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 527
+            }
+          },
+          {
+            "tsType": {
+              "repr": "SqlErrorKind",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqlErrorKind"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 574
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "sqlState",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 614
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "SqlErrorKind",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 93
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQL-specific error kinds."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "query",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "query"
+              }
+            },
+            {
+              "repr": "constraint",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "constraint"
+              }
+            },
+            {
+              "repr": "deadlock",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deadlock"
+              }
+            },
+            {
+              "repr": "unknown",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "unknown"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqlErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+        "line": 15,
+        "col": 0,
+        "byteIndex": 225
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for SqlError constructor."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "sqlState",
+            "jsDoc": {
+              "doc": "SQL State code (e.g., \"23505\" for unique violation)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/errors.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 344
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "expectSqlQueryResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+        "line": 238,
+        "col": 0,
+        "byteIndex": 6041
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create an expectation for a SQL query result."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "result",
+            "optional": false,
+            "tsType": {
+              "repr": "SqlQueryResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "SqlQueryResult"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "SqlQueryResultExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "T",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "T"
+                }
+              }
+            ],
+            "typeName": "SqlQueryResultExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "any",
+                    "kind": "keyword",
+                    "keyword": "any"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SqlQueryResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+        "line": 8,
+        "col": 0,
+        "byteIndex": 193
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Expectation interface for SQL query results.\nAll methods return `this` for chaining."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Verify query succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 10,
+              "col": 2,
+              "byteIndex": 275
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Verify query failed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 13,
+              "col": 2,
+              "byteIndex": 319
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Verify result has no rows"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 372
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Verify result has rows"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 426
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rows",
+            "jsDoc": {
+              "doc": "Verify exact row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 481
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowsAtLeast",
+            "jsDoc": {
+              "doc": "Verify minimum row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 545
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowsAtMost",
+            "jsDoc": {
+              "doc": "Verify maximum row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 616
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowCount",
+            "jsDoc": {
+              "doc": "Verify exact affected row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 693
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowCountAtLeast",
+            "jsDoc": {
+              "doc": "Verify minimum affected row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 770
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowCountAtMost",
+            "jsDoc": {
+              "doc": "Verify maximum affected row count"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 854
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowContains",
+            "jsDoc": {
+              "doc": "Verify a row contains the given subset"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 942
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rowMatch",
+            "jsDoc": {
+              "doc": "Custom row validation"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1015
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "rows",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "SqlRows",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": [
+                              {
+                                "repr": "T",
+                                "kind": "typeRef",
+                                "typeRef": {
+                                  "typeParams": null,
+                                  "typeName": "T"
+                                }
+                              }
+                            ],
+                            "typeName": "SqlRows"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "mapContains",
+            "jsDoc": {
+              "doc": "Verify mapped data contains the given subset"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1125
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "mapper",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "U",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "U"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "row",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "U",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "U"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "U"
+              }
+            ]
+          },
+          {
+            "name": "mapMatch",
+            "jsDoc": {
+              "doc": "Custom mapped data validation"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1232
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "mapper",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "U",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "U"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "row",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "mapped",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "",
+                          "kind": "array",
+                          "array": {
+                            "repr": "U",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "U"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "U"
+              }
+            ]
+          },
+          {
+            "name": "asContains",
+            "jsDoc": {
+              "doc": "Verify instance contains the given subset"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1360
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ctor",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": true,
+                    "tsType": {
+                      "repr": "U",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "U"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "row",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "U",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "U"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "U"
+              }
+            ]
+          },
+          {
+            "name": "asMatch",
+            "jsDoc": {
+              "doc": "Custom instance validation"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1465
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ctor",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": true,
+                    "tsType": {
+                      "repr": "U",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "U"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "row",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "instances",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "",
+                          "kind": "array",
+                          "array": {
+                            "repr": "U",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "U"
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "U"
+              }
+            ]
+          },
+          {
+            "name": "lastInsertId",
+            "jsDoc": {
+              "doc": "Verify exact lastInsertId"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1581
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "bigint",
+                      "kind": "keyword",
+                      "keyword": "bigint"
+                    },
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    }
+                  ]
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasLastInsertId",
+            "jsDoc": {
+              "doc": "Verify lastInsertId is present"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1671
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Verify query duration is below threshold"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/expectation.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1749
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PostgresConnectionConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 39,
+        "col": 0,
+        "byteIndex": 1059
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Connection configuration for PostgreSQL."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "host",
+            "jsDoc": {
+              "doc": "Database host"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 1128
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "port",
+            "jsDoc": {
+              "doc": "Database port"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1178
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "database",
+            "jsDoc": {
+              "doc": "Database name"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1228
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "user",
+            "jsDoc": {
+              "doc": "Database user"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1282
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "password",
+            "jsDoc": {
+              "doc": "Database password"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1336
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "PostgresPoolConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 59,
+        "col": 0,
+        "byteIndex": 1413
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Pool configuration for PostgreSQL."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "max",
+            "jsDoc": {
+              "doc": "Maximum number of connections in the pool"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1504
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "idleTimeout",
+            "jsDoc": {
+              "doc": "Idle timeout in milliseconds before closing unused connections"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1602
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "connectTimeout",
+            "jsDoc": {
+              "doc": "Connection timeout in milliseconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 67,
+              "col": 2,
+              "byteIndex": 1680
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "PostgresClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 73,
+        "col": 0,
+        "byteIndex": 1776
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Configuration for creating a PostgreSQL client."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "connection",
+            "jsDoc": {
+              "doc": "Connection string or configuration object"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1891
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "PostgresConnectionConfig",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "PostgresConnectionConfig"
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "pool",
+            "jsDoc": {
+              "doc": "Pool configuration"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 78,
+              "col": 2,
+              "byteIndex": 1978
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "PostgresPoolConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "PostgresPoolConfig"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "applicationName",
+            "jsDoc": {
+              "doc": "Application name for PostgreSQL connection"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 81,
+              "col": 2,
+              "byteIndex": 2069
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "PostgresNotification",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 87,
+        "col": 0,
+        "byteIndex": 2157
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "PostgreSQL LISTEN/NOTIFY notification."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "channel",
+            "jsDoc": {
+              "doc": "Channel name"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 89,
+              "col": 2,
+              "byteIndex": 2221
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "payload",
+            "jsDoc": {
+              "doc": "Notification payload"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 92,
+              "col": 2,
+              "byteIndex": 2280
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "processId",
+            "jsDoc": {
+              "doc": "Process ID of the notifying backend"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 95,
+              "col": 2,
+              "byteIndex": 2354
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "PostgresClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 101,
+        "col": 0,
+        "byteIndex": 2425
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "PostgreSQL client interface."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "query",
+            "jsDoc": {
+              "doc": "Execute a SQL query.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 115,
+              "col": 2,
+              "byteIndex": 2789
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "sql",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "params",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "SqlQueryResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "SqlQueryResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "any",
+                        "kind": "keyword",
+                        "keyword": "any"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "queryOne",
+            "jsDoc": {
+              "doc": "Execute a query and return the first row or undefined.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "sql",
+                  "doc": "- SQL query string"
+                },
+                {
+                  "kind": "param",
+                  "name": "params",
+                  "doc": "- Optional query parameters"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 127,
+              "col": 2,
+              "byteIndex": 3095
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "sql",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "params",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "union",
+                    "union": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      },
+                      {
+                        "repr": "undefined",
+                        "kind": "keyword",
+                        "keyword": "undefined"
+                      }
+                    ]
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "any",
+                        "kind": "keyword",
+                        "keyword": "any"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "transaction",
+            "jsDoc": {
+              "doc": "Execute a function within a transaction.\n\nThe transaction is automatically committed if the function completes successfully,\nor rolled back if the function throws an error.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "fn",
+                  "doc": "- Function to execute within the transaction"
+                },
+                {
+                  "kind": "param",
+                  "name": "options",
+                  "doc": "- Transaction options"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 141,
+              "col": 2,
+              "byteIndex": 3514
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "fn",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "Promise",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": [
+                          {
+                            "repr": "T",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "T"
+                            }
+                          }
+                        ],
+                        "typeName": "Promise"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "tx",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "SqlTransaction",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "SqlTransaction"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "SqlTransactionOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqlTransactionOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "copyFrom",
+            "jsDoc": {
+              "doc": "Copy data from an iterable into a table using PostgreSQL COPY protocol.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "table",
+                  "doc": "- Target table name"
+                },
+                {
+                  "kind": "param",
+                  "name": "data",
+                  "doc": "- Async iterable of row arrays"
+                },
+                {
+                  "kind": "return",
+                  "doc": "Number of rows copied"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 153,
+              "col": 2,
+              "byteIndex": 3847
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "table",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "data",
+                "optional": false,
+                "tsType": {
+                  "repr": "AsyncIterable",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "",
+                        "kind": "array",
+                        "array": {
+                          "repr": "unknown",
+                          "kind": "keyword",
+                          "keyword": "unknown"
+                        }
+                      }
+                    ],
+                    "typeName": "AsyncIterable"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "number",
+                    "kind": "keyword",
+                    "keyword": "number"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "copyTo",
+            "jsDoc": {
+              "doc": "Copy data from a query result using PostgreSQL COPY protocol.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "query",
+                  "doc": "- SQL query to copy from"
+                },
+                {
+                  "kind": "return",
+                  "doc": "Async iterable of row arrays"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 161,
+              "col": 2,
+              "byteIndex": 4094
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "query",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "AsyncIterable",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "array",
+                    "array": {
+                      "repr": "unknown",
+                      "kind": "keyword",
+                      "keyword": "unknown"
+                    }
+                  }
+                ],
+                "typeName": "AsyncIterable"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "listen",
+            "jsDoc": {
+              "doc": "Listen for notifications on a channel.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "channel",
+                  "doc": "- Channel name to listen on"
+                },
+                {
+                  "kind": "return",
+                  "doc": "Async iterable of notifications"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 169,
+              "col": 2,
+              "byteIndex": 4301
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "channel",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "AsyncIterable",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "PostgresNotification",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "PostgresNotification"
+                    }
+                  }
+                ],
+                "typeName": "AsyncIterable"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notify",
+            "jsDoc": {
+              "doc": "Send a notification on a channel.\n",
+              "tags": [
+                {
+                  "kind": "param",
+                  "name": "channel",
+                  "doc": "- Channel name"
+                },
+                {
+                  "kind": "param",
+                  "name": "payload",
+                  "doc": "- Optional notification payload"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 177,
+              "col": 2,
+              "byteIndex": 4509
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "channel",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "payload",
+                "optional": true,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "close",
+            "jsDoc": {
+              "doc": "Close the client and release all connections."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 182,
+              "col": 2,
+              "byteIndex": 4633
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "jsDoc": {
+              "doc": "The client configuration."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 103,
+              "col": 2,
+              "byteIndex": 2520
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "PostgresClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "PostgresClientConfig"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "dialect",
+            "jsDoc": {
+              "doc": "The database dialect."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+              "line": 106,
+              "col": 2,
+              "byteIndex": 2593
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "postgres",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "postgres"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "createPostgresClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/client.ts",
+        "line": 583,
+        "col": 0,
+        "byteIndex": 15484
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Creates a new PostgreSQL client.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```typescript\n// Using connection string\nconst client = await createPostgresClient({\n  connection: \"postgres://user:pass@localhost:5432/mydb\",\n});\n\n// Using connection config object\nconst client = await createPostgresClient({\n  connection: {\n    host: \"localhost\",\n    port: 5432,\n    database: \"mydb\",\n    user: \"user\",\n    password: \"pass\",\n  },\n  pool: { max: 10 },\n  applicationName: \"my-app\",\n});\n\nconst result = await client.query(\"SELECT * FROM users WHERE id = $1\", [1]);\nconsole.log(result.rows.first());\n\n// Transaction with auto-commit/rollback\nconst user = await client.transaction(async (tx) => {\n  await tx.query(\"INSERT INTO users (name) VALUES ($1)\", [\"John\"]);\n  return await tx.queryOne(\"SELECT * FROM users WHERE name = $1\", [\"John\"]);\n});\n\nawait client.close();\n```\n"
+          },
+          {
+            "kind": "unsupported",
+            "value": "@requires --allow-net Permission to connect to the database"
+          },
+          {
+            "kind": "unsupported",
+            "value": "@requires --allow-env Permission to read environment variables (if using env-based config)\n"
+          },
+          {
+            "kind": "param",
+            "name": "config",
+            "doc": "- PostgreSQL client configuration"
+          },
+          {
+            "kind": "return",
+            "doc": "PostgreSQL client instance"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": false,
+            "tsType": {
+              "repr": "PostgresClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "PostgresClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "PostgresClient",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "PostgresClient"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "PostgresErrorLike",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/errors.ts",
+        "line": 36,
+        "col": 0,
+        "byteIndex": 813
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "PostgreSQL error structure from the driver."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "message",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/errors.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 852
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/errors.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 880
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "constraint",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/errors.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 906
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "mapPostgresError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sql-postgres/0.0.7/errors.ts",
+        "line": 48,
+        "col": 0,
+        "byteIndex": 1106
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Maps a PostgreSQL error to the appropriate SqlError subclass.\n",
+        "tags": [
+          {
+            "kind": "param",
+            "name": "error",
+            "doc": "- PostgreSQL error from the driver"
+          },
+          {
+            "kind": "return",
+            "doc": "Mapped SqlError or subclass"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "error",
+            "optional": false,
+            "tsType": {
+              "repr": "PostgresErrorLike",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "PostgresErrorLike"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "SqlError",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": null,
+            "typeName": "SqlError"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:43.275Z"
+}

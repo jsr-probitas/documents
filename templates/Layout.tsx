@@ -20,8 +20,10 @@ interface LayoutProps {
   children: Child;
   /** Show logo in header (default: true) */
   showLogo?: boolean;
-  /** URL path to alternate markdown source */
+  /** URL path to alternate markdown source (for doc pages) */
   alternateMarkdown?: string;
+  /** URL path to alternate JSON data (for API pages) */
+  alternateJson?: string;
   /** Page description for SEO and JSON-LD */
   description?: string;
   /** Current page path for JSON-LD */
@@ -61,6 +63,7 @@ export function Layout(
     children,
     showLogo = true,
     alternateMarkdown,
+    alternateJson,
     description,
     pagePath,
   }: LayoutProps,
@@ -97,6 +100,14 @@ export function Layout(
             title="Markdown source"
           />
         )}
+        {alternateJson && (
+          <link
+            rel="alternate"
+            type="application/json"
+            href={alternateJson}
+            title="JSON data"
+          />
+        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -115,18 +126,19 @@ export function Layout(
 
 function Header({ showLogo }: { showLogo: boolean }) {
   return (
-    <header>
+    <header class="global-header">
       {showLogo
         ? (
           <a href="/" class="logo">
             <img src="/static/probitas.png" alt="Probitas" class="logo-img" />
-            <span>Probitas</span>
+            <span class="logo-text">Probitas</span>
           </a>
         )
         : <div />}
       <nav class="header-nav">
         {docPages.map((doc) => <a key={doc.path} href={doc.path}>{doc.label}
         </a>)}
+        <a href="/api">API</a>
       </nav>
       <div class="header-right">
         <button
@@ -145,7 +157,7 @@ function Header({ showLogo }: { showLogo: boolean }) {
           rel="noopener"
         >
           <i class="ti ti-brand-github" />
-          <span>GitHub</span>
+          <span class="github-text">GitHub</span>
         </a>
       </div>
     </header>

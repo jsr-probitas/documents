@@ -15,7 +15,7 @@ interface TableOfContentsProps {
 /** Table of contents navigation */
 export function TableOfContents({ items }: TableOfContentsProps) {
   return (
-    <nav class="toc">
+    <nav class="scrollable-nav toc">
       <h3>On this page</h3>
       <ul>
         {items.map((item) => (

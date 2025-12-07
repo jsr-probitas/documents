@@ -1,0 +1,202 @@
+{
+  "name": "discover",
+  "specifier": "@probitas/discover",
+  "version": "0.2.3",
+  "moduleDoc": "Scenario file discovery module\n",
+  "exports": [
+    {
+      "name": "DiscoverOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
+        "line": 18,
+        "col": 0,
+        "byteIndex": 385
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for discovering scenario files"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "includes",
+            "jsDoc": {
+              "doc": "Include patterns (glob) for directory discovery"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 479
+            },
+            "params": [],
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "excludes",
+            "jsDoc": {
+              "doc": "Exclude patterns (glob)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 545
+            },
+            "params": [],
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "discoverScenarioFiles",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/discover/0.2.2/discover.ts",
+        "line": 49,
+        "col": 0,
+        "byteIndex": 1290
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Discover scenario files from paths\n\nBehavior:\n- File path → Returns that file as absolute path\n- Directory path → Discovers files within using include patterns\n",
+        "tags": [
+          {
+            "kind": "param",
+            "name": "paths",
+            "doc": "- Paths (files or directories) - shell has already expanded globs"
+          },
+          {
+            "kind": "param",
+            "name": "options",
+            "doc": "- Discovery options with includes/excludes patterns"
+          },
+          {
+            "kind": "return",
+            "doc": "Array of absolute file paths (sorted)\n"
+          },
+          {
+            "kind": "unsupported",
+            "value": "@requires --allow-read Permission to read files\n"
+          },
+          {
+            "kind": "example",
+            "doc": "// Specific files and directories\nawait discoverScenarioFiles([\"test.scenario.ts\", \"api/\"], {});\n\n// With custom patterns\nconst files = await discoverScenarioFiles([\"api/\"], {\n  includes: [\"test.ts\"],\n  excludes: [\"skip.ts\"]\n});"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "paths",
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "assign",
+            "left": {
+              "kind": "identifier",
+              "name": "options",
+              "optional": false,
+              "tsType": {
+                "repr": "DiscoverOptions",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "DiscoverOptions"
+                }
+              }
+            },
+            "right": "[UNSUPPORTED]",
+            "tsType": null
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "",
+                "kind": "array",
+                "array": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:43.694Z"
+}

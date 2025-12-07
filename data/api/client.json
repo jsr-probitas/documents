@@ -1,0 +1,914 @@
+{
+  "name": "client",
+  "specifier": "@probitas/client",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "RetryOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 40
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Retry configuration options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "maxAttempts",
+            "jsDoc": {
+              "doc": "Maximum number of attempts (1 = no retry).",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default 1"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 150
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "backoff",
+            "jsDoc": {
+              "doc": "Backoff strategy.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default \"exponential\""
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 247
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "linear",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "linear"
+                  }
+                },
+                {
+                  "repr": "exponential",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "exponential"
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "initialDelay",
+            "jsDoc": {
+              "doc": "Initial delay in milliseconds.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default 1000"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 21,
+              "col": 2,
+              "byteIndex": 362
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "maxDelay",
+            "jsDoc": {
+              "doc": "Maximum delay in milliseconds.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default 30000"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 465
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "retryOn",
+            "jsDoc": {
+              "doc": "Function to determine if the error should trigger a retry."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 572
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "fnOrConstructor",
+              "fnOrConstructor": {
+                "constructor": false,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                },
+                "params": [
+                  {
+                    "kind": "identifier",
+                    "name": "error",
+                    "optional": false,
+                    "tsType": {
+                      "repr": "Error",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "Error"
+                      }
+                    }
+                  }
+                ],
+                "typeParams": []
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "CommonOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+        "line": 38,
+        "col": 0,
+        "byteIndex": 674
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Common options shared across all clients."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "timeout",
+            "jsDoc": {
+              "doc": "Timeout in milliseconds."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 751
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "signal",
+            "jsDoc": {
+              "doc": "AbortSignal for cancellation."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 828
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "AbortSignal",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "AbortSignal"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "retry",
+            "jsDoc": {
+              "doc": "Retry configuration."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/types.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 900
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "RetryOptions",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RetryOptions"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "ClientError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+        "line": 8,
+        "col": 0,
+        "byteIndex": 275
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for all client errors.\n\nThe `kind` property is typed as `string` to allow client-specific packages\nto define their own error kinds without modifying this core package.\nSubclasses can narrow the type using literal types with `as const`."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "assign",
+                "left": {
+                  "kind": "identifier",
+                  "name": "kind",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                "right": "unknown",
+                "tsType": null
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 394
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 318
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 10,
+              "col": 2,
+              "byteIndex": 368
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "Error",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "ConnectionError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+        "line": 25,
+        "col": 0,
+        "byteIndex": 615
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a connection cannot be established."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 765
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 668
+            }
+          },
+          {
+            "tsType": {
+              "repr": "connection",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "connection"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 714
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "TimeoutError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+        "line": 37,
+        "col": 0,
+        "byteIndex": 923
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when an operation times out."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "timeoutMs",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1094
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 973
+            }
+          },
+          {
+            "tsType": {
+              "repr": "timeout",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "timeout"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 1016
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "timeoutMs",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1063
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "AbortError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+        "line": 51,
+        "col": 0,
+        "byteIndex": 1317
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when an operation is aborted via AbortSignal."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1452
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1365
+            }
+          },
+          {
+            "tsType": {
+              "repr": "abort",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "abort"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client/0.0.7/errors.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1406
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "containsSubset",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/utils.ts",
+        "line": 41,
+        "col": 0,
+        "byteIndex": 1202
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Check if an object contains all properties from subset (deep partial match).\n\nThis function performs recursive comparison, supporting:\n- Primitive values: strict equality (`===`)\n- Objects: recursive partial matching (subset semantics)\n- Arrays: exact match (order and length matter, with recursive element comparison)\n- null: explicit null check\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "Basic usage\n```ts\nimport { containsSubset } from \"@probitas/client\";\n\n// Top-level partial match\ncontainsSubset({ a: 1, b: 2, c: 3 }, { a: 1 }); // true\n\n// Nested partial match\ncontainsSubset(\n  { user: { name: \"John\", age: 30 } },\n  { user: { name: \"John\" } }\n); // true\n\n// Array exact match\ncontainsSubset({ items: [1, 2, 3] }, { items: [1, 2, 3] }); // true\ncontainsSubset({ items: [1, 2, 3] }, { items: [1, 2] }); // false\n```\n"
+          },
+          {
+            "kind": "param",
+            "name": "obj",
+            "doc": "- The object to check"
+          },
+          {
+            "kind": "param",
+            "name": "subset",
+            "doc": "- The subset of properties to match"
+          },
+          {
+            "kind": "return",
+            "doc": "true if obj contains all properties from subset"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "obj",
+            "optional": false,
+            "tsType": {
+              "repr": "unknown",
+              "kind": "keyword",
+              "keyword": "unknown"
+            }
+          },
+          {
+            "kind": "identifier",
+            "name": "subset",
+            "optional": false,
+            "tsType": {
+              "repr": "unknown",
+              "kind": "keyword",
+              "keyword": "unknown"
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "boolean",
+          "kind": "keyword",
+          "keyword": "boolean"
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "containsSubarray",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client/0.0.7/utils.ts",
+        "line": 93,
+        "col": 0,
+        "byteIndex": 2680
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Check if an array contains a contiguous subarray.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\nimport { containsSubarray } from \"@probitas/client\";\n\nconst data = new Uint8Array([1, 2, 3, 4, 5]);\ncontainsSubarray(data, new Uint8Array([2, 3, 4])); // true\ncontainsSubarray(data, new Uint8Array([2, 4])); // false (not contiguous)\n```\n"
+          },
+          {
+            "kind": "param",
+            "name": "arr",
+            "doc": "- The array to search in"
+          },
+          {
+            "kind": "param",
+            "name": "sub",
+            "doc": "- The subarray to find"
+          },
+          {
+            "kind": "return",
+            "doc": "true if arr contains sub as a contiguous sequence"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "arr",
+            "optional": false,
+            "tsType": {
+              "repr": "Uint8Array",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Uint8Array"
+              }
+            }
+          },
+          {
+            "kind": "identifier",
+            "name": "sub",
+            "optional": false,
+            "tsType": {
+              "repr": "Uint8Array",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Uint8Array"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "boolean",
+          "kind": "keyword",
+          "keyword": "boolean"
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:41.768Z"
+}

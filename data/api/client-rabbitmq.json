@@ -1,0 +1,4826 @@
+{
+  "name": "client-rabbitmq",
+  "specifier": "@probitas/client-rabbitmq",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "RabbitMqMessageProperties",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 103
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ message properties."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "contentType",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 150
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentEncoding",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 8,
+              "col": 2,
+              "byteIndex": 183
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headers",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 220
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deliveryMode",
+            "jsDoc": {
+              "doc": "1: non-persistent, 2: persistent"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 308
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "1",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "number",
+                    "number": 1
+                  }
+                },
+                {
+                  "repr": "2",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "number",
+                    "number": 2
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "priority",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 341
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "correlationId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 13,
+              "col": 2,
+              "byteIndex": 371
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "replyTo",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 406
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "expiration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 435
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 467
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "timestamp",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 498
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 529
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "userId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 555
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "appId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 583
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqMessageFields",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 26,
+        "col": 0,
+        "byteIndex": 647
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ message fields."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "deliveryTag",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 690
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "bigint",
+              "kind": "keyword",
+              "keyword": "bigint"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "redelivered",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 722
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "exchange",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 755
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "routingKey",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 784
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqMessage",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 36,
+        "col": 0,
+        "byteIndex": 845
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ message."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "content",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 882
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "Uint8Array",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Uint8Array"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "properties",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 914
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "RabbitMqMessageProperties",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqMessageProperties"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "fields",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 964
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "RabbitMqMessageFields",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqMessageFields"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqPublishResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 45,
+        "col": 0,
+        "byteIndex": 1034
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Publish result."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1077
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "rabbitmq:publish",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "rabbitmq:publish"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1114
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 48,
+              "col": 2,
+              "byteIndex": 1138
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqConsumeResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 54,
+        "col": 0,
+        "byteIndex": 1222
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Consume result (single message retrieval)."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1265
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "rabbitmq:consume",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "rabbitmq:consume"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 56,
+              "col": 2,
+              "byteIndex": 1302
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "message",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 1326
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "RabbitMqMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqMessage"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1370
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqAckResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 64,
+        "col": 0,
+        "byteIndex": 1428
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Ack/Nack result."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 65,
+              "col": 2,
+              "byteIndex": 1467
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "rabbitmq:ack",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "rabbitmq:ack"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 66,
+              "col": 2,
+              "byteIndex": 1500
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 67,
+              "col": 2,
+              "byteIndex": 1524
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqQueueResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 73,
+        "col": 0,
+        "byteIndex": 1591
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Queue declaration result."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 1632
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "rabbitmq:queue",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "rabbitmq:queue"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1667
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "queue",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 76,
+              "col": 2,
+              "byteIndex": 1691
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 77,
+              "col": 2,
+              "byteIndex": 1717
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "consumerCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 78,
+              "col": 2,
+              "byteIndex": 1750
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 79,
+              "col": 2,
+              "byteIndex": 1784
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqExchangeResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 85,
+        "col": 0,
+        "byteIndex": 1854
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Exchange declaration result."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 1898
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "rabbitmq:exchange",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "rabbitmq:exchange"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 1936
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 1960
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 94,
+        "col": 0,
+        "byteIndex": 2032
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ client configuration."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "url",
+            "jsDoc": {
+              "doc": "AMQP URL (amqp://user:password@host:port/vhost)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 96,
+              "col": 2,
+              "byteIndex": 2153
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "heartbeat",
+            "jsDoc": {
+              "doc": "Heartbeat interval in seconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 98,
+              "col": 2,
+              "byteIndex": 2216
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "prefetch",
+            "jsDoc": {
+              "doc": "Default prefetch count for channels"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 100,
+              "col": 2,
+              "byteIndex": 2292
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqExchangeOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 106,
+        "col": 0,
+        "byteIndex": 2352
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Exchange options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "durable",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 107,
+              "col": 2,
+              "byteIndex": 2419
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "autoDelete",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 108,
+              "col": 2,
+              "byteIndex": 2449
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "internal",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 109,
+              "col": 2,
+              "byteIndex": 2482
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "arguments",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 110,
+              "col": 2,
+              "byteIndex": 2513
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqQueueOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 116,
+        "col": 0,
+        "byteIndex": 2588
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Queue options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "durable",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 117,
+              "col": 2,
+              "byteIndex": 2652
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "exclusive",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 118,
+              "col": 2,
+              "byteIndex": 2682
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "autoDelete",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 119,
+              "col": 2,
+              "byteIndex": 2714
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "arguments",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 120,
+              "col": 2,
+              "byteIndex": 2747
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageTtl",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 121,
+              "col": 2,
+              "byteIndex": 2795
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "maxLength",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 2827
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deadLetterExchange",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 2858
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deadLetterRoutingKey",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 2898
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqPublishOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 130,
+        "col": 0,
+        "byteIndex": 2969
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Publish options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "persistent",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 131,
+              "col": 2,
+              "byteIndex": 3035
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentType",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 132,
+              "col": 2,
+              "byteIndex": 3068
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentEncoding",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 133,
+              "col": 2,
+              "byteIndex": 3101
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headers",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 134,
+              "col": 2,
+              "byteIndex": 3138
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "correlationId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 135,
+              "col": 2,
+              "byteIndex": 3184
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "replyTo",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 136,
+              "col": 2,
+              "byteIndex": 3219
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "expiration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 137,
+              "col": 2,
+              "byteIndex": 3248
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 138,
+              "col": 2,
+              "byteIndex": 3280
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "priority",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 139,
+              "col": 2,
+              "byteIndex": 3311
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqConsumeOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 145,
+        "col": 0,
+        "byteIndex": 3370
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Consume options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "noAck",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 146,
+              "col": 2,
+              "byteIndex": 3436
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "exclusive",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 147,
+              "col": 2,
+              "byteIndex": 3464
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "priority",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 148,
+              "col": 2,
+              "byteIndex": 3496
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqNackOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 154,
+        "col": 0,
+        "byteIndex": 3552
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Nack options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "requeue",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 155,
+              "col": 2,
+              "byteIndex": 3615
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "allUpTo",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 156,
+              "col": 2,
+              "byteIndex": 3645
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqExchangeType",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 162,
+        "col": 0,
+        "byteIndex": 3702
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Exchange type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "direct",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "direct"
+              }
+            },
+            {
+              "repr": "topic",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "topic"
+              }
+            },
+            {
+              "repr": "fanout",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "fanout"
+              }
+            },
+            {
+              "repr": "headers",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "headers"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqChannel",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 167,
+        "col": 0,
+        "byteIndex": 3820
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ channel interface."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "assertExchange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 169,
+              "col": 2,
+              "byteIndex": 3895
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "type",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqExchangeType",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqExchangeType"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqExchangeOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqExchangeOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqExchangeResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqExchangeResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deleteExchange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 174,
+              "col": 2,
+              "byteIndex": 4040
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqExchangeResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqExchangeResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "assertQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 180,
+              "col": 2,
+              "byteIndex": 4155
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqQueueOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqQueueOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqQueueResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqQueueResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deleteQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 184,
+              "col": 2,
+              "byteIndex": 4259
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqQueueResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqQueueResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "purgeQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 188,
+              "col": 2,
+              "byteIndex": 4356
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqQueueResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqQueueResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "bindQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 192,
+              "col": 2,
+              "byteIndex": 4452
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "queue",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "exchange",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "routingKey",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqExchangeResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqExchangeResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "unbindQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 198,
+              "col": 2,
+              "byteIndex": 4597
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "queue",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "exchange",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "routingKey",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqExchangeResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqExchangeResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "publish",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 206,
+              "col": 2,
+              "byteIndex": 4758
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "exchange",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "routingKey",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "content",
+                "optional": false,
+                "tsType": {
+                  "repr": "Uint8Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Uint8Array"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqPublishOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqPublishOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqPublishResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqPublishResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sendToQueue",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 212,
+              "col": 2,
+              "byteIndex": 4915
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "queue",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "content",
+                "optional": false,
+                "tsType": {
+                  "repr": "Uint8Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Uint8Array"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqPublishOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqPublishOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqPublishResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqPublishResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "get",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 219,
+              "col": 2,
+              "byteIndex": 5063
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "queue",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqConsumeResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqConsumeResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "consume",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 220,
+              "col": 2,
+              "byteIndex": 5142
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "queue",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqConsumeOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqConsumeOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "AsyncIterable",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqMessage",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqMessage"
+                    }
+                  }
+                ],
+                "typeName": "AsyncIterable"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ack",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 226,
+              "col": 2,
+              "byteIndex": 5257
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqMessage"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqAckResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqAckResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "nack",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 230,
+              "col": 2,
+              "byteIndex": 5356
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqMessage"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqNackOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqNackOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqAckResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqAckResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "reject",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 234,
+              "col": 2,
+              "byteIndex": 5462
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqMessage"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "requeue",
+                "optional": true,
+                "tsType": {
+                  "repr": "boolean",
+                  "kind": "keyword",
+                  "keyword": "boolean"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqAckResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqAckResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "prefetch",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 240,
+              "col": 2,
+              "byteIndex": 5573
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "close",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 242,
+              "col": 2,
+              "byteIndex": 5616
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 248,
+        "col": 0,
+        "byteIndex": 5681
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "RabbitMQ client interface."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "channel",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 251,
+              "col": 2,
+              "byteIndex": 5783
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RabbitMqChannel",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RabbitMqChannel"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "close",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 253,
+              "col": 2,
+              "byteIndex": 5823
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+              "line": 249,
+              "col": 2,
+              "byteIndex": 5741
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "RabbitMqClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqClientConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 260,
+        "col": 0,
+        "byteIndex": 5976
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Union of all RabbitMQ result types.\nUsed by expectRabbitMqResult to determine the appropriate expectation type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "RabbitMqPublishResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqPublishResult"
+              }
+            },
+            {
+              "repr": "RabbitMqConsumeResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqConsumeResult"
+              }
+            },
+            {
+              "repr": "RabbitMqAckResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqAckResult"
+              }
+            },
+            {
+              "repr": "RabbitMqQueueResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqQueueResult"
+              }
+            },
+            {
+              "repr": "RabbitMqExchangeResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqExchangeResult"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 96
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for RabbitMQ errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 159
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 13,
+        "col": 0,
+        "byteIndex": 242
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for RabbitMQ client errors."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "assign",
+                "left": {
+                  "kind": "identifier",
+                  "name": "kind",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                "right": "rabbitmq",
+                "tsType": null
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 372
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 293
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 345
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqConnectionError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 30,
+        "col": 0,
+        "byteIndex": 626
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a RabbitMQ connection cannot be established."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 794
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 689
+            }
+          },
+          {
+            "tsType": {
+              "repr": "connection",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "connection"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 743
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RabbitMqError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqChannelErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 42,
+        "col": 0,
+        "byteIndex": 955
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for RabbitMQ channel errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RabbitMqErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "RabbitMqErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "channelId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1033
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqChannelError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 49,
+        "col": 0,
+        "byteIndex": 1130
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a RabbitMQ channel operation fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RabbitMqChannelErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqChannelErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1320
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1190
+            }
+          },
+          {
+            "tsType": {
+              "repr": "channel",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "channel"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 51,
+              "col": 2,
+              "byteIndex": 1241
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "channelId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1288
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RabbitMqError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqNotFoundErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 63,
+        "col": 0,
+        "byteIndex": 1528
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for RabbitMQ not found errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RabbitMqErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "RabbitMqErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "resource",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1607
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqNotFoundError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 70,
+        "col": 0,
+        "byteIndex": 1720
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a RabbitMQ resource (queue or exchange) is not found."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqNotFoundErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqNotFoundErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1912
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1781
+            }
+          },
+          {
+            "tsType": {
+              "repr": "not_found",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "not_found"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 1833
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "resource",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1882
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RabbitMqError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqPreconditionFailedErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 84,
+        "col": 0,
+        "byteIndex": 2129
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for RabbitMQ precondition failed errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RabbitMqErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "RabbitMqErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "reason",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 2220
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqPreconditionFailedError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+        "line": 92,
+        "col": 0,
+        "byteIndex": 2314
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a RabbitMQ precondition check fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": false,
+                "tsType": {
+                  "repr": "RabbitMqPreconditionFailedErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqPreconditionFailedErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 97,
+              "col": 2,
+              "byteIndex": 2534
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 93,
+              "col": 2,
+              "byteIndex": 2385
+            }
+          },
+          {
+            "tsType": {
+              "repr": "precondition_failed",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "precondition_failed"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 94,
+              "col": 2,
+              "byteIndex": 2447
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "reason",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/errors.ts",
+              "line": 95,
+              "col": 2,
+              "byteIndex": 2506
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RabbitMqError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "createRabbitMqClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/client.ts",
+        "line": 227,
+        "col": 0,
+        "byteIndex": 6118
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a RabbitMQ client.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```typescript\nconst rabbit = await createRabbitMqClient({\n  url: \"amqp://guest:guest@localhost:5672\",\n});\n\nconst channel = await rabbit.channel();\nawait channel.assertQueue(\"my-queue\", { durable: true });\n\nconst content = new TextEncoder().encode(JSON.stringify({ type: \"ORDER\" }));\nawait channel.sendToQueue(\"my-queue\", content, { persistent: true });\n\nawait channel.close();\nawait rabbit.close();\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": false,
+            "tsType": {
+              "repr": "RabbitMqClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "RabbitMqClient",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "RabbitMqClient"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqPublishResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 15,
+        "col": 0,
+        "byteIndex": 323
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for RabbitMQ publish result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that result ok is true"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 416
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that result ok is false"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 471
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 547
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqConsumeResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 29,
+        "col": 0,
+        "byteIndex": 648
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for RabbitMQ consume result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that result ok is true"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 741
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that result ok is false"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 796
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Assert that message is null (empty queue)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 865
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Assert that message is not null"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 928
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentContains",
+            "jsDoc": {
+              "doc": "Assert that content contains the given subbody"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1007
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subbody",
+                "optional": false,
+                "tsType": {
+                  "repr": "Uint8Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Uint8Array"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentMatch",
+            "jsDoc": {
+              "doc": "Assert content using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1108
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "content",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "Uint8Array",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "Uint8Array"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "propertyContains",
+            "jsDoc": {
+              "doc": "Assert that properties contain the given subset"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1228
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "RabbitMqMessageProperties",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "RabbitMqMessageProperties"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "routingKey",
+            "jsDoc": {
+              "doc": "Assert that routing key matches expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1349
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "exchange",
+            "jsDoc": {
+              "doc": "Assert that exchange matches expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1435
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1530
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqExchangeResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 65,
+        "col": 0,
+        "byteIndex": 1689
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for RabbitMQ exchange result validation.\nSame interface as publish result (ok, duration only)."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "RabbitMqPublishResultExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": null,
+            "typeName": "RabbitMqPublishResultExpectation"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqAckResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 72,
+        "col": 0,
+        "byteIndex": 1889
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for RabbitMQ ack result validation.\nSame interface as publish result (ok, duration only)."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "RabbitMqPublishResultExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": null,
+            "typeName": "RabbitMqPublishResultExpectation"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqQueueResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 77,
+        "col": 0,
+        "byteIndex": 2027
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for RabbitMQ queue result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that result ok is true"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 79,
+              "col": 2,
+              "byteIndex": 2118
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that result ok is false"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 2173
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageCount",
+            "jsDoc": {
+              "doc": "Assert that message count equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 85,
+              "col": 2,
+              "byteIndex": 2242
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageCountAtLeast",
+            "jsDoc": {
+              "doc": "Assert that message count is at least min"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 2331
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "consumerCount",
+            "jsDoc": {
+              "doc": "Assert that consumer count equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 91,
+              "col": 2,
+              "byteIndex": 2426
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+              "line": 94,
+              "col": 2,
+              "byteIndex": 2523
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RabbitMqExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 321,
+        "col": 0,
+        "byteIndex": 7961
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Expectation type returned by expectRabbitMqResult based on the result type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "conditional",
+          "conditionalType": {
+            "checkType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            },
+            "extendsType": {
+              "repr": "RabbitMqConsumeResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqConsumeResult"
+              }
+            },
+            "trueType": {
+              "repr": "RabbitMqConsumeResultExpectation",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqConsumeResultExpectation"
+              }
+            },
+            "falseType": {
+              "repr": "",
+              "kind": "conditional",
+              "conditionalType": {
+                "checkType": {
+                  "repr": "R",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "R"
+                  }
+                },
+                "extendsType": {
+                  "repr": "RabbitMqQueueResult",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqQueueResult"
+                  }
+                },
+                "trueType": {
+                  "repr": "RabbitMqQueueResultExpectation",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RabbitMqQueueResultExpectation"
+                  }
+                },
+                "falseType": {
+                  "repr": "",
+                  "kind": "conditional",
+                  "conditionalType": {
+                    "checkType": {
+                      "repr": "R",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "R"
+                      }
+                    },
+                    "extendsType": {
+                      "repr": "RabbitMqPublishResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "RabbitMqPublishResult"
+                      }
+                    },
+                    "trueType": {
+                      "repr": "RabbitMqPublishResultExpectation",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "RabbitMqPublishResultExpectation"
+                      }
+                    },
+                    "falseType": {
+                      "repr": "",
+                      "kind": "conditional",
+                      "conditionalType": {
+                        "checkType": {
+                          "repr": "R",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "R"
+                          }
+                        },
+                        "extendsType": {
+                          "repr": "RabbitMqExchangeResult",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "RabbitMqExchangeResult"
+                          }
+                        },
+                        "trueType": {
+                          "repr": "RabbitMqExchangeResultExpectation",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "RabbitMqExchangeResultExpectation"
+                          }
+                        },
+                        "falseType": {
+                          "repr": "",
+                          "kind": "conditional",
+                          "conditionalType": {
+                            "checkType": {
+                              "repr": "R",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "R"
+                              }
+                            },
+                            "extendsType": {
+                              "repr": "RabbitMqAckResult",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "RabbitMqAckResult"
+                              }
+                            },
+                            "trueType": {
+                              "repr": "RabbitMqAckResultExpectation",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "RabbitMqAckResultExpectation"
+                              }
+                            },
+                            "falseType": {
+                              "repr": "never",
+                              "kind": "keyword",
+                              "keyword": "never"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "RabbitMqResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqResult"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "expectRabbitMqResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/expect.ts",
+        "line": 358,
+        "col": 0,
+        "byteIndex": 9564
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a fluent expectation chain for any RabbitMQ result validation.\n\nThis unified function accepts any RabbitMQ result type and returns\nthe appropriate expectation interface based on the result's type discriminator.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\n// For publish result - returns RabbitMqPublishResultExpectation\nconst publishResult = await channel.sendToQueue(queue, content);\nexpectRabbitMqResult(publishResult).ok();\n\n// For consume result - returns RabbitMqConsumeResultExpectation\nconst consumeResult = await channel.get(queue);\nexpectRabbitMqResult(consumeResult).ok().hasContent().routingKey(\"key\");\n\n// For queue result - returns RabbitMqQueueResultExpectation\nconst queueResult = await channel.assertQueue(\"my-queue\");\nexpectRabbitMqResult(queueResult).ok().messageCount(0);\n\n// For exchange result - returns RabbitMqExchangeResultExpectation\nconst exchangeResult = await channel.assertExchange(\"my-exchange\", \"direct\");\nexpectRabbitMqResult(exchangeResult).ok();\n\n// For ack result - returns RabbitMqAckResultExpectation\nconst ackResult = await channel.ack(message);\nexpectRabbitMqResult(ackResult).ok();\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "result",
+            "optional": false,
+            "tsType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "RabbitMqExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "R",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "R"
+                }
+              }
+            ],
+            "typeName": "RabbitMqExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "RabbitMqResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RabbitMqResult"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:42.717Z"
+}

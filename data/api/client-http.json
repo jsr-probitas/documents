@@ -1,0 +1,3600 @@
+{
+  "name": "client-http",
+  "specifier": "@probitas/client-http",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "HttpResponse",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 9,
+        "col": 0,
+        "byteIndex": 277
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP response with pre-loaded body for synchronous access.\n\nWraps Web standard Response, allowing body to be read synchronously\nand multiple times (unlike the streaming-based standard Response)."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "arrayBuffer",
+            "jsDoc": {
+              "doc": "Get body as ArrayBuffer (null if no body)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 937
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "ArrayBuffer",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ArrayBuffer"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "blob",
+            "jsDoc": {
+              "doc": "Get body as Blob (null if no body)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 1019
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "Blob",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Blob"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "text",
+            "jsDoc": {
+              "doc": "Get body as text (null if no body)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1087
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "json",
+            "jsDoc": {
+              "doc": "Get body as parsed JSON (null if no body)",
+              "tags": [
+                {
+                  "kind": "template",
+                  "name": "T",
+                  "doc": "- defaults to any for test convenience"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1266
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "any",
+                  "kind": "keyword",
+                  "keyword": "any"
+                }
+              }
+            ]
+          }
+        ],
+        "properties": [
+          {
+            "name": "type",
+            "jsDoc": {
+              "doc": "Result type identifier"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 343
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "http",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "http"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Whether the response was successful (status 200-299)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 489
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "status",
+            "jsDoc": {
+              "doc": "HTTP status code"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 540
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "statusText",
+            "jsDoc": {
+              "doc": "HTTP status text"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 594
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headers",
+            "jsDoc": {
+              "doc": "Response headers"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 652
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "Headers",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Headers"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "url",
+            "jsDoc": {
+              "doc": "Request URL"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 703
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "body",
+            "jsDoc": {
+              "doc": "Response body as raw bytes (null if no body)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 33,
+              "col": 2,
+              "byteIndex": 849
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "Uint8Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Uint8Array"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "jsDoc": {
+              "doc": "Response time in milliseconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1371
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "raw",
+            "jsDoc": {
+              "doc": "Raw Web standard Response (for streaming or special cases)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 1469
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "globalThis.Response",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "globalThis.Response"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "QueryValue",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 63,
+        "col": 0,
+        "byteIndex": 1546
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Query parameter value type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "BodyInit",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 68,
+        "col": 0,
+        "byteIndex": 1629
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Request body type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            {
+              "repr": "Uint8Array",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Uint8Array"
+              }
+            },
+            {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            {
+              "repr": "FormData",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "FormData"
+              }
+            },
+            {
+              "repr": "URLSearchParams",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "URLSearchParams"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedirectMode",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 81,
+        "col": 0,
+        "byteIndex": 1928
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redirect handling mode.\n- \"follow\": Automatically follow redirects (default)\n- \"manual\": Return redirect response without following\n- \"error\": Throw error on redirect"
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "follow",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "follow"
+              }
+            },
+            {
+              "repr": "manual",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "manual"
+              }
+            },
+            {
+              "repr": "error",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "error"
+              }
+            }
+          ]
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 86,
+        "col": 0,
+        "byteIndex": 2036
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for individual HTTP requests."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "query",
+            "jsDoc": {
+              "doc": "Query parameters (arrays for multi-value params)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 2149
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "",
+                    "kind": "union",
+                    "union": [
+                      {
+                        "repr": "QueryValue",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "QueryValue"
+                        }
+                      },
+                      {
+                        "repr": "",
+                        "kind": "array",
+                        "array": {
+                          "repr": "QueryValue",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "QueryValue"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headers",
+            "jsDoc": {
+              "doc": "Additional request headers"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 91,
+              "col": 2,
+              "byteIndex": 2248
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "redirect",
+            "jsDoc": {
+              "doc": "Redirect handling mode.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default \"follow\" (inherited from client config if not specified)"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 97,
+              "col": 2,
+              "byteIndex": 2406
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "RedirectMode",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedirectMode"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "throwOnError",
+            "jsDoc": {
+              "doc": "Whether to throw HttpError for non-2xx responses.\nWhen false, non-2xx responses are returned as HttpResponse.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default true (inherited from client config if not specified)"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 104,
+              "col": 2,
+              "byteIndex": 2642
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "CookieConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 110,
+        "col": 0,
+        "byteIndex": 2720
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Cookie handling configuration."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "disabled",
+            "jsDoc": {
+              "doc": "Disable automatic cookie handling.\nWhen disabled, cookies are not stored or sent automatically.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default false"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 116,
+              "col": 2,
+              "byteIndex": 2892
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "initial",
+            "jsDoc": {
+              "doc": "Initial cookies to populate the cookie jar."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 121,
+              "col": 2,
+              "byteIndex": 2985
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 127,
+        "col": 0,
+        "byteIndex": 3069
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP client configuration."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "baseUrl",
+            "jsDoc": {
+              "doc": "Base URL for all requests"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 129,
+              "col": 2,
+              "byteIndex": 3164
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headers",
+            "jsDoc": {
+              "doc": "Default headers for all requests"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 132,
+              "col": 2,
+              "byteIndex": 3235
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "fetch",
+            "jsDoc": {
+              "doc": "Custom fetch implementation (for testing/mocking)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 135,
+              "col": 2,
+              "byteIndex": 3340
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "fetch",
+              "kind": "typeQuery",
+              "typeQuery": "fetch"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "redirect",
+            "jsDoc": {
+              "doc": "Default redirect handling mode.\nCan be overridden per-request via HttpOptions.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default \"follow\""
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 142,
+              "col": 2,
+              "byteIndex": 3498
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "RedirectMode",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedirectMode"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "throwOnError",
+            "jsDoc": {
+              "doc": "Whether to throw HttpError for non-2xx responses.\nCan be overridden per-request via HttpOptions.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default true"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 149,
+              "col": 2,
+              "byteIndex": 3673
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "cookies",
+            "jsDoc": {
+              "doc": "Cookie handling configuration.\nBy default, the client maintains a cookie jar for automatic\ncookie management across requests.\nSet `cookies: { disabled: true }` to disable."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 157,
+              "col": 2,
+              "byteIndex": 3913
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "CookieConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "CookieConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "line": 163,
+        "col": 0,
+        "byteIndex": 3983
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP client interface."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "get",
+            "jsDoc": {
+              "doc": "Send GET request"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 168,
+              "col": 2,
+              "byteIndex": 4133
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "post",
+            "jsDoc": {
+              "doc": "Send POST request"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 171,
+              "col": 2,
+              "byteIndex": 4228
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "body",
+                "optional": true,
+                "tsType": {
+                  "repr": "BodyInit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "BodyInit"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "put",
+            "jsDoc": {
+              "doc": "Send PUT request"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 178,
+              "col": 2,
+              "byteIndex": 4357
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "body",
+                "optional": true,
+                "tsType": {
+                  "repr": "BodyInit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "BodyInit"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "patch",
+            "jsDoc": {
+              "doc": "Send PATCH request"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 185,
+              "col": 2,
+              "byteIndex": 4487
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "body",
+                "optional": true,
+                "tsType": {
+                  "repr": "BodyInit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "BodyInit"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "delete",
+            "jsDoc": {
+              "doc": "Send DELETE request"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 192,
+              "col": 2,
+              "byteIndex": 4620
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "request",
+            "jsDoc": {
+              "doc": "Send request with arbitrary method"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 195,
+              "col": 2,
+              "byteIndex": 4735
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "method",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "path",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "intersection",
+                  "intersection": [
+                    {
+                      "repr": "HttpOptions",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "HttpOptions"
+                      }
+                    },
+                    {
+                      "repr": "",
+                      "kind": "typeLiteral",
+                      "typeLiteral": {
+                        "constructors": [],
+                        "methods": [],
+                        "properties": [
+                          {
+                            "name": "body",
+                            "location": {
+                              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+                              "line": 198,
+                              "col": 30,
+                              "byteIndex": 4812
+                            },
+                            "params": [],
+                            "computed": false,
+                            "optional": true,
+                            "tsType": {
+                              "repr": "BodyInit",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "BodyInit"
+                              }
+                            },
+                            "typeParams": []
+                          }
+                        ],
+                        "callSignatures": [],
+                        "indexSignatures": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "HttpResponse",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "HttpResponse"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "getCookies",
+            "jsDoc": {
+              "doc": "Get all cookies in the cookie jar.\nReturns empty object if cookies are disabled."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 205,
+              "col": 2,
+              "byteIndex": 4965
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "setCookie",
+            "jsDoc": {
+              "doc": "Set a cookie in the cookie jar.",
+              "tags": [
+                {
+                  "kind": "throws",
+                  "type": null,
+                  "doc": "Error if cookies are disabled"
+                }
+              ]
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 211,
+              "col": 2,
+              "byteIndex": 5098
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "void",
+              "kind": "keyword",
+              "keyword": "void"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "clearCookies",
+            "jsDoc": {
+              "doc": "Clear all cookies from the cookie jar.\nNo-op if cookies are disabled."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 217,
+              "col": 2,
+              "byteIndex": 5239
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "void",
+              "kind": "keyword",
+              "keyword": "void"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "close",
+            "jsDoc": {
+              "doc": "Close the client and release resources"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 220,
+              "col": 2,
+              "byteIndex": 5312
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "jsDoc": {
+              "doc": "Client configuration"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+              "line": 165,
+              "col": 2,
+              "byteIndex": 4069
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "HttpClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "HttpClientConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 7,
+        "col": 0,
+        "byteIndex": 150
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for HttpError constructor."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "response",
+            "jsDoc": {
+              "doc": "Associated HTTP response"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 243
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "HttpResponse",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "HttpResponse"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 15,
+        "col": 0,
+        "byteIndex": 314
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base HTTP error class."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "status",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "statusText",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 652
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 16,
+              "col": 2,
+              "byteIndex": 361
+            }
+          },
+          {
+            "tsType": {
+              "repr": "http",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "http"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 409
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "HTTP status code"
+            },
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 480
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "HTTP status text"
+            },
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 534
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Associated HTTP response (if available)"
+            },
+            "tsType": {
+              "repr": "HttpResponse",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "HttpResponse"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "response",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 615
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpBadRequestError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 44,
+        "col": 0,
+        "byteIndex": 950
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 400 Bad Request error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1147
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1005
+            }
+          },
+          {
+            "tsType": {
+              "repr": "400",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 400
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1055
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1098
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpUnauthorizedError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 57,
+        "col": 0,
+        "byteIndex": 1302
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 401 Unauthorized error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1504
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1359
+            }
+          },
+          {
+            "tsType": {
+              "repr": "401",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 401
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 59,
+              "col": 2,
+              "byteIndex": 1411
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1454
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpForbiddenError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 70,
+        "col": 0,
+        "byteIndex": 1657
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 403 Forbidden error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1850
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1711
+            }
+          },
+          {
+            "tsType": {
+              "repr": "403",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 403
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 1760
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1803
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpNotFoundError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 83,
+        "col": 0,
+        "byteIndex": 2000
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 404 Not Found error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 2191
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 2053
+            }
+          },
+          {
+            "tsType": {
+              "repr": "404",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 404
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 85,
+              "col": 2,
+              "byteIndex": 2101
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 2144
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpConflictError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 96,
+        "col": 0,
+        "byteIndex": 2340
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 409 Conflict error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2530
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 97,
+              "col": 2,
+              "byteIndex": 2393
+            }
+          },
+          {
+            "tsType": {
+              "repr": "409",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 409
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 98,
+              "col": 2,
+              "byteIndex": 2441
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 99,
+              "col": 2,
+              "byteIndex": 2484
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpTooManyRequestsError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 109,
+        "col": 0,
+        "byteIndex": 2687
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 429 Too Many Requests error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 114,
+              "col": 2,
+              "byteIndex": 2900
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 110,
+              "col": 2,
+              "byteIndex": 2747
+            }
+          },
+          {
+            "tsType": {
+              "repr": "429",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 429
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 111,
+              "col": 2,
+              "byteIndex": 2802
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 112,
+              "col": 2,
+              "byteIndex": 2845
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "HttpInternalServerError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+        "line": 122,
+        "col": 0,
+        "byteIndex": 3064
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "HTTP 500 Internal Server Error."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "HttpErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "HttpErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 127,
+              "col": 2,
+              "byteIndex": 3279
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 3123
+            }
+          },
+          {
+            "tsType": {
+              "repr": "500",
+              "kind": "literal",
+              "literal": {
+                "kind": "number",
+                "number": 500
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "status",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 3177
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "statusText",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/errors.ts",
+              "line": 125,
+              "col": 2,
+              "byteIndex": 3220
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "HttpError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "createHttpClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/client.ts",
+        "line": 377,
+        "col": 0,
+        "byteIndex": 10188
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a new HTTP client."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": false,
+            "tsType": {
+              "repr": "HttpClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "HttpClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "HttpClient",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": null,
+            "typeName": "HttpClient"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "createHttpResponse",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/response.ts",
+        "line": 84,
+        "col": 0,
+        "byteIndex": 2092
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create HttpResponse from raw Response.\n\nConsumes the response body and creates a reusable HttpResponse."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "raw",
+            "optional": false,
+            "tsType": {
+              "repr": "globalThis.Response",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "globalThis.Response"
+              }
+            }
+          },
+          {
+            "kind": "identifier",
+            "name": "duration",
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "HttpResponse",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "HttpResponse"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "HttpResponseExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+        "line": 7,
+        "col": 0,
+        "byteIndex": 177
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for HTTP response validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that response status is 200-299"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 270
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that response status is not 200-299"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 12,
+              "col": 2,
+              "byteIndex": 337
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "status",
+            "jsDoc": {
+              "doc": "Assert that response status matches expected code"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 414
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "code",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "statusInRange",
+            "jsDoc": {
+              "doc": "Assert that response status is within range (inclusive)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 510
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "max",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "header",
+            "jsDoc": {
+              "doc": "Assert that header value matches expected string or regex"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 21,
+              "col": 2,
+              "byteIndex": 627
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "RegExp",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "RegExp"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "headerExists",
+            "jsDoc": {
+              "doc": "Assert that header exists"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 720
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contentType",
+            "jsDoc": {
+              "doc": "Assert that Content-Type header matches expected string or regex"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 831
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "RegExp",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "RegExp"
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Assert that response body is null"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 923
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Assert that response body is not null"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 33,
+              "col": 2,
+              "byteIndex": 992
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "bodyContains",
+            "jsDoc": {
+              "doc": "Assert that body contains given byte sequence"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 1070
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subbody",
+                "optional": false,
+                "tsType": {
+                  "repr": "Uint8Array",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Uint8Array"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "bodyMatch",
+            "jsDoc": {
+              "doc": "Assert body using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 1165
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "body",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "Uint8Array",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "Uint8Array"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "textContains",
+            "jsDoc": {
+              "doc": "Assert that text body contains substring"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 1272
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "substring",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "textMatch",
+            "jsDoc": {
+              "doc": "Assert text body using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1370
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "text",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "string",
+                          "kind": "keyword",
+                          "keyword": "string"
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "jsonContains",
+            "jsDoc": {
+              "doc": "Assert that JSON body contains expected properties"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1521
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "any",
+                  "kind": "keyword",
+                  "keyword": "any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "jsonMatch",
+            "jsDoc": {
+              "doc": "Assert JSON body using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1667
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "body",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "any",
+                  "kind": "keyword",
+                  "keyword": "any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that response duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+              "line": 56,
+              "col": 2,
+              "byteIndex": 1791
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "expectHttpResponse",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/expect.ts",
+        "line": 226,
+        "col": 0,
+        "byteIndex": 6068
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a fluent expectation chain for HTTP response validation."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "response",
+            "optional": false,
+            "tsType": {
+              "repr": "HttpResponse",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "HttpResponse"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "HttpResponseExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": null,
+            "typeName": "HttpResponseExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:42.450Z"
+}

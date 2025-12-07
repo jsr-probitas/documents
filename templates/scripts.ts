@@ -45,7 +45,7 @@ function initCarousel() {
     tabs[index].classList.add('active');
     slides.forEach(s => s.classList.remove('active'));
     slides[index].classList.add('active');
-    slides[index].querySelectorAll('pre code').forEach(block => {
+    slides[index].querySelectorAll('pre code:not([data-highlighted])').forEach(block => {
       hljs.highlightElement(block);
     });
   }
@@ -71,20 +71,19 @@ function initCarousel() {
   });
 }
 
-function initTocFade() {
-  const toc = document.querySelector('.toc');
-  if (!toc) return;
+function initScrollableNavFade() {
+  document.querySelectorAll('.scrollable-nav').forEach(el => {
+    function updateFade() {
+      const atTop = el.scrollTop <= 10;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 10;
 
-  function updateFade() {
-    const atTop = toc.scrollTop <= 10;
-    const atBottom = toc.scrollTop + toc.clientHeight >= toc.scrollHeight - 10;
+      el.classList.toggle('scroll-top', atTop);
+      el.classList.toggle('scroll-bottom', atBottom);
+    }
 
-    toc.classList.toggle('scroll-top', atTop);
-    toc.classList.toggle('scroll-bottom', atBottom);
-  }
-
-  updateFade();
-  toc.addEventListener('scroll', updateFade, { passive: true });
+    updateFade();
+    el.addEventListener('scroll', updateFade, { passive: true });
+  });
 }
 
 function initCodeCopyButtons() {
@@ -120,11 +119,33 @@ function initCodeCopyButtons() {
   });
 }
 
+function initSignatureScrollFade() {
+  document.querySelectorAll('.api-signature pre code').forEach(code => {
+    function updateFade() {
+      const canScrollLeft = code.scrollLeft > 5;
+      const canScrollRight = code.scrollLeft + code.clientWidth < code.scrollWidth - 5;
+
+      code.classList.toggle('scroll-left', canScrollLeft);
+      code.classList.toggle('scroll-right', canScrollRight);
+    }
+
+    // Initial check
+    updateFade();
+
+    // Update on scroll
+    code.addEventListener('scroll', updateFade, { passive: true });
+
+    // Also check on window resize (content width may change)
+    window.addEventListener('resize', updateFade, { passive: true });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   hljs.highlightAll();
   updateHljsTheme(document.documentElement.getAttribute('data-theme') || 'dark');
   initCarousel();
-  initTocFade();
+  initScrollableNavFade();
   initCodeCopyButtons();
+  initSignatureScrollFade();
 });
 `;

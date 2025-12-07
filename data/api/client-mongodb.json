@@ -1,0 +1,5496 @@
+{
+  "name": "client-mongodb",
+  "specifier": "@probitas/client-mongodb",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "Document",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 7,
+        "col": 0,
+        "byteIndex": 132
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB document type"
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "Record",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "string",
+                "kind": "keyword",
+                "keyword": "string"
+              },
+              {
+                "repr": "T",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "T"
+                }
+              }
+            ],
+            "typeName": "Record"
+          }
+        },
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "any",
+              "kind": "keyword",
+              "keyword": "any"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Filter",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 14,
+        "col": 0,
+        "byteIndex": 354
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB filter type (simplified for compatibility with mongodb driver)\nAllows query operators like $gte, $lt, $in, etc."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "Record",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "string",
+                "kind": "keyword",
+                "keyword": "string"
+              },
+              {
+                "repr": "any",
+                "kind": "keyword",
+                "keyword": "any"
+              }
+            ],
+            "typeName": "Record"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "UpdateFilter",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 21,
+        "col": 0,
+        "byteIndex": 579
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB update filter type (simplified for compatibility with mongodb driver)\nAllows update operators like $set, $inc, $unset, etc."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "Record",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "string",
+                "kind": "keyword",
+                "keyword": "string"
+              },
+              {
+                "repr": "any",
+                "kind": "keyword",
+                "keyword": "any"
+              }
+            ],
+            "typeName": "Record"
+          }
+        },
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoDocs",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 26,
+        "col": 0,
+        "byteIndex": 678
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Document array with first/last methods"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ReadonlyArray",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              ],
+              "typeName": "ReadonlyArray"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "first",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 737
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "firstOrThrow",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 763
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "T",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "T"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "last",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 784
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lastOrThrow",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 809
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "T",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "T"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoFindResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 36,
+        "col": 0,
+        "byteIndex": 872
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Query result (find, aggregate)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 923
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:find",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:find"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 954
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docs",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 39,
+              "col": 2,
+              "byteIndex": 978
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "MongoDocs",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoDocs"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1009
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "Document",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Document"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoInsertOneResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 46,
+        "col": 0,
+        "byteIndex": 1068
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Insert one result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1110
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:insert",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:insert"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 48,
+              "col": 2,
+              "byteIndex": 1143
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertedId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1167
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1198
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoInsertManyResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 56,
+        "col": 0,
+        "byteIndex": 1258
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Insert many result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 1301
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:insert",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:insert"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1334
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertedIds",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 59,
+              "col": 2,
+              "byteIndex": 1358
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertedCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1401
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1435
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoUpdateResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 67,
+        "col": 0,
+        "byteIndex": 1490
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Update result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 68,
+              "col": 2,
+              "byteIndex": 1529
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:update",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:update"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 69,
+              "col": 2,
+              "byteIndex": 1562
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "matchedCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 1586
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "modifiedCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1619
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "upsertedId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 1653
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1685
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoDeleteResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 79,
+        "col": 0,
+        "byteIndex": 1740
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Delete result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 80,
+              "col": 2,
+              "byteIndex": 1779
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:delete",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:delete"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 81,
+              "col": 2,
+              "byteIndex": 1812
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deletedCount",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 1836
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 83,
+              "col": 2,
+              "byteIndex": 1869
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoFindOneResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 89,
+        "col": 0,
+        "byteIndex": 1925
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "FindOne result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 90,
+              "col": 2,
+              "byteIndex": 1979
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:find-one",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:find-one"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 91,
+              "col": 2,
+              "byteIndex": 2014
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "doc",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 92,
+              "col": 2,
+              "byteIndex": 2038
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 93,
+              "col": 2,
+              "byteIndex": 2069
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "Document",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Document"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoCountResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 99,
+        "col": 0,
+        "byteIndex": 2123
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Count result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 100,
+              "col": 2,
+              "byteIndex": 2161
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "mongo:count",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "mongo:count"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2193
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "count",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 102,
+              "col": 2,
+              "byteIndex": 2217
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 103,
+              "col": 2,
+              "byteIndex": 2243
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 111,
+        "col": 0,
+        "byteIndex": 2431
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Union of all MongoDB result types.\nUsed by expectMongoResult to determine the appropriate expectation type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "MongoFindResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoFindResult"
+              }
+            },
+            {
+              "repr": "MongoInsertOneResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoInsertOneResult"
+              }
+            },
+            {
+              "repr": "MongoInsertManyResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoInsertManyResult"
+              }
+            },
+            {
+              "repr": "MongoUpdateResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoUpdateResult"
+              }
+            },
+            {
+              "repr": "MongoDeleteResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoDeleteResult"
+              }
+            },
+            {
+              "repr": "MongoFindOneResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoFindOneResult"
+              }
+            },
+            {
+              "repr": "MongoCountResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoCountResult"
+              }
+            }
+          ]
+        },
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "any",
+              "kind": "keyword",
+              "keyword": "any"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoFindOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 123,
+        "col": 0,
+        "byteIndex": 2665
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB find options"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "sort",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 2725
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "",
+                    "kind": "union",
+                    "union": [
+                      {
+                        "repr": "1",
+                        "kind": "literal",
+                        "literal": {
+                          "kind": "number",
+                          "number": 1
+                        }
+                      },
+                      {
+                        "repr": "-1",
+                        "kind": "literal",
+                        "literal": {
+                          "kind": "number",
+                          "number": -1
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "limit",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 125,
+              "col": 2,
+              "byteIndex": 2767
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "skip",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 126,
+              "col": 2,
+              "byteIndex": 2794
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "projection",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 127,
+              "col": 2,
+              "byteIndex": 2820
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "",
+                    "kind": "union",
+                    "union": [
+                      {
+                        "repr": "0",
+                        "kind": "literal",
+                        "literal": {
+                          "kind": "number",
+                          "number": 0
+                        }
+                      },
+                      {
+                        "repr": "1",
+                        "kind": "literal",
+                        "literal": {
+                          "kind": "number",
+                          "number": 1
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoUpdateOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 133,
+        "col": 0,
+        "byteIndex": 2902
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB update options"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "upsert",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 134,
+              "col": 2,
+              "byteIndex": 2964
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 140,
+        "col": 0,
+        "byteIndex": 3034
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB client configuration"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "uri",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 141,
+              "col": 2,
+              "byteIndex": 3095
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "database",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 142,
+              "col": 2,
+              "byteIndex": 3119
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoSession",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 148,
+        "col": 0,
+        "byteIndex": 3205
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB session interface (for transactions)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "collection",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 149,
+              "col": 2,
+              "byteIndex": 3239
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "MongoCollection",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoCollection"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "constraint": {
+                  "repr": "Document",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Document"
+                  }
+                },
+                "default": {
+                  "repr": "Document",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Document"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoCollection",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 155,
+        "col": 0,
+        "byteIndex": 3359
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB collection interface"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "find",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 156,
+              "col": 2,
+              "byteIndex": 3416
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": true,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoFindOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoFindOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoFindResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "MongoFindResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "findOne",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 160,
+              "col": 2,
+              "byteIndex": 3511
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": false,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoFindOneResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "MongoFindOneResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertOne",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 164,
+              "col": 2,
+              "byteIndex": 3608
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "doc",
+                "optional": false,
+                "tsType": {
+                  "repr": "Omit",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      },
+                      {
+                        "repr": "_id",
+                        "kind": "literal",
+                        "literal": {
+                          "kind": "string",
+                          "string": "_id"
+                        }
+                      }
+                    ],
+                    "typeName": "Omit"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoInsertOneResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoInsertOneResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertMany",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 168,
+              "col": 2,
+              "byteIndex": 3711
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "docs",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "Omit",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        },
+                        {
+                          "repr": "_id",
+                          "kind": "literal",
+                          "literal": {
+                            "kind": "string",
+                            "string": "_id"
+                          }
+                        }
+                      ],
+                      "typeName": "Omit"
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoInsertManyResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoInsertManyResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "updateOne",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 172,
+              "col": 2,
+              "byteIndex": 3819
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": false,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "update",
+                "optional": false,
+                "tsType": {
+                  "repr": "UpdateFilter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "UpdateFilter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoUpdateOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoUpdateOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoUpdateResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoUpdateResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "updateMany",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 177,
+              "col": 2,
+              "byteIndex": 3945
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": false,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "update",
+                "optional": false,
+                "tsType": {
+                  "repr": "UpdateFilter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "UpdateFilter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoUpdateOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoUpdateOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoUpdateResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoUpdateResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deleteOne",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 182,
+              "col": 2,
+              "byteIndex": 4072
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": false,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoDeleteResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoDeleteResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deleteMany",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 186,
+              "col": 2,
+              "byteIndex": 4167
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": false,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoDeleteResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoDeleteResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "aggregate",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 190,
+              "col": 2,
+              "byteIndex": 4263
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "pipeline",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "Document",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Document"
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoFindResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "R",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "R"
+                          }
+                        }
+                      ],
+                      "typeName": "MongoFindResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "R",
+                "default": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "countDocuments",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 194,
+              "col": 2,
+              "byteIndex": 4372
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "filter",
+                "optional": true,
+                "tsType": {
+                  "repr": "Filter",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Filter"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "MongoCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "MongoCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "constraint": {
+              "repr": "Document",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Document"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 203,
+        "col": 0,
+        "byteIndex": 4509
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "MongoDB client interface"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "collection",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 206,
+              "col": 2,
+              "byteIndex": 4605
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "MongoCollection",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoCollection"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "constraint": {
+                  "repr": "Document",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Document"
+                  }
+                },
+                "default": {
+                  "repr": "Document",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Document"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "db",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 207,
+              "col": 2,
+              "byteIndex": 4684
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "name",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "MongoClient",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoClient"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "transaction",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 208,
+              "col": 2,
+              "byteIndex": 4717
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "fn",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "Promise",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": [
+                          {
+                            "repr": "T",
+                            "kind": "typeRef",
+                            "typeRef": {
+                              "typeParams": null,
+                              "typeName": "T"
+                            }
+                          }
+                        ],
+                        "typeName": "Promise"
+                      }
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "session",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "MongoSession",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "MongoSession"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "close",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 210,
+              "col": 2,
+              "byteIndex": 4791
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+              "line": 204,
+              "col": 2,
+              "byteIndex": 4566
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "MongoClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoClientConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 95
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for MongoDB errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 155
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 13,
+        "col": 0,
+        "byteIndex": 237
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for MongoDB client errors."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "assign",
+                "left": {
+                  "kind": "identifier",
+                  "name": "kind",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                "right": "mongo",
+                "tsType": null
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 361
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 285
+            }
+          },
+          {
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 334
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoConnectionError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 30,
+        "col": 0,
+        "byteIndex": 608
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a MongoDB connection cannot be established."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 767
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 665
+            }
+          },
+          {
+            "tsType": {
+              "repr": "connection",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "connection"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 716
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoQueryError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 42,
+        "col": 0,
+        "byteIndex": 929
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a MongoDB query fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "collection",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1104
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 981
+            }
+          },
+          {
+            "tsType": {
+              "repr": "query",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "query"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1027
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "collection",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1072
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoDuplicateKeyError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 60,
+        "col": 0,
+        "byteIndex": 1349
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a duplicate key constraint is violated."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "keyPattern",
+                "optional": false,
+                "tsType": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "number",
+                        "kind": "keyword",
+                        "keyword": "number"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "keyValue",
+                "optional": false,
+                "tsType": {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "unknown",
+                        "kind": "keyword",
+                        "keyword": "unknown"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 66,
+              "col": 2,
+              "byteIndex": 1608
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1408
+            }
+          },
+          {
+            "tsType": {
+              "repr": "duplicate_key",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "duplicate_key"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1461
+            }
+          },
+          {
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "number",
+                    "kind": "keyword",
+                    "keyword": "number"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "keyPattern",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 63,
+              "col": 2,
+              "byteIndex": 1514
+            }
+          },
+          {
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "keyValue",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1561
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoValidationError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 81,
+        "col": 0,
+        "byteIndex": 1953
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when document validation fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "validationErrors",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 2160
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 2010
+            }
+          },
+          {
+            "tsType": {
+              "repr": "validation",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "validation"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 83,
+              "col": 2,
+              "byteIndex": 2061
+            }
+          },
+          {
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "validationErrors",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 2111
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoWriteError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 99,
+        "col": 0,
+        "byteIndex": 2424
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a write operation fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "writeErrors",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "",
+                        "kind": "typeLiteral",
+                        "typeLiteral": {
+                          "constructors": [],
+                          "methods": [],
+                          "properties": [
+                            {
+                              "name": "index",
+                              "location": {
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "line": 110,
+                                "col": 28,
+                                "byteIndex": 2730
+                              },
+                              "params": [],
+                              "computed": false,
+                              "optional": false,
+                              "tsType": {
+                                "repr": "number",
+                                "kind": "keyword",
+                                "keyword": "number"
+                              },
+                              "typeParams": []
+                            },
+                            {
+                              "name": "code",
+                              "location": {
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "line": 110,
+                                "col": 43,
+                                "byteIndex": 2745
+                              },
+                              "params": [],
+                              "computed": false,
+                              "optional": false,
+                              "tsType": {
+                                "repr": "number",
+                                "kind": "keyword",
+                                "keyword": "number"
+                              },
+                              "typeParams": []
+                            },
+                            {
+                              "name": "message",
+                              "location": {
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                                "line": 110,
+                                "col": 57,
+                                "byteIndex": 2759
+                              },
+                              "params": [],
+                              "computed": false,
+                              "optional": false,
+                              "tsType": {
+                                "repr": "string",
+                                "kind": "keyword",
+                                "keyword": "string"
+                              },
+                              "typeParams": []
+                            }
+                          ],
+                          "callSignatures": [],
+                          "indexSignatures": []
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 108,
+              "col": 2,
+              "byteIndex": 2668
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 100,
+              "col": 2,
+              "byteIndex": 2476
+            }
+          },
+          {
+            "tsType": {
+              "repr": "write",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "write"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2522
+            }
+          },
+          {
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "",
+                    "kind": "typeLiteral",
+                    "typeLiteral": {
+                      "constructors": [],
+                      "methods": [],
+                      "properties": [
+                        {
+                          "name": "index",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "line": 103,
+                            "col": 4,
+                            "byteIndex": 2604
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "number",
+                            "kind": "keyword",
+                            "keyword": "number"
+                          },
+                          "typeParams": []
+                        },
+                        {
+                          "name": "code",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "line": 104,
+                            "col": 4,
+                            "byteIndex": 2623
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "number",
+                            "kind": "keyword",
+                            "keyword": "number"
+                          },
+                          "typeParams": []
+                        },
+                        {
+                          "name": "message",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+                            "line": 105,
+                            "col": 4,
+                            "byteIndex": 2641
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "string",
+                            "kind": "keyword",
+                            "keyword": "string"
+                          },
+                          "typeParams": []
+                        }
+                      ],
+                      "callSignatures": [],
+                      "indexSignatures": []
+                    }
+                  }
+                }
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "writeErrors",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 102,
+              "col": 2,
+              "byteIndex": 2567
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "MongoNotFoundError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+        "line": 121,
+        "col": 0,
+        "byteIndex": 2986
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a document is not found (for firstOrThrow, lastOrThrow)."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "MongoErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 125,
+              "col": 2,
+              "byteIndex": 3140
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 3041
+            }
+          },
+          {
+            "tsType": {
+              "repr": "not_found",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "not_found"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/errors.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 3090
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "MongoError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "createMongoDocs",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/results.ts",
+        "line": 7,
+        "col": 0,
+        "byteIndex": 154
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a MongoDocs array from a regular array."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "items",
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "array",
+              "array": {
+                "repr": "T",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "T"
+                }
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "MongoDocs",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "T",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "T"
+                }
+              }
+            ],
+            "typeName": "MongoDocs"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "createMongoClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/client.ts",
+        "line": 201,
+        "col": 0,
+        "byteIndex": 5019
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a MongoDB client.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```typescript\nconst mongo = await createMongoClient({\n  uri: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst users = mongo.collection<{ name: string; age: number }>(\"users\");\nconst result = await users.find({ age: { $gte: 18 } });\nconsole.log(result.docs.first());\n\nawait mongo.close();\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": false,
+            "tsType": {
+              "repr": "MongoClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "MongoClient",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "MongoClient"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoFindResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 17,
+        "col": 0,
+        "byteIndex": 332
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB find result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 383
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 397
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 414
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 21,
+              "col": 2,
+              "byteIndex": 435
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docs",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 457
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docsAtLeast",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 486
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docsAtMost",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 522
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docContains",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 25,
+              "col": 2,
+              "byteIndex": 557
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docMatch",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 598
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "docs",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "MongoDocs",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": [
+                              {
+                                "repr": "T",
+                                "kind": "typeRef",
+                                "typeRef": {
+                                  "typeParams": null,
+                                  "typeName": "T"
+                                }
+                              }
+                            ],
+                            "typeName": "MongoDocs"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 655
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoInsertResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 33,
+        "col": 0,
+        "byteIndex": 754
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB insert result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 804
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 818
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "insertedCount",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 835
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasInsertedId",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 873
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 898
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoUpdateResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 44,
+        "col": 0,
+        "byteIndex": 997
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB update result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1047
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1061
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "matchedCount",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1078
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "modifiedCount",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 48,
+              "col": 2,
+              "byteIndex": 1115
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "wasUpserted",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1153
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1176
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoDeleteResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 56,
+        "col": 0,
+        "byteIndex": 1275
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB delete result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 57,
+              "col": 2,
+              "byteIndex": 1325
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1339
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deletedCount",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 59,
+              "col": 2,
+              "byteIndex": 1356
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "deletedAtLeast",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1393
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1432
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoFindOneResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 67,
+        "col": 0,
+        "byteIndex": 1532
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB findOne result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 68,
+              "col": 2,
+              "byteIndex": 1586
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 69,
+              "col": 2,
+              "byteIndex": 1600
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "found",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 1617
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notFound",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1634
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docContains",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 1654
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "docMatch",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1695
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "doc",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 1740
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MongoCountResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 80,
+        "col": 0,
+        "byteIndex": 1838
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for MongoDB count result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 81,
+              "col": 2,
+              "byteIndex": 1887
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 1901
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "count",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 83,
+              "col": 2,
+              "byteIndex": 1918
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtLeast",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 1951
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtMost",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 85,
+              "col": 2,
+              "byteIndex": 1986
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "max",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countBetween",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 2020
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "max",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "isEmpty",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 2068
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "isNotEmpty",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 2087
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+              "line": 89,
+              "col": 2,
+              "byteIndex": 2109
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "MongoExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 497,
+        "col": 0,
+        "byteIndex": 11597
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Expectation type returned by expectMongoResult based on the result type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "conditional",
+          "conditionalType": {
+            "checkType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            },
+            "extendsType": {
+              "repr": "MongoFindResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "infer",
+                    "infer": {
+                      "typeParam": {
+                        "name": "T"
+                      }
+                    }
+                  }
+                ],
+                "typeName": "MongoFindResult"
+              }
+            },
+            "trueType": {
+              "repr": "MongoFindResultExpectation",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "MongoFindResultExpectation"
+              }
+            },
+            "falseType": {
+              "repr": "",
+              "kind": "conditional",
+              "conditionalType": {
+                "checkType": {
+                  "repr": "R",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "R"
+                  }
+                },
+                "extendsType": {
+                  "repr": "MongoInsertOneResult",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoInsertOneResult"
+                  }
+                },
+                "trueType": {
+                  "repr": "MongoInsertResultExpectation",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "MongoInsertResultExpectation"
+                  }
+                },
+                "falseType": {
+                  "repr": "",
+                  "kind": "conditional",
+                  "conditionalType": {
+                    "checkType": {
+                      "repr": "R",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "R"
+                      }
+                    },
+                    "extendsType": {
+                      "repr": "MongoInsertManyResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "MongoInsertManyResult"
+                      }
+                    },
+                    "trueType": {
+                      "repr": "MongoInsertResultExpectation",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "MongoInsertResultExpectation"
+                      }
+                    },
+                    "falseType": {
+                      "repr": "",
+                      "kind": "conditional",
+                      "conditionalType": {
+                        "checkType": {
+                          "repr": "R",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "R"
+                          }
+                        },
+                        "extendsType": {
+                          "repr": "MongoUpdateResult",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "MongoUpdateResult"
+                          }
+                        },
+                        "trueType": {
+                          "repr": "MongoUpdateResultExpectation",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "MongoUpdateResultExpectation"
+                          }
+                        },
+                        "falseType": {
+                          "repr": "",
+                          "kind": "conditional",
+                          "conditionalType": {
+                            "checkType": {
+                              "repr": "R",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "R"
+                              }
+                            },
+                            "extendsType": {
+                              "repr": "MongoDeleteResult",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "MongoDeleteResult"
+                              }
+                            },
+                            "trueType": {
+                              "repr": "MongoDeleteResultExpectation",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "MongoDeleteResultExpectation"
+                              }
+                            },
+                            "falseType": {
+                              "repr": "",
+                              "kind": "conditional",
+                              "conditionalType": {
+                                "checkType": {
+                                  "repr": "R",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": null,
+                                    "typeName": "R"
+                                  }
+                                },
+                                "extendsType": {
+                                  "repr": "MongoFindOneResult",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": [
+                                      {
+                                        "repr": "",
+                                        "kind": "infer",
+                                        "infer": {
+                                          "typeParam": {
+                                            "name": "T"
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "typeName": "MongoFindOneResult"
+                                  }
+                                },
+                                "trueType": {
+                                  "repr": "MongoFindOneResultExpectation",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": [
+                                      {
+                                        "repr": "T",
+                                        "kind": "typeRef",
+                                        "typeRef": {
+                                          "typeParams": null,
+                                          "typeName": "T"
+                                        }
+                                      }
+                                    ],
+                                    "typeName": "MongoFindOneResultExpectation"
+                                  }
+                                },
+                                "falseType": {
+                                  "repr": "",
+                                  "kind": "conditional",
+                                  "conditionalType": {
+                                    "checkType": {
+                                      "repr": "R",
+                                      "kind": "typeRef",
+                                      "typeRef": {
+                                        "typeParams": null,
+                                        "typeName": "R"
+                                      }
+                                    },
+                                    "extendsType": {
+                                      "repr": "MongoCountResult",
+                                      "kind": "typeRef",
+                                      "typeRef": {
+                                        "typeParams": null,
+                                        "typeName": "MongoCountResult"
+                                      }
+                                    },
+                                    "trueType": {
+                                      "repr": "MongoCountResultExpectation",
+                                      "kind": "typeRef",
+                                      "typeRef": {
+                                        "typeParams": null,
+                                        "typeName": "MongoCountResultExpectation"
+                                      }
+                                    },
+                                    "falseType": {
+                                      "repr": "never",
+                                      "kind": "keyword",
+                                      "keyword": "never"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "MongoResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "MongoResult"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "expectMongoResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/expect.ts",
+        "line": 541,
+        "col": 0,
+        "byteIndex": 13610
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a fluent expectation chain for any MongoDB result validation.\n\nThis unified function accepts any MongoDB result type and returns\nthe appropriate expectation interface based on the result's type discriminator.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\n// For find result - returns MongoFindResultExpectation\nconst findResult = await users.find({ age: { $gte: 30 } });\nexpectMongoResult(findResult).ok().hasContent().docs(2);\n\n// For insert result - returns MongoInsertResultExpectation\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nexpectMongoResult(insertResult).ok().hasInsertedId();\n\n// For update result - returns MongoUpdateResultExpectation\nconst updateResult = await users.updateOne({ name: \"Alice\" }, { $set: { age: 31 } });\nexpectMongoResult(updateResult).ok().matchedCount(1).modifiedCount(1);\n\n// For delete result - returns MongoDeleteResultExpectation\nconst deleteResult = await users.deleteOne({ name: \"Alice\" });\nexpectMongoResult(deleteResult).ok().deletedCount(1);\n\n// For findOne result - returns MongoFindOneResultExpectation\nconst findOneResult = await users.findOne({ name: \"Alice\" });\nexpectMongoResult(findOneResult).ok().found().docContains({ name: \"Alice\" });\n\n// For count result - returns MongoCountResultExpectation\nconst countResult = await users.countDocuments();\nexpectMongoResult(countResult).ok().count(10);\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "result",
+            "optional": false,
+            "tsType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "MongoExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "R",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "R"
+                }
+              }
+            ],
+            "typeName": "MongoExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "MongoResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "any",
+                    "kind": "keyword",
+                    "keyword": "any"
+                  }
+                ],
+                "typeName": "MongoResult"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:42.576Z"
+}

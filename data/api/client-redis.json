@@ -1,0 +1,5021 @@
+{
+  "name": "client-redis",
+  "specifier": "@probitas/client-redis",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "RedisCommonResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 16,
+        "col": 0,
+        "byteIndex": 331
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis operation result (common/generic)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 410
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:common",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:common"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "unknown",
+              "kind": "keyword",
+              "keyword": "unknown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedisGetResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 23,
+        "col": 0,
+        "byteIndex": 472
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis GET result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "",
+                  "kind": "union",
+                  "union": [
+                    {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    {
+                      "repr": "null",
+                      "kind": "keyword",
+                      "keyword": "null"
+                    }
+                  ]
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 547
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:get",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:get"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisSetResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 30,
+        "col": 0,
+        "byteIndex": 606
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis SET result"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "OK",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "OK"
+                  }
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 672
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:set",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:set"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisCountResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 37,
+        "col": 0,
+        "byteIndex": 760
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis numeric result (DEL, LPUSH, SADD, etc.)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 830
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:count",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:count"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisArrayResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 44,
+        "col": 0,
+        "byteIndex": 918
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis array result (LRANGE, SMEMBERS, etc.)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 46,
+              "col": 2,
+              "byteIndex": 1008
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:array",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:array"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedisHashResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 52,
+        "col": 0,
+        "byteIndex": 1080
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis hash result (HGETALL)"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultBase",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "Record",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      },
+                      {
+                        "repr": "string",
+                        "kind": "keyword",
+                        "keyword": "string"
+                      }
+                    ],
+                    "typeName": "Record"
+                  }
+                }
+              ],
+              "typeName": "RedisResultBase"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1167
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "redis:hash",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "redis:hash"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 61,
+        "col": 0,
+        "byteIndex": 1319
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Union of all Redis result types.\nUsed by expectRedisResult to determine the appropriate expectation type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "RedisCommonResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "RedisCommonResult"
+              }
+            },
+            {
+              "repr": "RedisGetResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisGetResult"
+              }
+            },
+            {
+              "repr": "RedisSetResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisSetResult"
+              }
+            },
+            {
+              "repr": "RedisCountResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisCountResult"
+              }
+            },
+            {
+              "repr": "RedisArrayResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "RedisArrayResult"
+              }
+            },
+            {
+              "repr": "RedisHashResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisHashResult"
+              }
+            }
+          ]
+        },
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "unknown",
+              "kind": "keyword",
+              "keyword": "unknown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedisSetOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 72,
+        "col": 0,
+        "byteIndex": 1517
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis SET options"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "ex",
+            "jsDoc": {
+              "doc": "Expiration in seconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 1607
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "px",
+            "jsDoc": {
+              "doc": "Expiration in milliseconds"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 76,
+              "col": 2,
+              "byteIndex": 1667
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "nx",
+            "jsDoc": {
+              "doc": "Only set if key does not exist"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 78,
+              "col": 2,
+              "byteIndex": 1731
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "xx",
+            "jsDoc": {
+              "doc": "Only set if key exists"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 80,
+              "col": 2,
+              "byteIndex": 1788
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisMessage",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 86,
+        "col": 0,
+        "byteIndex": 1847
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis Pub/Sub message"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "channel",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 1881
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "message",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 88,
+              "col": 2,
+              "byteIndex": 1909
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 94,
+        "col": 0,
+        "byteIndex": 1976
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis client configuration"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "url",
+            "jsDoc": {
+              "doc": "Redis URL (redis://user:password@host:port/db)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 96,
+              "col": 2,
+              "byteIndex": 2093
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "host",
+            "jsDoc": {
+              "doc": "Redis host"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 98,
+              "col": 2,
+              "byteIndex": 2138
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "port",
+            "jsDoc": {
+              "doc": "Redis port"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 100,
+              "col": 2,
+              "byteIndex": 2184
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "password",
+            "jsDoc": {
+              "doc": "Redis password"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 102,
+              "col": 2,
+              "byteIndex": 2234
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "db",
+            "jsDoc": {
+              "doc": "Database number"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 104,
+              "col": 2,
+              "byteIndex": 2289
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisTransaction",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 110,
+        "col": 0,
+        "byteIndex": 2353
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis transaction interface"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "get",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 111,
+              "col": 2,
+              "byteIndex": 2391
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "set",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 112,
+              "col": 2,
+              "byteIndex": 2417
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RedisSetOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisSetOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "del",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 113,
+              "col": 2,
+              "byteIndex": 2485
+            },
+            "params": [
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "keys",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "incr",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 114,
+              "col": 2,
+              "byteIndex": 2517
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "decr",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 115,
+              "col": 2,
+              "byteIndex": 2544
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hget",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 116,
+              "col": 2,
+              "byteIndex": 2571
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "field",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hset",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 117,
+              "col": 2,
+              "byteIndex": 2613
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "field",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hgetall",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 118,
+              "col": 2,
+              "byteIndex": 2670
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hdel",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 119,
+              "col": 2,
+              "byteIndex": 2700
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "fields",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lpush",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 120,
+              "col": 2,
+              "byteIndex": 2748
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "values",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rpush",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 121,
+              "col": 2,
+              "byteIndex": 2797
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "values",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lpop",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 2846
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rpop",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 2873
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lrange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 2900
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "start",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "stop",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "llen",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 125,
+              "col": 2,
+              "byteIndex": 2958
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sadd",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 126,
+              "col": 2,
+              "byteIndex": 2985
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "members",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "srem",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 127,
+              "col": 2,
+              "byteIndex": 3034
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "members",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "smembers",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 128,
+              "col": 2,
+              "byteIndex": 3083
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sismember",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 129,
+              "col": 2,
+              "byteIndex": 3114
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "member",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zadd",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 130,
+              "col": 2,
+              "byteIndex": 3162
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "entries",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "",
+                    "kind": "typeLiteral",
+                    "typeLiteral": {
+                      "constructors": [],
+                      "methods": [],
+                      "properties": [
+                        {
+                          "name": "score",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+                            "line": 130,
+                            "col": 34,
+                            "byteIndex": 3194
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "number",
+                            "kind": "keyword",
+                            "keyword": "number"
+                          },
+                          "typeParams": []
+                        },
+                        {
+                          "name": "member",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+                            "line": 130,
+                            "col": 49,
+                            "byteIndex": 3209
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "string",
+                            "kind": "keyword",
+                            "keyword": "string"
+                          },
+                          "typeParams": []
+                        }
+                      ],
+                      "callSignatures": [],
+                      "indexSignatures": []
+                    }
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zrange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 131,
+              "col": 2,
+              "byteIndex": 3238
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "start",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "stop",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zscore",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 132,
+              "col": 2,
+              "byteIndex": 3296
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "member",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "exec",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 133,
+              "col": 2,
+              "byteIndex": 3341
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisArrayResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "unknown",
+                          "kind": "keyword",
+                          "keyword": "unknown"
+                        }
+                      ],
+                      "typeName": "RedisArrayResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "discard",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 134,
+              "col": 2,
+              "byteIndex": 3387
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "void",
+              "kind": "keyword",
+              "keyword": "void"
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+        "line": 140,
+        "col": 0,
+        "byteIndex": 3441
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Redis client interface"
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "get",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 144,
+              "col": 2,
+              "byteIndex": 3550
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisGetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisGetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "set",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 145,
+              "col": 2,
+              "byteIndex": 3620
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RedisSetOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisSetOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisSetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisSetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "del",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 150,
+              "col": 2,
+              "byteIndex": 3724
+            },
+            "params": [
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "keys",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "incr",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 151,
+              "col": 2,
+              "byteIndex": 3777
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "decr",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 152,
+              "col": 2,
+              "byteIndex": 3825
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hget",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 155,
+              "col": 2,
+              "byteIndex": 3886
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "field",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisGetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisGetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hset",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 160,
+              "col": 2,
+              "byteIndex": 3989
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "field",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hgetall",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 166,
+              "col": 2,
+              "byteIndex": 4113
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisHashResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisHashResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hdel",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 167,
+              "col": 2,
+              "byteIndex": 4188
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "fields",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lpush",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 170,
+              "col": 2,
+              "byteIndex": 4269
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "values",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rpush",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 171,
+              "col": 2,
+              "byteIndex": 4339
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "values",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lpop",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 172,
+              "col": 2,
+              "byteIndex": 4409
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisGetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisGetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "rpop",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 173,
+              "col": 2,
+              "byteIndex": 4455
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisGetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisGetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lrange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 174,
+              "col": 2,
+              "byteIndex": 4501
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "start",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "stop",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisArrayResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisArrayResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "llen",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 180,
+              "col": 2,
+              "byteIndex": 4626
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sadd",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 183,
+              "col": 2,
+              "byteIndex": 4685
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "members",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "srem",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 184,
+              "col": 2,
+              "byteIndex": 4755
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "members",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "smembers",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 185,
+              "col": 2,
+              "byteIndex": 4825
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisArrayResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisArrayResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sismember",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 186,
+              "col": 2,
+              "byteIndex": 4902
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "member",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCommonResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "boolean",
+                          "kind": "keyword",
+                          "keyword": "boolean"
+                        }
+                      ],
+                      "typeName": "RedisCommonResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zadd",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 189,
+              "col": 2,
+              "byteIndex": 4999
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "entries",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "",
+                    "kind": "typeLiteral",
+                    "typeLiteral": {
+                      "constructors": [],
+                      "methods": [],
+                      "properties": [
+                        {
+                          "name": "score",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+                            "line": 191,
+                            "col": 18,
+                            "byteIndex": 5040
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "number",
+                            "kind": "keyword",
+                            "keyword": "number"
+                          },
+                          "typeParams": []
+                        },
+                        {
+                          "name": "member",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+                            "line": 191,
+                            "col": 33,
+                            "byteIndex": 5055
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": false,
+                          "tsType": {
+                            "repr": "string",
+                            "kind": "keyword",
+                            "keyword": "string"
+                          },
+                          "typeParams": []
+                        }
+                      ],
+                      "callSignatures": [],
+                      "indexSignatures": []
+                    }
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zrange",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 193,
+              "col": 2,
+              "byteIndex": 5108
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "start",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "stop",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisArrayResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisArrayResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "zscore",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 199,
+              "col": 2,
+              "byteIndex": 5233
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "member",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCommonResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "",
+                          "kind": "union",
+                          "union": [
+                            {
+                              "repr": "number",
+                              "kind": "keyword",
+                              "keyword": "number"
+                            },
+                            {
+                              "repr": "null",
+                              "kind": "keyword",
+                              "keyword": "null"
+                            }
+                          ]
+                        }
+                      ],
+                      "typeName": "RedisCommonResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "publish",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 205,
+              "col": 2,
+              "byteIndex": 5342
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "channel",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCountResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisCountResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "subscribe",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 206,
+              "col": 2,
+              "byteIndex": 5414
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "channel",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "AsyncIterable",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisMessage",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "RedisMessage"
+                    }
+                  }
+                ],
+                "typeName": "AsyncIterable"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "multi",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 209,
+              "col": 2,
+              "byteIndex": 5491
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "RedisTransaction",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisTransaction"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "command",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 212,
+              "col": 2,
+              "byteIndex": 5538
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "cmd",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "args",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "unknown",
+                    "kind": "keyword",
+                    "keyword": "unknown"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "RedisCommonResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "RedisCommonResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "default": {
+                  "repr": "unknown",
+                  "kind": "keyword",
+                  "keyword": "unknown"
+                }
+              }
+            ]
+          },
+          {
+            "name": "close",
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 217,
+              "col": 2,
+              "byteIndex": 5639
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
+              "line": 141,
+              "col": 2,
+              "byteIndex": 3498
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "RedisClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisClientConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 93
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for Redis errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 153
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 13,
+        "col": 0,
+        "byteIndex": 233
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for Redis client errors."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "assign",
+                "left": {
+                  "kind": "identifier",
+                  "name": "kind",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                "right": "redis",
+                "tsType": null
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RedisErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 357
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 14,
+              "col": 2,
+              "byteIndex": 281
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 15,
+              "col": 2,
+              "byteIndex": 330
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RedisConnectionError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 30,
+        "col": 0,
+        "byteIndex": 602
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a Redis connection cannot be established."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "RedisErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 761
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 31,
+              "col": 2,
+              "byteIndex": 659
+            }
+          },
+          {
+            "tsType": {
+              "repr": "connection",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "connection"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 710
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RedisError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RedisCommandErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 42,
+        "col": 0,
+        "byteIndex": 916
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for Redis command errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "RedisErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "command",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 988
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisCommandError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 49,
+        "col": 0,
+        "byteIndex": 1069
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a Redis command fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": false,
+                "tsType": {
+                  "repr": "RedisCommandErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisCommandErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1247
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1123
+            }
+          },
+          {
+            "tsType": {
+              "repr": "command",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "command"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 51,
+              "col": 2,
+              "byteIndex": 1171
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "command",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1218
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RedisError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "RedisScriptErrorOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 63,
+        "col": 0,
+        "byteIndex": 1440
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for Redis script errors."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisErrorOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "RedisErrorOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "script",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1511
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisScriptError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+        "line": 70,
+        "col": 0,
+        "byteIndex": 1594
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a Redis Lua script fails."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": false,
+                "tsType": {
+                  "repr": "RedisScriptErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "RedisScriptErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1768
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1647
+            }
+          },
+          {
+            "tsType": {
+              "repr": "script",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "script"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 72,
+              "col": 2,
+              "byteIndex": 1694
+            }
+          },
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "script",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/errors.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1740
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "RedisError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "createRedisClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/client.ts",
+        "line": 121,
+        "col": 0,
+        "byteIndex": 3150
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a Redis client.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```typescript\n// Using URL\nconst client = await createRedisClient({\n  url: \"redis://localhost:6379/0\",\n});\n\n// Using host/port\nconst client = await createRedisClient({\n  host: \"localhost\",\n  port: 6379,\n  db: 0,\n});\n\nawait client.set(\"key\", \"value\", { ex: 3600 });\nconst result = await client.get(\"key\");\nconsole.log(result.value); // \"value\"\n\nawait client.close();\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": false,
+            "tsType": {
+              "repr": "RedisClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "RedisClient",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "RedisClient"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+        "line": 24,
+        "col": 0,
+        "byteIndex": 424
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base fluent API for Redis result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that result ok is true"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 510
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that result ok is false"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 565
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "value",
+            "jsDoc": {
+              "doc": "Assert that value matches expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 627
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "valueMatch",
+            "jsDoc": {
+              "doc": "Assert value using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 708
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "value",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 816
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedisCountResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+        "line": 44,
+        "col": 0,
+        "byteIndex": 912
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for Redis count result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultExpectation",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              ],
+              "typeName": "RedisResultExpectation"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "count",
+            "jsDoc": {
+              "doc": "Assert that count equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 47,
+              "col": 2,
+              "byteIndex": 1045
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtLeast",
+            "jsDoc": {
+              "doc": "Assert that count is at least min"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1122
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtMost",
+            "jsDoc": {
+              "doc": "Assert that count is at most max"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1200
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "max",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "RedisArrayResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+        "line": 59,
+        "col": 0,
+        "byteIndex": 1292
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for Redis array result validation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "RedisResultExpectation",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    }
+                  }
+                }
+              ],
+              "typeName": "RedisResultExpectation"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Assert that array is empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1427
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Assert that array is not empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 65,
+              "col": 2,
+              "byteIndex": 1489
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "length",
+            "jsDoc": {
+              "doc": "Assert that array length equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 68,
+              "col": 2,
+              "byteIndex": 1562
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "count",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lengthAtLeast",
+            "jsDoc": {
+              "doc": "Assert that array length is at least min"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1644
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "contains",
+            "jsDoc": {
+              "doc": "Assert that array contains item"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 1722
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "item",
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RedisExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+        "line": 221,
+        "col": 0,
+        "byteIndex": 5020
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Expectation type returned by expectRedisResult based on the result type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "conditional",
+          "conditionalType": {
+            "checkType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            },
+            "extendsType": {
+              "repr": "RedisCountResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisCountResult"
+              }
+            },
+            "trueType": {
+              "repr": "RedisCountResultExpectation",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisCountResultExpectation"
+              }
+            },
+            "falseType": {
+              "repr": "",
+              "kind": "conditional",
+              "conditionalType": {
+                "checkType": {
+                  "repr": "R",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "R"
+                  }
+                },
+                "extendsType": {
+                  "repr": "RedisArrayResult",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "",
+                        "kind": "infer",
+                        "infer": {
+                          "typeParam": {
+                            "name": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeName": "RedisArrayResult"
+                  }
+                },
+                "trueType": {
+                  "repr": "RedisArrayResultExpectation",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "RedisArrayResultExpectation"
+                  }
+                },
+                "falseType": {
+                  "repr": "",
+                  "kind": "conditional",
+                  "conditionalType": {
+                    "checkType": {
+                      "repr": "R",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "R"
+                      }
+                    },
+                    "extendsType": {
+                      "repr": "RedisGetResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "RedisGetResult"
+                      }
+                    },
+                    "trueType": {
+                      "repr": "RedisResultExpectation",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": [
+                          {
+                            "repr": "",
+                            "kind": "union",
+                            "union": [
+                              {
+                                "repr": "string",
+                                "kind": "keyword",
+                                "keyword": "string"
+                              },
+                              {
+                                "repr": "null",
+                                "kind": "keyword",
+                                "keyword": "null"
+                              }
+                            ]
+                          }
+                        ],
+                        "typeName": "RedisResultExpectation"
+                      }
+                    },
+                    "falseType": {
+                      "repr": "",
+                      "kind": "conditional",
+                      "conditionalType": {
+                        "checkType": {
+                          "repr": "R",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "R"
+                          }
+                        },
+                        "extendsType": {
+                          "repr": "RedisSetResult",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "RedisSetResult"
+                          }
+                        },
+                        "trueType": {
+                          "repr": "RedisResultExpectation",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": [
+                              {
+                                "repr": "OK",
+                                "kind": "literal",
+                                "literal": {
+                                  "kind": "string",
+                                  "string": "OK"
+                                }
+                              }
+                            ],
+                            "typeName": "RedisResultExpectation"
+                          }
+                        },
+                        "falseType": {
+                          "repr": "",
+                          "kind": "conditional",
+                          "conditionalType": {
+                            "checkType": {
+                              "repr": "R",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "R"
+                              }
+                            },
+                            "extendsType": {
+                              "repr": "RedisHashResult",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "RedisHashResult"
+                              }
+                            },
+                            "trueType": {
+                              "repr": "RedisResultExpectation",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": [
+                                  {
+                                    "repr": "Record",
+                                    "kind": "typeRef",
+                                    "typeRef": {
+                                      "typeParams": [
+                                        {
+                                          "repr": "string",
+                                          "kind": "keyword",
+                                          "keyword": "string"
+                                        },
+                                        {
+                                          "repr": "string",
+                                          "kind": "keyword",
+                                          "keyword": "string"
+                                        }
+                                      ],
+                                      "typeName": "Record"
+                                    }
+                                  }
+                                ],
+                                "typeName": "RedisResultExpectation"
+                              }
+                            },
+                            "falseType": {
+                              "repr": "",
+                              "kind": "conditional",
+                              "conditionalType": {
+                                "checkType": {
+                                  "repr": "R",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": null,
+                                    "typeName": "R"
+                                  }
+                                },
+                                "extendsType": {
+                                  "repr": "RedisCommonResult",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": [
+                                      {
+                                        "repr": "",
+                                        "kind": "infer",
+                                        "infer": {
+                                          "typeParam": {
+                                            "name": "T"
+                                          }
+                                        }
+                                      }
+                                    ],
+                                    "typeName": "RedisCommonResult"
+                                  }
+                                },
+                                "trueType": {
+                                  "repr": "RedisResultExpectation",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": [
+                                      {
+                                        "repr": "T",
+                                        "kind": "typeRef",
+                                        "typeRef": {
+                                          "typeParams": null,
+                                          "typeName": "T"
+                                        }
+                                      }
+                                    ],
+                                    "typeName": "RedisResultExpectation"
+                                  }
+                                },
+                                "falseType": {
+                                  "repr": "never",
+                                  "kind": "keyword",
+                                  "keyword": "never"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "RedisResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "RedisResult"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "expectRedisResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/expect.ts",
+        "line": 252,
+        "col": 0,
+        "byteIndex": 6315
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a fluent expectation chain for any Redis result validation.\n\nThis unified function accepts any Redis result type and returns\nthe appropriate expectation interface based on the result's type discriminator.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\n// For GET result - returns RedisResultExpectation<string | null>\nconst getResult = await client.get(\"key\");\nexpectRedisResult(getResult).ok().value(\"expected\");\n\n// For COUNT result - returns RedisCountResultExpectation\nconst countResult = await client.del(\"key\");\nexpectRedisResult(countResult).ok().count(1);\n\n// For ARRAY result - returns RedisArrayResultExpectation\nconst arrayResult = await client.lrange(\"list\", 0, -1);\nexpectRedisResult(arrayResult).ok().length(3).contains(\"item\");\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "result",
+            "optional": false,
+            "tsType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "RedisExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "R",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "R"
+                }
+              }
+            ],
+            "typeName": "RedisExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "RedisResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "any",
+                    "kind": "keyword",
+                    "keyword": "any"
+                  }
+                ],
+                "typeName": "RedisResult"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:42.852Z"
+}

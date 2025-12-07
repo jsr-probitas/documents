@@ -1,0 +1,4385 @@
+{
+  "name": "client-deno-kv",
+  "specifier": "@probitas/client-deno-kv",
+  "version": "0.1.0",
+  "exports": [
+    {
+      "name": "DenoKvClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 106
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Configuration for DenoKvClient."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "path",
+            "jsDoc": {
+              "doc": "Path to the KV database file.\nIf not specified, uses in-memory storage or Deno Deploy's KV."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+              "line": 11,
+              "col": 2,
+              "byteIndex": 282
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvSetOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+        "line": 17,
+        "col": 0,
+        "byteIndex": 348
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for set operations."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "expireIn",
+            "jsDoc": {
+              "doc": "Time-to-live in milliseconds.\nThe entry will automatically expire after this duration."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 517
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvListOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+        "line": 28,
+        "col": 0,
+        "byteIndex": 588
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for list operations."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "limit",
+            "jsDoc": {
+              "doc": "Maximum number of entries to return."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 703
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "cursor",
+            "jsDoc": {
+              "doc": "Cursor for pagination."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 771
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "reverse",
+            "jsDoc": {
+              "doc": "Whether to iterate in reverse order."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/types.ts",
+              "line": 42,
+              "col": 2,
+              "byteIndex": 854
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+        "line": 6,
+        "col": 0,
+        "byteIndex": 108
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Base error class for Deno KV operations."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "assign",
+                "left": {
+                  "kind": "identifier",
+                  "name": "kind",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                },
+                "right": "kv",
+                "tsType": null
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 208
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 157
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "ClientError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "DenoKvAtomicCheckError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+        "line": 17,
+        "col": 0,
+        "byteIndex": 404
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when an atomic operation fails due to check failures."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "failedChecks",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "Deno.KvKey",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "Deno.KvKey"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 666
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 464
+            }
+          },
+          {
+            "tsType": {
+              "repr": "atomic_check",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "atomic_check"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 517
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "The keys whose checks failed."
+            },
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                }
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "failedChecks",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 24,
+              "col": 2,
+              "byteIndex": 617
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "DenoKvError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "DenoKvQuotaError",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+        "line": 39,
+        "col": 0,
+        "byteIndex": 921
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Error thrown when a quota limit is exceeded."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "message",
+                "optional": false,
+                "tsType": {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "ErrorOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "ErrorOptions"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 43,
+              "col": 2,
+              "byteIndex": 1068
+            }
+          }
+        ],
+        "properties": [
+          {
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "name",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 975
+            }
+          },
+          {
+            "tsType": {
+              "repr": "quota",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "quota"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "isOverride": true,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/errors.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 1022
+            }
+          }
+        ],
+        "indexSignatures": [],
+        "methods": [],
+        "extends": "DenoKvError",
+        "implements": [],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "DenoKvGetResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 4,
+        "col": 0,
+        "byteIndex": 38
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of a get operation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 5,
+              "col": 2,
+              "byteIndex": 78
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "deno-kv:get",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deno-kv:get"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 6,
+              "col": 2,
+              "byteIndex": 110
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "key",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 7,
+              "col": 2,
+              "byteIndex": 134
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "Deno.KvKey",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Deno.KvKey"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "value",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 8,
+              "col": 2,
+              "byteIndex": 162
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "versionstamp",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 9,
+              "col": 2,
+              "byteIndex": 190
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 10,
+              "col": 2,
+              "byteIndex": 230
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvSetResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 16,
+        "col": 0,
+        "byteIndex": 298
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of a set operation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 335
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "deno-kv:set",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deno-kv:set"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 18,
+              "col": 2,
+              "byteIndex": 367
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "versionstamp",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 19,
+              "col": 2,
+              "byteIndex": 391
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 424
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvDeleteResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 26,
+        "col": 0,
+        "byteIndex": 495
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of a delete operation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 535
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "deno-kv:delete",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deno-kv:delete"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 28,
+              "col": 2,
+              "byteIndex": 570
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 594
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 35,
+        "col": 0,
+        "byteIndex": 667
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "A single entry in the KV store."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "key",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 36,
+              "col": 2,
+              "byteIndex": 703
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "Deno.KvKey",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Deno.KvKey"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "value",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 37,
+              "col": 2,
+              "byteIndex": 731
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "T",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "T"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "versionstamp",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 752
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvEntries",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 44,
+        "col": 0,
+        "byteIndex": 843
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Collection of KV entries with helper methods."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ReadonlyArray",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "DenoKvEntry",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "DenoKvEntry"
+                  }
+                }
+              ],
+              "typeName": "ReadonlyArray"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "first",
+            "jsDoc": {
+              "doc": "Returns the first entry, or undefined if empty."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 48,
+              "col": 2,
+              "byteIndex": 984
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "DenoKvEntry",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "DenoKvEntry"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "firstOrThrow",
+            "jsDoc": {
+              "doc": "Returns the first entry, or throws if empty."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1086
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "DenoKvEntry",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvEntry"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "last",
+            "jsDoc": {
+              "doc": "Returns the last entry, or undefined if empty."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1185
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "DenoKvEntry",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "DenoKvEntry"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lastOrThrow",
+            "jsDoc": {
+              "doc": "Returns the last entry, or throws if empty."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 63,
+              "col": 2,
+              "byteIndex": 1285
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "DenoKvEntry",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvEntry"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "createDenoKvEntries",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 99,
+        "col": 0,
+        "byteIndex": 2010
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Creates a DenoKvEntries instance from an array of entries."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "entries",
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "array",
+              "array": {
+                "repr": "DenoKvEntry",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "T",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "T"
+                      }
+                    }
+                  ],
+                  "typeName": "DenoKvEntry"
+                }
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "DenoKvEntries",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "T",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "T"
+                }
+              }
+            ],
+            "typeName": "DenoKvEntries"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvListResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 110,
+        "col": 0,
+        "byteIndex": 2232
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of a list operation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 111,
+              "col": 2,
+              "byteIndex": 2273
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "deno-kv:list",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deno-kv:list"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 112,
+              "col": 2,
+              "byteIndex": 2306
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "entries",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 113,
+              "col": 2,
+              "byteIndex": 2330
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "DenoKvEntries",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvEntries"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 114,
+              "col": 2,
+              "byteIndex": 2368
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvAtomicResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 120,
+        "col": 0,
+        "byteIndex": 2440
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of an atomic operation."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "type",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 121,
+              "col": 2,
+              "byteIndex": 2480
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "deno-kv:atomic",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "deno-kv:atomic"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "ok",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 2515
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "boolean",
+              "kind": "keyword",
+              "keyword": "boolean"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "versionstamp",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 2539
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "duration",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 2573
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 131,
+        "col": 0,
+        "byteIndex": 2726
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Union of all Deno KV result types.\nUsed by expectDenoKvResult to determine the appropriate expectation type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "union",
+          "union": [
+            {
+              "repr": "DenoKvGetResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvGetResult"
+              }
+            },
+            {
+              "repr": "DenoKvSetResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvSetResult"
+              }
+            },
+            {
+              "repr": "DenoKvDeleteResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvDeleteResult"
+              }
+            },
+            {
+              "repr": "DenoKvListResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvListResult"
+              }
+            },
+            {
+              "repr": "DenoKvAtomicResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvAtomicResult"
+              }
+            }
+          ]
+        },
+        "typeParams": [
+          {
+            "name": "T",
+            "default": {
+              "repr": "unknown",
+              "kind": "keyword",
+              "keyword": "unknown"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvAtomicBuilder",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+        "line": 25,
+        "col": 0,
+        "byteIndex": 660
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Builder for atomic KV operations."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "check",
+            "jsDoc": {
+              "doc": "Add version checks to the atomic operation.\nIf any check fails, the entire operation will fail."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 30,
+              "col": 2,
+              "byteIndex": 819
+            },
+            "params": [
+              {
+                "kind": "rest",
+                "arg": {
+                  "kind": "identifier",
+                  "name": "checks",
+                  "optional": false,
+                  "tsType": null
+                },
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "Deno.AtomicCheck",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.AtomicCheck"
+                    }
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "set",
+            "jsDoc": {
+              "doc": "Set a value in the KV store."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 912
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "expireIn",
+                        "location": {
+                          "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+                          "line": 35,
+                          "col": 48,
+                          "byteIndex": 958
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": true,
+                        "tsType": {
+                          "repr": "number",
+                          "kind": "keyword",
+                          "keyword": "number"
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "delete",
+            "jsDoc": {
+              "doc": "Delete a key from the KV store."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 1038
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sum",
+            "jsDoc": {
+              "doc": "Atomically add to a bigint value (Deno.KvU64)."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 1136
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "n",
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "min",
+            "jsDoc": {
+              "doc": "Atomically set to minimum of current and provided value."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 50,
+              "col": 2,
+              "byteIndex": 1252
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "n",
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "max",
+            "jsDoc": {
+              "doc": "Atomically set to maximum of current and provided value."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1368
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "n",
+                "optional": false,
+                "tsType": {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "commit",
+            "jsDoc": {
+              "doc": "Commit the atomic operation."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1456
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "DenoKvAtomicResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "DenoKvAtomicResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvAtomicBuilderImpl",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+        "line": 66,
+        "col": 0,
+        "byteIndex": 1548
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Implementation of DenoKvAtomicBuilder."
+      },
+      "kind": "class",
+      "classDef": {
+        "isAbstract": false,
+        "constructors": [
+          {
+            "accessibility": null,
+            "hasBody": true,
+            "name": "constructor",
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "kv",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.Kv",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.Kv"
+                  }
+                }
+              }
+            ],
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1739
+            }
+          }
+        ],
+        "properties": [],
+        "indexSignatures": [],
+        "methods": [
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "check",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "rest",
+                  "arg": {
+                    "kind": "identifier",
+                    "name": "checks",
+                    "optional": false,
+                    "tsType": null
+                  },
+                  "tsType": {
+                    "repr": "",
+                    "kind": "array",
+                    "array": {
+                      "repr": "Deno.AtomicCheck",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "Deno.AtomicCheck"
+                      }
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1805
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "set",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "key",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "value",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "options",
+                  "optional": true,
+                  "tsType": {
+                    "repr": "",
+                    "kind": "typeLiteral",
+                    "typeLiteral": {
+                      "constructors": [],
+                      "methods": [],
+                      "properties": [
+                        {
+                          "name": "expireIn",
+                          "location": {
+                            "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+                            "line": 87,
+                            "col": 48,
+                            "byteIndex": 2155
+                          },
+                          "params": [],
+                          "computed": false,
+                          "optional": true,
+                          "tsType": {
+                            "repr": "number",
+                            "kind": "keyword",
+                            "keyword": "number"
+                          },
+                          "typeParams": []
+                        }
+                      ],
+                      "callSignatures": [],
+                      "indexSignatures": []
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": [
+                {
+                  "name": "T"
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 2109
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "delete",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "key",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2569
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "sum",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "key",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "n",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "bigint",
+                    "kind": "keyword",
+                    "keyword": "bigint"
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 111,
+              "col": 2,
+              "byteIndex": 2851
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "min",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "key",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "n",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "bigint",
+                    "kind": "keyword",
+                    "keyword": "bigint"
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 3165
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "max",
+            "kind": "method",
+            "functionDef": {
+              "params": [
+                {
+                  "kind": "identifier",
+                  "name": "key",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "Deno.KvKey",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "Deno.KvKey"
+                    }
+                  }
+                },
+                {
+                  "kind": "identifier",
+                  "name": "n",
+                  "optional": false,
+                  "tsType": {
+                    "repr": "bigint",
+                    "kind": "keyword",
+                    "keyword": "bigint"
+                  }
+                }
+              ],
+              "returnType": {
+                "repr": "this",
+                "kind": "this",
+                "this": true
+              },
+              "hasBody": true,
+              "isAsync": false,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 133,
+              "col": 2,
+              "byteIndex": 3479
+            }
+          },
+          {
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "commit",
+            "kind": "method",
+            "functionDef": {
+              "params": [],
+              "returnType": {
+                "repr": "Promise",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": [
+                    {
+                      "repr": "DenoKvAtomicResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "DenoKvAtomicResult"
+                      }
+                    }
+                  ],
+                  "typeName": "Promise"
+                }
+              },
+              "hasBody": true,
+              "isAsync": true,
+              "isGenerator": false,
+              "typeParams": []
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/atomic.ts",
+              "line": 144,
+              "col": 2,
+              "byteIndex": 3793
+            }
+          }
+        ],
+        "extends": null,
+        "implements": [
+          {
+            "repr": "DenoKvAtomicBuilder",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "DenoKvAtomicBuilder"
+            }
+          }
+        ],
+        "typeParams": [],
+        "superTypeParams": []
+      }
+    },
+    {
+      "name": "DenoKvClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+        "line": 40,
+        "col": 0,
+        "byteIndex": 1071
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Deno KV client for Probitas scenario testing."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "AsyncDisposable",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "AsyncDisposable"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "get",
+            "jsDoc": {
+              "doc": "Get a single value by key."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1252
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "DenoKvGetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "DenoKvGetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "getMany",
+            "jsDoc": {
+              "doc": "Get multiple values by keys."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1380
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "keys",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "tuple",
+                      "tuple": [
+                        {
+                          "repr": "",
+                          "kind": "rest",
+                          "rest": {
+                            "repr": "",
+                            "kind": "mapped",
+                            "mappedType": {
+                              "typeParam": {
+                                "name": "K",
+                                "constraint": {
+                                  "repr": "",
+                                  "kind": "typeOperator",
+                                  "typeOperator": {
+                                    "operator": "keyof",
+                                    "tsType": {
+                                      "repr": "T",
+                                      "kind": "typeRef",
+                                      "typeRef": {
+                                        "typeParams": null,
+                                        "typeName": "T"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "tsType": {
+                                "repr": "Deno.KvKey",
+                                "kind": "typeRef",
+                                "typeRef": {
+                                  "typeParams": null,
+                                  "typeName": "Deno.KvKey"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "mapped",
+                    "mappedType": {
+                      "typeParam": {
+                        "name": "K",
+                        "constraint": {
+                          "repr": "",
+                          "kind": "typeOperator",
+                          "typeOperator": {
+                            "operator": "keyof",
+                            "tsType": {
+                              "repr": "T",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "T"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "tsType": {
+                        "repr": "DenoKvGetResult",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": [
+                            {
+                              "repr": "",
+                              "kind": "indexedAccess",
+                              "indexedAccess": {
+                                "readonly": false,
+                                "objType": {
+                                  "repr": "T",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": null,
+                                    "typeName": "T"
+                                  }
+                                },
+                                "indexType": {
+                                  "repr": "K",
+                                  "kind": "typeRef",
+                                  "typeRef": {
+                                    "typeParams": null,
+                                    "typeName": "K"
+                                  }
+                                }
+                              }
+                            }
+                          ],
+                          "typeName": "DenoKvGetResult"
+                        }
+                      }
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T",
+                "constraint": {
+                  "repr": "",
+                  "kind": "typeOperator",
+                  "typeOperator": {
+                    "operator": "readonly",
+                    "tsType": {
+                      "repr": "",
+                      "kind": "array",
+                      "array": {
+                        "repr": "unknown",
+                        "kind": "keyword",
+                        "keyword": "unknown"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "set",
+            "jsDoc": {
+              "doc": "Set a value."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1594
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "value",
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "DenoKvSetOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "DenoKvSetOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "DenoKvSetResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "DenoKvSetResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "delete",
+            "jsDoc": {
+              "doc": "Delete a key."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 71,
+              "col": 2,
+              "byteIndex": 1734
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "key",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvKey",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvKey"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "CommonOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "CommonOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "DenoKvDeleteResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "DenoKvDeleteResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "list",
+            "jsDoc": {
+              "doc": "List entries by selector."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 76,
+              "col": 2,
+              "byteIndex": 1859
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "selector",
+                "optional": false,
+                "tsType": {
+                  "repr": "Deno.KvListSelector",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "Deno.KvListSelector"
+                  }
+                }
+              },
+              {
+                "kind": "identifier",
+                "name": "options",
+                "optional": true,
+                "tsType": {
+                  "repr": "DenoKvListOptions",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "DenoKvListOptions"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "DenoKvListResult",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": [
+                        {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      ],
+                      "typeName": "DenoKvListResult"
+                    }
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": [
+              {
+                "name": "T"
+              }
+            ]
+          },
+          {
+            "name": "atomic",
+            "jsDoc": {
+              "doc": "Create an atomic operation builder."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 2027
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "DenoKvAtomicBuilder",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvAtomicBuilder"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "close",
+            "jsDoc": {
+              "doc": "Close the KV connection."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 89,
+              "col": 2,
+              "byteIndex": 2103
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "Promise",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "void",
+                    "kind": "keyword",
+                    "keyword": "void"
+                  }
+                ],
+                "typeName": "Promise"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [
+          {
+            "name": "config",
+            "jsDoc": {
+              "doc": "Client configuration."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 1168
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "DenoKvClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvClientConfig"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "createDenoKvClient",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/client.ts",
+        "line": 385,
+        "col": 0,
+        "byteIndex": 10090
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a new Deno KV client."
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "config",
+            "optional": true,
+            "tsType": {
+              "repr": "DenoKvClientConfig",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvClientConfig"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "Promise",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "DenoKvClient",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "DenoKvClient"
+                }
+              }
+            ],
+            "typeName": "Promise"
+          }
+        },
+        "hasBody": true,
+        "isAsync": true,
+        "isGenerator": false,
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvGetResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 15,
+        "col": 0,
+        "byteIndex": 285
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for validating DenoKvGetResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that operation succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 377
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that operation did not succeed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 20,
+              "col": 2,
+              "byteIndex": 439
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Assert that no value was found (value is null)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 23,
+              "col": 2,
+              "byteIndex": 513
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Assert that a value was found (value is not null)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 26,
+              "col": 2,
+              "byteIndex": 594
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "value",
+            "jsDoc": {
+              "doc": "Assert that value equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 29,
+              "col": 2,
+              "byteIndex": 660
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "T",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "T"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "valueContains",
+            "jsDoc": {
+              "doc": "Assert that value contains expected properties"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 745
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "Partial",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "Partial"
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "valueMatch",
+            "jsDoc": {
+              "doc": "Assert value using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 35,
+              "col": 2,
+              "byteIndex": 841
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "value",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "T",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasVersionstamp",
+            "jsDoc": {
+              "doc": "Assert that versionstamp exists"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 932
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 41,
+              "col": 2,
+              "byteIndex": 1018
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvListResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 47,
+        "col": 0,
+        "byteIndex": 1112
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for validating DenoKvListResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that operation succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1205
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that operation did not succeed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 52,
+              "col": 2,
+              "byteIndex": 1267
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "noContent",
+            "jsDoc": {
+              "doc": "Assert that no entries were found"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1328
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasContent",
+            "jsDoc": {
+              "doc": "Assert that at least one entry was found"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 58,
+              "col": 2,
+              "byteIndex": 1400
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "count",
+            "jsDoc": {
+              "doc": "Assert that entry count equals expected"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 61,
+              "col": 2,
+              "byteIndex": 1472
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "expected",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtLeast",
+            "jsDoc": {
+              "doc": "Assert that entry count is at least min"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 64,
+              "col": 2,
+              "byteIndex": 1555
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "min",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "countAtMost",
+            "jsDoc": {
+              "doc": "Assert that entry count is at most max"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 67,
+              "col": 2,
+              "byteIndex": 1639
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "max",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "entryContains",
+            "jsDoc": {
+              "doc": "Assert that at least one entry contains expected properties"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 1743
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "subset",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "typeLiteral",
+                  "typeLiteral": {
+                    "constructors": [],
+                    "methods": [],
+                    "properties": [
+                      {
+                        "name": "key",
+                        "location": {
+                          "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+                          "line": 70,
+                          "col": 26,
+                          "byteIndex": 1767
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": true,
+                        "tsType": {
+                          "repr": "Deno.KvKey",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "Deno.KvKey"
+                          }
+                        },
+                        "typeParams": []
+                      },
+                      {
+                        "name": "value",
+                        "location": {
+                          "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+                          "line": 70,
+                          "col": 44,
+                          "byteIndex": 1785
+                        },
+                        "params": [],
+                        "computed": false,
+                        "optional": true,
+                        "tsType": {
+                          "repr": "Partial",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": [
+                              {
+                                "repr": "T",
+                                "kind": "typeRef",
+                                "typeRef": {
+                                  "typeParams": null,
+                                  "typeName": "T"
+                                }
+                              }
+                            ],
+                            "typeName": "Partial"
+                          }
+                        },
+                        "typeParams": []
+                      }
+                    ],
+                    "callSignatures": [],
+                    "indexSignatures": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "entriesMatch",
+            "jsDoc": {
+              "doc": "Assert entries using custom matcher function"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1871
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "matcher",
+                "optional": false,
+                "tsType": {
+                  "repr": "",
+                  "kind": "fnOrConstructor",
+                  "fnOrConstructor": {
+                    "constructor": false,
+                    "tsType": {
+                      "repr": "void",
+                      "kind": "keyword",
+                      "keyword": "void"
+                    },
+                    "params": [
+                      {
+                        "kind": "identifier",
+                        "name": "entries",
+                        "optional": false,
+                        "tsType": {
+                          "repr": "DenoKvEntries",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": [
+                              {
+                                "repr": "T",
+                                "kind": "typeRef",
+                                "typeRef": {
+                                  "typeParams": null,
+                                  "typeName": "T"
+                                }
+                              }
+                            ],
+                            "typeName": "DenoKvEntries"
+                          }
+                        }
+                      }
+                    ],
+                    "typeParams": []
+                  }
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 76,
+              "col": 2,
+              "byteIndex": 1998
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": [
+          {
+            "name": "T"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DenoKvSetResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 82,
+        "col": 0,
+        "byteIndex": 2091
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for validating DenoKvSetResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that operation succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 2180
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that operation did not succeed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 2242
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasVersionstamp",
+            "jsDoc": {
+              "doc": "Assert that versionstamp exists"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 90,
+              "col": 2,
+              "byteIndex": 2301
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 93,
+              "col": 2,
+              "byteIndex": 2387
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvDeleteResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 99,
+        "col": 0,
+        "byteIndex": 2483
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for validating DenoKvDeleteResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that operation succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2575
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that operation did not succeed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 104,
+              "col": 2,
+              "byteIndex": 2637
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 107,
+              "col": 2,
+              "byteIndex": 2713
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvAtomicResultExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 113,
+        "col": 0,
+        "byteIndex": 2809
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Fluent API for validating DenoKvAtomicResult."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "ok",
+            "jsDoc": {
+              "doc": "Assert that operation succeeded"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 115,
+              "col": 2,
+              "byteIndex": 2901
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "notOk",
+            "jsDoc": {
+              "doc": "Assert that operation did not succeed"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 118,
+              "col": 2,
+              "byteIndex": 2963
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "hasVersionstamp",
+            "jsDoc": {
+              "doc": "Assert that versionstamp exists (only present on successful atomic commits)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 121,
+              "col": 2,
+              "byteIndex": 3066
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          },
+          {
+            "name": "durationLessThan",
+            "jsDoc": {
+              "doc": "Assert that duration is less than threshold (ms)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 3152
+            },
+            "params": [
+              {
+                "kind": "identifier",
+                "name": "ms",
+                "optional": false,
+                "tsType": {
+                  "repr": "number",
+                  "kind": "keyword",
+                  "keyword": "number"
+                }
+              }
+            ],
+            "optional": false,
+            "returnType": {
+              "repr": "this",
+              "kind": "this",
+              "this": true
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "DenoKvExpectation",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 452,
+        "col": 0,
+        "byteIndex": 10454
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Expectation type returned by expectDenoKvResult based on the result type."
+      },
+      "kind": "typeAlias",
+      "typeAliasDef": {
+        "tsType": {
+          "repr": "",
+          "kind": "conditional",
+          "conditionalType": {
+            "checkType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            },
+            "extendsType": {
+              "repr": "DenoKvGetResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "",
+                    "kind": "infer",
+                    "infer": {
+                      "typeParam": {
+                        "name": "T"
+                      }
+                    }
+                  }
+                ],
+                "typeName": "DenoKvGetResult"
+              }
+            },
+            "trueType": {
+              "repr": "DenoKvGetResultExpectation",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "DenoKvGetResultExpectation"
+              }
+            },
+            "falseType": {
+              "repr": "",
+              "kind": "conditional",
+              "conditionalType": {
+                "checkType": {
+                  "repr": "R",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "R"
+                  }
+                },
+                "extendsType": {
+                  "repr": "DenoKvListResult",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "",
+                        "kind": "infer",
+                        "infer": {
+                          "typeParam": {
+                            "name": "T"
+                          }
+                        }
+                      }
+                    ],
+                    "typeName": "DenoKvListResult"
+                  }
+                },
+                "trueType": {
+                  "repr": "DenoKvListResultExpectation",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": [
+                      {
+                        "repr": "T",
+                        "kind": "typeRef",
+                        "typeRef": {
+                          "typeParams": null,
+                          "typeName": "T"
+                        }
+                      }
+                    ],
+                    "typeName": "DenoKvListResultExpectation"
+                  }
+                },
+                "falseType": {
+                  "repr": "",
+                  "kind": "conditional",
+                  "conditionalType": {
+                    "checkType": {
+                      "repr": "R",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "R"
+                      }
+                    },
+                    "extendsType": {
+                      "repr": "DenoKvSetResult",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "DenoKvSetResult"
+                      }
+                    },
+                    "trueType": {
+                      "repr": "DenoKvSetResultExpectation",
+                      "kind": "typeRef",
+                      "typeRef": {
+                        "typeParams": null,
+                        "typeName": "DenoKvSetResultExpectation"
+                      }
+                    },
+                    "falseType": {
+                      "repr": "",
+                      "kind": "conditional",
+                      "conditionalType": {
+                        "checkType": {
+                          "repr": "R",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "R"
+                          }
+                        },
+                        "extendsType": {
+                          "repr": "DenoKvDeleteResult",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "DenoKvDeleteResult"
+                          }
+                        },
+                        "trueType": {
+                          "repr": "DenoKvDeleteResultExpectation",
+                          "kind": "typeRef",
+                          "typeRef": {
+                            "typeParams": null,
+                            "typeName": "DenoKvDeleteResultExpectation"
+                          }
+                        },
+                        "falseType": {
+                          "repr": "",
+                          "kind": "conditional",
+                          "conditionalType": {
+                            "checkType": {
+                              "repr": "R",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "R"
+                              }
+                            },
+                            "extendsType": {
+                              "repr": "DenoKvAtomicResult",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "DenoKvAtomicResult"
+                              }
+                            },
+                            "trueType": {
+                              "repr": "DenoKvAtomicResultExpectation",
+                              "kind": "typeRef",
+                              "typeRef": {
+                                "typeParams": null,
+                                "typeName": "DenoKvAtomicResultExpectation"
+                              }
+                            },
+                            "falseType": {
+                              "repr": "never",
+                              "kind": "keyword",
+                              "keyword": "never"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "DenoKvResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "DenoKvResult"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "expectDenoKvResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/expect.ts",
+        "line": 490,
+        "col": 0,
+        "byteIndex": 12080
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Create a fluent expectation chain for any Deno KV result validation.\n\nThis unified function accepts any Deno KV result type and returns\nthe appropriate expectation interface based on the result's type discriminator.\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\n// For GET result - returns DenoKvGetResultExpectation<T>\nconst getResult = await kv.get([\"users\", \"1\"]);\nexpectDenoKvResult(getResult).ok().hasContent().valueContains({ name: \"Alice\" });\n\n// For SET result - returns DenoKvSetResultExpectation\nconst setResult = await kv.set([\"users\", \"1\"], { name: \"Alice\" });\nexpectDenoKvResult(setResult).ok().hasVersionstamp();\n\n// For LIST result - returns DenoKvListResultExpectation<T>\nconst listResult = await kv.list({ prefix: [\"users\"] });\nexpectDenoKvResult(listResult).ok().count(3);\n\n// For DELETE result - returns DenoKvDeleteResultExpectation\nconst deleteResult = await kv.delete([\"users\", \"1\"]);\nexpectDenoKvResult(deleteResult).ok();\n\n// For ATOMIC result - returns DenoKvAtomicResultExpectation\nconst atomicResult = await kv.atomic().set([\"counter\"], 1).commit();\nexpectDenoKvResult(atomicResult).ok().hasVersionstamp();\n```"
+          }
+        ]
+      },
+      "kind": "function",
+      "functionDef": {
+        "params": [
+          {
+            "kind": "identifier",
+            "name": "result",
+            "optional": false,
+            "tsType": {
+              "repr": "R",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "R"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "repr": "DenoKvExpectation",
+          "kind": "typeRef",
+          "typeRef": {
+            "typeParams": [
+              {
+                "repr": "R",
+                "kind": "typeRef",
+                "typeRef": {
+                  "typeParams": null,
+                  "typeName": "R"
+                }
+              }
+            ],
+            "typeName": "DenoKvExpectation"
+          }
+        },
+        "hasBody": true,
+        "isAsync": false,
+        "isGenerator": false,
+        "typeParams": [
+          {
+            "name": "R",
+            "constraint": {
+              "repr": "DenoKvResult",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "any",
+                    "kind": "keyword",
+                    "keyword": "any"
+                  }
+                ],
+                "typeName": "DenoKvResult"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "generatedAt": "2025-12-07T10:55:42.041Z"
+}
