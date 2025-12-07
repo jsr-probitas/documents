@@ -115,8 +115,8 @@ function countExports(exports: DocNode[]): ExportCounts {
  * Generate documentation for a single package
  */
 async function generatePackageDoc(pkg: JsrPackage): Promise<PackageDoc | null> {
-  const specifier = `jsr:@${pkg.scope}/${pkg.name}`;
-  console.log(`Processing ${specifier}@${pkg.latestVersion}...`);
+  const specifier = `jsr:@${pkg.scope}/${pkg.name}@${pkg.latestVersion}`;
+  console.log(`Processing ${specifier}...`);
 
   const docOutput = await getPackageDoc(specifier);
   if (!docOutput) return null;
