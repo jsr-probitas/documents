@@ -21,7 +21,7 @@ import { client, expect, scenario } from "probitas";
 export default scenario("API Test")
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
     }))
   .step("Make request", async (ctx) => {
     const { http } = ctx.resources;
@@ -44,7 +44,7 @@ disposed in reverse order after the scenario completes.
 
 ```typescript
 .resource("http", () =>
-  client.http.createHttpClient({ baseUrl: "..." })
+  client.http.createHttpClient({ url: "..." })
 )
 // Automatically disposed when scenario ends
 ```
@@ -53,7 +53,7 @@ For manual control outside scenarios, use `await using`:
 
 ```typescript
 await using http = client.http.createHttpClient({
-  baseUrl: "http://localhost:8080",
+  url: "http://localhost:8080",
 });
 // Automatically closed when scope exits
 ```
@@ -65,7 +65,7 @@ JSON handling and response assertions.
 
 ```typescript
 const http = client.http.createHttpClient({
-  baseUrl: "http://localhost:8080",
+  url: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
   throwOnError: true,
 });
@@ -121,7 +121,7 @@ expect(res)
   .ok() // Status 2xx
   .status(200) // Exact status code
   .contentType(/application\/json/) // Content-Type pattern
-  .jsonContains({ name: "Alice" }) // Partial JSON match
+  .dataContains({ name: "Alice" }) // Partial JSON match
   .durationLessThan(1000); // Response time limit
 
 // Additional assertions
@@ -143,7 +143,7 @@ Probitas supports multiple SQL databases with a consistent query interface.
 
 ```typescript
 const pg = client.sql.postgres.createPostgresClient({
-  connection: {
+  url: {
     host: "localhost",
     port: 5432,
     database: "testdb",
@@ -172,7 +172,7 @@ const result = await pg.query<{ id: number; name: string }>(
 // Access results
 const users = result.rows.all(); // All rows
 const first = result.rows.first(); // First row
-const count = result.rowCount; // Row count
+const count = result.count; // Row count
 ```
 
 ### Transactions
@@ -202,11 +202,11 @@ Validate query results:
 ```typescript
 expect(result)
   .ok()
-  .rowCount(1)
-  .rowContains({ name: "Alice" });
+  .count(1)
+  .dataContains({ name: "Alice" });
 
 // Match multiple rows
-expect(result).rowsMatch([
+expect(result).dataEquals([
   { id: 1, name: "Alice" },
   { id: 2, name: "Bob" },
 ]);
@@ -219,7 +219,7 @@ bidirectional streaming.
 
 ```typescript
 const grpc = client.grpc.createGrpcClient({
-  address: "localhost:50051",
+  url: "localhost:50051",
   metadata: { authorization: "Bearer token" },
 });
 ```
@@ -299,7 +299,7 @@ unified API.
 
 ```typescript
 const connect = client.connectrpc.createConnectRpcClient({
-  address: "localhost:8080",
+  url: "localhost:8080",
 });
 ```
 
@@ -332,9 +332,9 @@ The GraphQL client provides methods for queries, mutations, and subscriptions.
 
 ```typescript
 const graphql = client.graphql.createGraphqlClient({
-  endpoint: "http://localhost:4000/graphql",
+  url: "http://localhost:4000/graphql",
   headers: { Authorization: "Bearer token" },
-  wsEndpoint: "ws://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
 });
 ```
 
@@ -411,8 +411,7 @@ The Redis client provides operations for strings, hashes, lists, and sets.
 
 ```typescript
 const redis = client.redis.createRedisClient({
-  host: "localhost",
-  port: 6379,
+  url: "redis://localhost:6379",
 });
 ```
 
@@ -427,7 +426,7 @@ Common Redis operations:
 await redis.set("key", "value");
 await redis.set("key", "value", { ex: 3600 }); // With TTL
 const result = await redis.get("key");
-expect(result).ok().valueEquals("value");
+expect(result).ok().value("value");
 
 // Hashes
 await redis.hset("user:1", { name: "Alice", age: "30" });
@@ -505,7 +504,7 @@ By default, an in-memory database is used for testing.
 // Set and get
 await kv.set(["users", "1"], { name: "Alice" });
 const result = await kv.get(["users", "1"]);
-expect(result).ok().valueEquals({ name: "Alice" });
+expect(result).ok().value({ name: "Alice" });
 
 // List by prefix
 const users = await kv.list({ prefix: ["users"] });

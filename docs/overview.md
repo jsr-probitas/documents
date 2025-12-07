@@ -12,7 +12,7 @@ other backend services.
   message queues with unified APIs
 - **Type-safe**: Full type inference through the builder chain
 - **Fluent assertions**: Natural syntax like
-  `expect(result).ok().jsonContains({...})`
+  `expect(result).ok().dataContains({...})`
 
 ## Installation
 
@@ -50,7 +50,7 @@ import { client, expect, scenario } from "probitas";
 export default scenario("User API Test")
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
     }))
   .step("GET /users/1", async (ctx) => {
     const { http } = ctx.resources;
@@ -59,7 +59,7 @@ export default scenario("User API Test")
     expect(res)
       .ok()
       .status(200)
-      .jsonContains({ id: 1 });
+      .dataContains({ id: 1 });
   })
   .build();
 ```
@@ -168,10 +168,10 @@ The `expect()` function auto-dispatches based on result type:
 
 ```typescript
 // HTTP response
-expect(httpResponse).ok().status(200).jsonContains({ id: 1 });
+expect(httpResponse).ok().status(200).dataContains({ id: 1 });
 
 // SQL result
-expect(sqlResult).rows(1).rowContains({ name: "Alice" });
+expect(sqlResult).count(1).dataContains({ name: "Alice" });
 
 // gRPC response
 expect(grpcResponse).ok().dataContains({ id: "123" });

@@ -5,8 +5,7 @@ export default scenario("Redis Cache Test", {
 })
   .resource("redis", () =>
     client.redis.createRedisClient({
-      host: "localhost",
-      port: 6379,
+      url: "redis://localhost:6379",
     }))
   .resource("key", () => `cache:${faker.string.uuid()}`)
   .setup((ctx) => {

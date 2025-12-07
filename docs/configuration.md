@@ -200,7 +200,7 @@ const res = await http.get("/endpoint", {
 
 ```typescript
 client.http.createHttpClient({
-  baseUrl: "http://localhost:8080",
+  url: "http://localhost:8080",
   headers: { "Content-Type": "application/json" },
   throwOnError: true,
   timeout: 10000,
@@ -209,7 +209,7 @@ client.http.createHttpClient({
 
 | Option         | Description                          | Default    |
 | -------------- | ------------------------------------ | ---------- |
-| `baseUrl`      | Base URL for all requests (required) | —          |
+| `url`          | Base URL for all requests (required) | —          |
 | `headers`      | Default headers for all requests     | `{}`       |
 | `throwOnError` | Throw on 4xx/5xx responses           | `true`     |
 | `timeout`      | Request timeout (ms)                 | —          |
@@ -219,7 +219,7 @@ client.http.createHttpClient({
 
 ```typescript
 client.sql.postgres.createPostgresClient({
-  connection: {
+  url: {
     host: "localhost",
     port: 5432,
     database: "testdb",
@@ -232,7 +232,7 @@ client.sql.postgres.createPostgresClient({
 
 | Option             | Description                        | Default |
 | ------------------ | ---------------------------------- | ------- |
-| `connection`       | Connection string or config object | —       |
+| `url`              | Connection string or config object | —       |
 | `pool.min`         | Minimum pool connections           | `0`     |
 | `pool.max`         | Maximum pool connections           | `10`    |
 | `pool.idleTimeout` | Idle connection timeout (ms)       | `30000` |
@@ -241,7 +241,7 @@ Connection can also be a URL string:
 
 ```typescript
 client.sql.postgres.createPostgresClient({
-  connection: "postgres://user:pass@localhost:5432/mydb",
+  url: "postgres://user:pass@localhost:5432/mydb",
 });
 ```
 
@@ -249,7 +249,7 @@ client.sql.postgres.createPostgresClient({
 
 ```typescript
 client.grpc.createGrpcClient({
-  address: "localhost:50051",
+  url: "localhost:50051",
   metadata: { authorization: "Bearer token" },
   tls: { insecure: false },
 });
@@ -257,7 +257,7 @@ client.grpc.createGrpcClient({
 
 | Option     | Description                    | Default        |
 | ---------- | ------------------------------ | -------------- |
-| `address`  | Server address (host:port)     | —              |
+| `url`      | Server address (host:port)     | —              |
 | `metadata` | Default metadata for all calls | `{}`           |
 | `tls`      | TLS configuration              | —              |
 | `schema`   | Proto schema source            | `"reflection"` |
@@ -266,32 +266,30 @@ client.grpc.createGrpcClient({
 
 ```typescript
 client.graphql.createGraphqlClient({
-  endpoint: "http://localhost:4000/graphql",
+  url: "http://localhost:4000/graphql",
   headers: { Authorization: "Bearer token" },
-  wsEndpoint: "ws://localhost:4000/graphql",
+  wsUrl: "ws://localhost:4000/graphql",
 });
 ```
 
 | Option         | Description                          | Default |
 | -------------- | ------------------------------------ | ------- |
-| `endpoint`     | GraphQL HTTP endpoint (required)     | —       |
+| `url`          | GraphQL HTTP endpoint (required)     | —       |
 | `headers`      | Default headers                      | `{}`    |
-| `wsEndpoint`   | WebSocket endpoint for subscriptions | —       |
+| `wsUrl`        | WebSocket endpoint for subscriptions | —       |
 | `throwOnError` | Throw on GraphQL errors              | `true`  |
 
 ### Redis Client
 
 ```typescript
 client.redis.createRedisClient({
-  host: "localhost",
-  port: 6379,
+  url: "redis://localhost:6379",
 });
 ```
 
-| Option | Description       | Default       |
-| ------ | ----------------- | ------------- |
-| `host` | Redis server host | `"localhost"` |
-| `port` | Redis server port | `6379`        |
+| Option | Description                              | Default                    |
+| ------ | ---------------------------------------- | -------------------------- |
+| `url`  | Redis connection URL (redis://host:port) | `"redis://localhost:6379"` |
 
 ### MongoDB Client
 
@@ -352,14 +350,14 @@ Probitas respects these environment variables:
 scenario("Production Test")
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: Deno.env.get("API_URL") ?? "http://localhost:8080",
+      url: Deno.env.get("API_URL") ?? "http://localhost:8080",
       headers: {
         Authorization: `Bearer ${Deno.env.get("API_TOKEN")}`,
       },
     }))
   .resource("pg", () =>
     client.sql.postgres.createPostgresClient({
-      connection: Deno.env.get("DATABASE_URL") ??
+      url: Deno.env.get("DATABASE_URL") ??
         "postgres://user:pass@localhost/testdb",
     }))
   .build();
@@ -375,9 +373,7 @@ const isProduction = Deno.env.get("ENV") === "production";
 scenario("API Test")
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: isProduction
-        ? "https://api.example.com"
-        : "http://localhost:8080",
+      url: isProduction ? "https://api.example.com" : "http://localhost:8080",
       timeout: isProduction ? 30000 : 5000,
       retry: isProduction
         ? { maxAttempts: 3, backoff: "exponential" }
@@ -406,12 +402,12 @@ import { dbDefaults, httpDefaults } from "./config.ts";
 scenario("Test")
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
       ...httpDefaults,
     }))
   .resource("pg", () =>
     client.sql.postgres.createPostgresClient({
-      connection: "postgres://...",
+      url: "postgres://...",
       ...dbDefaults,
     }))
   .build();
@@ -421,9 +417,9 @@ scenario("Test")
 
 ```typescript
 // factories.ts
-export function createApiClient(baseUrl?: string) {
+export function createApiClient(url?: string) {
   return client.http.createHttpClient({
-    baseUrl: baseUrl ?? Deno.env.get("API_URL") ?? "http://localhost:8080",
+    url: url ?? Deno.env.get("API_URL") ?? "http://localhost:8080",
     timeout: 10000,
     retry: { maxAttempts: 2 },
   });
@@ -431,7 +427,7 @@ export function createApiClient(baseUrl?: string) {
 
 export function createTestDatabase() {
   return client.sql.postgres.createPostgresClient({
-    connection: {
+    url: {
       host: Deno.env.get("DB_HOST") ?? "localhost",
       port: Number(Deno.env.get("DB_PORT") ?? 5432),
       database: "testdb",
@@ -463,8 +459,7 @@ scenario("Conditional Features")
       throw new Skip("Redis not configured");
     }
     return client.redis.createRedisClient({
-      host: new URL(redisUrl).hostname,
-      port: Number(new URL(redisUrl).port),
+      url: redisUrl,
     });
   })
   .build();

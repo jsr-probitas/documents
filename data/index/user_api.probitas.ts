@@ -10,7 +10,7 @@ export default scenario("User API Integration Test", {
   }))
   .resource("db", () =>
     client.sql.postgres.createPostgresClient({
-      connection: {
+      url: {
         host: "localhost",
         port: 5432,
         database: "app",
@@ -20,7 +20,7 @@ export default scenario("User API Integration Test", {
     }))
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8000",
+      url: "http://localhost:8000",
     }))
   .setup(async (ctx) => {
     const { db, user } = ctx.resources;
@@ -39,6 +39,6 @@ export default scenario("User API Integration Test", {
     expect(res)
       .ok()
       .status(200)
-      .jsonContains({ id: user.id, name: user.name });
+      .dataContains({ id: user.id, name: user.name });
   })
   .build();

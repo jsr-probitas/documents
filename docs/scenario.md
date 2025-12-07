@@ -15,7 +15,7 @@ export default scenario("User API CRUD", {
 })
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
     }))
   .setup(async (ctx) => {
     // Create test user before steps
@@ -113,7 +113,7 @@ steps run and automatically disposed after the scenario completes.
 ```typescript
 .resource("http", () =>
   client.http.createHttpClient({
-    baseUrl: "http://localhost:8080",
+    url: "http://localhost:8080",
   })
 )
 ```
@@ -258,7 +258,7 @@ all subsequent steps via `ctx.resources`.
 ```typescript
 .resource("name", (ctx) => {
   // Create and return resource
-  return client.http.createHttpClient({ baseUrl: "..." });
+  return client.http.createHttpClient({ url: "..." });
 })
 ```
 
@@ -268,11 +268,11 @@ Resources can depend on earlier resources. They're created in declaration order.
 
 ```typescript
 .resource("config", () => ({
-  baseUrl: Deno.env.get("API_URL") ?? "http://localhost:8080",
+  url: Deno.env.get("API_URL") ?? "http://localhost:8080",
 }))
 .resource("http", (ctx) => {
   const { config } = ctx.resources;
-  return client.http.createHttpClient({ baseUrl: config.baseUrl });
+  return client.http.createHttpClient({ url: config.url });
 })
 ```
 
@@ -414,7 +414,7 @@ import { client, expect, scenario } from "probitas";
 export default scenario("User CRUD API", { tags: ["api", "integration"] })
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
     }))
   .step("Create user", async (ctx) => {
     const { http } = ctx.resources;
@@ -422,21 +422,21 @@ export default scenario("User CRUD API", { tags: ["api", "integration"] })
       name: "Alice",
       email: "alice@example.com",
     });
-    expect(res).ok().status(201).jsonContains({ name: "Alice" });
+    expect(res).ok().status(201).dataContains({ name: "Alice" });
     return res.json<{ id: number }>();
   })
   .step("Get user", async (ctx) => {
     const { http } = ctx.resources;
     const { id } = ctx.previous;
     const res = await http.get(`/users/${id}`);
-    expect(res).ok().status(200).jsonContains({ id, name: "Alice" });
+    expect(res).ok().status(200).dataContains({ id, name: "Alice" });
     return res.json();
   })
   .step("Update user", async (ctx) => {
     const { http } = ctx.resources;
     const { id } = ctx.previous;
     const res = await http.patch(`/users/${id}`, { name: "Bob" });
-    expect(res).ok().status(200).jsonContains({ name: "Bob" });
+    expect(res).ok().status(200).dataContains({ name: "Bob" });
     return { id };
   })
   .step("Delete user", async (ctx) => {
@@ -458,7 +458,7 @@ import { client, expect, scenario } from "probitas";
 export default scenario("Database Transaction", { tags: ["db", "postgres"] })
   .resource("pg", () =>
     client.sql.postgres.createPostgresClient({
-      connection: {
+      url: {
         host: "localhost",
         port: 5432,
         database: "testdb",
@@ -497,7 +497,7 @@ export default scenario("Database Transaction", { tags: ["db", "postgres"] })
       "SELECT name FROM users WHERE id = $1",
       [id],
     );
-    expect(result).ok().rowCount(1).rowContains({ name: "Alice" });
+    expect(result).ok().count(1).dataContains({ name: "Alice" });
   })
   .build();
 ```
@@ -512,7 +512,7 @@ import { client, expect, scenario } from "probitas";
 export default scenario("gRPC Echo Service", { tags: ["grpc"] })
   .resource("grpc", () =>
     client.grpc.createGrpcClient({
-      address: "localhost:50051",
+      url: "localhost:50051",
     }))
   .step("Unary call", async (ctx) => {
     const { grpc } = ctx.resources;
@@ -550,11 +550,11 @@ export default scenario("Full Stack Test", {
 })
   .resource("http", () =>
     client.http.createHttpClient({
-      baseUrl: "http://localhost:8080",
+      url: "http://localhost:8080",
     }))
   .resource("pg", () =>
     client.sql.postgres.createPostgresClient({
-      connection: {
+      url: {
         host: "localhost",
         port: 5432,
         database: "testdb",
@@ -564,8 +564,7 @@ export default scenario("Full Stack Test", {
     }))
   .resource("redis", () =>
     client.redis.createRedisClient({
-      host: "localhost",
-      port: 6379,
+      url: "redis://localhost:6379",
     }))
   .setup(async (ctx) => {
     const { redis } = ctx.resources;
@@ -594,7 +593,7 @@ export default scenario("Full Stack Test", {
       "SELECT * FROM items WHERE id = $1",
       [id],
     );
-    expect(result).ok().rowCount(1).rowContains({ name: "Test Item" });
+    expect(result).ok().count(1).dataContains({ name: "Test Item" });
   })
   .build();
 ```

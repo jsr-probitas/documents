@@ -5,7 +5,7 @@ export default scenario("gRPC Service Test", {
 })
   .resource("grpc", () =>
     client.grpc.createGrpcClient({
-      address: "localhost:50051",
+      url: "localhost:50051",
     }))
   .step("Echo - simple message", async (ctx) => {
     const { grpc } = ctx.resources;

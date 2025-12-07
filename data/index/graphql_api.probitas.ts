@@ -5,7 +5,7 @@ export default scenario("GraphQL API Test", {
 })
   .resource("gql", () =>
     client.graphql.createGraphqlClient({
-      endpoint: "http://localhost:4000/graphql",
+      url: "http://localhost:4000/graphql",
     }))
   .step("echo - simple query", async (ctx) => {
     const { gql } = ctx.resources;
