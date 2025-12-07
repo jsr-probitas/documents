@@ -12827,7 +12827,7 @@
           "fnOrConstructor": {
             "constructor": false,
             "tsType": {
-              "repr": "x is \u001b[0m\u001b[38;5;12mErrorObject\u001b[0m",
+              "repr": "x is ErrorObject",
               "kind": "typePredicate",
               "typePredicate": {
                 "asserts": false,
@@ -13630,5 +13630,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-07T13:32:50.745Z"
+  "generatedAt": "2025-12-07T13:39:30.259Z"
 }

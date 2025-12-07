@@ -60,6 +60,10 @@ async function getPackageDoc(
     args: ["doc", "--json", specifier],
     stdout: "piped",
     stderr: "piped",
+    env: {
+      ...Deno.env.toObject(),
+      NO_COLOR: "1",
+    },
   });
 
   const { code, stdout, stderr } = await command.output();
