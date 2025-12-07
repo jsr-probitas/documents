@@ -16,8 +16,8 @@ app.use("/static/*", serveStatic({ root: "./" }));
 app.get("/", async (c) => c.html(await HomePage()));
 
 // LLM-friendly endpoints (llms.txt standard)
-app.get("/llms.txt", (c) => {
-  return c.text(generateLlmsTxt(), 200, {
+app.get("/llms.txt", async (c) => {
+  return c.text(await generateLlmsTxt(), 200, {
     "Content-Type": "text/markdown; charset=utf-8",
   });
 });
