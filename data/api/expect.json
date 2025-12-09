@@ -2236,10 +2236,10 @@
       "name": "HttpResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
         "line": 9,
         "col": 0,
-        "byteIndex": 301
+        "byteIndex": 277
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2257,10 +2257,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 36,
               "col": 2,
-              "byteIndex": 961
+              "byteIndex": 937
             },
             "params": [],
             "optional": false,
@@ -2292,10 +2292,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 39,
               "col": 2,
-              "byteIndex": 1043
+              "byteIndex": 1019
             },
             "params": [],
             "optional": false,
@@ -2327,10 +2327,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 42,
               "col": 2,
-              "byteIndex": 1111
+              "byteIndex": 1087
             },
             "params": [],
             "optional": false,
@@ -2353,7 +2353,7 @@
             "typeParams": []
           },
           {
-            "name": "data",
+            "name": "json",
             "jsDoc": {
               "doc": "Get body as parsed JSON (null if no body)",
               "tags": [
@@ -2366,10 +2366,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 49,
               "col": 2,
-              "byteIndex": 1290
+              "byteIndex": 1266
             },
             "params": [],
             "optional": false,
@@ -2411,10 +2411,10 @@
               "doc": "Result type identifier"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 11,
               "col": 2,
-              "byteIndex": 367
+              "byteIndex": 343
             },
             "params": [],
             "readonly": true,
@@ -2436,10 +2436,10 @@
               "doc": "Whether the response was successful (status 200-299)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 16,
               "col": 2,
-              "byteIndex": 513
+              "byteIndex": 489
             },
             "params": [],
             "readonly": true,
@@ -2458,10 +2458,10 @@
               "doc": "HTTP status code"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 19,
               "col": 2,
-              "byteIndex": 564
+              "byteIndex": 540
             },
             "params": [],
             "readonly": true,
@@ -2480,10 +2480,10 @@
               "doc": "HTTP status text"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 22,
               "col": 2,
-              "byteIndex": 618
+              "byteIndex": 594
             },
             "params": [],
             "readonly": true,
@@ -2502,10 +2502,10 @@
               "doc": "Response headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 25,
               "col": 2,
-              "byteIndex": 676
+              "byteIndex": 652
             },
             "params": [],
             "readonly": true,
@@ -2527,10 +2527,10 @@
               "doc": "Request URL"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 28,
               "col": 2,
-              "byteIndex": 727
+              "byteIndex": 703
             },
             "params": [],
             "readonly": true,
@@ -2549,10 +2549,10 @@
               "doc": "Response body as raw bytes (null if no body)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 33,
               "col": 2,
-              "byteIndex": 873
+              "byteIndex": 849
             },
             "params": [],
             "readonly": true,
@@ -2585,10 +2585,10 @@
               "doc": "Response time in milliseconds"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 54,
               "col": 2,
-              "byteIndex": 1395
+              "byteIndex": 1371
             },
             "params": [],
             "readonly": true,
@@ -2607,10 +2607,10 @@
               "doc": "Raw Web standard Response (for streaming or special cases)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
               "line": 57,
               "col": 2,
-              "byteIndex": 1493
+              "byteIndex": 1469
             },
             "params": [],
             "readonly": true,
@@ -2727,10 +2727,10 @@
       "name": "GraphqlResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
         "line": 25,
         "col": 0,
-        "byteIndex": 732
+        "byteIndex": 708
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2748,10 +2748,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 54,
               "col": 2,
-              "byteIndex": 1506
+              "byteIndex": 1482
             },
             "params": [],
             "optional": false,
@@ -2796,10 +2796,10 @@
               "doc": "Result type identifier"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 27,
               "col": 2,
-              "byteIndex": 810
+              "byteIndex": 786
             },
             "params": [],
             "readonly": true,
@@ -2821,10 +2821,10 @@
               "doc": "Whether the request was successful (no errors)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 30,
               "col": 2,
-              "byteIndex": 895
+              "byteIndex": 871
             },
             "params": [],
             "readonly": true,
@@ -2843,10 +2843,10 @@
               "doc": "GraphQL errors array (null if no errors)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 33,
               "col": 2,
-              "byteIndex": 970
+              "byteIndex": 946
             },
             "params": [],
             "readonly": true,
@@ -2890,10 +2890,10 @@
               "doc": "Response extensions"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 36,
               "col": 2,
-              "byteIndex": 1055
+              "byteIndex": 1031
             },
             "params": [],
             "readonly": true,
@@ -2926,10 +2926,10 @@
               "doc": "Response time in milliseconds"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 39,
               "col": 2,
-              "byteIndex": 1144
+              "byteIndex": 1120
             },
             "params": [],
             "readonly": true,
@@ -2948,10 +2948,10 @@
               "doc": "HTTP status code"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 42,
               "col": 2,
-              "byteIndex": 1200
+              "byteIndex": 1176
             },
             "params": [],
             "readonly": true,
@@ -2970,10 +2970,10 @@
               "doc": "Headers from the HTTP response"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 45,
               "col": 2,
-              "byteIndex": 1268
+              "byteIndex": 1244
             },
             "params": [],
             "readonly": true,
@@ -2995,10 +2995,10 @@
               "doc": "Raw Web standard Response (for streaming or special cases)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.2.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
               "line": 48,
               "col": 2,
-              "byteIndex": 1366
+              "byteIndex": 1342
             },
             "params": [],
             "readonly": true,
@@ -3124,7 +3124,7 @@
       "name": "ConnectRpcResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
         "line": 12,
         "col": 0,
         "byteIndex": 155
@@ -3145,7 +3145,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 40,
               "col": 2,
               "byteIndex": 973
@@ -3189,7 +3189,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1046
@@ -3211,7 +3211,7 @@
               "doc": "Result type identifier"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 227
@@ -3236,7 +3236,7 @@
               "doc": "Whether the request was successful (code === 0)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 317
@@ -3258,7 +3258,7 @@
               "doc": "ConnectRPC/gRPC status code."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 20,
               "col": 2,
               "byteIndex": 380
@@ -3283,7 +3283,7 @@
               "doc": "Status message (empty string for successful responses)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 23,
               "col": 2,
               "byteIndex": 485
@@ -3305,7 +3305,7 @@
               "doc": "Response headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 26,
               "col": 2,
               "byteIndex": 540
@@ -3341,7 +3341,7 @@
               "doc": "Response trailers (sent at end of RPC)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 29,
               "col": 2,
               "byteIndex": 633
@@ -3377,7 +3377,7 @@
               "doc": "Response time in milliseconds."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 719
@@ -3491,7 +3491,7 @@
       "kind": "reference",
       "reference_def": {
         "target": {
-          "filename": "https://jsr.io/@probitas/client-connectrpc/0.3.0/response.ts",
+          "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
           "line": 12,
           "col": 0,
           "byteIndex": 155
@@ -3579,14 +3579,14 @@
       "name": "RedisResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-redis/0.2.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
         "line": 61,
         "col": 0,
-        "byteIndex": 1304
+        "byteIndex": 1319
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all Redis result types."
+        "doc": "Union of all Redis result types.\nUsed by expectRedisResult to determine the appropriate expectation type."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -3755,14 +3755,14 @@
       "name": "MongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.3.0/types.ts",
-        "line": 132,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
+        "line": 111,
         "col": 0,
-        "byteIndex": 2786
+        "byteIndex": 2431
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all MongoDB result types."
+        "doc": "Union of all MongoDB result types.\nUsed by expectMongoResult to determine the appropriate expectation type."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -3939,14 +3939,14 @@
       "name": "DenoKvResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-deno-kv/0.2.0/results.ts",
-        "line": 130,
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
+        "line": 131,
         "col": 0,
-        "byteIndex": 2649
+        "byteIndex": 2726
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all Deno KV result types."
+        "doc": "Union of all Deno KV result types.\nUsed by expectDenoKvResult to determine the appropriate expectation type."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -4170,14 +4170,14 @@
       "name": "SqsResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 225,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.0.7/types.ts",
+        "line": 198,
         "col": 0,
-        "byteIndex": 5681
+        "byteIndex": 5081
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union type of all SQS result types."
+        "doc": "Union type of all SQS result types.\nUsed for type-safe handling in the unified expectSqsResult function."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -4321,14 +4321,14 @@
       "name": "RabbitMqResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.2.0/types.ts",
-        "line": 286,
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
+        "line": 260,
         "col": 0,
-        "byteIndex": 6512
+        "byteIndex": 5976
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all RabbitMQ result types."
+        "doc": "Union of all RabbitMQ result types.\nUsed by expectRabbitMqResult to determine the appropriate expectation type."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -5469,7 +5469,7 @@
       "name": "SqlQueryResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
         "line": 38,
         "col": 0,
         "byteIndex": 875
@@ -5511,36 +5511,14 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 46,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 45,
               "col": 2,
-              "byteIndex": 1123
+              "byteIndex": 1089
             }
           }
         ],
         "properties": [
-          {
-            "tsType": {
-              "repr": "sql",
-              "kind": "literal",
-              "literal": {
-                "kind": "string",
-                "string": "sql"
-              }
-            },
-            "readonly": true,
-            "accessibility": null,
-            "optional": false,
-            "isAbstract": false,
-            "isStatic": false,
-            "name": "type",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 39,
-              "col": 2,
-              "byteIndex": 932
-            }
-          },
           {
             "tsType": {
               "repr": "boolean",
@@ -5554,10 +5532,10 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 40,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 39,
               "col": 2,
-              "byteIndex": 966
+              "byteIndex": 932
             }
           },
           {
@@ -5585,10 +5563,10 @@
             "isStatic": false,
             "name": "rows",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 41,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 40,
               "col": 2,
-              "byteIndex": 990
+              "byteIndex": 956
             }
           },
           {
@@ -5604,10 +5582,10 @@
             "isStatic": false,
             "name": "rowCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 42,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 41,
               "col": 2,
-              "byteIndex": 1019
+              "byteIndex": 985
             }
           },
           {
@@ -5623,10 +5601,10 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 43,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 42,
               "col": 2,
-              "byteIndex": 1048
+              "byteIndex": 1014
             }
           },
           {
@@ -5645,10 +5623,10 @@
             "isStatic": false,
             "name": "metadata",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 44,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 43,
               "col": 2,
-              "byteIndex": 1077
+              "byteIndex": 1043
             }
           }
         ],
@@ -5725,10 +5703,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 57,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 56,
               "col": 2,
-              "byteIndex": 1382
+              "byteIndex": 1348
             }
           },
           {
@@ -5802,10 +5780,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.2.0/result.ts",
-              "line": 68,
+              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
+              "line": 67,
               "col": 2,
-              "byteIndex": 1597
+              "byteIndex": 1563
             }
           }
         ],
@@ -5839,5 +5817,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T20:32:20.470Z"
+  "generatedAt": "2025-12-09T22:07:59.767Z"
 }
