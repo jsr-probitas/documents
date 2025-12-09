@@ -174,28 +174,14 @@ function AiFriendlySection() {
 
         <div class="ai-friendly-card">
           <div class="ai-friendly-card-header">
-            <i class="ti ti-file-stack" />
-            <span>Root Markdown</span>
-          </div>
-          <p>
-            Access <code>/</code> with <code>curl</code> or an
-            <code>Accept: text/markdown</code>{" "}
-            header to get an LLM-friendly Markdown overview. Add{" "}
-            <code>?human=1</code> for the full HTML page.
-          </p>
-          <a href={`${basePath}/?human=1`} class="ai-friendly-link">
-            View human homepage <i class="ti ti-arrow-right" />
-          </a>
-        </div>
-
-        <div class="ai-friendly-card">
-          <div class="ai-friendly-card-header">
             <i class="ti ti-markdown" />
-            <span>Raw Markdown</span>
+            <span>Markdown Pages</span>
           </div>
           <p>
-            Every documentation page has a <code>.md</code> endpoint (e.g.,{" "}
-            <code>/docs/index.md</code>) returning clean Markdown source.
+            Every documentation page has an <code>index.md</code>{" "}
+            endpoint (e.g., <code>/docs/index.md</code>,{" "}
+            <code>/docs/quickstart/index.md</code>) returning clean Markdown
+            source for easy LLM consumption.
           </p>
           <a href={`${basePath}/docs/index.md`} class="ai-friendly-link">
             Example: /docs/index.md <i class="ti ti-arrow-right" />
