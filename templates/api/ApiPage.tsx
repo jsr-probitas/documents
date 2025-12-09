@@ -14,6 +14,7 @@ import {
   loadPackageDoc,
   type PackageGroup,
 } from "../../data/api-pages.ts";
+import { basePath } from "../../data/docs.ts";
 import { parseApiMarkdown } from "../../lib/markdown.ts";
 import { Layout } from "../Layout.tsx";
 import { mainScript } from "../scripts.ts";
@@ -165,8 +166,8 @@ export async function PackagePage({ packageName }: PackagePageProps) {
       description={doc.moduleDoc ??
         `API documentation for ${doc.specifier}`}
       pagePath={`/api/${packageName}/`}
-      alternateJson={`/api/${packageName}/index.json`}
-      alternateMarkdown={`/api/${packageName}/index.md`}
+      alternateJson={`${basePath}/api/${packageName}/index.json`}
+      alternateMarkdown={`${basePath}/api/${packageName}/index.md`}
     >
       <div class="api-layout">
         <aside class="api-sidebar">
@@ -180,14 +181,14 @@ export async function PackagePage({ packageName }: PackagePageProps) {
                   <h1>{doc.specifier}</h1>
                   <div class="api-source-links">
                     <a
-                      href={`/api/${packageName}/index.md`}
+                      href={`${basePath}/api/${packageName}/index.md`}
                       class="source-link md-source-link"
                       title="View Markdown"
                     >
                       <i class="ti ti-markdown" />
                     </a>
                     <a
-                      href={`/api/${packageName}/index.json`}
+                      href={`${basePath}/api/${packageName}/index.json`}
                       class="source-link json-source-link"
                       title="View JSON data"
                     >
@@ -315,7 +316,7 @@ function NotFoundPage({ packageName }: NotFoundPageProps) {
               The package <code>@probitas/{packageName}</code> was not found.
             </p>
             <p>
-              <a href="/api/">← Back to API Reference</a>
+              <a href={`${basePath}/api/`}>← Back to API Reference</a>
             </p>
           </article>
         </main>

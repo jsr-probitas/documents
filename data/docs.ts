@@ -58,5 +58,11 @@ export const siteMetadata = {
     "Probitas is a scenario-based testing framework for Deno that enables declarative, readable integration tests for APIs, databases, message queues, and other backend services.",
   github: "https://github.com/jsr-probitas/probitas",
   jsr: "https://jsr.io/@probitas/probitas",
-  baseUrl: "https://documents.probitas.deno.net",
+  baseUrl: "https://jsr-probitas.github.io/documents",
 };
+
+/**
+ * Base path for all URLs (e.g., "/documents" for GitHub Pages).
+ * Set via BASE_PATH environment variable, defaults to empty string.
+ */
+export const basePath = Deno.env.get("BASE_PATH") ?? "";

@@ -2,6 +2,7 @@
  * Home page JSX template
  */
 import { clients } from "../data/clients.ts";
+import { basePath } from "../data/docs.ts";
 import { features } from "../data/features.ts";
 import { loadSampleCodes, type SampleCode } from "../data/sample_codes.ts";
 import { Layout } from "./Layout.tsx";
@@ -81,10 +82,10 @@ function Hero({ sampleCodes }: { sampleCodes: SampleCode[] }) {
         queue testing
       </p>
       <div class="cta-group">
-        <a href="/docs/" class="btn btn-primary">
+        <a href={`${basePath}/docs/`} class="btn btn-primary">
           Get Started
         </a>
-        <a href="/docs/scenario/" class="btn btn-secondary">
+        <a href={`${basePath}/docs/scenario/`} class="btn btn-secondary">
           Learn Scenarios
         </a>
       </div>
@@ -166,7 +167,7 @@ function AiFriendlySection() {
             An index of all documentation pages with descriptions. AI agents use
             this as a "sitemap" to discover available content.
           </p>
-          <a href="/llms.txt" class="ai-friendly-link">
+          <a href={`${basePath}/llms.txt`} class="ai-friendly-link">
             View llms.txt <i class="ti ti-arrow-right" />
           </a>
         </div>
@@ -182,7 +183,7 @@ function AiFriendlySection() {
             header to get an LLM-friendly Markdown overview. Add{" "}
             <code>?human=1</code> for the full HTML page.
           </p>
-          <a href="/?human=1" class="ai-friendly-link">
+          <a href={`${basePath}/?human=1`} class="ai-friendly-link">
             View human homepage <i class="ti ti-arrow-right" />
           </a>
         </div>
@@ -196,7 +197,7 @@ function AiFriendlySection() {
             Every documentation page has a <code>.md</code> endpoint (e.g.,{" "}
             <code>/docs/index.md</code>) returning clean Markdown source.
           </p>
-          <a href="/docs/index.md" class="ai-friendly-link">
+          <a href={`${basePath}/docs/index.md`} class="ai-friendly-link">
             Example: /docs/index.md <i class="ti ti-arrow-right" />
           </a>
         </div>

@@ -2,7 +2,7 @@
  * Base HTML layout component
  */
 import type { Child } from "hono/jsx";
-import { docPages, siteMetadata } from "../data/docs.ts";
+import { basePath, docPages, siteMetadata } from "../data/docs.ts";
 import { themeInitScript } from "./scripts.ts";
 
 const GITHUB_URL = "https://github.com/jsr-probitas/probitas";
@@ -86,8 +86,8 @@ export function Layout(
         />
         <link href={CDN.fonts} rel="stylesheet" />
         <link rel="stylesheet" href={CDN.tablerIcons} />
-        <link rel="stylesheet" href="/static/style.css" />
-        <link rel="icon" href="/static/favicon.ico" />
+        <link rel="stylesheet" href={`${basePath}/static/style.css`} />
+        <link rel="icon" href={`${basePath}/static/favicon.ico`} />
         <link
           id="hljs-theme"
           rel="stylesheet"
@@ -130,16 +130,21 @@ function Header({ showLogo }: { showLogo: boolean }) {
     <header class="global-header">
       {showLogo
         ? (
-          <a href="/" class="logo">
-            <img src="/static/probitas.png" alt="Probitas" class="logo-img" />
+          <a href={`${basePath}/`} class="logo">
+            <img
+              src={`${basePath}/static/probitas.png`}
+              alt="Probitas"
+              class="logo-img"
+            />
             <span class="logo-text">Probitas</span>
           </a>
         )
         : <div />}
       <nav class="header-nav">
-        {docPages.map((doc) => <a key={doc.path} href={doc.path}>{doc.label}
-        </a>)}
-        <a href="/api/">API</a>
+        {docPages.map((doc) => (
+          <a key={doc.path} href={`${basePath}${doc.path}`}>{doc.label}</a>
+        ))}
+        <a href={`${basePath}/api/`}>API</a>
       </nav>
       <div class="header-right">
         <button

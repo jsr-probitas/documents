@@ -1,6 +1,7 @@
 /**
  * Markdown documentation page template
  */
+import { basePath } from "../../data/docs.ts";
 import { extractTitle, extractToc, parseMarkdown } from "../../lib/markdown.ts";
 import { DocLayout, TableOfContents } from "../components.tsx";
 import { Layout } from "../Layout.tsx";
@@ -36,7 +37,7 @@ export function MarkdownDoc(
 
   // Alternate markdown URL (path ends with /, so append index.md)
   const alternateMarkdown = markdownPath
-    ? `${markdownPath}index.md`
+    ? `${basePath}${markdownPath}index.md`
     : undefined;
 
   return (

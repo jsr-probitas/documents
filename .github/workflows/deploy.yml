@@ -39,8 +39,10 @@ jobs:
       # Run tests
       - run: deno task test
 
-      # Build static site
+      # Build static site (BASE_PATH for GitHub Pages subdirectory)
       - run: deno task build
+        env:
+          BASE_PATH: /documents
 
       # Upload artifact for GitHub Pages
       - name: Upload artifact
