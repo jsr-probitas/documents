@@ -93,6 +93,7 @@ export function Layout(
           rel="stylesheet"
           href={`${CDN.hljs}/styles/github-dark.min.css`}
         />
+        {/* Pagefind UI CSS intentionally not loaded - using custom styles in style.css */}
         {alternateMarkdown && (
           <link
             rel="alternate"
@@ -120,10 +121,84 @@ export function Layout(
       <body>
         <Header showLogo={showLogo} />
         {children}
+        <SearchModal />
+        <script src={`${basePath}/pagefind/pagefind-ui.js`} />
+        <script dangerouslySetInnerHTML={{ __html: searchScript }} />
       </body>
     </html>
   );
 }
+
+function SearchModal() {
+  return (
+    <div
+      id="search-modal"
+      class="search-modal"
+      onclick="closeSearchOnBackdrop(event)"
+    >
+      <div class="search-modal-content">
+        <div class="search-modal-header">
+          <span class="search-modal-title">Search Documentation</span>
+          <button
+            type="button"
+            class="search-modal-close"
+            onclick="closeSearch()"
+            aria-label="Close search"
+          >
+            <i class="ti ti-x" />
+          </button>
+        </div>
+        <div id="search-container" />
+      </div>
+    </div>
+  );
+}
+
+const searchScript = `
+let searchInitialized = false;
+
+function openSearch() {
+  const modal = document.getElementById('search-modal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  if (!searchInitialized && typeof PagefindUI !== 'undefined') {
+    new PagefindUI({
+      element: '#search-container',
+      showSubResults: true,
+      showImages: false,
+    });
+    searchInitialized = true;
+  }
+
+  setTimeout(() => {
+    const input = modal.querySelector('.pagefind-ui__search-input');
+    if (input) input.focus();
+  }, 100);
+}
+
+function closeSearch() {
+  const modal = document.getElementById('search-modal');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeSearchOnBackdrop(event) {
+  if (event.target.id === 'search-modal') {
+    closeSearch();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    openSearch();
+  }
+  if (e.key === 'Escape') {
+    closeSearch();
+  }
+});
+`;
 
 function Header({ showLogo }: { showLogo: boolean }) {
   return (
@@ -147,6 +222,15 @@ function Header({ showLogo }: { showLogo: boolean }) {
         <a href={`${basePath}/api/`}>API</a>
       </nav>
       <div class="header-right">
+        <button
+          type="button"
+          class="search-toggle"
+          onclick="openSearch()"
+          aria-label="Search"
+        >
+          <i class="ti ti-search" />
+          <span class="search-shortcut">⌘K</span>
+        </button>
         <button
           type="button"
           class="theme-toggle"

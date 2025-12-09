@@ -224,8 +224,9 @@ body:has(.doc-layout) .global-header {
   gap: 0.75rem;
 }
 
-/* Icon button base style (shared by theme-toggle and github-link) */
+/* Icon button base style (shared by theme-toggle, search-toggle, and github-link) */
 .theme-toggle,
+.search-toggle,
 .github-link {
   display: flex;
   align-items: center;
@@ -241,6 +242,7 @@ body:has(.doc-layout) .global-header {
 }
 
 .theme-toggle:hover,
+.search-toggle:hover,
 .github-link:hover {
   color: var(--text-heading);
   border-color: var(--accent);
@@ -248,8 +250,24 @@ body:has(.doc-layout) .global-header {
 }
 
 .theme-toggle i,
+.search-toggle i,
 .github-link i {
   font-size: 20px;
+}
+
+/* Search toggle button */
+.search-toggle {
+  width: auto;
+  padding: 0 0.75rem;
+  gap: 0.5rem;
+}
+
+.search-shortcut {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--bg-code);
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
 }
 
 /* Theme toggle: show/hide sun/moon icons based on theme */
@@ -2446,12 +2464,23 @@ body:has(.api-layout) .global-header {
   }
 
   .theme-toggle,
+  .search-toggle,
   .github-link {
     width: 36px;
     height: 36px;
   }
 
+  .search-toggle {
+    width: 36px;
+    padding: 0;
+  }
+
+  .search-shortcut {
+    display: none;
+  }
+
   .theme-toggle i,
+  .search-toggle i,
   .github-link i {
     font-size: 18px;
   }
@@ -2644,4 +2673,294 @@ body:has(.api-layout) .global-header {
 .overload-item .api-params h5,
 .overload-item .api-returns h5 {
   font-size: 0.8rem;
+}
+
+/* ========================================
+   Search Modal
+   ======================================== */
+.search-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  /* Prevent layout shift from scrollbar */
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
+}
+
+.search-modal.open {
+  display: flex;
+}
+
+.search-modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 720px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.search-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-modal-title {
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.search-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.search-modal-close:hover {
+  background: var(--bg-code);
+  color: var(--text-heading);
+}
+
+.search-modal-close i {
+  font-size: 18px;
+}
+
+/* Pagefind UI customization */
+#search-container {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--text-primary);
+  --pagefind-ui-background: var(--bg-card);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--bg-code);
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: "Inter", sans-serif;
+}
+
+#search-container .pagefind-ui__form {
+  padding: 1rem 1.25rem;
+}
+
+#search-container .pagefind-ui__search-input {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0.875rem 3rem 0.875rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#search-container .pagefind-ui__search-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* Pagefind UI wrapper - ensure vertical layout */
+#search-container .pagefind-ui {
+  display: block !important;
+}
+
+/* Search form wrapper */
+#search-container .pagefind-ui__form {
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Hide default search icon */
+#search-container .pagefind-ui__form::before {
+  display: none !important;
+}
+
+/* Clear button positioning - vertically centered in input */
+#search-container .pagefind-ui__search-clear {
+  position: absolute;
+  color: var(--text-muted);
+  /* Form padding (1rem) + center of input (25px = 50px/2) - half button (16px = 32px/2) */
+  top: calc(1rem + 25px - 16px);
+  right: calc(1.25rem + 12px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  z-index: 10;
+}
+
+#search-container .pagefind-ui__search-clear:hover {
+  color: var(--text-primary);
+}
+
+/* Form needs position relative for absolute clear button */
+#search-container .pagefind-ui__form {
+  position: relative;
+}
+
+#search-container .pagefind-ui__drawer {
+  padding: 0 0 1.25rem !important;
+}
+
+/* Results area - message stays fixed, results scroll */
+#search-container .pagefind-ui__results-area {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(70vh - 140px);
+}
+
+/* Results list - scrollable */
+#search-container .pagefind-ui__results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  flex: 1;
+  min-height: 0; /* Required for overflow to work in flex child */
+  overflow-y: auto;
+  /* Custom scrollbar - hidden by default, visible on hover */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+#search-container .pagefind-ui__results:hover {
+  scrollbar-color: var(--border) transparent;
+}
+
+#search-container .pagefind-ui__results::-webkit-scrollbar {
+  width: 8px;
+}
+
+#search-container .pagefind-ui__results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#search-container .pagefind-ui__results::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+#search-container .pagefind-ui__results:hover::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+#search-container .pagefind-ui__results::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+#search-container .pagefind-ui__message {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  padding: 0.5rem 0 1rem;
+}
+
+#search-container .pagefind-ui__result {
+  padding: 1rem;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+  flex-shrink: 0; /* Prevent cards from shrinking in flex container */
+}
+
+#search-container .pagefind-ui__result:hover {
+  border-color: var(--accent);
+}
+
+#search-container .pagefind-ui__result-title {
+  margin-bottom: 0.25rem;
+}
+
+#search-container .pagefind-ui__result-link {
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#search-container .pagefind-ui__result-link:hover {
+  color: var(--accent);
+}
+
+#search-container .pagefind-ui__result-excerpt {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Highlight matching text with accent color */
+#search-container mark {
+  background: rgba(99, 102, 241, 0.25);
+  color: var(--accent-light);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+[data-theme="light"] #search-container mark {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent-dark);
+}
+
+/* Sub-results styling */
+#search-container .pagefind-ui__result-nested {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+#search-container .pagefind-ui__result-nested .pagefind-ui__result-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--link-color);
+}
+
+/* Load more button */
+#search-container .pagefind-ui__button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+#search-container .pagefind-ui__button:hover {
+  background: var(--accent-dark);
+}
+
+/* Truncate long excerpts */
+#search-container .pagefind-ui__result-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#search-container .pagefind-ui__result-nested .pagefind-ui__result-excerpt {
+  -webkit-line-clamp: 1;
 }

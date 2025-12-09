@@ -56,4 +56,17 @@ for await (const entry of Deno.readDir("./static")) {
   }
 }
 
+// Generate search index with Pagefind
+console.log("\n🔍 Generating search index...");
+const pagefindCmd = new Deno.Command("pagefind", {
+  args: ["--site", "dist"],
+  stdout: "inherit",
+  stderr: "inherit",
+});
+const pagefindResult = await pagefindCmd.output();
+if (!pagefindResult.success) {
+  console.error("❌ Pagefind indexing failed");
+  Deno.exit(1);
+}
+
 console.log("\n🎉 Build complete!");
