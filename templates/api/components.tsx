@@ -1411,12 +1411,13 @@ interface ApiTocProps {
 }
 
 export function ApiToc({ nodes }: ApiTocProps) {
-  // Group by kind
-  const functions = nodes.filter((n) => n.kind === "function");
+  // Group by kind (same order as content display)
   const classes = nodes.filter((n) => n.kind === "class");
   const interfaces = nodes.filter((n) => n.kind === "interface");
+  const functions = nodes.filter((n) => n.kind === "function");
   const types = nodes.filter((n) => n.kind === "typeAlias");
   const variables = nodes.filter((n) => n.kind === "variable");
+  const enums = nodes.filter((n) => n.kind === "enum");
 
   return (
     <nav class="scrollable-nav api-toc">
@@ -1436,6 +1437,9 @@ export function ApiToc({ nodes }: ApiTocProps) {
       {variables.length > 0 && (
         <TocGroup title="Variables" icon="ti-variable" items={variables} />
       )}
+      {enums.length > 0 && (
+        <TocGroup title="Enums" icon="ti-list" items={enums} />
+      )}
     </nav>
   );
 }
@@ -1447,13 +1451,16 @@ interface TocGroupProps {
 }
 
 function TocGroup({ title, icon, items }: TocGroupProps) {
+  // Sort items alphabetically to match content order
+  const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <div class="toc-group">
       <h4>
         <i class={`ti ${icon}`} /> {title}
       </h4>
       <ul>
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <li key={item.name}>
             <a href={`#${item.name}`}>{item.name}</a>
           </li>
