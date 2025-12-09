@@ -74,7 +74,11 @@ function PackageGroupSection({ group }: PackageGroupSectionProps) {
       </h2>
       <div class="package-grid">
         {group.packages.map((pkg) => (
-          <a key={pkg.name} href={`/api/${pkg.name}`} class="package-card">
+          <a
+            key={pkg.name}
+            href={`${basePath}/api/${pkg.name}/`}
+            class="package-card"
+          >
             <h3>{pkg.specifier}</h3>
             <div class="package-meta">
               <span class="package-version">v{pkg.version}</span>

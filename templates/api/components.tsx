@@ -37,6 +37,7 @@ import {
   extractTypeParamRefs,
   extractTypeRefs,
 } from "../../lib/type-references.ts";
+import { basePath } from "../../data/docs.ts";
 
 // ============================================================================
 // Type Display Components (with linking)
@@ -232,7 +233,7 @@ function renderTypeName(name: string, ctx: TypeLinkContext): Child {
     if (targetPackage !== currentPackage) {
       return (
         <a
-          href={`/api/${targetPackage}#${name}`}
+          href={`${basePath}/api/${targetPackage}/#${name}`}
           class="type-link type-link-cross-package"
         >
           {name}
@@ -1225,7 +1226,7 @@ export function PackageSidebar(
                   key={pkg.name}
                   class={pkg.name === currentPackage ? "active" : ""}
                 >
-                  <a href={`/api/${pkg.name}`}>{pkg.name}</a>
+                  <a href={`${basePath}/api/${pkg.name}/`}>{pkg.name}</a>
                 </li>
               ))}
             </ul>
