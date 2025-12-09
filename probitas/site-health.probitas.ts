@@ -37,11 +37,11 @@ export default scenario("Probitas docs site health", {
     });
 
     expect(res)
-      .ok()
-      .status(200)
-      .contentType(/text\/markdown/)
-      .textContains("This is a Markdown page for LLMs.")
-      .textContains("# Probitas");
+      .toBeSuccessful()
+      .toHaveStatus(200)
+      .toHaveHeader("content-type", /text\/markdown/)
+      .toHaveText(/This is a Markdown page for LLMs\./)
+      .toHaveText(/# Probitas/);
   })
   .step("serves human homepage HTML", async ({ resources }) => {
     const res = await resources.http.get("/", {
@@ -50,24 +50,24 @@ export default scenario("Probitas docs site health", {
     });
 
     expect(res)
-      .ok()
-      .status(200)
-      .contentType(/text\/html/)
-      .textContains("Probitas - Scenario-based Testing Framework")
-      .textContains(
-        "Scenario-based testing framework designed for API, database, and message queue testing",
+      .toBeSuccessful()
+      .toHaveStatus(200)
+      .toHaveHeader("content-type", /text\/html/)
+      .toHaveText(/Probitas - Scenario-based Testing Framework/)
+      .toHaveText(
+        /Scenario-based testing framework designed for API, database, and message queue testing/,
       )
-      .textContains("AI-Friendly Documentation");
+      .toHaveText(/AI-Friendly Documentation/);
   })
   .step("exposes raw markdown for docs pages", async ({ resources }) => {
     for (const doc of docPages) {
       const res = await resources.http.get(`${doc.path}.md`);
       const heading = docHeadings[doc.path] ?? "# ";
       expect(res)
-        .ok()
-        .status(200)
-        .contentType(/text\/markdown/)
-        .textContains(heading);
+        .toBeSuccessful()
+        .toHaveStatus(200)
+        .toHaveHeader("content-type", /text\/markdown/)
+        .toHaveText(new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     }
   })
   .step("renders docs HTML pages", async ({ resources }) => {
@@ -76,35 +76,39 @@ export default scenario("Probitas docs site health", {
         headers: { accept: "text/html" },
       });
       expect(res)
-        .ok()
-        .status(200)
-        .contentType(/text\/html/)
-        .textContains(doc.label);
+        .toBeSuccessful()
+        .toHaveStatus(200)
+        .toHaveHeader("content-type", /text\/html/)
+        .toHaveText(
+          new RegExp(doc.label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+        );
     }
   })
   .step("provides LLM endpoints", async ({ resources }) => {
     const indexRes = await resources.http.get("/llms.txt");
     expect(indexRes)
-      .ok()
-      .status(200)
-      .contentType(/text\/markdown/)
-      .textContains("## Documentation")
-      .textContains("## API Reference");
+      .toBeSuccessful()
+      .toHaveStatus(200)
+      .toHaveHeader("content-type", /text\/markdown/)
+      .toHaveText(/## Documentation/)
+      .toHaveText(/## API Reference/);
   })
   .step("renders API index and package JSON", async ({ resources }) => {
     const indexRes = await resources.http.get("/api", {
       headers: { accept: "text/html" },
     });
-    expect(indexRes).ok().status(200).textContains("API Reference");
+    expect(indexRes).toBeSuccessful().toHaveStatus(200).toHaveText(
+      /API Reference/,
+    );
 
     const packages = await getPackageList();
     for (const pkg of packages) {
       const res = await resources.http.get(`/api/${pkg.name}.json`);
       expect(res)
-        .ok()
-        .status(200)
-        .contentType(/application\/json/)
-        .dataContains({ name: pkg.name, specifier: pkg.specifier });
+        .toBeSuccessful()
+        .toHaveStatus(200)
+        .toHaveHeader("content-type", /application\/json/)
+        .toHaveContentContaining({ name: pkg.name, specifier: pkg.specifier });
     }
   })
   .step("renders API markdown endpoints", async ({ resources }) => {
@@ -112,14 +116,19 @@ export default scenario("Probitas docs site health", {
     for (const pkg of packages) {
       const res = await resources.http.get(`/api/${pkg.name}.md`);
       expect(res)
-        .ok()
-        .status(200)
-        .contentType(/text\/markdown/)
-        .textContains(pkg.specifier);
+        .toBeSuccessful()
+        .toHaveStatus(200)
+        .toHaveHeader("content-type", /text\/markdown/)
+        .toHaveText(
+          new RegExp(pkg.specifier.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+        );
     }
   })
   .step("serves static assets", async ({ resources }) => {
     const res = await resources.http.get("/static/style.css");
-    expect(res).ok().status(200).contentType(/text\/css/);
+    expect(res).toBeSuccessful().toHaveStatus(200).toHaveHeader(
+      "content-type",
+      /text\/css/,
+    );
   })
   .build();

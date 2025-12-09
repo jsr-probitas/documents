@@ -30,7 +30,7 @@ export default scenario("User API CRUD", {
   .step("Get user", async (ctx) => {
     const { http } = ctx.resources;
     const res = await http.get("/users/test-user");
-    expect(res).status(200);
+    expect(res).toHaveStatus(200);
     return res.json();
   })
   .build();
@@ -395,7 +395,7 @@ options.
 ```typescript
 .step("Flaky operation", async (ctx) => {
   const res = await http.get("/sometimes-fails");
-  expect(res).ok();
+  expect(res).toBeSuccessful();
   return res.json();
 }, {
   retry: { maxAttempts: 3, backoff: "exponential" }
@@ -422,28 +422,35 @@ export default scenario("User CRUD API", { tags: ["api", "integration"] })
       name: "Alice",
       email: "alice@example.com",
     });
-    expect(res).ok().status(201).dataContains({ name: "Alice" });
+    expect(res).toBeSuccessful().toHaveStatus(201).toHaveContentContaining({
+      name: "Alice",
+    });
     return res.json<{ id: number }>();
   })
   .step("Get user", async (ctx) => {
     const { http } = ctx.resources;
     const { id } = ctx.previous;
     const res = await http.get(`/users/${id}`);
-    expect(res).ok().status(200).dataContains({ id, name: "Alice" });
+    expect(res).toBeSuccessful().toHaveStatus(200).toHaveContentContaining({
+      id,
+      name: "Alice",
+    });
     return res.json();
   })
   .step("Update user", async (ctx) => {
     const { http } = ctx.resources;
     const { id } = ctx.previous;
     const res = await http.patch(`/users/${id}`, { name: "Bob" });
-    expect(res).ok().status(200).dataContains({ name: "Bob" });
+    expect(res).toBeSuccessful().toHaveStatus(200).toHaveContentContaining({
+      name: "Bob",
+    });
     return { id };
   })
   .step("Delete user", async (ctx) => {
     const { http } = ctx.resources;
     const { id } = ctx.previous;
     const res = await http.delete(`/users/${id}`);
-    expect(res).ok().status(204);
+    expect(res).toBeSuccessful().toHaveStatus(204);
   })
   .build();
 ```
@@ -497,7 +504,9 @@ export default scenario("Database Transaction", { tags: ["db", "postgres"] })
       "SELECT name FROM users WHERE id = $1",
       [id],
     );
-    expect(result).ok().count(1).dataContains({ name: "Alice" });
+    expect(result).toBeSuccessful().toHaveRowCount(1).toHaveContentContaining({
+      name: "Alice",
+    });
   })
   .build();
 ```
@@ -519,7 +528,7 @@ export default scenario("gRPC Echo Service", { tags: ["grpc"] })
     const res = await grpc.call("echo.EchoService", "Echo", {
       message: "Hello",
     });
-    expect(res).ok().dataContains({ message: "Hello" });
+    expect(res).toBeSuccessful().toHaveContentContaining({ message: "Hello" });
     return res.data();
   })
   .step("Server streaming", async (ctx) => {
@@ -530,7 +539,7 @@ export default scenario("gRPC Echo Service", { tags: ["grpc"] })
         count: 3,
       })
     ) {
-      expect(res).ok();
+      expect(res).toBeSuccessful();
       messages.push(res.data());
     }
     return messages;
@@ -583,7 +592,7 @@ export default scenario("Full Stack Test", {
   .step("Create via API", async (ctx) => {
     const { http } = ctx.resources;
     const res = await http.post("/items", { name: "Test Item" });
-    expect(res).ok().status(201);
+    expect(res).toBeSuccessful().toHaveStatus(201);
     return res.json<{ id: number }>();
   })
   .step("Verify in database", async (ctx) => {
@@ -593,7 +602,9 @@ export default scenario("Full Stack Test", {
       "SELECT * FROM items WHERE id = $1",
       [id],
     );
-    expect(result).ok().count(1).dataContains({ name: "Test Item" });
+    expect(result).toBeSuccessful().toHaveRowCount(1).toHaveContentContaining({
+      name: "Test Item",
+    });
   })
   .build();
 ```

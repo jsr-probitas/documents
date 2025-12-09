@@ -12,7 +12,7 @@ other backend services.
   message queues with unified APIs
 - **Type-safe**: Full type inference through the builder chain
 - **Fluent assertions**: Natural syntax like
-  `expect(result).ok().dataContains({...})`
+  `expect(result).toBeSuccessful().toHaveContentContaining({...})`
 
 ## Installation
 
@@ -72,9 +72,9 @@ export default scenario("User API Test")
     const res = await http.get("/users/1");
 
     expect(res)
-      .ok()
-      .status(200)
-      .dataContains({ id: 1 });
+      .toBeSuccessful()
+      .toHaveStatus(200)
+      .toHaveContentContaining({ id: 1 });
   })
   .build();
 ```
@@ -183,13 +183,20 @@ The `expect()` function auto-dispatches based on result type:
 
 ```typescript
 // HTTP response
-expect(httpResponse).ok().status(200).dataContains({ id: 1 });
+expect(httpResponse)
+  .toBeSuccessful()
+  .toHaveStatus(200)
+  .toHaveContentContaining({ id: 1 });
 
 // SQL result
-expect(sqlResult).count(1).dataContains({ name: "Alice" });
+expect(sqlResult)
+  .toHaveRowCount(1)
+  .toHaveContentContaining({ name: "Alice" });
 
 // gRPC response
-expect(grpcResponse).ok().dataContains({ id: "123" });
+expect(grpcResponse)
+  .toBeSuccessful()
+  .toHaveContentContaining({ id: "123" });
 ```
 
 ## Included Utilities

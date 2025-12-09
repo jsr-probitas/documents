@@ -19,14 +19,14 @@ export default scenario("Redis Cache Test", {
     await redis.set(key, "hello world");
     const res = await redis.get(key);
 
-    expect(res).ok().value("hello world");
+    expect(res).toBeSuccessful().toHaveContent("hello world");
   })
   .step("INCR counter", async (ctx) => {
     const { redis } = ctx.resources;
     await redis.set("test:counter", "0");
     const res = await redis.incr("test:counter");
 
-    expect(res).ok().count(1);
+    expect(res).toBeSuccessful().toHaveContent(1);
 
     // Cleanup
     await redis.del("test:counter");

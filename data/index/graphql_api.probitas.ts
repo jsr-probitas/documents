@@ -16,8 +16,8 @@ export default scenario("GraphQL API Test", {
     `);
 
     expect(res)
-      .ok()
-      .dataContains({ echo: "Hello GraphQL" });
+      .toBeSuccessful()
+      .toHaveContentContaining({ echo: "Hello GraphQL" });
   })
   .step("echo - with variables", async (ctx) => {
     const { gql } = ctx.resources;
@@ -31,8 +31,8 @@ export default scenario("GraphQL API Test", {
     );
 
     expect(res)
-      .ok()
-      .dataContains({ echo: "variable message" });
+      .toBeSuccessful()
+      .toHaveContentContaining({ echo: "variable message" });
   })
   .step("createMessage - mutation", async (ctx) => {
     const { gql } = ctx.resources;
@@ -45,6 +45,6 @@ export default scenario("GraphQL API Test", {
       }
     `);
 
-    expect(res).ok();
+    expect(res).toBeSuccessful();
   })
   .build();
