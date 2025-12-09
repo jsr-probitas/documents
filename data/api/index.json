@@ -3,7 +3,7 @@
     {
       "name": "builder",
       "specifier": "@probitas/builder",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "exportCount": 4,
       "counts": {
         "classes": 0,
@@ -17,12 +17,12 @@
     {
       "name": "client",
       "specifier": "@probitas/client",
-      "version": "0.1.1",
-      "exportCount": 9,
+      "version": "0.2.0",
+      "exportCount": 7,
       "counts": {
         "classes": 4,
         "interfaces": 3,
-        "functions": 2,
+        "functions": 0,
         "types": 0,
         "variables": 0,
         "enums": 0
@@ -31,12 +31,12 @@
     {
       "name": "client-connectrpc",
       "specifier": "@probitas/client-connectrpc",
-      "version": "0.2.1",
-      "exportCount": 32,
+      "version": "0.3.0",
+      "exportCount": 30,
       "counts": {
         "classes": 8,
-        "interfaces": 14,
-        "functions": 5,
+        "interfaces": 13,
+        "functions": 4,
         "types": 4,
         "variables": 1,
         "enums": 0
@@ -45,13 +45,13 @@
     {
       "name": "client-deno-kv",
       "specifier": "@probitas/client-deno-kv",
-      "version": "0.1.1",
-      "exportCount": 26,
+      "version": "0.2.0",
+      "exportCount": 19,
       "counts": {
         "classes": 4,
-        "interfaces": 17,
-        "functions": 3,
-        "types": 2,
+        "interfaces": 12,
+        "functions": 2,
+        "types": 1,
         "variables": 0,
         "enums": 0
       }
@@ -59,12 +59,12 @@
     {
       "name": "client-graphql",
       "specifier": "@probitas/client-graphql",
-      "version": "0.1.1",
-      "exportCount": 17,
+      "version": "0.2.0",
+      "exportCount": 15,
       "counts": {
         "classes": 4,
-        "interfaces": 9,
-        "functions": 3,
+        "interfaces": 8,
+        "functions": 2,
         "types": 0,
         "variables": 1,
         "enums": 0
@@ -73,12 +73,12 @@
     {
       "name": "client-grpc",
       "specifier": "@probitas/client-grpc",
-      "version": "0.2.1",
-      "exportCount": 26,
+      "version": "0.3.0",
+      "exportCount": 24,
       "counts": {
         "classes": 7,
-        "interfaces": 12,
-        "functions": 4,
+        "interfaces": 11,
+        "functions": 3,
         "types": 2,
         "variables": 1,
         "enums": 0
@@ -87,12 +87,12 @@
     {
       "name": "client-http",
       "specifier": "@probitas/client-http",
-      "version": "0.1.1",
-      "exportCount": 22,
+      "version": "0.2.0",
+      "exportCount": 20,
       "counts": {
         "classes": 8,
-        "interfaces": 8,
-        "functions": 3,
+        "interfaces": 7,
+        "functions": 2,
         "types": 3,
         "variables": 0,
         "enums": 0
@@ -101,13 +101,13 @@
     {
       "name": "client-mongodb",
       "specifier": "@probitas/client-mongodb",
-      "version": "0.2.1",
-      "exportCount": 37,
+      "version": "0.3.0",
+      "exportCount": 29,
       "counts": {
         "classes": 7,
-        "interfaces": 22,
-        "functions": 3,
-        "types": 5,
+        "interfaces": 16,
+        "functions": 2,
+        "types": 4,
         "variables": 0,
         "enums": 0
       }
@@ -115,13 +115,13 @@
     {
       "name": "client-rabbitmq",
       "specifier": "@probitas/client-rabbitmq",
-      "version": "0.1.1",
-      "exportCount": 36,
+      "version": "0.2.0",
+      "exportCount": 29,
       "counts": {
         "classes": 5,
-        "interfaces": 24,
-        "functions": 2,
-        "types": 5,
+        "interfaces": 21,
+        "functions": 1,
+        "types": 2,
         "variables": 0,
         "enums": 0
       }
@@ -129,13 +129,13 @@
     {
       "name": "client-redis",
       "specifier": "@probitas/client-redis",
-      "version": "0.1.2",
-      "exportCount": 27,
+      "version": "0.2.0",
+      "exportCount": 22,
       "counts": {
         "classes": 4,
-        "interfaces": 19,
-        "functions": 2,
-        "types": 2,
+        "interfaces": 16,
+        "functions": 1,
+        "types": 1,
         "variables": 0,
         "enums": 0
       }
@@ -143,12 +143,12 @@
     {
       "name": "client-sql",
       "specifier": "@probitas/client-sql",
-      "version": "0.1.1",
-      "exportCount": 15,
+      "version": "0.2.0",
+      "exportCount": 13,
       "counts": {
         "classes": 6,
-        "interfaces": 6,
-        "functions": 1,
+        "interfaces": 5,
+        "functions": 0,
         "types": 2,
         "variables": 0,
         "enums": 0
@@ -157,7 +157,7 @@
     {
       "name": "client-sql-duckdb",
       "specifier": "@probitas/client-sql-duckdb",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "exportCount": 26,
       "counts": {
         "classes": 10,
@@ -171,7 +171,7 @@
     {
       "name": "client-sql-mysql",
       "specifier": "@probitas/client-sql-mysql",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "exportCount": 29,
       "counts": {
         "classes": 10,
@@ -185,12 +185,12 @@
     {
       "name": "client-sql-postgres",
       "specifier": "@probitas/client-sql-postgres",
-      "version": "0.1.1",
-      "exportCount": 24,
+      "version": "0.2.0",
+      "exportCount": 22,
       "counts": {
         "classes": 6,
-        "interfaces": 13,
-        "functions": 3,
+        "interfaces": 12,
+        "functions": 2,
         "types": 2,
         "variables": 0,
         "enums": 0
@@ -199,7 +199,7 @@
     {
       "name": "client-sql-sqlite",
       "specifier": "@probitas/client-sql-sqlite",
-      "version": "0.1.1",
+      "version": "0.2.0",
       "exportCount": 28,
       "counts": {
         "classes": 11,
@@ -213,13 +213,13 @@
     {
       "name": "client-sqs",
       "specifier": "@probitas/client-sqs",
-      "version": "0.1.1",
-      "exportCount": 41,
+      "version": "0.2.0",
+      "exportCount": 31,
       "counts": {
         "classes": 7,
-        "interfaces": 28,
-        "functions": 4,
-        "types": 2,
+        "interfaces": 21,
+        "functions": 2,
+        "types": 1,
         "variables": 0,
         "enums": 0
       }
@@ -227,7 +227,7 @@
     {
       "name": "discover",
       "specifier": "@probitas/discover",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "exportCount": 2,
       "counts": {
         "classes": 0,
@@ -239,9 +239,23 @@
       }
     },
     {
+      "name": "expect",
+      "specifier": "@probitas/expect",
+      "version": "0.1.0",
+      "exportCount": 41,
+      "counts": {
+        "classes": 1,
+        "interfaces": 5,
+        "functions": 29,
+        "types": 5,
+        "variables": 0,
+        "enums": 0
+      }
+    },
+    {
       "name": "logger",
       "specifier": "@probitas/logger",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "exportCount": 5,
       "counts": {
         "classes": 0,
@@ -255,11 +269,11 @@
     {
       "name": "probitas",
       "specifier": "@probitas/probitas",
-      "version": "0.3.5",
-      "exportCount": 89,
+      "version": "0.4.0",
+      "exportCount": 88,
       "counts": {
         "classes": 8,
-        "interfaces": 14,
+        "interfaces": 13,
         "functions": 48,
         "types": 15,
         "variables": 3,
@@ -269,7 +283,7 @@
     {
       "name": "reporter",
       "specifier": "@probitas/reporter",
-      "version": "0.2.6",
+      "version": "0.3.2",
       "exportCount": 14,
       "counts": {
         "classes": 4,
@@ -283,7 +297,7 @@
     {
       "name": "runner",
       "specifier": "@probitas/runner",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "exportCount": 9,
       "counts": {
         "classes": 2,
@@ -297,7 +311,7 @@
     {
       "name": "scenario",
       "specifier": "@probitas/scenario",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "exportCount": 17,
       "counts": {
         "classes": 0,
@@ -309,5 +323,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T00:26:36.120Z"
+  "generatedAt": "2025-12-09T20:05:17.203Z"
 }
