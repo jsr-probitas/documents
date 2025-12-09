@@ -37,8 +37,8 @@ export default scenario("User API Integration Test", {
     const res = await http.get(`/users/${user.id}`);
 
     expect(res)
-      .ok()
-      .status(200)
-      .dataContains({ id: user.id, name: user.name });
+      .toBeSuccessful()
+      .toHaveStatus(200)
+      .toHaveContentContaining({ id: user.id, name: user.name });
   })
   .build();

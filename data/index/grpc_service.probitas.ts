@@ -14,8 +14,8 @@ export default scenario("gRPC Service Test", {
     });
 
     expect(res)
-      .ok()
-      .dataContains({ message: "Hello from probitas" });
+      .toBeSuccessful()
+      .toHaveContentContaining({ message: "Hello from probitas" });
   })
   .step("EchoWithDelay - delayed response", async (ctx) => {
     const { grpc } = ctx.resources;
@@ -25,8 +25,8 @@ export default scenario("gRPC Service Test", {
     });
 
     expect(res)
-      .ok()
-      .dataContains({ message: "delayed" })
-      .durationLessThan(5000);
+      .toBeSuccessful()
+      .toHaveContentContaining({ message: "delayed" })
+      .toHaveDurationLessThan(5000);
   })
   .build();
