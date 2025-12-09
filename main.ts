@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
+import { ssgParams } from "hono/ssg";
 import { docPages } from "./data/docs.ts";
 import type { PackageDoc } from "./lib/api-docs.ts";
 import { generateApiMarkdown } from "./lib/api-markdown.ts";
@@ -8,35 +9,41 @@ import { ApiIndexPage, PackagePage } from "./templates/api/ApiPage.tsx";
 import { MarkdownDocFromFile } from "./templates/docs/MarkdownDoc.tsx";
 import { HomePage } from "./templates/home.tsx";
 
+/** Get list of API package names for SSG */
+async function getApiPackageNames(): Promise<string[]> {
+  const indexPath = new URL("./data/api/index.json", import.meta.url);
+  const content = await Deno.readTextFile(indexPath);
+  const index = JSON.parse(content);
+  return index.packages.map((p: { name: string }) => p.name);
+}
+
 const app = new Hono();
 
 app.use("/static/*", serveStatic({ root: "./" }));
 
-// Home page
+// Home page (HTML)
 app.get("/", async (c) => {
-  const accept = (c.req.header("accept") ?? "").toLowerCase();
-  const human = c.req.query("human");
-
-  if (human !== "1" && !accept.includes("text/html")) {
-    const content = await Deno.readTextFile(
-      new URL("./docs/overview.md", import.meta.url),
-    );
-    const modified = [
-      "*".repeat(80),
-      "",
-      "This is a Markdown page for LLMs. If you are LLMs, read this page.",
-      "If you are human and want to visit Web page, add ?human=1 to the URL.",
-      "",
-      "*".repeat(80),
-      "",
-      content,
-    ].join("\n");
-    return c.text(modified, 200, {
-      "Content-Type": "text/markdown; charset=utf-8",
-    });
-  }
-
   return c.html(await HomePage());
+});
+
+// Home page markdown for LLMs (SSG generates /index.md)
+app.get("/index.md", async (c) => {
+  const content = await Deno.readTextFile(
+    new URL("./docs/overview.md", import.meta.url),
+  );
+  const modified = [
+    "*".repeat(80),
+    "",
+    "This is a Markdown page for LLMs. If you are LLMs, read this page.",
+    "If you are human and want to visit Web page, visit /",
+    "",
+    "*".repeat(80),
+    "",
+    content,
+  ].join("\n");
+  return c.text(modified, 200, {
+    "Content-Type": "text/markdown; charset=utf-8",
+  });
 });
 
 // LLM-friendly endpoints (llms.txt standard)
@@ -58,8 +65,11 @@ for (const doc of docPages) {
     return c.html(page);
   });
 
-  // Raw markdown endpoint (append .md to get source)
-  app.get(`${doc.path}.md`, async (c) => {
+  // Raw markdown endpoint: /docs/ → /docs/index.md
+  const mdPath = doc.path.endsWith("/")
+    ? `${doc.path}index.md`
+    : `${doc.path}.md`;
+  app.get(mdPath, async (c) => {
     const content = await Deno.readTextFile(doc.file);
     return c.text(content, 200, {
       "Content-Type": "text/markdown; charset=utf-8",
@@ -68,16 +78,32 @@ for (const doc of docPages) {
 }
 
 // API Reference pages
-app.get("/api", async (c) => {
+app.get("/api/", async (c) => {
   return c.html(await ApiIndexPage());
 });
 
-app.get("/api/:package", async (c) => {
-  const param = c.req.param("package");
+app.get(
+  "/api/:package/",
+  // SSG: Generate static pages for all packages (HTML)
+  ssgParams(async () => {
+    const packages = await getApiPackageNames();
+    return packages.map((name) => ({ package: name }));
+  }),
+  async (c) => {
+    const packageName = c.req.param("package");
+    return c.html(await PackagePage({ packageName }));
+  },
+);
 
-  // Check if requesting JSON
-  if (param.endsWith(".json")) {
-    const packageName = param.slice(0, -5); // Remove .json suffix
+// API JSON endpoints: /api/builder.json → /api/builder/index.json
+app.get(
+  "/api/:package/index.json",
+  ssgParams(async () => {
+    const packages = await getApiPackageNames();
+    return packages.map((name) => ({ package: name }));
+  }),
+  async (c) => {
+    const packageName = c.req.param("package");
     try {
       const jsonPath = new URL(
         `./data/api/${packageName}.json`,
@@ -90,11 +116,18 @@ app.get("/api/:package", async (c) => {
     } catch {
       return c.text("Not found", 404);
     }
-  }
+  },
+);
 
-  // Check if requesting Markdown
-  if (param.endsWith(".md")) {
-    const packageName = param.slice(0, -3); // Remove .md suffix
+// API Markdown endpoints: /api/builder.md → /api/builder/index.md
+app.get(
+  "/api/:package/index.md",
+  ssgParams(async () => {
+    const packages = await getApiPackageNames();
+    return packages.map((name) => ({ package: name }));
+  }),
+  async (c) => {
+    const packageName = c.req.param("package");
     try {
       // Load current package
       const jsonPath = new URL(
@@ -130,10 +163,13 @@ app.get("/api/:package", async (c) => {
     } catch {
       return c.text("Not found", 404);
     }
-  }
+  },
+);
 
-  // Otherwise render HTML page
-  return c.html(await PackagePage({ packageName: param }));
-});
+// Export app for SSG build
+export default app;
 
-Deno.serve(app.fetch);
+// Start server when running directly
+if (import.meta.main) {
+  Deno.serve(app.fetch);
+}

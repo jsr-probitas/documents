@@ -17,7 +17,7 @@ export interface DocPage {
 
 export const docPages: DocPage[] = [
   {
-    path: "/docs",
+    path: "/docs/",
     file: "./docs/overview.md",
     title: "Overview",
     label: "Overview",
@@ -25,7 +25,7 @@ export const docPages: DocPage[] = [
       "Introduction to Probitas, installation guide, quick start, and core concepts",
   },
   {
-    path: "/docs/scenario",
+    path: "/docs/scenario/",
     file: "./docs/scenario.md",
     title: "Scenario",
     label: "Scenario",
@@ -33,7 +33,7 @@ export const docPages: DocPage[] = [
       "How to write test scenarios with resources, setup hooks, and steps",
   },
   {
-    path: "/docs/client",
+    path: "/docs/client/",
     file: "./docs/client.md",
     title: "Client",
     label: "Client",
@@ -41,7 +41,7 @@ export const docPages: DocPage[] = [
       "Client API reference for HTTP, SQL, gRPC, GraphQL, Redis, MongoDB, and more",
   },
   {
-    path: "/docs/configuration",
+    path: "/docs/configuration/",
     file: "./docs/configuration.md",
     title: "Configuration",
     label: "Configuration",

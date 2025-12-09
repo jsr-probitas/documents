@@ -34,8 +34,10 @@ export function MarkdownDoc(
   // Parse markdown to HTML
   const html = parseMarkdown(content);
 
-  // Alternate markdown URL (append .md to path)
-  const alternateMarkdown = markdownPath ? `${markdownPath}.md` : undefined;
+  // Alternate markdown URL (path ends with /, so append index.md)
+  const alternateMarkdown = markdownPath
+    ? `${markdownPath}index.md`
+    : undefined;
 
   return (
     <Layout

@@ -164,9 +164,9 @@ export async function PackagePage({ packageName }: PackagePageProps) {
       title={`${doc.specifier} - API Reference - Probitas Documentation`}
       description={doc.moduleDoc ??
         `API documentation for ${doc.specifier}`}
-      pagePath={`/api/${packageName}`}
-      alternateJson={`/api/${packageName}.json`}
-      alternateMarkdown={`/api/${packageName}.md`}
+      pagePath={`/api/${packageName}/`}
+      alternateJson={`/api/${packageName}/index.json`}
+      alternateMarkdown={`/api/${packageName}/index.md`}
     >
       <div class="api-layout">
         <aside class="api-sidebar">
@@ -180,14 +180,14 @@ export async function PackagePage({ packageName }: PackagePageProps) {
                   <h1>{doc.specifier}</h1>
                   <div class="api-source-links">
                     <a
-                      href={`/api/${packageName}.md`}
+                      href={`/api/${packageName}/index.md`}
                       class="source-link md-source-link"
                       title="View Markdown"
                     >
                       <i class="ti ti-markdown" />
                     </a>
                     <a
-                      href={`/api/${packageName}.json`}
+                      href={`/api/${packageName}/index.json`}
                       class="source-link json-source-link"
                       title="View JSON data"
                     >
@@ -315,7 +315,7 @@ function NotFoundPage({ packageName }: NotFoundPageProps) {
               The package <code>@probitas/{packageName}</code> was not found.
             </p>
             <p>
-              <a href="/api">← Back to API Reference</a>
+              <a href="/api/">← Back to API Reference</a>
             </p>
           </article>
         </main>

@@ -2,3 +2,4 @@
 .coverage
 .worktrees
 .playwright-mcp
+dist/

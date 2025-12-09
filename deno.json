@@ -6,6 +6,8 @@
   "tasks": {
     "dev": "deno run --allow-net --allow-read --watch main.ts",
     "start": "deno run --allow-net --allow-read main.ts",
+    "build": "deno run --allow-net --allow-read --allow-write scripts/build.ts",
+    "preview": "deno run --allow-net --allow-read jsr:@std/http/file-server ./dist",
     "check": "deno check main.ts templates/**/*.tsx data/*.ts lib/*.ts scripts/*.ts",
     "verify": "deno fmt && deno lint && deno task check && deno task test",
     "test": "deno test --allow-net --allow-read",

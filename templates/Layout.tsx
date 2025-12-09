@@ -139,7 +139,7 @@ function Header({ showLogo }: { showLogo: boolean }) {
       <nav class="header-nav">
         {docPages.map((doc) => <a key={doc.path} href={doc.path}>{doc.label}
         </a>)}
-        <a href="/api">API</a>
+        <a href="/api/">API</a>
       </nav>
       <div class="header-right">
         <button

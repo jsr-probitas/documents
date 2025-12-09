@@ -44,11 +44,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765128148,
-        "narHash": "sha256-tw/ylS9HBNqrUxwPsy+m1UNfEFcZoqWPiK6DExPvNns=",
+        "lastModified": 1765236706,
+        "narHash": "sha256-BIv1ArvSPJ9LLpyKdjc7gPQ0LJZmZdgAx690R88+2As=",
         "owner": "jsr-probitas",
         "repo": "probitas",
-        "rev": "65da2d072a4122a9e03e93827dc09dfe79985164",
+        "rev": "6c3c6043346d60dd02b44077c9d1a4651f29bb51",
         "type": "github"
       },
       "original": {

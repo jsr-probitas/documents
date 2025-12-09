@@ -81,10 +81,10 @@ function Hero({ sampleCodes }: { sampleCodes: SampleCode[] }) {
         queue testing
       </p>
       <div class="cta-group">
-        <a href="/docs" class="btn btn-primary">
+        <a href="/docs/" class="btn btn-primary">
           Get Started
         </a>
-        <a href="/docs/scenario" class="btn btn-secondary">
+        <a href="/docs/scenario/" class="btn btn-secondary">
           Learn Scenarios
         </a>
       </div>
@@ -194,10 +194,10 @@ function AiFriendlySection() {
           </div>
           <p>
             Every documentation page has a <code>.md</code> endpoint (e.g.,{" "}
-            <code>/docs.md</code>) returning clean Markdown source.
+            <code>/docs/index.md</code>) returning clean Markdown source.
           </p>
-          <a href="/docs.md" class="ai-friendly-link">
-            Example: /docs.md <i class="ti ti-arrow-right" />
+          <a href="/docs/index.md" class="ai-friendly-link">
+            Example: /docs/index.md <i class="ti ti-arrow-right" />
           </a>
         </div>
       </div>
