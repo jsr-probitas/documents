@@ -463,18 +463,18 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 72,
         "col": 0,
-        "byteIndex": 2504
+        "byteIndex": 2579
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Unified expect function that dispatches to the appropriate expectXXXXX function\nbased on the type of the input object.\n",
+        "doc": "Unified expect function that dispatches to the appropriate expectation function\nbased on the type of the input object.\n",
         "tags": [
           {
             "kind": "example",
-            "doc": "```ts\n// HTTP response\nconst httpRes = await http.get(\"/users\");\nexpect(httpRes).ok().dataContains({ users: [] });\n\n// GraphQL response\nconst gqlRes = await graphql.query(\"{ users { id name } }\");\nexpect(gqlRes).ok().hasContent();\n\n// SQL query result\nconst sqlRes = await db.query(\"SELECT * FROM users\");\nexpect(sqlRes).ok().count(10);\n\n// MongoDB result\nconst mongoRes = await mongo.find({ status: \"active\" });\nexpect(mongoRes).ok().count(10);\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\n```"
+            "doc": "```ts\n// HTTP response\nconst httpRes = await http.get(\"/users\");\nexpect(httpRes).toBeSuccessful().toHaveContentContaining({ users: [] });\n\n// GraphQL response\nconst gqlRes = await graphql.query(\"{ users { id name } }\");\nexpect(gqlRes).toBeSuccessful().toHaveContent();\n\n// SQL query result\nconst sqlRes = await db.query(\"SELECT * FROM users\");\nexpect(sqlRes).toBeSuccessful().toHaveCount(10);\n\n// MongoDB result\nconst mongoRes = await mongo.find({ status: \"active\" });\nexpect(mongoRes).toBeSuccessful().toHaveLength(10);\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\n```"
           }
         ]
       },
@@ -530,10 +530,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 75,
         "col": 0,
-        "byteIndex": 2606
+        "byteIndex": 2681
       },
       "declarationKind": "export",
       "kind": "function",
@@ -588,10 +588,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 78,
         "col": 0,
-        "byteIndex": 2720
+        "byteIndex": 2795
       },
       "declarationKind": "export",
       "kind": "function",
@@ -646,10 +646,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 81,
         "col": 0,
-        "byteIndex": 2828
+        "byteIndex": 2903
       },
       "declarationKind": "export",
       "kind": "function",
@@ -716,10 +716,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 84,
         "col": 0,
-        "byteIndex": 2942
+        "byteIndex": 3017
       },
       "declarationKind": "export",
       "kind": "function",
@@ -774,10 +774,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 87,
         "col": 0,
-        "byteIndex": 3047
+        "byteIndex": 3122
       },
       "declarationKind": "export",
       "kind": "function",
@@ -832,10 +832,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 90,
         "col": 0,
-        "byteIndex": 3150
+        "byteIndex": 3225
       },
       "declarationKind": "export",
       "kind": "function",
@@ -890,10 +890,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 93,
         "col": 0,
-        "byteIndex": 3253
+        "byteIndex": 3328
       },
       "declarationKind": "export",
       "kind": "function",
@@ -948,10 +948,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 96,
         "col": 0,
-        "byteIndex": 3362
+        "byteIndex": 3437
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1006,10 +1006,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 99,
         "col": 0,
-        "byteIndex": 3461
+        "byteIndex": 3536
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1043,10 +1043,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.0/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.1.1/expect.ts",
         "line": 100,
         "col": 0,
-        "byteIndex": 3522
+        "byteIndex": 3597
       },
       "declarationKind": "export",
       "kind": "function",
@@ -12656,5 +12656,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T20:05:16.153Z"
+  "generatedAt": "2025-12-09T20:32:21.015Z"
 }
