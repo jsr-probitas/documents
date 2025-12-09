@@ -100,21 +100,28 @@ result of the previous step.
 })
 ```
 
-### `.resource(name, factory)`
+### `.resource(name, factory, options?)`
 
 Registers a resource with lifecycle management. Resources are created before
 steps run and automatically disposed after the scenario completes.
 
-| Parameter | Type         | Description                                           |
-| --------- | ------------ | ----------------------------------------------------- |
-| `name`    | `string`     | Name to access this resource via `ctx.resources.name` |
-| `factory` | `(ctx) => T` | Function that creates and returns the resource        |
+| Parameter  | Type         | Description                                                                            |
+| ---------- | ------------ | -------------------------------------------------------------------------------------- |
+| `name`     | `string`     | Name to access this resource via `ctx.resources.name`                                  |
+| `factory`  | `(ctx) => T` | Function that creates and returns the resource                                         |
+| `options?` | `object`     | Per-resource timeout and retry (see [Configuration](/docs/configuration#step-options)) |
 
 ```typescript
 .resource("http", () =>
   client.http.createHttpClient({
     url: "http://localhost:8080",
   })
+)
+
+// With options
+.resource("db", () =>
+  client.sql.postgres.createPostgresClient({ ... }),
+  { timeout: 10000 }
 )
 ```
 
@@ -125,24 +132,32 @@ steps run and automatically disposed after the scenario completes.
 - Resources are available to subsequent steps, setups, and other resources
 - Disposal happens in reverse order after scenario completion
 
-### `.setup(fn)`
+### `.setup(name?, fn, options?)`
 
 Registers a setup hook that runs before steps. Can return a cleanup function
 that runs after all steps complete (even on failure).
 
-| Parameter | Type                | Description                                                             |
-| --------- | ------------------- | ----------------------------------------------------------------------- |
-| `fn`      | `(ctx) => Cleanup?` | Setup function that optionally returns a cleanup function or Disposable |
+| Parameter  | Type                | Description                                                                         |
+| ---------- | ------------------- | ----------------------------------------------------------------------------------- |
+| `name?`    | `string`            | Optional setup name (auto-generated as "Setup step 1", etc. if omitted)             |
+| `fn`       | `(ctx) => Cleanup?` | Setup function that optionally returns a cleanup function or Disposable             |
+| `options?` | `object`            | Per-setup timeout and retry (see [Configuration](/docs/configuration#step-options)) |
 
 ```typescript
-// Setup with cleanup function
-.setup(async (ctx) => {
+// Named setup with cleanup function
+.setup("Seed test data", async (ctx) => {
   const { db } = ctx.resources;
   await db.query("INSERT INTO test_data ...");
 
   return async () => {
     await db.query("DELETE FROM test_data ...");
   };
+})
+
+// Unnamed setup (auto-named as "Setup step 1", etc.)
+.setup(async (ctx) => {
+  const { db } = ctx.resources;
+  await db.query("INSERT INTO test_data ...");
 })
 
 // Setup with Disposable
@@ -155,10 +170,10 @@ that runs after all steps complete (even on failure).
   };
 })
 
-// Setup without cleanup
-.setup((ctx) => {
-  console.log("Setting up...");
-})
+// Setup with options
+.setup("Long setup", async (ctx) => {
+  await prepareTestEnvironment();
+}, { timeout: 60000 })
 ```
 
 ### `.build()`

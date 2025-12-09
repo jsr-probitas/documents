@@ -171,10 +171,10 @@ A scenario is a complete test case composed of:
 
 ```
 scenario(name, options?)
-  .resource(name, factoryFn)  // Register resources (factory function)
-  .setup(fn)                  // Add setup/cleanup hooks
-  .step(name, fn, options?)   // Define test steps
-  .build()                    // Create immutable definition
+  .resource(name, factoryFn, options?)    // Register resources (factory function)
+  .setup(name?, fn, options?)             // Add setup/cleanup hooks (name optional)
+  .step(name?, fn, options?)              // Define test steps (name optional)
+  .build()                                // Create immutable definition
 ```
 
 ### Expect API
