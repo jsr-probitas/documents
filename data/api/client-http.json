@@ -1,17 +1,17 @@
 {
   "name": "client-http",
   "specifier": "@probitas/client-http",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "moduleDoc": "HTTP client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides an HTTP client designed for integration testing of HTTP APIs.\n\n## Features\n\n- **All HTTP Methods**: Support for GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS\n- **Request Building**: Headers, query parameters, body (JSON, form, multipart)\n- **Response Inspection**: Status codes, headers, cookies, body parsing\n- **Duration Tracking**: Built-in timing for performance monitoring\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-http\n```\n\n## Quick Start\n\n```ts\nimport { createHttpClient } from \"@probitas/client-http\";\n\nconst http = createHttpClient({ url: \"http://localhost:3000\" });\n\n// GET request\nconst res = await http.get(\"/users/123\");\nconsole.log(\"Status:\", res.status);\n\n// Extract typed data\nconst user = res.json<User>();\n\n// POST request\nconst created = await http.post(\"/users\", {\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({ name: \"Jane\" }),\n});\nconsole.log(\"Created:\", created.status);\n\nawait http.close();\n```\n\n## Using with `using` Statement\n\n```ts\nawait using http = createHttpClient({ url: \"http://localhost:3000\" });\n\nconst res = await http.get(\"/health\");\nconsole.log(\"Health:\", res.ok);\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-graphql`](https://jsr.io/@probitas/client-graphql) | GraphQL client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n",
   "exports": [
     {
       "name": "HttpResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
         "line": 9,
         "col": 0,
-        "byteIndex": 301
+        "byteIndex": 276
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -19,7 +19,16 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [
           {
@@ -29,10 +38,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 36,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 41,
               "col": 2,
-              "byteIndex": 961
+              "byteIndex": 1090
             },
             "params": [],
             "optional": false,
@@ -64,10 +73,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 39,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 44,
               "col": 2,
-              "byteIndex": 1043
+              "byteIndex": 1172
             },
             "params": [],
             "optional": false,
@@ -99,10 +108,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 42,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 47,
               "col": 2,
-              "byteIndex": 1111
+              "byteIndex": 1240
             },
             "params": [],
             "optional": false,
@@ -138,10 +147,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 49,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 54,
               "col": 2,
-              "byteIndex": 1290
+              "byteIndex": 1419
             },
             "params": [],
             "optional": false,
@@ -174,19 +183,43 @@
                 }
               }
             ]
+          },
+          {
+            "name": "raw",
+            "jsDoc": {
+              "doc": "Get raw Web standard Response (for streaming or special cases)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1626
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "globalThis.Response",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "globalThis.Response"
+              }
+            },
+            "typeParams": []
           }
         ],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
             "jsDoc": {
-              "doc": "Result type identifier"
+              "doc": "Result kind discriminator.\n\nAlways `\"http\"` for HTTP responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 11,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 16,
               "col": 2,
-              "byteIndex": 367
+              "byteIndex": 496
             },
             "params": [],
             "readonly": true,
@@ -208,10 +241,10 @@
               "doc": "Whether the response was successful (status 200-299)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 16,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 21,
               "col": 2,
-              "byteIndex": 513
+              "byteIndex": 642
             },
             "params": [],
             "readonly": true,
@@ -230,10 +263,10 @@
               "doc": "HTTP status code"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 19,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 24,
               "col": 2,
-              "byteIndex": 564
+              "byteIndex": 693
             },
             "params": [],
             "readonly": true,
@@ -252,10 +285,10 @@
               "doc": "HTTP status text"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 22,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 27,
               "col": 2,
-              "byteIndex": 618
+              "byteIndex": 747
             },
             "params": [],
             "readonly": true,
@@ -274,10 +307,10 @@
               "doc": "Response headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 25,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 30,
               "col": 2,
-              "byteIndex": 676
+              "byteIndex": 805
             },
             "params": [],
             "readonly": true,
@@ -299,10 +332,10 @@
               "doc": "Request URL"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 28,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 33,
               "col": 2,
-              "byteIndex": 727
+              "byteIndex": 856
             },
             "params": [],
             "readonly": true,
@@ -321,10 +354,10 @@
               "doc": "Response body as raw bytes (null if no body)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 33,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 38,
               "col": 2,
-              "byteIndex": 873
+              "byteIndex": 1002
             },
             "params": [],
             "readonly": true,
@@ -357,10 +390,10 @@
               "doc": "Response time in milliseconds"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 54,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 59,
               "col": 2,
-              "byteIndex": 1395
+              "byteIndex": 1524
             },
             "params": [],
             "readonly": true,
@@ -370,31 +403,6 @@
               "repr": "number",
               "kind": "keyword",
               "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "raw",
-            "jsDoc": {
-              "doc": "Raw Web standard Response (for streaming or special cases)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 57,
-              "col": 2,
-              "byteIndex": 1493
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "globalThis.Response",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "globalThis.Response"
-              }
             },
             "typeParams": []
           }
@@ -408,10 +416,10 @@
       "name": "QueryValue",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 63,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 9,
         "col": 0,
-        "byteIndex": 1570
+        "byteIndex": 208
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -447,10 +455,10 @@
       "name": "BodyInit",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 68,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 14,
         "col": 0,
-        "byteIndex": 1653
+        "byteIndex": 291
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -519,10 +527,10 @@
       "name": "RedirectMode",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 81,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 27,
         "col": 0,
-        "byteIndex": 1952
+        "byteIndex": 590
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -567,10 +575,10 @@
       "name": "HttpOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 86,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 32,
         "col": 0,
-        "byteIndex": 2060
+        "byteIndex": 698
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -597,10 +605,10 @@
               "doc": "Query parameters (arrays for multi-value params)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 88,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 34,
               "col": 2,
-              "byteIndex": 2173
+              "byteIndex": 811
             },
             "params": [],
             "readonly": true,
@@ -654,10 +662,10 @@
               "doc": "Additional request headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 91,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 37,
               "col": 2,
-              "byteIndex": 2272
+              "byteIndex": 910
             },
             "params": [],
             "readonly": true,
@@ -696,10 +704,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 97,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 43,
               "col": 2,
-              "byteIndex": 2430
+              "byteIndex": 1068
             },
             "params": [],
             "readonly": true,
@@ -727,10 +735,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 104,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 50,
               "col": 2,
-              "byteIndex": 2666
+              "byteIndex": 1304
             },
             "params": [],
             "readonly": true,
@@ -753,10 +761,10 @@
       "name": "CookieConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 110,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 56,
         "col": 0,
-        "byteIndex": 2744
+        "byteIndex": 1382
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -780,10 +788,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 116,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 62,
               "col": 2,
-              "byteIndex": 2916
+              "byteIndex": 1554
             },
             "params": [],
             "readonly": true,
@@ -802,10 +810,10 @@
               "doc": "Initial cookies to populate the cookie jar."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 121,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 67,
               "col": 2,
-              "byteIndex": 3009
+              "byteIndex": 1647
             },
             "params": [],
             "readonly": true,
@@ -842,10 +850,10 @@
       "name": "HttpConnectionConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 129,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 75,
         "col": 0,
-        "byteIndex": 3162
+        "byteIndex": 1800
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -878,10 +886,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 134,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 80,
               "col": 2,
-              "byteIndex": 3290
+              "byteIndex": 1928
             },
             "params": [],
             "readonly": true,
@@ -923,10 +931,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 140,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 86,
               "col": 2,
-              "byteIndex": 3400
+              "byteIndex": 2038
             },
             "params": [],
             "readonly": true,
@@ -949,10 +957,10 @@
       "name": "HttpClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 146,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 92,
         "col": 0,
-        "byteIndex": 3465
+        "byteIndex": 2103
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -985,10 +993,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 161,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 107,
               "col": 2,
-              "byteIndex": 3843
+              "byteIndex": 2481
             },
             "params": [],
             "readonly": true,
@@ -1021,10 +1029,10 @@
               "doc": "Default headers for all requests"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 164,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 110,
               "col": 2,
-              "byteIndex": 3933
+              "byteIndex": 2571
             },
             "params": [],
             "readonly": true,
@@ -1057,10 +1065,10 @@
               "doc": "Custom fetch implementation (for testing/mocking)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 167,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 113,
               "col": 2,
-              "byteIndex": 4038
+              "byteIndex": 2676
             },
             "params": [],
             "readonly": true,
@@ -1085,10 +1093,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 174,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 120,
               "col": 2,
-              "byteIndex": 4196
+              "byteIndex": 2834
             },
             "params": [],
             "readonly": true,
@@ -1116,10 +1124,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 181,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 127,
               "col": 2,
-              "byteIndex": 4371
+              "byteIndex": 3009
             },
             "params": [],
             "readonly": true,
@@ -1138,10 +1146,10 @@
               "doc": "Cookie handling configuration.\nBy default, the client maintains a cookie jar for automatic\ncookie management across requests.\nSet `cookies: { disabled: true }` to disable."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 189,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 135,
               "col": 2,
-              "byteIndex": 4611
+              "byteIndex": 3249
             },
             "params": [],
             "readonly": true,
@@ -1167,10 +1175,10 @@
       "name": "HttpClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-        "line": 195,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+        "line": 141,
         "col": 0,
-        "byteIndex": 4681
+        "byteIndex": 3319
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1197,10 +1205,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 200,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 146,
               "col": 2,
-              "byteIndex": 4831
+              "byteIndex": 3469
             },
             "params": [
               {
@@ -1254,10 +1262,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 203,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 149,
               "col": 2,
-              "byteIndex": 4926
+              "byteIndex": 3564
             },
             "params": [
               {
@@ -1324,10 +1332,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 210,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 156,
               "col": 2,
-              "byteIndex": 5055
+              "byteIndex": 3693
             },
             "params": [
               {
@@ -1394,10 +1402,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 217,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 163,
               "col": 2,
-              "byteIndex": 5185
+              "byteIndex": 3823
             },
             "params": [
               {
@@ -1464,10 +1472,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 224,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 170,
               "col": 2,
-              "byteIndex": 5318
+              "byteIndex": 3956
             },
             "params": [
               {
@@ -1521,10 +1529,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 227,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 173,
               "col": 2,
-              "byteIndex": 5433
+              "byteIndex": 4071
             },
             "params": [
               {
@@ -1573,10 +1581,10 @@
                           {
                             "name": "body",
                             "location": {
-                              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-                              "line": 230,
+                              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+                              "line": 176,
                               "col": 30,
-                              "byteIndex": 5510
+                              "byteIndex": 4148
                             },
                             "params": [],
                             "computed": false,
@@ -1627,10 +1635,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 237,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 183,
               "col": 2,
-              "byteIndex": 5663
+              "byteIndex": 4301
             },
             "params": [],
             "optional": false,
@@ -1669,10 +1677,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 243,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 189,
               "col": 2,
-              "byteIndex": 5796
+              "byteIndex": 4434
             },
             "params": [
               {
@@ -1711,10 +1719,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 249,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 195,
               "col": 2,
-              "byteIndex": 5937
+              "byteIndex": 4575
             },
             "params": [],
             "optional": false,
@@ -1732,10 +1740,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 252,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 198,
               "col": 2,
-              "byteIndex": 6010
+              "byteIndex": 4648
             },
             "params": [],
             "optional": false,
@@ -1763,10 +1771,10 @@
               "doc": "Client configuration"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/types.ts",
-              "line": 197,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/types.ts",
+              "line": 143,
               "col": 2,
-              "byteIndex": 4767
+              "byteIndex": 3405
             },
             "params": [],
             "readonly": true,
@@ -1792,7 +1800,7 @@
       "name": "HttpErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 7,
         "col": 0,
         "byteIndex": 150
@@ -1822,7 +1830,7 @@
               "doc": "Associated HTTP response"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 9,
               "col": 2,
               "byteIndex": 243
@@ -1851,7 +1859,7 @@
       "name": "HttpError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 15,
         "col": 0,
         "byteIndex": 314
@@ -1914,7 +1922,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 28,
               "col": 2,
               "byteIndex": 652
@@ -1936,7 +1944,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 16,
               "col": 2,
               "byteIndex": 361
@@ -1959,7 +1967,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 409
@@ -1981,7 +1989,7 @@
             "isStatic": false,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 20,
               "col": 2,
               "byteIndex": 480
@@ -2003,7 +2011,7 @@
             "isStatic": false,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 23,
               "col": 2,
               "byteIndex": 534
@@ -2028,7 +2036,7 @@
             "isStatic": false,
             "name": "response",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 26,
               "col": 2,
               "byteIndex": 615
@@ -2047,7 +2055,7 @@
       "name": "HttpBadRequestError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 44,
         "col": 0,
         "byteIndex": 950
@@ -2090,7 +2098,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 49,
               "col": 2,
               "byteIndex": 1147
@@ -2112,7 +2120,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1005
@@ -2135,7 +2143,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 46,
               "col": 2,
               "byteIndex": 1055
@@ -2155,7 +2163,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 47,
               "col": 2,
               "byteIndex": 1098
@@ -2174,7 +2182,7 @@
       "name": "HttpUnauthorizedError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 57,
         "col": 0,
         "byteIndex": 1302
@@ -2217,7 +2225,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 62,
               "col": 2,
               "byteIndex": 1504
@@ -2239,7 +2247,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1359
@@ -2262,7 +2270,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1411
@@ -2282,7 +2290,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 60,
               "col": 2,
               "byteIndex": 1454
@@ -2301,7 +2309,7 @@
       "name": "HttpForbiddenError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 70,
         "col": 0,
         "byteIndex": 1657
@@ -2344,7 +2352,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 75,
               "col": 2,
               "byteIndex": 1850
@@ -2366,7 +2374,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 71,
               "col": 2,
               "byteIndex": 1711
@@ -2389,7 +2397,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 72,
               "col": 2,
               "byteIndex": 1760
@@ -2409,7 +2417,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1803
@@ -2428,7 +2436,7 @@
       "name": "HttpNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 83,
         "col": 0,
         "byteIndex": 2000
@@ -2471,7 +2479,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 88,
               "col": 2,
               "byteIndex": 2191
@@ -2493,7 +2501,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2053
@@ -2516,7 +2524,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 85,
               "col": 2,
               "byteIndex": 2101
@@ -2536,7 +2544,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 86,
               "col": 2,
               "byteIndex": 2144
@@ -2555,7 +2563,7 @@
       "name": "HttpConflictError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 96,
         "col": 0,
         "byteIndex": 2340
@@ -2598,7 +2606,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2530
@@ -2620,7 +2628,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 97,
               "col": 2,
               "byteIndex": 2393
@@ -2643,7 +2651,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 98,
               "col": 2,
               "byteIndex": 2441
@@ -2663,7 +2671,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 99,
               "col": 2,
               "byteIndex": 2484
@@ -2682,7 +2690,7 @@
       "name": "HttpTooManyRequestsError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 109,
         "col": 0,
         "byteIndex": 2687
@@ -2725,7 +2733,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 114,
               "col": 2,
               "byteIndex": 2900
@@ -2747,7 +2755,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 110,
               "col": 2,
               "byteIndex": 2747
@@ -2770,7 +2778,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 111,
               "col": 2,
               "byteIndex": 2802
@@ -2790,7 +2798,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 112,
               "col": 2,
               "byteIndex": 2845
@@ -2809,7 +2817,7 @@
       "name": "HttpInternalServerError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
         "line": 122,
         "col": 0,
         "byteIndex": 3064
@@ -2852,7 +2860,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 127,
               "col": 2,
               "byteIndex": 3279
@@ -2874,7 +2882,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 123,
               "col": 2,
               "byteIndex": 3123
@@ -2897,7 +2905,7 @@
             "isOverride": true,
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 124,
               "col": 2,
               "byteIndex": 3177
@@ -2917,7 +2925,7 @@
             "isOverride": true,
             "name": "statusText",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/errors.ts",
               "line": 125,
               "col": 2,
               "byteIndex": 3220
@@ -2936,7 +2944,7 @@
       "name": "createHttpClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/client.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/client.ts",
         "line": 414,
         "col": 0,
         "byteIndex": 11062
@@ -3007,10 +3015,10 @@
       "name": "createHttpResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.2.0/response.ts",
-        "line": 84,
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+        "line": 150,
         "col": 0,
-        "byteIndex": 2092
+        "byteIndex": 3751
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3067,5 +3075,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T22:09:48.346Z"
+  "generatedAt": "2025-12-12T09:23:52.114Z"
 }

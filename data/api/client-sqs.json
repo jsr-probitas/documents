@@ -1,1821 +1,17 @@
 {
   "name": "client-sqs",
   "specifier": "@probitas/client-sqs",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "moduleDoc": "AWS SQS client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides an AWS SQS client designed for integration testing of message-driven applications using Amazon Simple Queue Service.\n\n## Features\n\n- **Queue Management**: Create, delete, and purge queues\n- **Message Operations**: Send, receive, and delete messages (single and batch)\n- **Message Attributes**: Support for custom message attributes\n- **LocalStack Compatible**: Works with LocalStack for local development\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-sqs\n```\n\n## Quick Start\n\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\", // LocalStack\n  credentials: {\n    accessKeyId: \"test\",\n    secretAccessKey: \"test\",\n  },\n});\n\n// Ensure queue exists\nconst queueResult = await client.ensureQueue(\"test-queue\");\nconst queueUrl = queueResult.queueUrl;\n\n// Send a message\nconst sendResult = await client.send(queueUrl, \"Hello, World!\", {\n  attributes: {\n    type: { dataType: \"String\", stringValue: \"greeting\" },\n  },\n});\nconsole.log(\"Message ID:\", sendResult.messageId);\n\n// Receive messages\nconst receiveResult = await client.receive(queueUrl, {\n  maxMessages: 10,\n  waitTimeSeconds: 5,\n});\nconsole.log(\"Received:\", receiveResult.messages.length);\n\n// Delete message after processing\nfor (const msg of receiveResult.messages) {\n  await client.delete(queueUrl, msg.receiptHandle);\n}\n\nawait client.close();\n```\n\n## Batch Operations\n\n```ts\n// Send batch messages\nawait client.sendBatch(queueUrl, [\n  { body: \"Message 1\", id: \"msg-1\" },\n  { body: \"Message 2\", id: \"msg-2\" },\n  { body: \"Message 3\", id: \"msg-3\" },\n]);\n\n// Delete batch messages\nconst messages = await client.receive(queueUrl, { maxMessages: 10 });\nawait client.deleteBatch(\n  queueUrl,\n  messages.messages.map((m, i) => ({ id: `del-${i}`, receiptHandle: m.receiptHandle }))\n);\n```\n\n## Using with `using` Statement\n\n```ts\nawait using client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n});\n\nconst queue = await client.ensureQueue(\"test\");\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-rabbitmq`](https://jsr.io/@probitas/client-rabbitmq) | RabbitMQ client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [AWS SQS](https://aws.amazon.com/sqs/)\n- [LocalStack](https://localstack.cloud/)\n",
   "exports": [
-    {
-      "name": "SqsConnectionConfig",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 8,
-        "col": 0,
-        "byteIndex": 192
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "SQS connection configuration.\n\nExtends CommonConnectionConfig with SQS-specific options."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "CommonConnectionConfig",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": null,
-              "typeName": "CommonConnectionConfig"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "protocol",
-            "jsDoc": {
-              "doc": "Protocol to use.",
-              "tags": [
-                {
-                  "kind": "unsupported",
-                  "value": "@default \"https\""
-                }
-              ]
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 13,
-              "col": 2,
-              "byteIndex": 320
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "",
-              "kind": "union",
-              "union": [
-                {
-                  "repr": "http",
-                  "kind": "literal",
-                  "literal": {
-                    "kind": "string",
-                    "string": "http"
-                  }
-                },
-                {
-                  "repr": "https",
-                  "kind": "literal",
-                  "literal": {
-                    "kind": "string",
-                    "string": "https"
-                  }
-                }
-              ]
-            },
-            "typeParams": []
-          },
-          {
-            "name": "path",
-            "jsDoc": {
-              "doc": "Custom path (for LocalStack or custom endpoints).",
-              "tags": [
-                {
-                  "kind": "unsupported",
-                  "value": "@default \"\""
-                }
-              ]
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 19,
-              "col": 2,
-              "byteIndex": 445
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "region",
-            "jsDoc": {
-              "doc": "AWS region (required for AWS, optional for LocalStack)."
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 24,
-              "col": 2,
-              "byteIndex": 545
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsClientConfig",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 30,
-        "col": 0,
-        "byteIndex": 611
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "SQS client configuration."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "CommonOptions",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": null,
-              "typeName": "CommonOptions"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "region",
-            "jsDoc": {
-              "doc": "AWS region"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 32,
-              "col": 2,
-              "byteIndex": 690
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "credentials",
-            "jsDoc": {
-              "doc": "AWS credentials"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 34,
-              "col": 2,
-              "byteIndex": 742
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "",
-              "kind": "typeLiteral",
-              "typeLiteral": {
-                "constructors": [],
-                "methods": [],
-                "properties": [
-                  {
-                    "name": "accessKeyId",
-                    "location": {
-                      "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-                      "line": 35,
-                      "col": 4,
-                      "byteIndex": 771
-                    },
-                    "params": [],
-                    "readonly": true,
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    "typeParams": []
-                  },
-                  {
-                    "name": "secretAccessKey",
-                    "location": {
-                      "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-                      "line": 36,
-                      "col": 4,
-                      "byteIndex": 805
-                    },
-                    "params": [],
-                    "readonly": true,
-                    "computed": false,
-                    "optional": false,
-                    "tsType": {
-                      "repr": "string",
-                      "kind": "keyword",
-                      "keyword": "string"
-                    },
-                    "typeParams": []
-                  }
-                ],
-                "callSignatures": [],
-                "indexSignatures": []
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "queueUrl",
-            "jsDoc": {
-              "doc": "SQS queue URL (optional - can be set later or used with ensureQueue)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 39,
-              "col": 2,
-              "byteIndex": 924
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "url",
-            "jsDoc": {
-              "doc": "SQS endpoint URL (e.g., \"http://localhost:4566\" for LocalStack).\nCan be a string URL or a connection config object.\nOptional for real AWS (uses default endpoint), required for LocalStack."
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 45,
-              "col": 2,
-              "byteIndex": 1169
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "",
-              "kind": "union",
-              "union": [
-                {
-                  "repr": "string",
-                  "kind": "keyword",
-                  "keyword": "string"
-                },
-                {
-                  "repr": "SqsConnectionConfig",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "SqsConnectionConfig"
-                  }
-                }
-              ]
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsMessageAttribute",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 51,
-        "col": 0,
-        "byteIndex": 1252
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "SQS message attributes."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "dataType",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 52,
-              "col": 2,
-              "byteIndex": 1293
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "",
-              "kind": "union",
-              "union": [
-                {
-                  "repr": "String",
-                  "kind": "literal",
-                  "literal": {
-                    "kind": "string",
-                    "string": "String"
-                  }
-                },
-                {
-                  "repr": "Number",
-                  "kind": "literal",
-                  "literal": {
-                    "kind": "string",
-                    "string": "Number"
-                  }
-                },
-                {
-                  "repr": "Binary",
-                  "kind": "literal",
-                  "literal": {
-                    "kind": "string",
-                    "string": "Binary"
-                  }
-                }
-              ]
-            },
-            "typeParams": []
-          },
-          {
-            "name": "stringValue",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 53,
-              "col": 2,
-              "byteIndex": 1346
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "binaryValue",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 54,
-              "col": 2,
-              "byteIndex": 1379
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "Uint8Array",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "Uint8Array"
-              }
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsMessage",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 60,
-        "col": 0,
-        "byteIndex": 1463
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "SQS message received from a queue."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "messageId",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 61,
-              "col": 2,
-              "byteIndex": 1495
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "body",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 62,
-              "col": 2,
-              "byteIndex": 1525
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "receiptHandle",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 63,
-              "col": 2,
-              "byteIndex": 1550
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "attributes",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 64,
-              "col": 2,
-              "byteIndex": 1584
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                ],
-                "typeName": "Record"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageAttributes",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 65,
-              "col": 2,
-              "byteIndex": 1631
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "SqsMessageAttribute",
-                    "kind": "typeRef",
-                    "typeRef": {
-                      "typeParams": null,
-                      "typeName": "SqsMessageAttribute"
-                    }
-                  }
-                ],
-                "typeName": "Record"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "md5OfBody",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 66,
-              "col": 2,
-              "byteIndex": 1699
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsMessages",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 72,
-        "col": 0,
-        "byteIndex": 1776
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Message array with helper methods."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "ReadonlyArray",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": [
-                {
-                  "repr": "SqsMessage",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "SqsMessage"
-                  }
-                }
-              ],
-              "typeName": "ReadonlyArray"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [
-          {
-            "name": "first",
-            "jsDoc": {
-              "doc": "Get the first message or undefined if empty"
-            },
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 74,
-              "col": 2,
-              "byteIndex": 1896
-            },
-            "params": [],
-            "optional": false,
-            "returnType": {
-              "repr": "",
-              "kind": "union",
-              "union": [
-                {
-                  "repr": "SqsMessage",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "SqsMessage"
-                  }
-                },
-                {
-                  "repr": "undefined",
-                  "kind": "keyword",
-                  "keyword": "undefined"
-                }
-              ]
-            },
-            "typeParams": []
-          },
-          {
-            "name": "firstOrThrow",
-            "jsDoc": {
-              "doc": "Get the first message or throw if empty"
-            },
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 76,
-              "col": 2,
-              "byteIndex": 1980
-            },
-            "params": [],
-            "optional": false,
-            "returnType": {
-              "repr": "SqsMessage",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "SqsMessage"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "last",
-            "jsDoc": {
-              "doc": "Get the last message or undefined if empty"
-            },
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 78,
-              "col": 2,
-              "byteIndex": 2062
-            },
-            "params": [],
-            "optional": false,
-            "returnType": {
-              "repr": "",
-              "kind": "union",
-              "union": [
-                {
-                  "repr": "SqsMessage",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "SqsMessage"
-                  }
-                },
-                {
-                  "repr": "undefined",
-                  "kind": "keyword",
-                  "keyword": "undefined"
-                }
-              ]
-            },
-            "typeParams": []
-          },
-          {
-            "name": "lastOrThrow",
-            "jsDoc": {
-              "doc": "Get the last message or throw if empty"
-            },
-            "kind": "method",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 80,
-              "col": 2,
-              "byteIndex": 2144
-            },
-            "params": [],
-            "optional": false,
-            "returnType": {
-              "repr": "SqsMessage",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "SqsMessage"
-              }
-            },
-            "typeParams": []
-          }
-        ],
-        "properties": [],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsSendOptions",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 86,
-        "col": 0,
-        "byteIndex": 2216
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Options for sending a message."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "CommonOptions",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": null,
-              "typeName": "CommonOptions"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "delaySeconds",
-            "jsDoc": {
-              "doc": "Delay in seconds before the message becomes visible (0-900)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 88,
-              "col": 2,
-              "byteIndex": 2343
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageAttributes",
-            "jsDoc": {
-              "doc": "Message attributes"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 90,
-              "col": 2,
-              "byteIndex": 2405
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "SqsMessageAttribute",
-                    "kind": "typeRef",
-                    "typeRef": {
-                      "typeParams": null,
-                      "typeName": "SqsMessageAttribute"
-                    }
-                  }
-                ],
-                "typeName": "Record"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageGroupId",
-            "jsDoc": {
-              "doc": "Message group ID (required for FIFO queues)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 92,
-              "col": 2,
-              "byteIndex": 2526
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageDeduplicationId",
-            "jsDoc": {
-              "doc": "Message deduplication ID (required for FIFO queues without content-based deduplication)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 94,
-              "col": 2,
-              "byteIndex": 2659
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsBatchMessage",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 100,
-        "col": 0,
-        "byteIndex": 2744
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Batch message for sendBatch."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "id",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 101,
-              "col": 2,
-              "byteIndex": 2781
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "body",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 102,
-              "col": 2,
-              "byteIndex": 2804
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "delaySeconds",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 103,
-              "col": 2,
-              "byteIndex": 2829
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageAttributes",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 104,
-              "col": 2,
-              "byteIndex": 2863
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "SqsMessageAttribute",
-                    "kind": "typeRef",
-                    "typeRef": {
-                      "typeParams": null,
-                      "typeName": "SqsMessageAttribute"
-                    }
-                  }
-                ],
-                "typeName": "Record"
-              }
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsReceiveOptions",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 110,
-        "col": 0,
-        "byteIndex": 2975
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Options for receiving messages."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [
-          {
-            "repr": "CommonOptions",
-            "kind": "typeRef",
-            "typeRef": {
-              "typeParams": null,
-              "typeName": "CommonOptions"
-            }
-          }
-        ],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "maxMessages",
-            "jsDoc": {
-              "doc": "Maximum number of messages to receive (1-10, default: 1)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 112,
-              "col": 2,
-              "byteIndex": 3102
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "waitTimeSeconds",
-            "jsDoc": {
-              "doc": "Wait time in seconds for long polling (0-20)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 114,
-              "col": 2,
-              "byteIndex": 3189
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "visibilityTimeout",
-            "jsDoc": {
-              "doc": "Visibility timeout in seconds (0-43200)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 116,
-              "col": 2,
-              "byteIndex": 3275
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "attributeNames",
-            "jsDoc": {
-              "doc": "System attribute names to retrieve"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 118,
-              "col": 2,
-              "byteIndex": 3358
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "",
-              "kind": "typeOperator",
-              "typeOperator": {
-                "operator": "readonly",
-                "tsType": {
-                  "repr": "",
-                  "kind": "array",
-                  "array": {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                }
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageAttributeNames",
-            "jsDoc": {
-              "doc": "Message attribute names to retrieve"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 120,
-              "col": 2,
-              "byteIndex": 3450
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "",
-              "kind": "typeOperator",
-              "typeOperator": {
-                "operator": "readonly",
-                "tsType": {
-                  "repr": "",
-                  "kind": "array",
-                  "array": {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                }
-              }
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsSendResult",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 126,
-        "col": 0,
-        "byteIndex": 3545
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Result of sending a message."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "type",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 127,
-              "col": 2,
-              "byteIndex": 3580
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "sqs:send",
-              "kind": "literal",
-              "literal": {
-                "kind": "string",
-                "string": "sqs:send"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 128,
-              "col": 2,
-              "byteIndex": 3609
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messageId",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 129,
-              "col": 2,
-              "byteIndex": 3633
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "md5OfBody",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 130,
-              "col": 2,
-              "byteIndex": 3663
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "sequenceNumber",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 131,
-              "col": 2,
-              "byteIndex": 3693
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 132,
-              "col": 2,
-              "byteIndex": 3729
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsBatchSuccessEntry",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 138,
-        "col": 0,
-        "byteIndex": 3799
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Successful batch send entry."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "messageId",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 139,
-              "col": 2,
-              "byteIndex": 3841
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "id",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 140,
-              "col": 2,
-              "byteIndex": 3871
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsBatchFailedEntry",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 146,
-        "col": 0,
-        "byteIndex": 3926
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Failed batch entry."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "id",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 147,
-              "col": 2,
-              "byteIndex": 3967
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "code",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 148,
-              "col": 2,
-              "byteIndex": 3990
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "message",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 149,
-              "col": 2,
-              "byteIndex": 4015
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsSendBatchResult",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 155,
-        "col": 0,
-        "byteIndex": 4089
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Result of batch sending messages."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "type",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 156,
-              "col": 2,
-              "byteIndex": 4129
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "sqs:send-batch",
-              "kind": "literal",
-              "literal": {
-                "kind": "string",
-                "string": "sqs:send-batch"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 157,
-              "col": 2,
-              "byteIndex": 4164
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "successful",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 158,
-              "col": 2,
-              "byteIndex": 4188
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "",
-              "kind": "typeOperator",
-              "typeOperator": {
-                "operator": "readonly",
-                "tsType": {
-                  "repr": "",
-                  "kind": "array",
-                  "array": {
-                    "repr": "SqsBatchSuccessEntry",
-                    "kind": "typeRef",
-                    "typeRef": {
-                      "typeParams": null,
-                      "typeName": "SqsBatchSuccessEntry"
-                    }
-                  }
-                }
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "failed",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 159,
-              "col": 2,
-              "byteIndex": 4244
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "",
-              "kind": "typeOperator",
-              "typeOperator": {
-                "operator": "readonly",
-                "tsType": {
-                  "repr": "",
-                  "kind": "array",
-                  "array": {
-                    "repr": "SqsBatchFailedEntry",
-                    "kind": "typeRef",
-                    "typeRef": {
-                      "typeParams": null,
-                      "typeName": "SqsBatchFailedEntry"
-                    }
-                  }
-                }
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 160,
-              "col": 2,
-              "byteIndex": 4295
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsReceiveResult",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 166,
-        "col": 0,
-        "byteIndex": 4366
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Result of receiving messages."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "type",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 167,
-              "col": 2,
-              "byteIndex": 4404
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "sqs:receive",
-              "kind": "literal",
-              "literal": {
-                "kind": "string",
-                "string": "sqs:receive"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 168,
-              "col": 2,
-              "byteIndex": 4436
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "messages",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 169,
-              "col": 2,
-              "byteIndex": 4460
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "SqsMessages",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "SqsMessages"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 170,
-              "col": 2,
-              "byteIndex": 4494
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
-    {
-      "name": "SqsDeleteResult",
-      "isDefault": false,
-      "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 176,
-        "col": 0,
-        "byteIndex": 4565
-      },
-      "declarationKind": "export",
-      "jsDoc": {
-        "doc": "Result of deleting a message."
-      },
-      "kind": "interface",
-      "interfaceDef": {
-        "extends": [],
-        "constructors": [],
-        "methods": [],
-        "properties": [
-          {
-            "name": "type",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 177,
-              "col": 2,
-              "byteIndex": 4602
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "sqs:delete",
-              "kind": "literal",
-              "literal": {
-                "kind": "string",
-                "string": "sqs:delete"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 178,
-              "col": 2,
-              "byteIndex": 4633
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 179,
-              "col": 2,
-              "byteIndex": 4657
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
-          }
-        ],
-        "callSignatures": [],
-        "indexSignatures": [],
-        "typeParams": []
-      }
-    },
     {
       "name": "SqsDeleteBatchResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 185,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 91,
         "col": 0,
-        "byteIndex": 4733
+        "byteIndex": 1873
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1823,17 +19,29 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete-batch\"` for batch message delete operations."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 186,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 97,
               "col": 2,
-              "byteIndex": 4775
+              "byteIndex": 2055
             },
             "params": [],
             "readonly": true,
@@ -1850,31 +58,15 @@
             "typeParams": []
           },
           {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 187,
-              "col": 2,
-              "byteIndex": 4812
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
             "name": "successful",
+            "jsDoc": {
+              "doc": "Array of message IDs that were successfully deleted."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 188,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 102,
               "col": 2,
-              "byteIndex": 4836
+              "byteIndex": 2163
             },
             "params": [],
             "readonly": true,
@@ -1900,11 +92,14 @@
           },
           {
             "name": "failed",
+            "jsDoc": {
+              "doc": "Array of messages that failed to delete."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 189,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 107,
               "col": 2,
-              "byteIndex": 4878
+              "byteIndex": 2264
             },
             "params": [],
             "readonly": true,
@@ -1930,23 +125,63 @@
               }
             },
             "typeParams": []
-          },
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsDeleteQueueResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 130,
+        "col": 0,
+        "byteIndex": 2721
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of deleting a queue."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
           {
-            "name": "duration",
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete-queue\"` for queue deletion operations."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 190,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 136,
               "col": 2,
-              "byteIndex": 4929
+              "byteIndex": 2897
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
+              "repr": "sqs:delete-queue",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "sqs:delete-queue"
+              }
             },
             "typeParams": []
           }
@@ -1957,27 +192,27 @@
       }
     },
     {
-      "name": "SqsEnsureQueueOptions",
+      "name": "SqsDeleteResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 196,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 79,
         "col": 0,
-        "byteIndex": 5007
+        "byteIndex": 1623
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Options for ensuring a queue exists."
+        "doc": "Result of deleting a message."
       },
       "kind": "interface",
       "interfaceDef": {
         "extends": [
           {
-            "repr": "CommonOptions",
+            "repr": "ClientResult",
             "kind": "typeRef",
             "typeRef": {
               "typeParams": null,
-              "typeName": "CommonOptions"
+              "typeName": "ClientResult"
             }
           }
         ],
@@ -1985,73 +220,26 @@
         "methods": [],
         "properties": [
           {
-            "name": "attributes",
+            "name": "kind",
             "jsDoc": {
-              "doc": "Queue attributes (e.g., DelaySeconds, MessageRetentionPeriod)"
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete\"` for single message delete operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 198,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 85,
               "col": 2,
-              "byteIndex": 5143
+              "byteIndex": 1795
             },
             "params": [],
             "readonly": true,
             "computed": false,
-            "optional": true,
+            "optional": false,
             "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                ],
-                "typeName": "Record"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "tags",
-            "jsDoc": {
-              "doc": "Queue tags"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 200,
-              "col": 2,
-              "byteIndex": 5211
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": true,
-            "tsType": {
-              "repr": "Record",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                ],
-                "typeName": "Record"
+              "repr": "sqs:delete",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "sqs:delete"
               }
             },
             "typeParams": []
@@ -2066,10 +254,10 @@
       "name": "SqsEnsureQueueResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 206,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 113,
         "col": 0,
-        "byteIndex": 5300
+        "byteIndex": 2362
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2077,17 +265,29 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:ensure-queue\"` for queue creation/verification operations."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 207,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 119,
               "col": 2,
-              "byteIndex": 5342
+              "byteIndex": 2551
             },
             "params": [],
             "readonly": true,
@@ -2104,31 +304,15 @@
             "typeParams": []
           },
           {
-            "name": "ok",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 208,
-              "col": 2,
-              "byteIndex": 5379
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
             "name": "queueUrl",
+            "jsDoc": {
+              "doc": "URL of the queue (existing or newly created)."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 209,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 124,
               "col": 2,
-              "byteIndex": 5403
+              "byteIndex": 2652
             },
             "params": [],
             "readonly": true,
@@ -2140,25 +324,6 @@
               "keyword": "string"
             },
             "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 210,
-              "col": 2,
-              "byteIndex": 5432
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
-            },
-            "typeParams": []
           }
         ],
         "callSignatures": [],
@@ -2167,81 +332,80 @@
       }
     },
     {
-      "name": "SqsDeleteQueueResult",
+      "name": "SqsReceiveResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 216,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 60,
         "col": 0,
-        "byteIndex": 5501
+        "byteIndex": 1225
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Result of deleting a queue."
+        "doc": "Result of receiving messages."
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:receive\"` for message receive operations."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 217,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 66,
               "col": 2,
-              "byteIndex": 5543
+              "byteIndex": 1393
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "sqs:delete-queue",
+              "repr": "sqs:receive",
               "kind": "literal",
               "literal": {
                 "kind": "string",
-                "string": "sqs:delete-queue"
+                "string": "sqs:receive"
               }
             },
             "typeParams": []
           },
           {
-            "name": "ok",
+            "name": "messages",
+            "jsDoc": {
+              "doc": "Array of received messages (may be empty).\n\nIncludes helper methods like first(), last(), etc."
+            },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 218,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 73,
               "col": 2,
-              "byteIndex": 5580
+              "byteIndex": 1547
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "boolean",
-              "kind": "keyword",
-              "keyword": "boolean"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "duration",
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 219,
-              "col": 2,
-              "byteIndex": 5604
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "number",
-              "kind": "keyword",
-              "keyword": "number"
+              "repr": "SqsMessages",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqsMessages"
+              }
             },
             "typeParams": []
           }
@@ -2255,10 +419,10 @@
       "name": "SqsResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 225,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 142,
         "col": 0,
-        "byteIndex": 5681
+        "byteIndex": 2982
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2332,13 +496,1694 @@
       }
     },
     {
+      "name": "SqsSendBatchResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 38,
+        "col": 0,
+        "byteIndex": 753
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of batch sending messages."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:send-batch\"` for batch message send operations."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 44,
+              "col": 2,
+              "byteIndex": 929
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "sqs:send-batch",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "sqs:send-batch"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "successful",
+            "jsDoc": {
+              "doc": "Array of successfully sent messages."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 49,
+              "col": 2,
+              "byteIndex": 1019
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "SqsBatchSuccessEntry",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "SqsBatchSuccessEntry"
+                    }
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "failed",
+            "jsDoc": {
+              "doc": "Array of messages that failed to send."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 54,
+              "col": 2,
+              "byteIndex": 1132
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "SqsBatchFailedEntry",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "SqsBatchFailedEntry"
+                    }
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsSendResult",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 11,
+        "col": 0,
+        "byteIndex": 199
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Result of sending a message."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "kind",
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sqs:send\"` for single message send operations."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 17,
+              "col": 2,
+              "byteIndex": 365
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "sqs:send",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "sqs:send"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageId",
+            "jsDoc": {
+              "doc": "Unique identifier for the sent message."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 22,
+              "col": 2,
+              "byteIndex": 452
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "md5OfBody",
+            "jsDoc": {
+              "doc": "MD5 hash of the message body (for integrity verification)."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 27,
+              "col": 2,
+              "byteIndex": 559
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "sequenceNumber",
+            "jsDoc": {
+              "doc": "Sequence number for FIFO queues (present only for FIFO queues)."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "line": 32,
+              "col": 2,
+              "byteIndex": 671
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsConnectionConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 29,
+        "col": 0,
+        "byteIndex": 572
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQS connection configuration.\n\nExtends CommonConnectionConfig with SQS-specific options."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonConnectionConfig",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonConnectionConfig"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "protocol",
+            "jsDoc": {
+              "doc": "Protocol to use.",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default \"https\""
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 34,
+              "col": 2,
+              "byteIndex": 700
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "http",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "http"
+                  }
+                },
+                {
+                  "repr": "https",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "https"
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "path",
+            "jsDoc": {
+              "doc": "Custom path (for LocalStack or custom endpoints).",
+              "tags": [
+                {
+                  "kind": "unsupported",
+                  "value": "@default \"\""
+                }
+              ]
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 40,
+              "col": 2,
+              "byteIndex": 825
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "region",
+            "jsDoc": {
+              "doc": "AWS region (required for AWS, optional for LocalStack)."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 45,
+              "col": 2,
+              "byteIndex": 925
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsClientConfig",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 51,
+        "col": 0,
+        "byteIndex": 991
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQS client configuration."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "region",
+            "jsDoc": {
+              "doc": "AWS region"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 53,
+              "col": 2,
+              "byteIndex": 1070
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "credentials",
+            "jsDoc": {
+              "doc": "AWS credentials"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 55,
+              "col": 2,
+              "byteIndex": 1122
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeLiteral",
+              "typeLiteral": {
+                "constructors": [],
+                "methods": [],
+                "properties": [
+                  {
+                    "name": "accessKeyId",
+                    "location": {
+                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+                      "line": 56,
+                      "col": 4,
+                      "byteIndex": 1151
+                    },
+                    "params": [],
+                    "readonly": true,
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    "typeParams": []
+                  },
+                  {
+                    "name": "secretAccessKey",
+                    "location": {
+                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+                      "line": 57,
+                      "col": 4,
+                      "byteIndex": 1185
+                    },
+                    "params": [],
+                    "readonly": true,
+                    "computed": false,
+                    "optional": false,
+                    "tsType": {
+                      "repr": "string",
+                      "kind": "keyword",
+                      "keyword": "string"
+                    },
+                    "typeParams": []
+                  }
+                ],
+                "callSignatures": [],
+                "indexSignatures": []
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "queueUrl",
+            "jsDoc": {
+              "doc": "SQS queue URL (optional - can be set later or used with ensureQueue)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 60,
+              "col": 2,
+              "byteIndex": 1304
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "url",
+            "jsDoc": {
+              "doc": "SQS endpoint URL (e.g., \"http://localhost:4566\" for LocalStack).\nCan be a string URL or a connection config object.\nOptional for real AWS (uses default endpoint), required for LocalStack."
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 66,
+              "col": 2,
+              "byteIndex": 1549
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "SqsConnectionConfig",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqsConnectionConfig"
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsMessageAttribute",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 72,
+        "col": 0,
+        "byteIndex": 1632
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQS message attributes."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "dataType",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1673
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "String",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "String"
+                  }
+                },
+                {
+                  "repr": "Number",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "Number"
+                  }
+                },
+                {
+                  "repr": "Binary",
+                  "kind": "literal",
+                  "literal": {
+                    "kind": "string",
+                    "string": "Binary"
+                  }
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "stringValue",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 74,
+              "col": 2,
+              "byteIndex": 1726
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "binaryValue",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 75,
+              "col": 2,
+              "byteIndex": 1759
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Uint8Array",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "Uint8Array"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsMessage",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 81,
+        "col": 0,
+        "byteIndex": 1843
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "SQS message received from a queue."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "messageId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 82,
+              "col": 2,
+              "byteIndex": 1875
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "body",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 83,
+              "col": 2,
+              "byteIndex": 1905
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "receiptHandle",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 84,
+              "col": 2,
+              "byteIndex": 1930
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "attributes",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 85,
+              "col": 2,
+              "byteIndex": 1964
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageAttributes",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 86,
+              "col": 2,
+              "byteIndex": 2011
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "SqsMessageAttribute",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "SqsMessageAttribute"
+                    }
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "md5OfBody",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 87,
+              "col": 2,
+              "byteIndex": 2079
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsMessages",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 93,
+        "col": 0,
+        "byteIndex": 2156
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Message array with helper methods."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "ReadonlyArray",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": [
+                {
+                  "repr": "SqsMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqsMessage"
+                  }
+                }
+              ],
+              "typeName": "ReadonlyArray"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [
+          {
+            "name": "first",
+            "jsDoc": {
+              "doc": "Get the first message or undefined if empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 95,
+              "col": 2,
+              "byteIndex": 2276
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "SqsMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqsMessage"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "firstOrThrow",
+            "jsDoc": {
+              "doc": "Get the first message or throw if empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 97,
+              "col": 2,
+              "byteIndex": 2360
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "SqsMessage",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqsMessage"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "last",
+            "jsDoc": {
+              "doc": "Get the last message or undefined if empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 99,
+              "col": 2,
+              "byteIndex": 2442
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "SqsMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "SqsMessage"
+                  }
+                },
+                {
+                  "repr": "undefined",
+                  "kind": "keyword",
+                  "keyword": "undefined"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
+            "name": "lastOrThrow",
+            "jsDoc": {
+              "doc": "Get the last message or throw if empty"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 101,
+              "col": 2,
+              "byteIndex": 2524
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "SqsMessage",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "SqsMessage"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "properties": [],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsSendOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 107,
+        "col": 0,
+        "byteIndex": 2596
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for sending a message."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "delaySeconds",
+            "jsDoc": {
+              "doc": "Delay in seconds before the message becomes visible (0-900)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 109,
+              "col": 2,
+              "byteIndex": 2723
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageAttributes",
+            "jsDoc": {
+              "doc": "Message attributes"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 111,
+              "col": 2,
+              "byteIndex": 2785
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "SqsMessageAttribute",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "SqsMessageAttribute"
+                    }
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageGroupId",
+            "jsDoc": {
+              "doc": "Message group ID (required for FIFO queues)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 113,
+              "col": 2,
+              "byteIndex": 2906
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageDeduplicationId",
+            "jsDoc": {
+              "doc": "Message deduplication ID (required for FIFO queues without content-based deduplication)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 115,
+              "col": 2,
+              "byteIndex": 3039
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsBatchMessage",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 121,
+        "col": 0,
+        "byteIndex": 3124
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Batch message for sendBatch."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "id",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 122,
+              "col": 2,
+              "byteIndex": 3161
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "body",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 123,
+              "col": 2,
+              "byteIndex": 3184
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "delaySeconds",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 124,
+              "col": 2,
+              "byteIndex": 3209
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageAttributes",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 125,
+              "col": 2,
+              "byteIndex": 3243
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "SqsMessageAttribute",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "SqsMessageAttribute"
+                    }
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsReceiveOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 131,
+        "col": 0,
+        "byteIndex": 3355
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for receiving messages."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "maxMessages",
+            "jsDoc": {
+              "doc": "Maximum number of messages to receive (1-10, default: 1)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 133,
+              "col": 2,
+              "byteIndex": 3482
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "waitTimeSeconds",
+            "jsDoc": {
+              "doc": "Wait time in seconds for long polling (0-20)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 135,
+              "col": 2,
+              "byteIndex": 3569
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "visibilityTimeout",
+            "jsDoc": {
+              "doc": "Visibility timeout in seconds (0-43200)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 137,
+              "col": 2,
+              "byteIndex": 3655
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "number",
+              "kind": "keyword",
+              "keyword": "number"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "attributeNames",
+            "jsDoc": {
+              "doc": "System attribute names to retrieve"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 139,
+              "col": 2,
+              "byteIndex": 3738
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "messageAttributeNames",
+            "jsDoc": {
+              "doc": "Message attribute names to retrieve"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 141,
+              "col": 2,
+              "byteIndex": 3830
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsBatchSuccessEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 147,
+        "col": 0,
+        "byteIndex": 3925
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Successful batch send entry."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "messageId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 148,
+              "col": 2,
+              "byteIndex": 3967
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "id",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 149,
+              "col": 2,
+              "byteIndex": 3997
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsBatchFailedEntry",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 155,
+        "col": 0,
+        "byteIndex": 4052
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Failed batch entry."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "id",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 156,
+              "col": 2,
+              "byteIndex": 4093
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "code",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 157,
+              "col": 2,
+              "byteIndex": 4116
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          },
+          {
+            "name": "message",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 158,
+              "col": 2,
+              "byteIndex": 4141
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "string",
+              "kind": "keyword",
+              "keyword": "string"
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
+      "name": "SqsEnsureQueueOptions",
+      "isDefault": false,
+      "location": {
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 164,
+        "col": 0,
+        "byteIndex": 4218
+      },
+      "declarationKind": "export",
+      "jsDoc": {
+        "doc": "Options for ensuring a queue exists."
+      },
+      "kind": "interface",
+      "interfaceDef": {
+        "extends": [
+          {
+            "repr": "CommonOptions",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "CommonOptions"
+            }
+          }
+        ],
+        "constructors": [],
+        "methods": [],
+        "properties": [
+          {
+            "name": "attributes",
+            "jsDoc": {
+              "doc": "Queue attributes (e.g., DelaySeconds, MessageRetentionPeriod)"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 166,
+              "col": 2,
+              "byteIndex": 4354
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          },
+          {
+            "name": "tags",
+            "jsDoc": {
+              "doc": "Queue tags"
+            },
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 168,
+              "col": 2,
+              "byteIndex": 4422
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": true,
+            "tsType": {
+              "repr": "Record",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": [
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  },
+                  {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                ],
+                "typeName": "Record"
+              }
+            },
+            "typeParams": []
+          }
+        ],
+        "callSignatures": [],
+        "indexSignatures": [],
+        "typeParams": []
+      }
+    },
+    {
       "name": "SqsClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-        "line": 237,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "line": 174,
         "col": 0,
-        "byteIndex": 5897
+        "byteIndex": 4498
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2365,10 +2210,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 248,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 185,
               "col": 2,
-              "byteIndex": 6189
+              "byteIndex": 4790
             },
             "params": [
               {
@@ -2397,10 +2242,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 255,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 192,
               "col": 2,
-              "byteIndex": 6455
+              "byteIndex": 5056
             },
             "params": [
               {
@@ -2454,10 +2299,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 263,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 200,
               "col": 2,
-              "byteIndex": 6607
+              "byteIndex": 5208
             },
             "params": [
               {
@@ -2511,10 +2356,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 271,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 208,
               "col": 2,
-              "byteIndex": 6756
+              "byteIndex": 5357
             },
             "params": [
               {
@@ -2568,10 +2413,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 276,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 213,
               "col": 2,
-              "byteIndex": 6903
+              "byteIndex": 5504
             },
             "params": [
               {
@@ -2619,10 +2464,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 281,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 218,
               "col": 2,
-              "byteIndex": 7025
+              "byteIndex": 5626
             },
             "params": [
               {
@@ -2666,10 +2511,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 286,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 223,
               "col": 2,
-              "byteIndex": 7143
+              "byteIndex": 5744
             },
             "params": [
               {
@@ -2723,10 +2568,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 294,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 231,
               "col": 2,
-              "byteIndex": 7319
+              "byteIndex": 5920
             },
             "params": [
               {
@@ -2784,10 +2629,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 302,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 239,
               "col": 2,
-              "byteIndex": 7482
+              "byteIndex": 6083
             },
             "params": [
               {
@@ -2831,10 +2676,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 307,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 244,
               "col": 2,
-              "byteIndex": 7600
+              "byteIndex": 6201
             },
             "params": [],
             "optional": false,
@@ -2859,10 +2704,10 @@
           {
             "name": "config",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 238,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 175,
               "col": 2,
-              "byteIndex": 5952
+              "byteIndex": 4553
             },
             "params": [],
             "readonly": true,
@@ -2884,10 +2729,10 @@
               "doc": "The current queue URL. Can be set via config, ensureQueue(), or setQueueUrl()."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/types.ts",
-              "line": 243,
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "line": 180,
               "col": 2,
-              "byteIndex": 6085
+              "byteIndex": 4686
             },
             "params": [],
             "readonly": true,
@@ -2921,7 +2766,7 @@
       "name": "SqsErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 91
@@ -2948,7 +2793,7 @@
           {
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 7,
               "col": 2,
               "byteIndex": 149
@@ -2974,7 +2819,7 @@
       "name": "SqsError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 13,
         "col": 0,
         "byteIndex": 227
@@ -3032,7 +2877,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 347
@@ -3054,7 +2899,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 273
@@ -3073,7 +2918,7 @@
             "isStatic": false,
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 320
@@ -3092,7 +2937,7 @@
       "name": "SqsConnectionError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 30,
         "col": 0,
         "byteIndex": 587
@@ -3135,7 +2980,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 740
@@ -3157,7 +3002,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 31,
               "col": 2,
               "byteIndex": 640
@@ -3180,7 +3025,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 689
@@ -3199,7 +3044,7 @@
       "name": "SqsCommandErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 42,
         "col": 0,
         "byteIndex": 891
@@ -3226,7 +3071,7 @@
           {
             "name": "operation",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 43,
               "col": 2,
               "byteIndex": 959
@@ -3252,7 +3097,7 @@
       "name": "SqsCommandError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 49,
         "col": 0,
         "byteIndex": 1041
@@ -3295,7 +3140,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 54,
               "col": 2,
               "byteIndex": 1215
@@ -3317,7 +3162,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 50,
               "col": 2,
               "byteIndex": 1091
@@ -3340,7 +3185,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1137
@@ -3359,7 +3204,7 @@
             "isStatic": false,
             "name": "operation",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1184
@@ -3378,7 +3223,7 @@
       "name": "SqsQueueNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 63,
         "col": 0,
         "byteIndex": 1417
@@ -3431,7 +3276,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 68,
               "col": 2,
               "byteIndex": 1610
@@ -3453,7 +3298,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1473
@@ -3476,7 +3321,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 65,
               "col": 2,
               "byteIndex": 1525
@@ -3495,7 +3340,7 @@
             "isStatic": false,
             "name": "queueUrl",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1580
@@ -3514,7 +3359,7 @@
       "name": "SqsMessageTooLargeError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 77,
         "col": 0,
         "byteIndex": 1834
@@ -3577,7 +3422,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 2057
@@ -3599,7 +3444,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 78,
               "col": 2,
               "byteIndex": 1892
@@ -3622,7 +3467,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 79,
               "col": 2,
               "byteIndex": 1946
@@ -3641,7 +3486,7 @@
             "isStatic": false,
             "name": "size",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 80,
               "col": 2,
               "byteIndex": 2003
@@ -3660,7 +3505,7 @@
             "isStatic": false,
             "name": "maxSize",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 2028
@@ -3679,7 +3524,7 @@
       "name": "SqsBatchError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 98,
         "col": 0,
         "byteIndex": 2338
@@ -3732,7 +3577,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 103,
               "col": 2,
               "byteIndex": 2508
@@ -3754,7 +3599,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 99,
               "col": 2,
               "byteIndex": 2386
@@ -3777,7 +3622,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 100,
               "col": 2,
               "byteIndex": 2430
@@ -3796,7 +3641,7 @@
             "isStatic": false,
             "name": "failedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2475
@@ -3815,7 +3660,7 @@
       "name": "SqsMessageNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
         "line": 112,
         "col": 0,
         "byteIndex": 2750
@@ -3858,7 +3703,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 116,
               "col": 2,
               "byteIndex": 2920
@@ -3880,7 +3725,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 113,
               "col": 2,
               "byteIndex": 2808
@@ -3903,7 +3748,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
               "line": 114,
               "col": 2,
               "byteIndex": 2862
@@ -3922,7 +3767,7 @@
       "name": "createSqsClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/client.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/client.ts",
         "line": 344,
         "col": 0,
         "byteIndex": 9421
@@ -4010,7 +3855,7 @@
       "name": "createSqsMessages",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.2.0/messages.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/messages.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 120
@@ -4055,5 +3900,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T22:09:49.487Z"
+  "generatedAt": "2025-12-12T09:23:52.369Z"
 }

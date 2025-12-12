@@ -1,14 +1,14 @@
 {
   "name": "probitas",
   "specifier": "@probitas/probitas",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "moduleDoc": "Probitas - Scenario-based testing and workflow execution framework.\n\nThis is the main entry point for the Probitas framework. It provides a fluent API\nfor building and executing scenario-based tests with support for:\n\n- **Sequential steps**: Define test steps that execute in order with type-safe context passing\n- **Skip conditions**: Conditionally skip steps or entire scenarios\n- **Rich assertions**: Built-in expect utilities for comprehensive assertions\n- **External clients**: Pre-configured clients for HTTP, databases, message queues, and more\n- **Test utilities**: Faker for test data, time mocking, and function spies\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [Documentation](./.claude/README.md)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/builder](https://jsr.io/@probitas/builder) | Fluent API for building scenario definitions |\n| [@probitas/runner](https://jsr.io/@probitas/runner) | Test execution engine with retry and concurrency |\n| [@probitas/reporter](https://jsr.io/@probitas/reporter) | Output formatters (list, dot, TAP, JSON) |\n| [@probitas/scenario](https://jsr.io/@probitas/scenario) | Core type definitions and utilities |\n| [@probitas/discover](https://jsr.io/@probitas/discover) | Scenario file discovery |\n| [@probitas/logger](https://jsr.io/@probitas/logger) | Unified logging interface |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | Command-line interface |\n\n## Core Exports\n\n- {@linkcode scenario} - Factory function to create scenario builders\n- {@linkcode Skip} - Utility to skip steps or scenarios conditionally\n- {@linkcode StepContext} - Type representing the context passed to each step\n- {@linkcode client} - Namespace containing all available client implementations\n- {@linkcode expect} - Assertion utilities (from `@std/expect`)\n\n## Re-exported Utilities\n\nFor convenience, this module also re-exports commonly used testing utilities:\n\n- `faker` - Fake data generation from `@jackfiszr/faker`\n- `FakeTime` - Time mocking utilities from `@std/testing/time`\n- `spy`, `stub`, `assertSpyCalls` - Mock utilities from `@std/testing/mock`\n- `tryOr`, `raise` - Error handling utilities from `@core/errorutil`\n- `outdent` - Template literal tag for removing indentation\n",
   "exports": [
     {
       "name": "client",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/probitas/0.4.0/mod.ts",
+        "filename": "https://jsr.io/@probitas/probitas/0.5.0/mod.ts",
         "line": 102,
         "col": 7,
         "byteIndex": 3992
@@ -39,7 +39,7 @@
       "name": "scenario",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.2.7/scenario_builder.ts",
+        "filename": "https://jsr.io/@probitas/builder/0.2.8/scenario_builder.ts",
         "line": 554,
         "col": 0,
         "byteIndex": 17911
@@ -133,7 +133,7 @@
       "name": "Skip",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/runner/0.2.7/skip.ts",
+        "filename": "https://jsr.io/@probitas/runner/0.2.8/skip.ts",
         "line": 62,
         "col": 0,
         "byteIndex": 1603
@@ -191,7 +191,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.2.7/skip.ts",
+              "filename": "https://jsr.io/@probitas/runner/0.2.8/skip.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2304
@@ -215,7 +215,7 @@
             "isStatic": false,
             "name": "reason",
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.2.7/skip.ts",
+              "filename": "https://jsr.io/@probitas/runner/0.2.8/skip.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1857
@@ -234,7 +234,7 @@
       "name": "StepContext",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.2.7/types.ts",
+        "filename": "https://jsr.io/@probitas/builder/0.2.8/types.ts",
         "line": 40,
         "col": 0,
         "byteIndex": 1237
@@ -295,7 +295,7 @@
                       "doc": "Result from the previous step.\n\nFully typed based on what the previous step returned.\nFor the first step, this is `unknown`."
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.2.7/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.2.8/types.ts",
                       "line": 51,
                       "col": 2,
                       "byteIndex": 1578
@@ -320,7 +320,7 @@
                       "doc": "All accumulated results as a typed tuple.\n\nAllows accessing any previous result by index:\n```ts\nctx.results[0]  // First step's result\nctx.results[1]  // Second step's result\n```"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.2.7/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.2.8/types.ts",
                       "line": 62,
                       "col": 2,
                       "byteIndex": 1828
@@ -345,7 +345,7 @@
                       "doc": "Named resources registered with `.resource()`.\n\nResources are typed based on their registration:\n```ts\n.resource(\"db\", () => createDbConnection())\n.step((ctx) => ctx.resources.db.query(...))\n```"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.2.7/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.2.8/types.ts",
                       "line": 73,
                       "col": 2,
                       "byteIndex": 2093
@@ -463,10 +463,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 72,
         "col": 0,
-        "byteIndex": 2579
+        "byteIndex": 2547
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -474,7 +474,7 @@
         "tags": [
           {
             "kind": "example",
-            "doc": "```ts\n// HTTP response\nconst httpRes = await http.get(\"/users\");\nexpect(httpRes).toBeSuccessful().toHaveContentContaining({ users: [] });\n\n// GraphQL response\nconst gqlRes = await graphql.query(\"{ users { id name } }\");\nexpect(gqlRes).toBeSuccessful().toHaveContent();\n\n// SQL query result\nconst sqlRes = await db.query(\"SELECT * FROM users\");\nexpect(sqlRes).toBeSuccessful().toHaveCount(10);\n\n// MongoDB result\nconst mongoRes = await mongo.find({ status: \"active\" });\nexpect(mongoRes).toBeSuccessful().toHaveLength(10);\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\n```"
+            "doc": "```ts\n// HTTP response\nconst httpRes = await http.get(\"/users\");\nexpect(httpRes).toBeOk().toHaveContentContaining({ users: [] });\n\n// GraphQL response\nconst gqlRes = await graphql.query(\"{ users { id name } }\");\nexpect(gqlRes).toBeOk().toHaveContent();\n\n// SQL query result\nconst sqlRes = await db.query(\"SELECT * FROM users\");\nexpect(sqlRes).toBeOk().toHaveCount(10);\n\n// MongoDB result\nconst mongoRes = await mongo.find({ status: \"active\" });\nexpect(mongoRes).toBeOk().toHaveLength(10);\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\n```"
           }
         ]
       },
@@ -530,10 +530,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 75,
         "col": 0,
-        "byteIndex": 2681
+        "byteIndex": 2649
       },
       "declarationKind": "export",
       "kind": "function",
@@ -588,10 +588,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 78,
         "col": 0,
-        "byteIndex": 2795
+        "byteIndex": 2763
       },
       "declarationKind": "export",
       "kind": "function",
@@ -646,10 +646,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 81,
         "col": 0,
-        "byteIndex": 2903
+        "byteIndex": 2871
       },
       "declarationKind": "export",
       "kind": "function",
@@ -673,25 +673,7 @@
           "repr": "SqlQueryResultExpectation",
           "kind": "typeRef",
           "typeRef": {
-            "typeParams": [
-              {
-                "repr": "ExtractSqlRowType",
-                "kind": "typeRef",
-                "typeRef": {
-                  "typeParams": [
-                    {
-                      "repr": "T",
-                      "kind": "typeRef",
-                      "typeRef": {
-                        "typeParams": null,
-                        "typeName": "T"
-                      }
-                    }
-                  ],
-                  "typeName": "ExtractSqlRowType"
-                }
-              }
-            ],
+            "typeParams": null,
             "typeName": "SqlQueryResultExpectation"
           }
         },
@@ -716,10 +698,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 84,
         "col": 0,
-        "byteIndex": 3017
+        "byteIndex": 2963
       },
       "declarationKind": "export",
       "kind": "function",
@@ -774,10 +756,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 87,
         "col": 0,
-        "byteIndex": 3122
+        "byteIndex": 3068
       },
       "declarationKind": "export",
       "kind": "function",
@@ -832,10 +814,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 90,
         "col": 0,
-        "byteIndex": 3225
+        "byteIndex": 3171
       },
       "declarationKind": "export",
       "kind": "function",
@@ -890,10 +872,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 93,
         "col": 0,
-        "byteIndex": 3328
+        "byteIndex": 3274
       },
       "declarationKind": "export",
       "kind": "function",
@@ -948,10 +930,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 96,
         "col": 0,
-        "byteIndex": 3437
+        "byteIndex": 3383
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1006,10 +988,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 99,
         "col": 0,
-        "byteIndex": 3536
+        "byteIndex": 3482
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1043,10 +1025,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.1.2/expect.ts",
+        "filename": "https://jsr.io/@probitas/expect/0.2.0/expect.ts",
         "line": 100,
         "col": 0,
-        "byteIndex": 3597
+        "byteIndex": 3543
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1078,10 +1060,10 @@
       "name": "ConnectRpcResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-        "line": 12,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+        "line": 14,
         "col": 0,
-        "byteIndex": 155
+        "byteIndex": 284
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1089,7 +1071,16 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [
           {
@@ -1099,10 +1090,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 40,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 73,
               "col": 2,
-              "byteIndex": 973
+              "byteIndex": 1800
             },
             "params": [],
             "optional": false,
@@ -1139,14 +1130,14 @@
           {
             "name": "raw",
             "jsDoc": {
-              "doc": "Get raw response message."
+              "doc": "Get raw response or error."
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 45,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 78,
               "col": 2,
-              "byteIndex": 1046
+              "byteIndex": 1874
             },
             "params": [],
             "optional": false,
@@ -1160,15 +1151,15 @@
         ],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
             "jsDoc": {
-              "doc": "Result type identifier"
+              "doc": "Result kind discriminator.\n\nAlways `\"connectrpc\"` for ConnectRPC responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 14,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 21,
               "col": 2,
-              "byteIndex": 227
+              "byteIndex": 522
             },
             "params": [],
             "readonly": true,
@@ -1187,13 +1178,13 @@
           {
             "name": "ok",
             "jsDoc": {
-              "doc": "Whether the request was successful (code === 0)."
+              "doc": "Whether the request was successful (statusCode === 0).\n\nInherited from ClientResult. True when statusCode is 0 (OK),\nfalse for any error code."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 17,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 29,
               "col": 2,
-              "byteIndex": 317
+              "byteIndex": 728
             },
             "params": [],
             "readonly": true,
@@ -1207,15 +1198,15 @@
             "typeParams": []
           },
           {
-            "name": "code",
+            "name": "statusCode",
             "jsDoc": {
-              "doc": "ConnectRPC/gRPC status code."
+              "doc": "ConnectRPC/gRPC status code.\n\n0 indicates success (OK). Non-zero values represent various error conditions\ncompatible with gRPC status codes."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 20,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 37,
               "col": 2,
-              "byteIndex": 380
+              "byteIndex": 926
             },
             "params": [],
             "readonly": true,
@@ -1232,59 +1223,59 @@
             "typeParams": []
           },
           {
-            "name": "message",
+            "name": "statusMessage",
             "jsDoc": {
-              "doc": "Status message (empty string for successful responses)."
+              "doc": "Status message (null for successful responses).\n\nContains error description when ok is false."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 23,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 44,
               "col": 2,
-              "byteIndex": 485
+              "byteIndex": 1092
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "string",
-              "kind": "keyword",
-              "keyword": "string"
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
             },
             "typeParams": []
           },
           {
             "name": "headers",
             "jsDoc": {
-              "doc": "Response headers"
+              "doc": "Response headers.\n\nHTTP headers sent at the beginning of the response."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 26,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 51,
               "col": 2,
-              "byteIndex": 540
+              "byteIndex": 1231
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "Record",
+              "repr": "Headers",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                ],
-                "typeName": "Record"
+                "typeParams": null,
+                "typeName": "Headers"
               }
             },
             "typeParams": []
@@ -1292,35 +1283,24 @@
           {
             "name": "trailers",
             "jsDoc": {
-              "doc": "Response trailers (sent at end of RPC)"
+              "doc": "Response trailers (sent at end of RPC).\n\nAdditional metadata sent after the response body in streaming RPCs."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 29,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 58,
               "col": 2,
-              "byteIndex": 633
+              "byteIndex": 1396
             },
             "params": [],
             "readonly": true,
             "computed": false,
             "optional": false,
             "tsType": {
-              "repr": "Record",
+              "repr": "Headers",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": [
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  },
-                  {
-                    "repr": "string",
-                    "kind": "keyword",
-                    "keyword": "string"
-                  }
-                ],
-                "typeName": "Record"
+                "typeParams": null,
+                "typeName": "Headers"
               }
             },
             "typeParams": []
@@ -1328,13 +1308,13 @@
           {
             "name": "duration",
             "jsDoc": {
-              "doc": "Response time in milliseconds."
+              "doc": "Response time in milliseconds.\n\nInherited from ClientResult. Measures the full RPC duration."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.0.7/response.ts",
-              "line": 32,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "line": 65,
               "col": 2,
-              "byteIndex": 719
+              "byteIndex": 1546
             },
             "params": [],
             "readonly": true,
@@ -1357,14 +1337,14 @@
       "name": "DenoKvResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-deno-kv/0.0.7/results.ts",
-        "line": 131,
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.3.0/results.ts",
+        "line": 177,
         "col": 0,
-        "byteIndex": 2726
+        "byteIndex": 3683
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all Deno KV result types.\nUsed by expectDenoKvResult to determine the appropriate expectation type."
+        "doc": "Union of all Deno KV result types."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -1448,10 +1428,10 @@
       "name": "GraphqlResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-        "line": 25,
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+        "line": 8,
         "col": 0,
-        "byteIndex": 708
+        "byteIndex": 210
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1459,7 +1439,16 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [
           {
@@ -1469,10 +1458,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 54,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 64,
               "col": 2,
-              "byteIndex": 1482
+              "byteIndex": 1609
             },
             "params": [],
             "optional": false,
@@ -1508,19 +1497,43 @@
                 }
               }
             ]
+          },
+          {
+            "name": "raw",
+            "jsDoc": {
+              "doc": "Get the raw Web standard Response object.\nUseful for streaming or accessing low-level response details."
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 70,
+              "col": 2,
+              "byteIndex": 1763
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "globalThis.Response",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "globalThis.Response"
+              }
+            },
+            "typeParams": []
           }
         ],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
             "jsDoc": {
-              "doc": "Result type identifier"
+              "doc": "Result kind discriminator.\n\nAlways `\"graphql\"` for GraphQL responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 27,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 15,
               "col": 2,
-              "byteIndex": 786
+              "byteIndex": 448
             },
             "params": [],
             "readonly": true,
@@ -1539,13 +1552,13 @@
           {
             "name": "ok",
             "jsDoc": {
-              "doc": "Whether the request was successful (no errors)"
+              "doc": "Whether the request was successful (no errors).\n\nInherited from ClientResult. True when errors array is null or empty,\nfalse when GraphQL errors are present."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 30,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 23,
               "col": 2,
-              "byteIndex": 871
+              "byteIndex": 666
             },
             "params": [],
             "readonly": true,
@@ -1561,13 +1574,13 @@
           {
             "name": "errors",
             "jsDoc": {
-              "doc": "GraphQL errors array (null if no errors)"
+              "doc": "GraphQL errors array (null if no errors).\n\nContains validation, execution, or resolver errors from the GraphQL server."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 33,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 30,
               "col": 2,
-              "byteIndex": 946
+              "byteIndex": 836
             },
             "params": [],
             "readonly": true,
@@ -1608,13 +1621,13 @@
           {
             "name": "extensions",
             "jsDoc": {
-              "doc": "Response extensions"
+              "doc": "Response extensions.\n\nCustom metadata added by the GraphQL server (tracing, metrics, etc.)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 36,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 37,
               "col": 2,
-              "byteIndex": 1031
+              "byteIndex": 1010
             },
             "params": [],
             "readonly": true,
@@ -1644,13 +1657,13 @@
           {
             "name": "duration",
             "jsDoc": {
-              "doc": "Response time in milliseconds"
+              "doc": "Response time in milliseconds.\n\nInherited from ClientResult. Measures the full request/response cycle."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 39,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 44,
               "col": 2,
-              "byteIndex": 1120
+              "byteIndex": 1189
             },
             "params": [],
             "readonly": true,
@@ -1666,13 +1679,13 @@
           {
             "name": "status",
             "jsDoc": {
-              "doc": "HTTP status code"
+              "doc": "HTTP status code.\n\nThe underlying HTTP status (typically 200 even for GraphQL errors)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 42,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 51,
               "col": 2,
-              "byteIndex": 1176
+              "byteIndex": 1332
             },
             "params": [],
             "readonly": true,
@@ -1688,13 +1701,13 @@
           {
             "name": "headers",
             "jsDoc": {
-              "doc": "Headers from the HTTP response"
+              "doc": "Headers from the HTTP response.\n\nIncludes content-type, cache-control, and custom headers."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 45,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "line": 58,
               "col": 2,
-              "byteIndex": 1244
+              "byteIndex": 1477
             },
             "params": [],
             "readonly": true,
@@ -1706,31 +1719,6 @@
               "typeRef": {
                 "typeParams": null,
                 "typeName": "Headers"
-              }
-            },
-            "typeParams": []
-          },
-          {
-            "name": "raw",
-            "jsDoc": {
-              "doc": "Raw Web standard Response (for streaming or special cases)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.0.7/types.ts",
-              "line": 48,
-              "col": 2,
-              "byteIndex": 1342
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "globalThis.Response",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "globalThis.Response"
               }
             },
             "typeParams": []
@@ -1754,10 +1742,10 @@
       "name": "HttpResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
         "line": 9,
         "col": 0,
-        "byteIndex": 277
+        "byteIndex": 276
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1765,7 +1753,16 @@
       },
       "kind": "interface",
       "interfaceDef": {
-        "extends": [],
+        "extends": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "constructors": [],
         "methods": [
           {
@@ -1775,10 +1772,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 36,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 41,
               "col": 2,
-              "byteIndex": 937
+              "byteIndex": 1090
             },
             "params": [],
             "optional": false,
@@ -1810,10 +1807,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 39,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 44,
               "col": 2,
-              "byteIndex": 1019
+              "byteIndex": 1172
             },
             "params": [],
             "optional": false,
@@ -1845,10 +1842,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 42,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 47,
               "col": 2,
-              "byteIndex": 1087
+              "byteIndex": 1240
             },
             "params": [],
             "optional": false,
@@ -1871,7 +1868,7 @@
             "typeParams": []
           },
           {
-            "name": "json",
+            "name": "data",
             "jsDoc": {
               "doc": "Get body as parsed JSON (null if no body)",
               "tags": [
@@ -1884,10 +1881,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 49,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 54,
               "col": 2,
-              "byteIndex": 1266
+              "byteIndex": 1419
             },
             "params": [],
             "optional": false,
@@ -1920,19 +1917,43 @@
                 }
               }
             ]
+          },
+          {
+            "name": "raw",
+            "jsDoc": {
+              "doc": "Get raw Web standard Response (for streaming or special cases)"
+            },
+            "kind": "method",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 62,
+              "col": 2,
+              "byteIndex": 1626
+            },
+            "params": [],
+            "optional": false,
+            "returnType": {
+              "repr": "globalThis.Response",
+              "kind": "typeRef",
+              "typeRef": {
+                "typeParams": null,
+                "typeName": "globalThis.Response"
+              }
+            },
+            "typeParams": []
           }
         ],
         "properties": [
           {
-            "name": "type",
+            "name": "kind",
             "jsDoc": {
-              "doc": "Result type identifier"
+              "doc": "Result kind discriminator.\n\nAlways `\"http\"` for HTTP responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 11,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 16,
               "col": 2,
-              "byteIndex": 343
+              "byteIndex": 496
             },
             "params": [],
             "readonly": true,
@@ -1954,10 +1975,10 @@
               "doc": "Whether the response was successful (status 200-299)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 16,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 21,
               "col": 2,
-              "byteIndex": 489
+              "byteIndex": 642
             },
             "params": [],
             "readonly": true,
@@ -1976,10 +1997,10 @@
               "doc": "HTTP status code"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 19,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 24,
               "col": 2,
-              "byteIndex": 540
+              "byteIndex": 693
             },
             "params": [],
             "readonly": true,
@@ -1998,10 +2019,10 @@
               "doc": "HTTP status text"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 22,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 27,
               "col": 2,
-              "byteIndex": 594
+              "byteIndex": 747
             },
             "params": [],
             "readonly": true,
@@ -2020,10 +2041,10 @@
               "doc": "Response headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 25,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 30,
               "col": 2,
-              "byteIndex": 652
+              "byteIndex": 805
             },
             "params": [],
             "readonly": true,
@@ -2045,10 +2066,10 @@
               "doc": "Request URL"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 28,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 33,
               "col": 2,
-              "byteIndex": 703
+              "byteIndex": 856
             },
             "params": [],
             "readonly": true,
@@ -2067,10 +2088,10 @@
               "doc": "Response body as raw bytes (null if no body)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 33,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 38,
               "col": 2,
-              "byteIndex": 849
+              "byteIndex": 1002
             },
             "params": [],
             "readonly": true,
@@ -2103,10 +2124,10 @@
               "doc": "Response time in milliseconds"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 54,
+              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "line": 59,
               "col": 2,
-              "byteIndex": 1371
+              "byteIndex": 1524
             },
             "params": [],
             "readonly": true,
@@ -2116,31 +2137,6 @@
               "repr": "number",
               "kind": "keyword",
               "keyword": "number"
-            },
-            "typeParams": []
-          },
-          {
-            "name": "raw",
-            "jsDoc": {
-              "doc": "Raw Web standard Response (for streaming or special cases)"
-            },
-            "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.0.7/types.ts",
-              "line": 57,
-              "col": 2,
-              "byteIndex": 1469
-            },
-            "params": [],
-            "readonly": true,
-            "computed": false,
-            "optional": false,
-            "tsType": {
-              "repr": "globalThis.Response",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "globalThis.Response"
-              }
             },
             "typeParams": []
           }
@@ -2154,14 +2150,14 @@
       "name": "MongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.0.7/types.ts",
-        "line": 111,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "line": 151,
         "col": 0,
-        "byteIndex": 2431
+        "byteIndex": 3035
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all MongoDB result types.\nUsed by expectMongoResult to determine the appropriate expectation type."
+        "doc": "Union of all MongoDB result types."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -2261,14 +2257,14 @@
       "name": "RabbitMqResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.0.7/types.ts",
-        "line": 260,
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.3.0/result.ts",
+        "line": 87,
         "col": 0,
-        "byteIndex": 5976
+        "byteIndex": 1813
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all RabbitMQ result types.\nUsed by expectRabbitMqResult to determine the appropriate expectation type."
+        "doc": "Union of all RabbitMQ result types."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -2325,14 +2321,14 @@
       "name": "RedisResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-redis/0.0.7/types.ts",
-        "line": 61,
+        "filename": "https://jsr.io/@probitas/client-redis/0.3.0/result.ts",
+        "line": 97,
         "col": 0,
-        "byteIndex": 1319
+        "byteIndex": 2073
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union of all Redis result types.\nUsed by expectRedisResult to determine the appropriate expectation type."
+        "doc": "Union of all Redis result types."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -2424,10 +2420,10 @@
       "name": "SqlQueryResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-        "line": 38,
+        "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+        "line": 31,
         "col": 0,
-        "byteIndex": 875
+        "byteIndex": 774
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -2466,15 +2462,43 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 45,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 82,
               "col": 2,
-              "byteIndex": 1089
+              "byteIndex": 2019
             }
           }
         ],
         "properties": [
           {
+            "jsDoc": {
+              "doc": "Result kind discriminator.\n\nAlways `\"sql\"` for SQL query results. Use this in switch statements\nfor type-safe narrowing of union types."
+            },
+            "tsType": {
+              "repr": "sql",
+              "kind": "literal",
+              "literal": {
+                "kind": "string",
+                "string": "sql"
+              }
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": false,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "kind",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 38,
+              "col": 2,
+              "byteIndex": 1022
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Whether the query succeeded.\n\nInherited from ClientResult. Always true for successful queries."
+            },
             "tsType": {
               "repr": "boolean",
               "kind": "keyword",
@@ -2487,13 +2511,16 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 39,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 45,
               "col": 2,
-              "byteIndex": 932
+              "byteIndex": 1178
             }
           },
           {
+            "jsDoc": {
+              "doc": "Query result rows.\n\nProvides iteration and helper methods for row access."
+            },
             "tsType": {
               "repr": "SqlRows",
               "kind": "typeRef",
@@ -2518,13 +2545,16 @@
             "isStatic": false,
             "name": "rows",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 40,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 52,
               "col": 2,
-              "byteIndex": 956
+              "byteIndex": 1303
             }
           },
           {
+            "jsDoc": {
+              "doc": "Number of affected rows (for INSERT/UPDATE/DELETE).\n\nFor SELECT queries, this may be 0 or match rows.length depending on the driver."
+            },
             "tsType": {
               "repr": "number",
               "kind": "keyword",
@@ -2537,13 +2567,16 @@
             "isStatic": false,
             "name": "rowCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 41,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 59,
               "col": 2,
-              "byteIndex": 985
+              "byteIndex": 1492
             }
           },
           {
+            "jsDoc": {
+              "doc": "Query execution duration in milliseconds.\n\nInherited from ClientResult. Measures the full query execution time."
+            },
             "tsType": {
               "repr": "number",
               "kind": "keyword",
@@ -2556,32 +2589,76 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 42,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 66,
               "col": 2,
-              "byteIndex": 1014
+              "byteIndex": 1660
             }
           },
           {
+            "jsDoc": {
+              "doc": "Last inserted ID (for INSERT statements).\n\nType varies by database (bigint for MySQL, string for others)."
+            },
             "tsType": {
-              "repr": "SqlQueryResultMetadata",
-              "kind": "typeRef",
-              "typeRef": {
-                "typeParams": null,
-                "typeName": "SqlQueryResultMetadata"
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "bigint",
+                  "kind": "keyword",
+                  "keyword": "bigint"
+                },
+                {
+                  "repr": "string",
+                  "kind": "keyword",
+                  "keyword": "string"
+                }
+              ]
+            },
+            "readonly": true,
+            "accessibility": null,
+            "optional": true,
+            "isAbstract": false,
+            "isStatic": false,
+            "name": "lastInsertId",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 73,
+              "col": 2,
+              "byteIndex": 1822
+            }
+          },
+          {
+            "jsDoc": {
+              "doc": "Warning messages from the database.\n\nPresent only when the query generates warnings."
+            },
+            "tsType": {
+              "repr": "",
+              "kind": "typeOperator",
+              "typeOperator": {
+                "operator": "readonly",
+                "tsType": {
+                  "repr": "",
+                  "kind": "array",
+                  "array": {
+                    "repr": "string",
+                    "kind": "keyword",
+                    "keyword": "string"
+                  }
+                }
               }
             },
             "readonly": true,
             "accessibility": null,
-            "optional": false,
+            "optional": true,
             "isAbstract": false,
             "isStatic": false,
-            "name": "metadata",
+            "name": "warnings",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 43,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 80,
               "col": 2,
-              "byteIndex": 1043
+              "byteIndex": 1977
             }
           }
         ],
@@ -2658,10 +2735,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 56,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 94,
               "col": 2,
-              "byteIndex": 1348
+              "byteIndex": 2321
             }
           },
           {
@@ -2735,15 +2812,24 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.0.6/result.ts",
-              "line": 67,
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "line": 105,
               "col": 2,
-              "byteIndex": 1563
+              "byteIndex": 2536
             }
           }
         ],
         "extends": null,
-        "implements": [],
+        "implements": [
+          {
+            "repr": "ClientResult",
+            "kind": "typeRef",
+            "typeRef": {
+              "typeParams": null,
+              "typeName": "ClientResult"
+            }
+          }
+        ],
         "typeParams": [
           {
             "name": "T",
@@ -2775,14 +2861,14 @@
       "name": "SqsResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.0.7/types.ts",
-        "line": 198,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "line": 142,
         "col": 0,
-        "byteIndex": 5081
+        "byteIndex": 2982
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "Union type of all SQS result types.\nUsed for type-safe handling in the unified expectSqsResult function."
+        "doc": "Union type of all SQS result types."
       },
       "kind": "typeAlias",
       "typeAliasDef": {
@@ -12656,5 +12742,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T22:09:51.944Z"
+  "generatedAt": "2025-12-12T09:23:52.790Z"
 }

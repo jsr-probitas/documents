@@ -1,14 +1,14 @@
 {
   "name": "reporter",
   "specifier": "@probitas/reporter",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "moduleDoc": "Test result reporting and formatting for Probitas.\n\nThis package provides multiple reporter implementations for formatting and\ndisplaying test execution results. All reporters implement the {@linkcode Reporter}\ninterface from `@probitas/runner` and can be passed to `ScenarioRunner.run()`.\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package (recommended for most users)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/runner](https://jsr.io/@probitas/runner) | Uses reporters for output |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | CLI that uses these reporters |\n| [@probitas/logger](https://jsr.io/@probitas/logger) | Logging used during execution |\n\n## Available Reporters\n\n- {@linkcode ListReporter} - Detailed hierarchical output showing scenario and step names\n- {@linkcode DotReporter} - Compact single-character output (`.` for pass, `F` for fail)\n- {@linkcode TapReporter} - TAP (Test Anything Protocol) format for CI integration\n- {@linkcode JsonReporter} - JSON output for machine-readable results\n\n## Base Class\n\n- {@linkcode BaseReporter} - Abstract base class with common functionality:\n  - Output stream management (defaults to stderr)\n  - Serialized write operations for concurrent scenarios\n  - Customizable color themes (use `noColor` option to disable)\n\n## Theming\n\n- {@linkcode Theme} - Interface defining semantic color functions\n- {@linkcode defaultTheme} - Default colored theme\n- {@linkcode noColorTheme} - Theme without ANSI color codes\n\n## Configuration Types\n\n- {@linkcode ReporterOptions} - Options for reporter initialization\n- {@linkcode ThemeFunction} - Type for theme color functions\n",
   "exports": [
     {
       "name": "TAPReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
         "line": 15,
         "col": 0,
         "byteIndex": 457
@@ -38,7 +38,7 @@
       "name": "TAPReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
         "line": 18,
         "col": 0,
         "byteIndex": 520
@@ -73,7 +73,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
               "line": 24,
               "col": 2,
               "byteIndex": 685
@@ -137,7 +137,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
               "line": 33,
               "col": 2,
               "byteIndex": 911
@@ -232,7 +232,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1715
@@ -296,7 +296,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/tap_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/tap_reporter.ts",
               "line": 103,
               "col": 2,
               "byteIndex": 3036
@@ -322,7 +322,7 @@
       "name": "ListReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
         "line": 36,
         "col": 0,
         "byteIndex": 990
@@ -352,7 +352,7 @@
               "doc": "Custom theme for styling output.\nIf not provided, uses defaultTheme (or noColorTheme if Deno.noColor is set)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
               "line": 41,
               "col": 2,
               "byteIndex": 1185
@@ -380,7 +380,7 @@
       "name": "ListReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
         "line": 75,
         "col": 0,
         "byteIndex": 2140
@@ -434,7 +434,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2335
@@ -513,7 +513,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
               "line": 127,
               "col": 2,
               "byteIndex": 3427
@@ -596,7 +596,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/list_reporter.ts",
               "line": 182,
               "col": 2,
               "byteIndex": 5300
@@ -622,7 +622,7 @@
       "name": "JSONReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
         "line": 19,
         "col": 0,
         "byteIndex": 427
@@ -652,7 +652,7 @@
       "name": "JSONReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
         "line": 21,
         "col": 0,
         "byteIndex": 490
@@ -687,7 +687,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 24,
               "col": 2,
               "byteIndex": 560
@@ -751,7 +751,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 758
@@ -824,7 +824,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 41,
               "col": 2,
               "byteIndex": 921
@@ -873,7 +873,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1117
@@ -935,7 +935,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1268
@@ -997,7 +997,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1466
@@ -1072,7 +1072,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/json_reporter.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 1656
@@ -1098,7 +1098,7 @@
       "name": "DotReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
         "line": 16,
         "col": 0,
         "byteIndex": 469
@@ -1122,7 +1122,7 @@
           {
             "name": "theme",
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 531
@@ -1150,7 +1150,7 @@
       "name": "DotReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
         "line": 20,
         "col": 0,
         "byteIndex": 549
@@ -1185,7 +1185,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
               "line": 24,
               "col": 2,
               "byteIndex": 635
@@ -1251,7 +1251,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
               "line": 39,
               "col": 2,
               "byteIndex": 1032
@@ -1324,7 +1324,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/dot_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/dot_reporter.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1429
@@ -1350,7 +1350,7 @@
       "name": "ThemeFunction",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
         "line": 28,
         "col": 0,
         "byteIndex": 706
@@ -1399,7 +1399,7 @@
       "name": "Theme",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
         "line": 53,
         "col": 0,
         "byteIndex": 1476
@@ -1434,7 +1434,7 @@
               "doc": "Style for successful/passing states"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 55,
               "col": 2,
               "byteIndex": 1548
@@ -1459,7 +1459,7 @@
               "doc": "Style for failed/error states"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1623
@@ -1484,7 +1484,7 @@
               "doc": "Style for skipped states"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 61,
               "col": 2,
               "byteIndex": 1693
@@ -1509,7 +1509,7 @@
               "doc": "Style for secondary/muted information"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1773
@@ -1534,7 +1534,7 @@
               "doc": "Style for titles and headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 67,
               "col": 2,
               "byteIndex": 1843
@@ -1559,7 +1559,7 @@
               "doc": "Style for informational messages"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1919
@@ -1584,7 +1584,7 @@
               "doc": "Style for warnings"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1980
@@ -1609,7 +1609,7 @@
               "doc": "Style for light gray text (used for resource/setup step titles)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
               "line": 76,
               "col": 2,
               "byteIndex": 2089
@@ -1638,7 +1638,7 @@
       "name": "colorTheme",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
         "line": 82,
         "col": 13,
         "byteIndex": 2177
@@ -1664,7 +1664,7 @@
       "name": "noColorTheme",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
         "line": 96,
         "col": 13,
         "byteIndex": 2399
@@ -1690,7 +1690,7 @@
       "name": "defaultTheme",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/theme.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/theme.ts",
         "line": 107,
         "col": 13,
         "byteIndex": 2646
@@ -1706,7 +1706,7 @@
       "name": "ReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.3.2/types.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.3.3/types.ts",
         "line": 21,
         "col": 0,
         "byteIndex": 417
@@ -1743,7 +1743,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/types.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/types.ts",
               "line": 27,
               "col": 2,
               "byteIndex": 546
@@ -1768,7 +1768,7 @@
               "doc": "Custom theme for styling output.\n\nIf not provided, uses {@linkcode defaultTheme} (or {@linkcode noColorTheme}\nif `Deno.noColor` is true)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.3.2/types.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.3.3/types.ts",
               "line": 35,
               "col": 2,
               "byteIndex": 752
@@ -1794,5 +1794,5 @@
       }
     }
   ],
-  "generatedAt": "2025-12-09T22:09:52.099Z"
+  "generatedAt": "2025-12-12T09:23:52.819Z"
 }
