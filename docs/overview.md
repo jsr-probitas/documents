@@ -18,6 +18,8 @@ other backend services.
 
 ### Install CLI
 
+Requires [Deno](https://deno.land/) v2.x or later.
+
 Install the CLI to run scenarios using the shell installer:
 
 ```bash
@@ -28,16 +30,10 @@ curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | 
 
 ```bash
 # Install specific version
-curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.7.1 bash
+curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.7.3 bash
 
 # Install to custom directory
 curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_INSTALL_DIR=/usr/local/bin bash
-```
-
-Alternatively, install via Deno:
-
-```bash
-deno install -grAf -n probitas jsr:@probitas/cli
 ```
 
 ### Using Nix
