@@ -30,32 +30,39 @@ Add Probitas to your project's `deno.json`:
 
 ### Install CLI
 
-Install the CLI to run scenarios:
+Install the CLI to run scenarios using the shell installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | bash
+```
+
+**Options via environment variables:**
+
+```bash
+# Install specific version
+curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_VERSION=0.7.1 bash
+
+# Install to custom directory
+curl -fsSL https://raw.githubusercontent.com/jsr-probitas/cli/main/install.sh | PROBITAS_INSTALL_DIR=/usr/local/bin bash
+```
+
+Alternatively, install via Deno:
 
 ```bash
 deno install -grAf -n probitas jsr:@probitas/cli
 ```
 
-- `-g` Global install
-- `-r` Reload cache (fetch latest version)
-- `-A` All permissions
-- `-f` Force overwrite existing
-- `-n probitas` Command name
-
 ### Using Nix
 
-Use the flake to run or install the CLI without Deno-level globals:
+Use the flake to run or install the CLI:
 
 ```bash
 # Run without installing
-nix run github:jsr-probitas/probitas
+nix run github:jsr-probitas/cli
 
 # Install into your profile
-nix profile install github:jsr-probitas/probitas#probitas
+nix profile install github:jsr-probitas/cli
 ```
-
-The flake packages a wrapper that runs the bundled CLI with the repository
-import map and lockfile.
 
 ## Quick Start
 
@@ -92,19 +99,6 @@ src/
 ```
 
 ## Running Scenarios
-
-### Initialize a Project
-
-```bash
-probitas init
-```
-
-This creates:
-
-- deno.json - Configuration with probitas import and settings
-- probitas/example.probitas.ts - Example scenario
-
-### Run Scenarios
 
 ```bash
 # Run all scenarios
