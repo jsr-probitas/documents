@@ -8,7 +8,7 @@ covering the builder API, step context, resources, and best practices.
 A Probitas scenario follows this structure:
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("User API CRUD", {
   tags: ["integration", "api"],
@@ -363,7 +363,7 @@ Throw `Skip` to conditionally skip the remaining steps. This is useful for
 environment-specific tests.
 
 ```typescript
-import { Skip } from "probitas";
+import { Skip } from "jsr:@probitas/probitas";
 
 .step("Check precondition", () => {
   if (!Deno.env.get("INTEGRATION_ENABLED")) {
@@ -424,7 +424,7 @@ options.
 A typical CRUD test that creates, reads, updates, and deletes a resource.
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("User CRUD API", { tags: ["api", "integration"] })
   .resource("http", () =>
@@ -475,7 +475,7 @@ export default scenario("User CRUD API", { tags: ["api", "integration"] })
 Testing database operations with setup/cleanup for table management.
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("Database Transaction", { tags: ["db", "postgres"] })
   .resource("pg", () =>
@@ -531,7 +531,7 @@ export default scenario("Database Transaction", { tags: ["db", "postgres"] })
 Testing gRPC services including unary calls and streaming.
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("gRPC Echo Service", { tags: ["grpc"] })
   .resource("grpc", () =>
@@ -567,7 +567,7 @@ export default scenario("gRPC Echo Service", { tags: ["grpc"] })
 Combining multiple clients (HTTP, database, Redis) in a single end-to-end test.
 
 ```typescript
-import { client, expect, scenario, Skip } from "probitas";
+import { client, expect, scenario, Skip } from "jsr:@probitas/probitas";
 
 export default scenario("Full Stack Test", {
   tags: ["integration", "e2e"],

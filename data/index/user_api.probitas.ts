@@ -1,4 +1,4 @@
-import { client, expect, faker, scenario } from "probitas";
+import { client, expect, faker, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("User API Integration Test", {
   tags: ["integration", "http", "postgres"],

@@ -5,33 +5,27 @@ all available options and common configuration patterns.
 
 ## Project Configuration
 
-Configure Probitas CLI defaults in your `deno.json` or `deno.jsonc` file under
-the `probitas` section:
+Configure Probitas CLI defaults in a `probitas.json` file in your project root:
 
 ```json
 {
-  "imports": {
-    "probitas": "jsr:@probitas/probitas@^0"
-  },
-  "probitas": {
-    "reporter": "list",
-    "includes": ["**/*.probitas.ts"],
-    "excludes": [],
-    "selectors": ["!tag:slow"],
-    "maxConcurrency": 4,
-    "maxFailures": 5
-  }
+  "includes": ["probitas/**/*.probitas.ts"],
+  "excludes": ["**/*.skip.probitas.ts"],
+  "reporter": "list",
+  "maxConcurrency": 4,
+  "timeout": "30s",
+  "selectors": ["!tag:wip"]
 }
 ```
 
-| Option           | Description                               | Default                |
-| ---------------- | ----------------------------------------- | ---------------------- |
-| `reporter`       | Output reporter: `list`, `json`           | `"list"`               |
-| `includes`       | Glob patterns for scenario file discovery | `["**/*.probitas.ts"]` |
-| `excludes`       | Glob patterns to exclude from discovery   | `[]`                   |
-| `selectors`      | Default selectors for filtering scenarios | `[]`                   |
-| `maxConcurrency` | Maximum parallel scenario execution       | unlimited              |
-| `maxFailures`    | Stop after this many failures             | unlimited              |
+| Option           | Description                               | Default                         |
+| ---------------- | ----------------------------------------- | ------------------------------- |
+| `includes`       | Glob patterns for scenario file discovery | `["probitas/**/*.probitas.ts"]` |
+| `excludes`       | Glob patterns to exclude from discovery   | `[]`                            |
+| `reporter`       | Output reporter: `list`, `json`           | `"list"`                        |
+| `maxConcurrency` | Maximum parallel scenario execution       | unlimited                       |
+| `timeout`        | Default timeout for scenarios             | `"30s"`                         |
+| `selectors`      | Default selectors for filtering scenarios | `[]`                            |
 
 ### Selectors
 
@@ -48,9 +42,7 @@ AND logic:
 
 ```json
 {
-  "probitas": {
-    "selectors": ["tag:api,!tag:slow"]
-  }
+  "selectors": ["tag:api,!tag:slow"]
 }
 ```
 
@@ -58,7 +50,7 @@ This runs scenarios with `api` tag AND without `slow` tag.
 
 ### CLI Override
 
-Command-line options override `deno.json` settings:
+Command-line options override `probitas.json` settings:
 
 ```bash
 # Override reporter
@@ -449,7 +441,7 @@ scenario("Test")
 ### Conditional Resources
 
 ```typescript
-import { Skip } from "probitas";
+import { Skip } from "jsr:@probitas/probitas";
 
 scenario("Conditional Features")
   .resource("http", () => createHttpClient(...))

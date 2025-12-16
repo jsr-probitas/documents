@@ -80,7 +80,7 @@ Guidelines for writing and maintaining documentation content.
 Every concept should have a runnable code example:
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("Example")
   .resource("http", client.http.createHttpClient())

@@ -16,18 +16,6 @@ other backend services.
 
 ## Installation
 
-### Add to deno.json
-
-Add Probitas to your project's `deno.json`:
-
-```json
-{
-  "imports": {
-    "probitas": "jsr:@probitas/probitas"
-  }
-}
-```
-
 ### Install CLI
 
 Install the CLI to run scenarios using the shell installer:
@@ -67,7 +55,7 @@ nix profile install github:jsr-probitas/cli
 ## Quick Start
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("User API Test")
   .resource("http", () =>
@@ -88,14 +76,14 @@ export default scenario("User API Test")
 
 ## File Naming Convention
 
-Scenario files should use the `.probitas.ts` extension:
+Scenario files should use the `.probitas.ts` extension and be placed in the
+`probitas/` directory:
 
 ```
-src/
-  probitas/
-    auth.probitas.ts
-    user-crud.probitas.ts
-    payment-flow.probitas.ts
+probitas/
+  auth.probitas.ts
+  user-crud.probitas.ts
+  payment-flow.probitas.ts
 ```
 
 ## Running Scenarios
@@ -210,7 +198,7 @@ import {
   spy,
   stub,
   tryOr,
-} from "probitas";
+} from "jsr:@probitas/probitas";
 ```
 
 ## Next Steps

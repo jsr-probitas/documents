@@ -16,7 +16,7 @@ scenario testing. All clients share common patterns:
 - **Built-in assertions**: Use `expect()` for response validation
 
 ```typescript
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 export default scenario("API Test")
   .resource("http", () =>
@@ -351,7 +351,7 @@ See [Configuration](/docs/configuration#graphql-client) for all options.
 Fetch data with GraphQL queries:
 
 ```typescript
-import { outdent } from "probitas";
+import { outdent } from "jsr:@probitas/probitas";
 
 const res = await graphql.query(
   outdent`

@@ -1,4 +1,4 @@
-import { client, expect, scenario } from "probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 import { getPackageList } from "../data/api-pages.ts";
 import { docPages } from "../data/docs.ts";
 
