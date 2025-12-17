@@ -65,6 +65,28 @@ nix profile install github:jsr-probitas/cli
 
 ## Quick Start
 
+### Initialize a Project
+
+Create a new Probitas project with example files:
+
+```bash
+# Create probitas/ directory with example files
+probitas init
+
+# Create custom directory
+probitas init -d scenarios
+
+# Overwrite existing files
+probitas init --force
+```
+
+This creates:
+
+- `example.probitas.ts` - Example scenario file
+- `probitas.jsonc` - Configuration file with defaults
+
+### Your First Scenario
+
 ```typescript
 import { client, expect, scenario } from "jsr:@probitas/probitas";
 

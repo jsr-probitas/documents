@@ -5,15 +5,36 @@ all available options and common configuration patterns.
 
 ## Project Configuration
 
-Configure Probitas CLI defaults in a `probitas.json` file in your project root:
+Configure Probitas CLI defaults in a configuration file in your project root.
 
-```json
+### Configuration File Names
+
+Probitas looks for configuration files in this priority order:
+
+1. `probitas.json` - Standard JSON format
+2. `probitas.jsonc` - JSON with comments (recommended)
+3. `.probitas.json` - Hidden JSON format
+4. `.probitas.jsonc` - Hidden JSON with comments
+
+The first file found is used. JSONC files support `//` and `/* */` comments.
+
+### Configuration Options
+
+```jsonc
 {
+  // Glob patterns for scenario file discovery
   "includes": ["probitas/**/*.probitas.ts"],
+  // Glob patterns to exclude from discovery
   "excludes": ["**/*.skip.probitas.ts"],
+  // Output reporter (list, json)
   "reporter": "list",
+  // Maximum parallel scenario execution (0 = unlimited)
   "maxConcurrency": 4,
+  // Maximum failures before stopping (0 = unlimited)
+  "maxFailures": 0,
+  // Default timeout for scenarios
   "timeout": "30s",
+  // Default selectors for filtering scenarios
   "selectors": ["!tag:wip"]
 }
 ```
@@ -23,9 +44,25 @@ Configure Probitas CLI defaults in a `probitas.json` file in your project root:
 | `includes`       | Glob patterns for scenario file discovery | `["probitas/**/*.probitas.ts"]` |
 | `excludes`       | Glob patterns to exclude from discovery   | `[]`                            |
 | `reporter`       | Output reporter: `list`, `json`           | `"list"`                        |
-| `maxConcurrency` | Maximum parallel scenario execution       | unlimited                       |
+| `maxConcurrency` | Maximum parallel scenario execution       | unlimited (`0`)                 |
+| `maxFailures`    | Maximum failures before stopping          | unlimited (`0`)                 |
 | `timeout`        | Default timeout for scenarios             | `"30s"`                         |
 | `selectors`      | Default selectors for filtering scenarios | `[]`                            |
+
+### maxFailures
+
+Controls when the test runner stops execution:
+
+- `0` (default): Run all scenarios regardless of failures
+- `1`: Fail-fast mode - stop immediately on first failure
+- `n`: Stop after n failures
+
+```jsonc
+{
+  // Fail-fast: stop on first failure
+  "maxFailures": 1
+}
+```
 
 ### Selectors
 
@@ -50,7 +87,7 @@ This runs scenarios with `api` tag AND without `slow` tag.
 
 ### CLI Override
 
-Command-line options override `probitas.json` settings:
+Command-line options override configuration file settings:
 
 ```bash
 # Override reporter
@@ -58,6 +95,9 @@ probitas run --reporter json
 
 # Override concurrency
 probitas run --max-concurrency 1
+
+# Fail-fast mode
+probitas run --max-failures 1
 
 # Add selectors (combined with config selectors)
 probitas run -s tag:smoke
