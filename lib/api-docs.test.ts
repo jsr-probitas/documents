@@ -233,6 +233,181 @@ Deno.test("formatType - formats type literal with optional property", () => {
   assertEquals(formatType(type), "{ name?: string }");
 });
 
+Deno.test("formatType - formats long type literal with multiline", () => {
+  const type: TsTypeDef = {
+    repr: "",
+    kind: "typeLiteral",
+    typeLiteral: {
+      methods: [],
+      properties: [
+        {
+          name: "OK",
+          tsType: { repr: "number", kind: "keyword", keyword: "number" },
+        },
+        {
+          name: "CANCELLED",
+          tsType: { repr: "number", kind: "keyword", keyword: "number" },
+        },
+        {
+          name: "UNKNOWN",
+          tsType: { repr: "number", kind: "keyword", keyword: "number" },
+        },
+        {
+          name: "INVALID_ARGUMENT",
+          tsType: { repr: "number", kind: "keyword", keyword: "number" },
+        },
+      ],
+      callSignatures: [],
+      indexSignatures: [],
+    },
+  };
+  // 4+ properties should trigger multiline formatting
+  const result = formatType(type);
+  assertEquals(result.includes("\n"), true);
+  assertEquals(result.includes("OK: number;"), true);
+  assertEquals(result.includes("INVALID_ARGUMENT: number;"), true);
+});
+
+Deno.test("formatType - formats empty type literal", () => {
+  const type: TsTypeDef = {
+    repr: "{}",
+    kind: "typeLiteral",
+    typeLiteral: {
+      methods: [],
+      properties: [],
+      callSignatures: [],
+      indexSignatures: [],
+    },
+  };
+  assertEquals(formatType(type), "{}");
+});
+
+Deno.test("formatType - formats conditional type", () => {
+  const type: TsTypeDef = {
+    repr: "",
+    kind: "conditional",
+    conditionalType: {
+      checkType: {
+        repr: "T",
+        kind: "typeRef",
+        typeRef: { typeName: "T", typeParams: null },
+      },
+      extendsType: { repr: "string", kind: "keyword", keyword: "string" },
+      trueType: {
+        repr: "A",
+        kind: "typeRef",
+        typeRef: { typeName: "A", typeParams: null },
+      },
+      falseType: {
+        repr: "B",
+        kind: "typeRef",
+        typeRef: { typeName: "B", typeParams: null },
+      },
+    },
+  };
+  assertEquals(formatType(type), "T extends string ? A : B");
+});
+
+Deno.test("formatType - formats nested conditional type with multiline", () => {
+  const type: TsTypeDef = {
+    repr: "",
+    kind: "conditional",
+    conditionalType: {
+      checkType: {
+        repr: "R",
+        kind: "typeRef",
+        typeRef: { typeName: "R", typeParams: null },
+      },
+      extendsType: {
+        repr: "TypeA",
+        kind: "typeRef",
+        typeRef: { typeName: "TypeA", typeParams: null },
+      },
+      trueType: {
+        repr: "ResultA",
+        kind: "typeRef",
+        typeRef: { typeName: "ResultA", typeParams: null },
+      },
+      falseType: {
+        repr: "",
+        kind: "conditional",
+        conditionalType: {
+          checkType: {
+            repr: "R",
+            kind: "typeRef",
+            typeRef: { typeName: "R", typeParams: null },
+          },
+          extendsType: {
+            repr: "TypeB",
+            kind: "typeRef",
+            typeRef: { typeName: "TypeB", typeParams: null },
+          },
+          trueType: {
+            repr: "ResultB",
+            kind: "typeRef",
+            typeRef: { typeName: "ResultB", typeParams: null },
+          },
+          falseType: { repr: "never", kind: "keyword", keyword: "never" },
+        },
+      },
+    },
+  };
+  const result = formatType(type);
+  // Nested conditional should have line breaks
+  assertEquals(result.includes("\n"), true);
+  assertEquals(result.includes("R extends TypeA"), true);
+  assertEquals(result.includes("? ResultA"), true);
+  assertEquals(result.includes(": R extends TypeB"), true);
+});
+
+Deno.test("formatType - formats infer type", () => {
+  const type: TsTypeDef = {
+    repr: "",
+    kind: "infer",
+    infer: {
+      typeParam: { name: "T" },
+    },
+  };
+  assertEquals(formatType(type), "infer T");
+});
+
+Deno.test("formatType - formats long union type with multiline", () => {
+  const type: TsTypeDef = {
+    repr: "",
+    kind: "union",
+    union: [
+      {
+        repr: "VeryLongTypeNameForFirstMember",
+        kind: "typeRef",
+        typeRef: {
+          typeName: "VeryLongTypeNameForFirstMember",
+          typeParams: null,
+        },
+      },
+      {
+        repr: "VeryLongTypeNameForSecondMember",
+        kind: "typeRef",
+        typeRef: {
+          typeName: "VeryLongTypeNameForSecondMember",
+          typeParams: null,
+        },
+      },
+      {
+        repr: "VeryLongTypeNameForThirdMember",
+        kind: "typeRef",
+        typeRef: {
+          typeName: "VeryLongTypeNameForThirdMember",
+          typeParams: null,
+        },
+      },
+    ],
+  };
+  const result = formatType(type);
+  // Long union (>80 chars) should have line breaks
+  assertEquals(result.includes("\n"), true);
+  assertEquals(result.includes("| VeryLongTypeNameForSecondMember"), true);
+});
+
 // ============================================================================
 // formatParams Tests
 // ============================================================================

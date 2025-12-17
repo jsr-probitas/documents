@@ -66,6 +66,15 @@ export function extractTypeRefs(type: TsTypeDef | undefined): Set<string> {
           });
         }
         break;
+      case "conditional":
+        if (t.conditionalType) {
+          walk(t.conditionalType.checkType);
+          walk(t.conditionalType.extendsType);
+          walk(t.conditionalType.trueType);
+          walk(t.conditionalType.falseType);
+        }
+        break;
+        // "infer" types don't reference external types, they introduce new ones
     }
   }
 

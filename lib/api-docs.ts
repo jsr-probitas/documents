@@ -145,6 +145,15 @@ export interface TsTypeDef {
     callSignatures: CallSignatureDef[];
     indexSignatures: IndexSignatureDef[];
   };
+  conditionalType?: {
+    checkType: TsTypeDef;
+    extendsType: TsTypeDef;
+    trueType: TsTypeDef;
+    falseType: TsTypeDef;
+  };
+  infer?: {
+    typeParam: TsTypeParamDef;
+  };
 }
 
 export interface TsTypeParamDef {
@@ -360,8 +369,11 @@ export interface PackageInfo {
 
 /**
  * Format a type definition as a readable string
+ *
+ * @param type - The type definition to format
+ * @param indent - Current indentation level (used for nested conditionals)
  */
-export function formatType(type?: TsTypeDef): string {
+export function formatType(type?: TsTypeDef, indent = 0): string {
   if (!type) return "unknown";
 
   switch (type.kind) {
@@ -373,7 +385,7 @@ export function formatType(type?: TsTypeDef): string {
         const params = type.typeRef.typeParams;
         if (params && params.length > 0) {
           return `${type.typeRef.typeName}<${
-            params.map(formatType).join(", ")
+            params.map((p) => formatType(p, indent)).join(", ")
           }>`;
         }
         return type.typeRef.typeName;
@@ -381,13 +393,35 @@ export function formatType(type?: TsTypeDef): string {
       return type.repr;
 
     case "array":
-      return `${formatType(type.array)}[]`;
+      return `${formatType(type.array, indent)}[]`;
 
-    case "union":
-      return type.union?.map(formatType).join(" | ") ?? type.repr;
+    case "union": {
+      if (!type.union) return type.repr;
+      const members = type.union.map((t) => formatType(t, indent));
+      const inline = members.join(" | ");
+      // Break into multiple lines if too long (>80 chars) and has multiple members
+      if (inline.length > 80 && members.length > 1) {
+        const spaces = "  ".repeat(indent);
+        return members.map((m, i) => i === 0 ? m : `${spaces}| ${m}`).join(
+          "\n",
+        );
+      }
+      return inline;
+    }
 
-    case "intersection":
-      return type.intersection?.map(formatType).join(" & ") ?? type.repr;
+    case "intersection": {
+      if (!type.intersection) return type.repr;
+      const members = type.intersection.map((t) => formatType(t, indent));
+      const inline = members.join(" & ");
+      // Break into multiple lines if too long (>80 chars) and has multiple members
+      if (inline.length > 80 && members.length > 1) {
+        const spaces = "  ".repeat(indent);
+        return members.map((m, i) => i === 0 ? m : `${spaces}& ${m}`).join(
+          "\n",
+        );
+      }
+      return inline;
+    }
 
     case "literal":
       if (type.literal) {
@@ -400,30 +434,67 @@ export function formatType(type?: TsTypeDef): string {
       return type.repr;
 
     case "tuple":
-      return `[${type.tuple?.map(formatType).join(", ") ?? ""}]`;
+      return `[${
+        type.tuple?.map((t) => formatType(t, indent)).join(", ") ?? ""
+      }]`;
 
     case "fnOrConstructor": {
       const fn = type.fnOrConstructor;
       if (!fn) return type.repr;
       const params = fn.params.map((p) =>
-        `${p.name ?? "_"}: ${formatType(p.tsType)}`
+        `${p.name ?? "_"}: ${formatType(p.tsType, indent)}`
       ).join(", ");
-      return `(${params}) => ${formatType(fn.returnType)}`;
+      return `(${params}) => ${formatType(fn.returnType, indent)}`;
     }
 
     case "typeOperator": {
       const op = type.typeOperator;
       if (!op) return type.repr;
-      return `${op.operator} ${formatType(op.tsType)}`;
+      return `${op.operator} ${formatType(op.tsType, indent)}`;
     }
 
     case "typeLiteral": {
       const lit = type.typeLiteral;
       if (!lit) return type.repr;
-      const props = lit.properties.map((p) =>
-        `${p.name}${p.optional ? "?" : ""}: ${formatType(p.tsType)}`
-      ).join("; ");
-      return `{ ${props} }`;
+      const propStrings = lit.properties.map((p) =>
+        `${p.name}${p.optional ? "?" : ""}: ${formatType(p.tsType, indent + 1)}`
+      );
+      if (propStrings.length === 0) return "{}";
+      const inline = `{ ${propStrings.join("; ")} }`;
+      // Break into multiple lines if too long (>80 chars) or has many properties
+      if (inline.length > 80 || propStrings.length > 3) {
+        const spaces = "  ".repeat(indent);
+        const multiline = propStrings
+          .map((s) => `${spaces}  ${s};`)
+          .join("\n");
+        return `{\n${multiline}\n${spaces}}`;
+      }
+      return inline;
+    }
+
+    case "conditional": {
+      const cond = type.conditionalType;
+      if (!cond) return type.repr;
+
+      const check = formatType(cond.checkType, indent);
+      const ext = formatType(cond.extendsType, indent);
+      const trueT = formatType(cond.trueType, indent);
+
+      // If falseType is also conditional, format with line breaks for readability
+      if (cond.falseType.kind === "conditional") {
+        const spaces = "  ".repeat(indent);
+        const falseT = formatType(cond.falseType, indent + 1);
+        return `${check} extends ${ext}\n${spaces}  ? ${trueT}\n${spaces}  : ${falseT}`;
+      }
+
+      const falseT = formatType(cond.falseType, indent);
+      return `${check} extends ${ext} ? ${trueT} : ${falseT}`;
+    }
+
+    case "infer": {
+      const inf = type.infer;
+      if (!inf) return type.repr;
+      return `infer ${inf.typeParam.name}`;
     }
 
     default:

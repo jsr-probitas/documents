@@ -14,6 +14,35 @@ import type {
 } from "./api-docs.ts";
 import { formatParams, formatType, formatTypeParams } from "./api-docs.ts";
 
+/** Line length threshold for breaking into multiple lines */
+const LINE_LENGTH_THRESHOLD = 80;
+
+/**
+ * Format parameters with line breaks if the list is long
+ */
+function formatParamsMultiline(
+  params: ParamDef[] | undefined,
+  baseIndent: string,
+): { inline: string; multiline: string } {
+  const inline = formatParams(params);
+  if (!params || params.length === 0) {
+    return { inline, multiline: inline };
+  }
+
+  const paramStrings = params.map((p) => {
+    const optional = p.optional ? "?" : "";
+    const name = p.name ?? "_";
+    const type = formatType(p.tsType);
+    return `${name}${optional}: ${type}`;
+  });
+
+  const multiline = paramStrings
+    .map((s) => `\n${baseIndent}  ${s},`)
+    .join("") + `\n${baseIndent}`;
+
+  return { inline, multiline };
+}
+
 /**
  * Format a function signature as a string for syntax highlighting
  */
@@ -24,9 +53,17 @@ export function formatFunctionSignature(
   const asyncPrefix = def.isAsync ? "async " : "";
   const generatorPrefix = def.isGenerator ? "*" : "";
   const typeParams = formatTypeParams(def.typeParams);
-  const params = formatParams(def.params);
   const returnType = formatType(def.returnType);
-  return `${asyncPrefix}function ${generatorPrefix}${name}${typeParams}(${params}): ${returnType}`;
+  const { inline, multiline } = formatParamsMultiline(def.params, "");
+
+  const singleLine =
+    `${asyncPrefix}function ${generatorPrefix}${name}${typeParams}(${inline}): ${returnType}`;
+
+  if (singleLine.length <= LINE_LENGTH_THRESHOLD) {
+    return singleLine;
+  }
+
+  return `${asyncPrefix}function ${generatorPrefix}${name}${typeParams}(${multiline}): ${returnType}`;
 }
 
 /**
@@ -36,9 +73,17 @@ export function formatMethodSignature(method: MethodDef): string {
   const staticPrefix = method.isStatic ? "static " : "";
   const abstractPrefix = method.isAbstract ? "abstract " : "";
   const typeParams = formatTypeParams(method.typeParams);
-  const params = formatParams(method.params);
   const returnType = formatType(method.returnType);
-  return `${staticPrefix}${abstractPrefix}${method.name}${typeParams}(${params}): ${returnType}`;
+  const { inline, multiline } = formatParamsMultiline(method.params, "");
+
+  const singleLine =
+    `${staticPrefix}${abstractPrefix}${method.name}${typeParams}(${inline}): ${returnType}`;
+
+  if (singleLine.length <= LINE_LENGTH_THRESHOLD) {
+    return singleLine;
+  }
+
+  return `${staticPrefix}${abstractPrefix}${method.name}${typeParams}(${multiline}): ${returnType}`;
 }
 
 /**
@@ -58,11 +103,26 @@ export function formatClassSignature(name: string, def: ClassDef): string {
   }
 
   // Implements clause
-  const implementsClause = def.implements && def.implements.length > 0
-    ? ` implements ${def.implements.map(formatType).join(", ")}`
+  const implementsTypes = def.implements?.map(formatType) ?? [];
+  const implementsInline = implementsTypes.length > 0
+    ? ` implements ${implementsTypes.join(", ")}`
     : "";
 
-  return `${abstractPrefix}class ${name}${typeParams}${extendsClause}${implementsClause}`;
+  const singleLine =
+    `${abstractPrefix}class ${name}${typeParams}${extendsClause}${implementsInline}`;
+
+  if (
+    singleLine.length <= LINE_LENGTH_THRESHOLD || implementsTypes.length <= 1
+  ) {
+    return singleLine;
+  }
+
+  // Break implements into multiple lines
+  const implementsMultiline = implementsTypes
+    .map((t, i) => i === 0 ? ` implements ${t}` : `  ${t}`)
+    .join(",\n");
+
+  return `${abstractPrefix}class ${name}${typeParams}${extendsClause}\n${implementsMultiline}`;
 }
 
 /**
@@ -73,10 +133,23 @@ export function formatInterfaceSignature(
   def: InterfaceDef,
 ): string {
   const typeParams = formatTypeParams(def.typeParams);
-  const extendsClause = def.extends && def.extends.length > 0
-    ? ` extends ${def.extends.map(formatType).join(", ")}`
+  const extendsTypes = def.extends?.map(formatType) ?? [];
+  const extendsInline = extendsTypes.length > 0
+    ? ` extends ${extendsTypes.join(", ")}`
     : "";
-  return `interface ${name}${typeParams}${extendsClause}`;
+
+  const singleLine = `interface ${name}${typeParams}${extendsInline}`;
+
+  if (singleLine.length <= LINE_LENGTH_THRESHOLD || extendsTypes.length <= 1) {
+    return singleLine;
+  }
+
+  // Break extends into multiple lines
+  const extendsMultiline = extendsTypes
+    .map((t, i) => i === 0 ? ` extends ${t}` : `  ${t}`)
+    .join(",\n");
+
+  return `interface ${name}${typeParams}\n${extendsMultiline}`;
 }
 
 /**
@@ -88,7 +161,17 @@ export function formatTypeAliasSignature(
 ): string {
   const typeParams = formatTypeParams(def.typeParams);
   const tsType = formatType(def.tsType);
-  return `type ${name}${typeParams} = ${tsType}`;
+  const singleLine = `type ${name}${typeParams} = ${tsType}`;
+
+  // If the type contains newlines (e.g., from conditional or union formatting), indent properly
+  if (tsType.includes("\n")) {
+    const indented = tsType.split("\n").map((line, i) =>
+      i === 0 ? line : `  ${line}`
+    ).join("\n");
+    return `type ${name}${typeParams} = ${indented}`;
+  }
+
+  return singleLine;
 }
 
 /**
@@ -98,5 +181,12 @@ export function formatConstructorSignature(
   className: string,
   params: ParamDef[],
 ): string {
-  return `new ${className}(${formatParams(params)})`;
+  const { inline, multiline } = formatParamsMultiline(params, "");
+  const singleLine = `new ${className}(${inline})`;
+
+  if (singleLine.length <= LINE_LENGTH_THRESHOLD) {
+    return singleLine;
+  }
+
+  return `new ${className}(${multiline})`;
 }

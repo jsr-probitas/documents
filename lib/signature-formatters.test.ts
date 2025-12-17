@@ -637,3 +637,61 @@ Deno.test("formatConstructorSignature - formats constructor with optional params
     "new Service(config?: Config)",
   );
 });
+
+// ============================================================================
+// Edge Cases: undefined params handling
+// ============================================================================
+
+Deno.test("formatMethodSignature - handles undefined params", () => {
+  // MethodDef.params can be undefined in some deno doc JSON output
+  const method = {
+    name: "doSomething",
+    typeParams: [],
+    params: undefined,
+    returnType: { repr: "void", kind: "keyword", keyword: "void" },
+  } as unknown as MethodDef;
+  // Should not throw, should handle gracefully
+  const result = formatMethodSignature(method);
+  assertEquals(result, "doSomething(): void");
+});
+
+Deno.test("formatFunctionSignature - formats long signature with multiline", () => {
+  const params: ParamDef[] = [
+    {
+      kind: "identifier",
+      name: "veryLongParameterName1",
+      tsType: { repr: "string", kind: "keyword", keyword: "string" },
+    },
+    {
+      kind: "identifier",
+      name: "veryLongParameterName2",
+      tsType: { repr: "number", kind: "keyword", keyword: "number" },
+    },
+    {
+      kind: "identifier",
+      name: "veryLongParameterName3",
+      tsType: { repr: "boolean", kind: "keyword", keyword: "boolean" },
+    },
+  ];
+  const def: FunctionDef = {
+    params,
+    hasBody: true,
+    isAsync: false,
+    isGenerator: false,
+    typeParams: [],
+    returnType: { repr: "void", kind: "keyword", keyword: "void" },
+  };
+  const result = formatFunctionSignature("myFunctionWithALongName", def);
+  // Long signature should have line breaks
+  assertEquals(result.includes("\n"), true);
+  assertEquals(result.includes("veryLongParameterName1: string"), true);
+});
+
+Deno.test("formatConstructorSignature - handles undefined params", () => {
+  // Should not throw when params is undefined
+  const result = formatConstructorSignature(
+    "MyClass",
+    undefined as unknown as ParamDef[],
+  );
+  assertEquals(result, "new MyClass()");
+});
