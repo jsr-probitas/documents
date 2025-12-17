@@ -283,14 +283,14 @@
     {
       "name": "probitas",
       "specifier": "@probitas/probitas",
-      "version": "0.5.4",
-      "exportCount": 88,
+      "version": "0.5.5",
+      "exportCount": 84,
       "counts": {
-        "classes": 8,
+        "classes": 7,
         "interfaces": 13,
         "functions": 48,
-        "types": 15,
-        "variables": 3,
+        "types": 13,
+        "variables": 2,
         "enums": 0
       }
     },
