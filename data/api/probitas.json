@@ -1,17 +1,17 @@
 {
   "name": "probitas",
   "specifier": "@probitas/probitas",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "moduleDoc": "Probitas - Scenario-based testing and workflow execution framework.\n\nThis is the main entry point for the Probitas framework. It provides a fluent API\nfor building and executing scenario-based tests with support for:\n\n- **Sequential steps**: Define test steps that execute in order with type-safe context passing\n- **Skip conditions**: Conditionally skip steps or entire scenarios\n- **Rich assertions**: Built-in expect utilities for comprehensive assertions\n- **External clients**: Pre-configured clients for HTTP, databases, message queues, and more\n- **Test utilities**: Faker for test data, time mocking, and function spies\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [Documentation](./.claude/README.md)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/builder](https://jsr.io/@probitas/builder) | Fluent API for building scenario definitions |\n| [@probitas/runner](https://jsr.io/@probitas/runner) | Test execution engine with retry and concurrency |\n| [@probitas/reporter](https://jsr.io/@probitas/reporter) | Output formatters (list, dot, TAP, JSON) |\n| [@probitas/core](https://jsr.io/@probitas/core) | Core type definitions and utilities |\n| [@probitas/discover](https://jsr.io/@probitas/discover) | Scenario file discovery |\n| [@probitas/logger](https://jsr.io/@probitas/logger) | Unified logging interface |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | Command-line interface |\n\n## Core Exports\n\n- {@linkcode scenario} - Factory function to create scenario builders\n- {@linkcode Skip} - Utility to skip steps or scenarios conditionally\n- {@linkcode StepContext} - Type representing the context passed to each step\n- {@linkcode client} - Namespace containing all available client implementations\n- {@linkcode expect} - Assertion utilities (from `@std/expect`)\n\n## Re-exported Utilities\n\nFor convenience, this module also re-exports commonly used testing utilities:\n\n- `faker` - Fake data generation from `@jackfiszr/faker`\n- `FakeTime` - Time mocking utilities from `@std/testing/time`\n- `spy`, `stub`, `assertSpyCalls` - Mock utilities from `@std/testing/mock`\n- `tryOr`, `raise` - Error handling utilities from `@core/errorutil`\n- `outdent` - Template literal tag for removing indentation\n",
   "exports": [
     {
       "name": "client",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/probitas/0.5.3/mod.ts",
-        "line": 102,
+        "filename": "https://jsr.io/@probitas/probitas/0.5.4/mod.ts",
+        "line": 110,
         "col": 7,
-        "byteIndex": 3984
+        "byteIndex": 4502
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -19,11 +19,11 @@
         "tags": [
           {
             "kind": "example",
-            "doc": "HTTP client usage\n```ts\nimport { scenario, client, expect } from \"@probitas/probitas\";\n\nconst api = client.http({ baseUrl: \"https://api.example.com\" });\n\nexport default scenario(\"API Test\")\n  .step(\"Fetch users\", async () => {\n    const response = await api.get(\"/users\");\n    expect(response.status).toBe(200);\n    return response.data();\n  })\n  .build();\n```\n"
+            "doc": "HTTP client usage\n```ts\nimport { scenario, client } from \"@probitas/probitas\";\nimport { expectHttpResponse } from \"@probitas/expect\";\n\nconst api = client.http.createHttpClient({ url: \"https://api.example.com\" });\n\nexport default scenario(\"API Test\")\n  .step(\"Fetch users\", async () => {\n    const response = await api.get(\"/users\");\n    expectHttpResponse(response).toBeOk().toHaveStatus(200);\n    return response.data();\n  })\n  .build();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "MongoDB client usage\n```ts\nimport { scenario, client } from \"@probitas/probitas\";\n\nexport default scenario(\"Database Test\")\n  .resource(\"db\", async () => {\n    return await client.mongodb({ uri: process.env.MONGO_URI });\n  })\n  .step(\"Query data\", async (ctx) => {\n    const users = await ctx.resources.db.collection(\"users\").find().toArray();\n    return { count: users.length };\n  })\n  .build();\n```\n"
+            "doc": "MongoDB client usage\n```ts\nimport { scenario, client } from \"@probitas/probitas\";\n\n// Mock environment variable for this example\nconst mongoUrl = \"mongodb://localhost:27017\";\n\nexport default scenario(\"Database Test\")\n  .resource(\"db\", async () => {\n    return await client.mongodb.createMongoClient({\n      url: mongoUrl,\n      database: \"testdb\",\n    });\n  })\n  .step(\"Query data\", async (ctx) => {\n    const result = await ctx.resources.db.collection(\"users\").find({});\n    return { count: result.docs.length };\n  })\n  .build();\n```\n"
           },
           {
             "kind": "module"
@@ -39,10 +39,10 @@
       "name": "scenario",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.3.1/scenario_builder.ts",
-        "line": 571,
+        "filename": "https://jsr.io/@probitas/builder/0.3.2/scenario_builder.ts",
+        "line": 644,
         "col": 0,
-        "byteIndex": 18358
+        "byteIndex": 20517
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -68,15 +68,15 @@
           },
           {
             "kind": "example",
-            "doc": "Basic scenario with type-safe step chaining\n```ts\nimport { scenario } from \"@probitas/builder\";\n\nexport default scenario(\"User Registration\")\n  .step(\"Create user\", async () => {\n    const user = await createUser({ email: \"test@example.com\" });\n    return { userId: user.id };\n  })\n  .step(\"Verify email\", async (ctx) => {\n    // ctx.previous is typed as { userId: string }\n    await verifyEmail(ctx.previous.userId);\n  })\n  .build();\n```\n"
+            "doc": "Basic scenario with type-safe step chaining\n```ts\nimport { scenario } from \"@probitas/builder\";\n\n// Mock user service for example\nconst createUser = (_data: { email: string }) =>\n  Promise.resolve({ id: \"user-123\" });\nconst verifyEmail = (_userId: string) => Promise.resolve();\n\nexport default scenario(\"User Registration\")\n  .step(\"Create user\", async () => {\n    const user = await createUser({ email: \"test@example.com\" });\n    return { userId: user.id };\n  })\n  .step(\"Verify email\", async (ctx) => {\n    // ctx.previous is typed as { userId: string }\n    await verifyEmail(ctx.previous.userId);\n  })\n  .build();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Scenario with tags for filtering\n```ts\nscenario(\"Payment Integration\", {\n  tags: [\"integration\", \"payment\", \"slow\"],\n  stepOptions: { timeout: 60000 }  // 1 minute timeout for all steps\n})\n  .step(\"Process payment\", async () => { ... })\n  .build();\n\n// Run with: probitas run -s \"tag:payment\"\n```\n"
+            "doc": "Scenario with tags for filtering\n```ts\nimport { scenario } from \"@probitas/builder\";\n\nscenario(\"Payment Integration\", {\n  tags: [\"integration\", \"payment\", \"slow\"],\n  stepOptions: { timeout: 60000 }  // 1 minute timeout for all steps\n})\n  .step(\"Process payment\", async () => {\n    return { success: true };\n  })\n  .build();\n\n// Run with: probitas run -s \"tag:payment\"\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Scenario with resources and setup\n```ts\nscenario(\"Database Test\")\n  .resource(\"db\", async () => await Database.connect())\n  .setup((ctx) => {\n    // Run migrations\n    return () => ctx.resources.db.rollback();\n  })\n  .step(\"Insert data\", (ctx) => ctx.resources.db.insert(...))\n  .step(\"Query data\", (ctx) => ctx.resources.db.query(...))\n  .build();\n```\n"
+            "doc": "Scenario with resources and setup\n```ts\nimport { scenario } from \"@probitas/builder\";\n\n// Mock Database for example\nconst Database = {\n  connect: () =>\n    Promise.resolve({\n      rollback: () => {},\n      insert: (_data: { id: number }) => {},\n      query: (_sql: string) => [{ id: 1 }],\n    }),\n};\n\nscenario(\"Database Test\")\n  .resource(\"db\", async () => await Database.connect())\n  .setup((ctx) => {\n    // Run migrations\n    return () => ctx.resources.db.rollback();\n  })\n  .step(\"Insert data\", (ctx) => ctx.resources.db.insert({ id: 1 }))\n  .step(\"Query data\", (ctx) => ctx.resources.db.query(\"SELECT * FROM users\"))\n  .build();\n```\n"
           },
           {
             "kind": "see",
@@ -133,10 +133,10 @@
       "name": "Skip",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/runner/0.3.2/skip.ts",
-        "line": 62,
+        "filename": "https://jsr.io/@probitas/runner/0.3.3/skip.ts",
+        "line": 76,
         "col": 0,
-        "byteIndex": 1603
+        "byteIndex": 2082
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -144,15 +144,15 @@
         "tags": [
           {
             "kind": "example",
-            "doc": "Skip based on environment\n```ts\nimport { scenario, Skip } from \"@probitas/probitas\";\n\nscenario(\"Production Only\")\n  .step(\"Check environment\", () => {\n    if (Deno.env.get(\"ENV\") !== \"production\") {\n      throw new Skip(\"Only runs in production\");\n    }\n  })\n  .step(\"Production test\", () => { ... })\n  .build();\n```\n"
+            "doc": "Skip based on environment\n```ts\nimport { scenario } from \"@probitas/builder\";\nimport { Skip } from \"@probitas/runner\";\n\nconst def = scenario(\"Production Only\")\n  .step(\"Check environment\", () => {\n    if (Deno.env.get(\"ENV\") !== \"production\") {\n      throw new Skip(\"Only runs in production\");\n    }\n  })\n  .step(\"Production test\", () => {\n    console.log(\"Running in production\");\n  })\n  .build();\nconsole.log(def.name);\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Skip based on resource availability\n```ts\nscenario(\"Database Test\")\n  .resource(\"db\", async () => {\n    try {\n      return await Database.connect();\n    } catch {\n      throw new Skip(\"Database not available\");\n    }\n  })\n  .step(\"Query data\", (ctx) => ctx.resources.db.query(...))\n  .build();\n```\n"
+            "doc": "Skip based on resource availability\n```ts\nimport { scenario } from \"@probitas/builder\";\nimport { Skip } from \"@probitas/runner\";\n\nconst Database = { connect: async () => ({ query: (sql: string) => sql }) };\n\nconst def = scenario(\"Database Test\")\n  .resource(\"db\", async () => {\n    try {\n      return await Database.connect();\n    } catch {\n      throw new Skip(\"Database not available\");\n    }\n  })\n  .step(\"Query data\", (ctx) => ctx.resources.db.query(\"SELECT 1\"))\n  .build();\nconsole.log(def.name);\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Skip with feature flag\n```ts\nscenario(\"Beta Feature\")\n  .step(\"Check feature flag\", (ctx) => {\n    if (!ctx.store.get(\"betaEnabled\")) {\n      throw new Skip(\"Beta feature not enabled\");\n    }\n  })\n  .build();\n```"
+            "doc": "Skip with feature flag\n```ts\nimport { scenario } from \"@probitas/builder\";\nimport { Skip } from \"@probitas/runner\";\n\nconst def = scenario(\"Beta Feature\")\n  .step(\"Check feature flag\", (ctx) => {\n    if (!ctx.store.get(\"betaEnabled\")) {\n      throw new Skip(\"Beta feature not enabled\");\n    }\n  })\n  .build();\nconsole.log(def.name);\n```"
           }
         ]
       },
@@ -171,7 +171,7 @@
                 },
                 {
                   "kind": "example",
-                  "doc": "```ts\nthrow new Skip();                    // message: \"Skipped\", reason: undefined\nthrow new Skip(\"Not on Windows\");    // message: \"Not on Windows\", reason: \"Not on Windows\"\n```"
+                  "doc": "```ts\nimport { Skip } from \"@probitas/runner\";\n\nconst skip1 = new Skip();                    // message: \"Skipped\", reason: undefined\nconst skip2 = new Skip(\"Not on Windows\");    // message: \"Not on Windows\", reason: \"Not on Windows\"\nconsole.log(skip1.message, skip2.reason);\n```"
                 }
               ]
             },
@@ -191,10 +191,10 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.3.2/skip.ts",
-              "line": 84,
+              "filename": "https://jsr.io/@probitas/runner/0.3.3/skip.ts",
+              "line": 101,
               "col": 2,
-              "byteIndex": 2304
+              "byteIndex": 2897
             }
           }
         ],
@@ -215,10 +215,10 @@
             "isStatic": false,
             "name": "reason",
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.3.2/skip.ts",
-              "line": 70,
+              "filename": "https://jsr.io/@probitas/runner/0.3.3/skip.ts",
+              "line": 84,
               "col": 2,
-              "byteIndex": 1857
+              "byteIndex": 2336
             }
           }
         ],
@@ -234,10 +234,10 @@
       "name": "StepContext",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.3.1/types.ts",
-        "line": 40,
+        "filename": "https://jsr.io/@probitas/builder/0.3.2/types.ts",
+        "line": 44,
         "col": 0,
-        "byteIndex": 1233
+        "byteIndex": 1337
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -260,11 +260,11 @@
           },
           {
             "kind": "example",
-            "doc": "Accessing previous result\n```ts\nscenario(\"Chained Steps\")\n  .step(\"First\", () => ({ id: 123 }))\n  .step(\"Second\", (ctx) => {\n    console.log(ctx.previous.id);  // 123 (typed as number)\n  })\n  .build();\n```\n"
+            "doc": "Accessing previous result\n```ts\nimport { scenario } from \"@probitas/builder\";\n\nscenario(\"Chained Steps\")\n  .step(\"First\", () => ({ id: 123 }))\n  .step(\"Second\", (ctx) => {\n    console.log(ctx.previous.id);  // 123 (typed as number)\n  })\n  .build();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using shared store\n```ts\nscenario(\"Store Example\")\n  .setup((ctx) => {\n    ctx.store.set(\"startTime\", Date.now());\n  })\n  .step(\"Check duration\", (ctx) => {\n    const start = ctx.store.get(\"startTime\") as number;\n    console.log(`Elapsed: ${Date.now() - start}ms`);\n  })\n  .build();\n```"
+            "doc": "Using shared store\n```ts\nimport { scenario } from \"@probitas/builder\";\n\nscenario(\"Store Example\")\n  .setup((ctx) => {\n    ctx.store.set(\"startTime\", Date.now());\n  })\n  .step(\"Check duration\", (ctx) => {\n    const start = ctx.store.get(\"startTime\") as number;\n    console.log(`Elapsed: ${Date.now() - start}ms`);\n  })\n  .build();\n```"
           }
         ]
       },
@@ -295,10 +295,10 @@
                       "doc": "Result from the previous step.\n\nFully typed based on what the previous step returned.\nFor the first step, this is `unknown`."
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.3.1/types.ts",
-                      "line": 51,
+                      "filename": "https://jsr.io/@probitas/builder/0.3.2/types.ts",
+                      "line": 55,
                       "col": 2,
-                      "byteIndex": 1574
+                      "byteIndex": 1678
                     },
                     "params": [],
                     "readonly": true,
@@ -317,13 +317,13 @@
                   {
                     "name": "results",
                     "jsDoc": {
-                      "doc": "All accumulated results as a typed tuple.\n\nAllows accessing any previous result by index:\n```ts\nctx.results[0]  // First step's result\nctx.results[1]  // Second step's result\n```"
+                      "doc": "All accumulated results as a typed tuple.\n\nAllows accessing any previous result by index:\n- `ctx.results[0]` - First step's result\n- `ctx.results[1]` - Second step's result"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.3.1/types.ts",
-                      "line": 62,
+                      "filename": "https://jsr.io/@probitas/builder/0.3.2/types.ts",
+                      "line": 64,
                       "col": 2,
-                      "byteIndex": 1824
+                      "byteIndex": 1912
                     },
                     "params": [],
                     "readonly": true,
@@ -342,13 +342,13 @@
                   {
                     "name": "resources",
                     "jsDoc": {
-                      "doc": "Named resources registered with `.resource()`.\n\nResources are typed based on their registration:\n```ts\n.resource(\"db\", () => createDbConnection())\n.step((ctx) => ctx.resources.db.query(...))\n```"
+                      "doc": "Named resources registered with `.resource()`.\n\nResources are typed based on their registration:\n```ts\nimport { scenario } from \"@probitas/builder\";\n\n// Mock database connection for example\nconst createDbConnection = () => ({ query: (_sql: string) => [{ id: 1 }] });\n\nscenario(\"test\")\n  .resource(\"db\", () => createDbConnection())\n  .step((ctx) => ctx.resources.db.query(\"SELECT 1\"))\n  .build();\n```"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.3.1/types.ts",
-                      "line": 73,
+                      "filename": "https://jsr.io/@probitas/builder/0.3.2/types.ts",
+                      "line": 82,
                       "col": 2,
-                      "byteIndex": 2089
+                      "byteIndex": 2415
                     },
                     "params": [],
                     "readonly": true,
@@ -463,10 +463,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 72,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 60,
         "col": 0,
-        "byteIndex": 2547
+        "byteIndex": 2159
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -474,7 +474,7 @@
         "tags": [
           {
             "kind": "example",
-            "doc": "```ts\n// HTTP response\nconst httpRes = await http.get(\"/users\");\nexpect(httpRes).toBeOk().toHaveContentContaining({ users: [] });\n\n// GraphQL response\nconst gqlRes = await graphql.query(\"{ users { id name } }\");\nexpect(gqlRes).toBeOk().toHaveContent();\n\n// SQL query result\nconst sqlRes = await db.query(\"SELECT * FROM users\");\nexpect(sqlRes).toBeOk().toHaveCount(10);\n\n// MongoDB result\nconst mongoRes = await mongo.find({ status: \"active\" });\nexpect(mongoRes).toBeOk().toHaveLength(10);\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\n```"
+            "doc": "```ts\nimport { expect } from \"./expect.ts\";\n\n// Falls back to expectAnything (chainable @std/expect) for other values\nexpect(42).toBe(42).toBeGreaterThan(40);\nexpect(\"hello world\").toContain(\"world\");\nexpect({ a: 1, b: 2 }).toMatchObject({ a: 1 });\n```"
           }
         ]
       },
@@ -530,10 +530,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 75,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 63,
         "col": 0,
-        "byteIndex": 2649
+        "byteIndex": 2261
       },
       "declarationKind": "export",
       "kind": "function",
@@ -588,10 +588,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 78,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 66,
         "col": 0,
-        "byteIndex": 2763
+        "byteIndex": 2375
       },
       "declarationKind": "export",
       "kind": "function",
@@ -646,10 +646,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 81,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 69,
         "col": 0,
-        "byteIndex": 2871
+        "byteIndex": 2483
       },
       "declarationKind": "export",
       "kind": "function",
@@ -698,10 +698,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 84,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 72,
         "col": 0,
-        "byteIndex": 2963
+        "byteIndex": 2575
       },
       "declarationKind": "export",
       "kind": "function",
@@ -756,10 +756,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 87,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 75,
         "col": 0,
-        "byteIndex": 3068
+        "byteIndex": 2680
       },
       "declarationKind": "export",
       "kind": "function",
@@ -814,10 +814,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 90,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 78,
         "col": 0,
-        "byteIndex": 3171
+        "byteIndex": 2783
       },
       "declarationKind": "export",
       "kind": "function",
@@ -872,10 +872,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 93,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 81,
         "col": 0,
-        "byteIndex": 3274
+        "byteIndex": 2886
       },
       "declarationKind": "export",
       "kind": "function",
@@ -930,10 +930,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 96,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 84,
         "col": 0,
-        "byteIndex": 3383
+        "byteIndex": 2995
       },
       "declarationKind": "export",
       "kind": "function",
@@ -988,10 +988,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 99,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 87,
         "col": 0,
-        "byteIndex": 3482
+        "byteIndex": 3094
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1025,10 +1025,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.2.3/expect.ts",
-        "line": 100,
+        "filename": "https://jsr.io/@probitas/expect/0.2.4/expect.ts",
+        "line": 88,
         "col": 0,
-        "byteIndex": 3543
+        "byteIndex": 3155
       },
       "declarationKind": "export",
       "kind": "function",
@@ -1060,7 +1060,7 @@
       "name": "ConnectRpcResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
         "line": 14,
         "col": 0,
         "byteIndex": 284
@@ -1090,7 +1090,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1800
@@ -1134,7 +1134,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 78,
               "col": 2,
               "byteIndex": 1874
@@ -1156,7 +1156,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"connectrpc\"` for ConnectRPC responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 21,
               "col": 2,
               "byteIndex": 522
@@ -1181,7 +1181,7 @@
               "doc": "Whether the request was successful (statusCode === 0).\n\nInherited from ClientResult. True when statusCode is 0 (OK),\nfalse for any error code."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 29,
               "col": 2,
               "byteIndex": 728
@@ -1203,7 +1203,7 @@
               "doc": "ConnectRPC/gRPC status code.\n\n0 indicates success (OK). Non-zero values represent various error conditions\ncompatible with gRPC status codes."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 37,
               "col": 2,
               "byteIndex": 926
@@ -1228,7 +1228,7 @@
               "doc": "Status message (null for successful responses).\n\nContains error description when ok is false."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1092
@@ -1261,7 +1261,7 @@
               "doc": "Response headers.\n\nHTTP headers sent at the beginning of the response."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1231
@@ -1286,7 +1286,7 @@
               "doc": "Response trailers (sent at end of RPC).\n\nAdditional metadata sent after the response body in streaming RPCs."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1396
@@ -1311,7 +1311,7 @@
               "doc": "Response time in milliseconds.\n\nInherited from ClientResult. Measures the full RPC duration."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.4.1/response.ts",
               "line": 65,
               "col": 2,
               "byteIndex": 1546
@@ -1337,7 +1337,7 @@
       "name": "DenoKvResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-deno-kv/0.3.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-deno-kv/0.3.1/results.ts",
         "line": 177,
         "col": 0,
         "byteIndex": 3683
@@ -1428,7 +1428,7 @@
       "name": "GraphqlResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
         "line": 8,
         "col": 0,
         "byteIndex": 210
@@ -1458,7 +1458,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1609
@@ -1505,7 +1505,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1763
@@ -1530,7 +1530,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"graphql\"` for GraphQL responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 448
@@ -1555,7 +1555,7 @@
               "doc": "Whether the request was successful (no errors).\n\nInherited from ClientResult. True when errors array is null or empty,\nfalse when GraphQL errors are present."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 23,
               "col": 2,
               "byteIndex": 666
@@ -1577,7 +1577,7 @@
               "doc": "GraphQL errors array (null if no errors).\n\nContains validation, execution, or resolver errors from the GraphQL server."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 30,
               "col": 2,
               "byteIndex": 836
@@ -1624,7 +1624,7 @@
               "doc": "Response extensions.\n\nCustom metadata added by the GraphQL server (tracing, metrics, etc.)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 37,
               "col": 2,
               "byteIndex": 1010
@@ -1660,7 +1660,7 @@
               "doc": "Response time in milliseconds.\n\nInherited from ClientResult. Measures the full request/response cycle."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1189
@@ -1682,7 +1682,7 @@
               "doc": "HTTP status code.\n\nThe underlying HTTP status (typically 200 even for GraphQL errors)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1332
@@ -1704,7 +1704,7 @@
               "doc": "Headers from the HTTP response.\n\nIncludes content-type, cache-control, and custom headers."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1477
@@ -1742,7 +1742,7 @@
       "name": "HttpResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
         "line": 9,
         "col": 0,
         "byteIndex": 276
@@ -1772,7 +1772,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 41,
               "col": 2,
               "byteIndex": 1090
@@ -1807,7 +1807,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1172
@@ -1842,7 +1842,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 47,
               "col": 2,
               "byteIndex": 1240
@@ -1881,7 +1881,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 54,
               "col": 2,
               "byteIndex": 1419
@@ -1925,7 +1925,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 62,
               "col": 2,
               "byteIndex": 1626
@@ -1950,7 +1950,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"http\"` for HTTP responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 16,
               "col": 2,
               "byteIndex": 496
@@ -1975,7 +1975,7 @@
               "doc": "Whether the response was successful (status 200-299)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 21,
               "col": 2,
               "byteIndex": 642
@@ -1997,7 +1997,7 @@
               "doc": "HTTP status code"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 24,
               "col": 2,
               "byteIndex": 693
@@ -2019,7 +2019,7 @@
               "doc": "HTTP status text"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 27,
               "col": 2,
               "byteIndex": 747
@@ -2041,7 +2041,7 @@
               "doc": "Response headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 30,
               "col": 2,
               "byteIndex": 805
@@ -2066,7 +2066,7 @@
               "doc": "Request URL"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 33,
               "col": 2,
               "byteIndex": 856
@@ -2088,7 +2088,7 @@
               "doc": "Response body as raw bytes (null if no body)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 38,
               "col": 2,
               "byteIndex": 1002
@@ -2124,7 +2124,7 @@
               "doc": "Response time in milliseconds"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-http/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-http/0.3.1/response.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1524
@@ -2150,7 +2150,7 @@
       "name": "MongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 151,
         "col": 0,
         "byteIndex": 3035
@@ -2257,7 +2257,7 @@
       "name": "RabbitMqResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-rabbitmq/0.3.1/result.ts",
         "line": 87,
         "col": 0,
         "byteIndex": 1813
@@ -2321,7 +2321,7 @@
       "name": "RedisResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-redis/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-redis/0.3.1/result.ts",
         "line": 97,
         "col": 0,
         "byteIndex": 2073
@@ -2420,7 +2420,7 @@
       "name": "SqlQueryResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
         "line": 31,
         "col": 0,
         "byteIndex": 774
@@ -2462,7 +2462,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 2019
@@ -2489,7 +2489,7 @@
             "isStatic": false,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 38,
               "col": 2,
               "byteIndex": 1022
@@ -2511,7 +2511,7 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1178
@@ -2545,7 +2545,7 @@
             "isStatic": false,
             "name": "rows",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1303
@@ -2567,7 +2567,7 @@
             "isStatic": false,
             "name": "rowCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1492
@@ -2589,7 +2589,7 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1660
@@ -2622,7 +2622,7 @@
             "isStatic": false,
             "name": "lastInsertId",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1822
@@ -2655,7 +2655,7 @@
             "isStatic": false,
             "name": "warnings",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 80,
               "col": 2,
               "byteIndex": 1977
@@ -2735,7 +2735,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 94,
               "col": 2,
               "byteIndex": 2321
@@ -2812,7 +2812,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sql/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sql/0.3.1/result.ts",
               "line": 105,
               "col": 2,
               "byteIndex": 2536
@@ -2861,7 +2861,7 @@
       "name": "SqsResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 142,
         "col": 0,
         "byteIndex": 2982
@@ -12741,6 +12741,5 @@
         "kind": "const"
       }
     }
-  ],
-  "generatedAt": "2025-12-16T18:17:32.326Z"
+  ]
 }

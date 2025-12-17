@@ -1,17 +1,17 @@
 {
   "name": "client-graphql",
   "specifier": "@probitas/client-graphql",
-  "version": "0.3.0",
-  "moduleDoc": "GraphQL client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides a GraphQL client designed for integration testing of GraphQL APIs.\n\n## Features\n\n- **Query & Mutation**: Full support for GraphQL operations\n- **Variables Support**: Pass typed variables to queries and mutations\n- **Duration Tracking**: Built-in timing for performance monitoring\n- **Error Inspection**: Inspect GraphQL errors and their structure\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n- **Template Literals**: Re-exports `outdent` for clean multi-line queries\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-graphql\n```\n\n## Quick Start\n\n```ts\nimport { createGraphqlClient, outdent } from \"@probitas/client-graphql\";\n\nconst client = createGraphqlClient({ url: \"http://localhost:4000/graphql\" });\n\n// Query with variables\nconst res = await client.query(outdent`\n  query GetUser($id: ID!) {\n    user(id: $id) { id name email }\n  }\n`, { id: \"123\" });\nconsole.log(\"User:\", res.data());\n\n// Mutation\nconst created = await client.mutation(outdent`\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(input: $input) { id name }\n  }\n`, { input: { name: \"Jane\", email: \"jane@example.com\" } });\nconsole.log(\"Created:\", created.data());\n\nawait client.close();\n```\n\n## Using with `using` Statement\n\n```ts\nawait using client = createGraphqlClient({ url: \"http://localhost:4000/graphql\" });\n\nconst res = await client.query(`{ __typename }`);\nconsole.log(res.data());\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-http`](https://jsr.io/@probitas/client-http) | HTTP client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n",
+  "version": "0.3.1",
+  "moduleDoc": "GraphQL client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides a GraphQL client designed for integration testing of GraphQL APIs.\n\n## Features\n\n- **Query & Mutation**: Full support for GraphQL operations\n- **Variables Support**: Pass typed variables to queries and mutations\n- **Duration Tracking**: Built-in timing for performance monitoring\n- **Error Inspection**: Inspect GraphQL errors and their structure\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n- **Template Literals**: Re-exports `outdent` for clean multi-line queries\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-graphql\n```\n\n## Quick Start\n\n```ts\nimport { createGraphqlClient, outdent } from \"@probitas/client-graphql\";\n\nconst client = createGraphqlClient({ url: \"http://localhost:4000/graphql\" });\n\n// Query with variables\nconst res = await client.query(outdent`\n  query GetUser($id: ID!) {\n    user(id: $id) { id name email }\n  }\n`, { id: \"123\" });\nconsole.log(\"User:\", res.data());\n\n// Mutation\nconst created = await client.mutation(outdent`\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(input: $input) { id name }\n  }\n`, { input: { name: \"Jane\", email: \"jane@example.com\" } });\nconsole.log(\"Created:\", created.data());\n\nawait client.close();\n```\n\n## Using with `using` Statement\n\n```ts\nimport { createGraphqlClient } from \"@probitas/client-graphql\";\n\nawait using client = createGraphqlClient({ url: \"http://localhost:4000/graphql\" });\n\nconst res = await client.query(`{ __typename }`);\nconsole.log(res.data());\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-http`](https://jsr.io/@probitas/client-http) | HTTP client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n",
   "exports": [
     {
       "name": "createGraphqlClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/client.ts",
-        "line": 491,
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/client.ts",
+        "line": 504,
         "col": 0,
-        "byteIndex": 13984
+        "byteIndex": 14401
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -28,19 +28,19 @@
           },
           {
             "kind": "example",
-            "doc": "Basic query\n```ts\nconst client = createGraphqlClient({\n  url: \"http://localhost:4000/graphql\",\n});\n\nconst response = await client.query(`\n  query GetUser($id: ID!) {\n    user(id: $id) { id name email }\n  }\n`, { id: \"123\" });\n\nconsole.log(response.data());\nawait client.close();\n```\n"
+            "doc": "Basic query\n```ts\nimport { createGraphqlClient } from \"@probitas/client-graphql\";\n\nconst client = createGraphqlClient({\n  url: \"http://localhost:4000/graphql\",\n});\n\nconst response = await client.query(`\n  query GetUser($id: ID!) {\n    user(id: $id) { id name email }\n  }\n`, { id: \"123\" });\n\nconsole.log(response.data());\nawait client.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using connection config object\n```ts\nconst client = createGraphqlClient({\n  url: { host: \"api.example.com\", port: 443, protocol: \"https\" },\n});\n```\n"
+            "doc": "Using connection config object\n```ts\nimport { createGraphqlClient } from \"@probitas/client-graphql\";\n\nconst client = createGraphqlClient({\n  url: { host: \"api.example.com\", port: 443, protocol: \"https\" },\n});\nawait client.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Mutation with error handling\n```ts\nconst response = await client.mutation(`\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(input: $input) { id }\n  }\n`, { input: { name: \"Alice\", email: \"alice@example.com\" } });\n\nif (response.ok) {\n  console.log(\"Created user:\", response.data().createUser.id);\n}\n```\n"
+            "doc": "Mutation with error handling\n```ts\nimport { createGraphqlClient } from \"@probitas/client-graphql\";\n\nconst client = createGraphqlClient({ url: \"http://localhost:4000/graphql\" });\n\nconst response = await client.mutation(`\n  mutation CreateUser($input: CreateUserInput!) {\n    createUser(input: $input) { id }\n  }\n`, { input: { name: \"Alice\", email: \"alice@example.com\" } });\n\nif (response.ok) {\n  console.log(\"Created user:\", response.data().createUser.id);\n}\n\nawait client.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using `await using` for automatic cleanup\n```ts\nawait using client = createGraphqlClient({\n  url: \"http://localhost:4000/graphql\",\n});\nconst response = await client.query(`{ __typename }`);\n// Client automatically closed when scope exits\n```"
+            "doc": "Using `await using` for automatic cleanup\n```ts\nimport { createGraphqlClient } from \"@probitas/client-graphql\";\n\nawait using client = createGraphqlClient({\n  url: \"http://localhost:4000/graphql\",\n});\nconst response = await client.query(`{ __typename }`);\n// Client automatically closed when scope exits\n```"
           }
         ]
       },
@@ -102,7 +102,7 @@
       "name": "GraphqlErrorItem",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
         "line": 8,
         "col": 0,
         "byteIndex": 278
@@ -129,7 +129,7 @@
               "doc": "Error message"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 10,
               "col": 2,
               "byteIndex": 339
@@ -151,7 +151,7 @@
               "doc": "Location(s) in the GraphQL document where the error occurred"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 13,
               "col": 2,
               "byteIndex": 438
@@ -178,7 +178,7 @@
                         {
                           "name": "line",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+                            "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
                             "line": 13,
                             "col": 34,
                             "byteIndex": 470
@@ -196,7 +196,7 @@
                         {
                           "name": "column",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+                            "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
                             "line": 13,
                             "col": 48,
                             "byteIndex": 484
@@ -227,7 +227,7 @@
               "doc": "Path to the field that caused the error"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 16,
               "col": 2,
               "byteIndex": 556
@@ -275,7 +275,7 @@
               "doc": "Additional error metadata"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 19,
               "col": 2,
               "byteIndex": 640
@@ -315,7 +315,7 @@
       "name": "GraphqlResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
         "line": 8,
         "col": 0,
         "byteIndex": 210
@@ -345,7 +345,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1609
@@ -392,7 +392,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1763
@@ -417,7 +417,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"graphql\"` for GraphQL responses. Use this in switch statements\nfor type-safe narrowing of union types."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 448
@@ -442,7 +442,7 @@
               "doc": "Whether the request was successful (no errors).\n\nInherited from ClientResult. True when errors array is null or empty,\nfalse when GraphQL errors are present."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 23,
               "col": 2,
               "byteIndex": 666
@@ -464,7 +464,7 @@
               "doc": "GraphQL errors array (null if no errors).\n\nContains validation, execution, or resolver errors from the GraphQL server."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 30,
               "col": 2,
               "byteIndex": 836
@@ -511,7 +511,7 @@
               "doc": "Response extensions.\n\nCustom metadata added by the GraphQL server (tracing, metrics, etc.)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 37,
               "col": 2,
               "byteIndex": 1010
@@ -547,7 +547,7 @@
               "doc": "Response time in milliseconds.\n\nInherited from ClientResult. Measures the full request/response cycle."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1189
@@ -569,7 +569,7 @@
               "doc": "HTTP status code.\n\nThe underlying HTTP status (typically 200 even for GraphQL errors)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1332
@@ -591,7 +591,7 @@
               "doc": "Headers from the HTTP response.\n\nIncludes content-type, cache-control, and custom headers."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1477
@@ -629,7 +629,7 @@
       "name": "GraphqlOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
         "line": 27,
         "col": 0,
         "byteIndex": 776
@@ -659,7 +659,7 @@
               "doc": "Additional request headers"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 29,
               "col": 2,
               "byteIndex": 870
@@ -695,7 +695,7 @@
               "doc": "Operation name (for documents with multiple operations)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 981
@@ -723,7 +723,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 38,
               "col": 2,
               "byteIndex": 1162
@@ -749,7 +749,7 @@
       "name": "GraphqlConnectionConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
         "line": 46,
         "col": 0,
         "byteIndex": 1311
@@ -785,7 +785,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1442
@@ -830,7 +830,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
               "line": 57,
               "col": 2,
               "byteIndex": 1548
@@ -856,7 +856,7 @@
       "name": "GraphqlClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
         "line": 63,
         "col": 0,
         "byteIndex": 1616
@@ -887,15 +887,19 @@
               "tags": [
                 {
                   "kind": "example",
-                  "doc": "```ts\n// String URL\n{ url: \"http://localhost:4000/graphql\" }\n\n// Connection config object\n{ url: { host: \"api.example.com\", port: 443, protocol: \"https\" } }\n```"
+                  "doc": "String URL\n```ts\nimport type { GraphqlClientConfig } from \"@probitas/client-graphql\";\nconst config: GraphqlClientConfig = { url: \"http://localhost:4000/graphql\" };\n```\n"
+                },
+                {
+                  "kind": "example",
+                  "doc": "Connection config object\n```ts\nimport type { GraphqlClientConfig } from \"@probitas/client-graphql\";\nconst config: GraphqlClientConfig = {\n  url: { host: \"api.example.com\", port: 443, protocol: \"https\" },\n};\n```"
                 }
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 78,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 83,
               "col": 2,
-              "byteIndex": 2000
+              "byteIndex": 2253
             },
             "params": [],
             "readonly": true,
@@ -928,10 +932,10 @@
               "doc": "Default headers for all requests"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 81,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 86,
               "col": 2,
-              "byteIndex": 2093
+              "byteIndex": 2346
             },
             "params": [],
             "readonly": true,
@@ -964,10 +968,10 @@
               "doc": "WebSocket endpoint URL (for subscriptions)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 84,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 89,
               "col": 2,
-              "byteIndex": 2191
+              "byteIndex": 2444
             },
             "params": [],
             "readonly": true,
@@ -986,10 +990,10 @@
               "doc": "Custom fetch implementation (for testing/mocking)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 87,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 92,
               "col": 2,
-              "byteIndex": 2283
+              "byteIndex": 2536
             },
             "params": [],
             "readonly": true,
@@ -1014,10 +1018,10 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 94,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 99,
               "col": 2,
-              "byteIndex": 2469
+              "byteIndex": 2722
             },
             "params": [],
             "readonly": true,
@@ -1040,10 +1044,10 @@
       "name": "GraphqlClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-        "line": 100,
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+        "line": 105,
         "col": 0,
-        "byteIndex": 2542
+        "byteIndex": 2795
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -1070,10 +1074,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 106,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 111,
               "col": 2,
-              "byteIndex": 2743
+              "byteIndex": 2996
             },
             "params": [
               {
@@ -1180,10 +1184,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 114,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 119,
               "col": 2,
-              "byteIndex": 2989
+              "byteIndex": 3242
             },
             "params": [
               {
@@ -1290,10 +1294,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 122,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 127,
               "col": 2,
-              "byteIndex": 3261
+              "byteIndex": 3514
             },
             "params": [
               {
@@ -1400,10 +1404,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 130,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 135,
               "col": 2,
-              "byteIndex": 3535
+              "byteIndex": 3788
             },
             "params": [
               {
@@ -1510,10 +1514,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 137,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 142,
               "col": 2,
-              "byteIndex": 3768
+              "byteIndex": 4021
             },
             "params": [],
             "optional": false,
@@ -1541,10 +1545,10 @@
               "doc": "Client configuration"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/types.ts",
-              "line": 102,
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/types.ts",
+              "line": 107,
               "col": 2,
-              "byteIndex": 2631
+              "byteIndex": 2884
             },
             "params": [],
             "readonly": true,
@@ -1570,7 +1574,7 @@
       "name": "GraphqlErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
         "line": 7,
         "col": 0,
         "byteIndex": 174
@@ -1600,7 +1604,7 @@
               "doc": "Associated GraphQL response"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 9,
               "col": 2,
               "byteIndex": 273
@@ -1629,7 +1633,7 @@
       "name": "GraphqlError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
         "line": 15,
         "col": 0,
         "byteIndex": 350
@@ -1696,7 +1700,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 25,
               "col": 2,
               "byteIndex": 678
@@ -1718,7 +1722,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 16,
               "col": 2,
               "byteIndex": 400
@@ -1741,7 +1745,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 451
@@ -1777,7 +1781,7 @@
             "isStatic": false,
             "name": "errors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 20,
               "col": 2,
               "byteIndex": 537
@@ -1802,7 +1806,7 @@
             "isStatic": false,
             "name": "response",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 23,
               "col": 2,
               "byteIndex": 638
@@ -1821,7 +1825,7 @@
       "name": "GraphqlNetworkError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
         "line": 39,
         "col": 0,
         "byteIndex": 981
@@ -1864,7 +1868,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 42,
               "col": 2,
               "byteIndex": 1090
@@ -1886,7 +1890,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 40,
               "col": 2,
               "byteIndex": 1039
@@ -1905,7 +1909,7 @@
       "name": "GraphqlValidationError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
         "line": 50,
         "col": 0,
         "byteIndex": 1240
@@ -1962,7 +1966,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 53,
               "col": 2,
               "byteIndex": 1355
@@ -1984,7 +1988,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1301
@@ -2003,7 +2007,7 @@
       "name": "GraphqlExecutionError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
         "line": 67,
         "col": 0,
         "byteIndex": 1653
@@ -2060,7 +2064,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1766
@@ -2082,7 +2086,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/errors.ts",
               "line": 68,
               "col": 2,
               "byteIndex": 1713
@@ -2101,7 +2105,7 @@
       "name": "GraphqlResponseOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
         "line": 76,
         "col": 0,
         "byteIndex": 1845
@@ -2119,7 +2123,7 @@
           {
             "name": "data",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 77,
               "col": 2,
               "byteIndex": 1892
@@ -2152,7 +2156,7 @@
           {
             "name": "errors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 78,
               "col": 2,
               "byteIndex": 1919
@@ -2196,7 +2200,7 @@
           {
             "name": "extensions",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 79,
               "col": 2,
               "byteIndex": 1974
@@ -2229,7 +2233,7 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 80,
               "col": 2,
               "byteIndex": 2023
@@ -2248,7 +2252,7 @@
           {
             "name": "status",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 2052
@@ -2267,7 +2271,7 @@
           {
             "name": "raw",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+              "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 2079
@@ -2300,7 +2304,7 @@
       "name": "createGraphqlResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-graphql/0.3.0/response.ts",
+        "filename": "https://jsr.io/@probitas/client-graphql/0.3.1/response.ts",
         "line": 123,
         "col": 0,
         "byteIndex": 3109
@@ -2362,6 +2366,5 @@
         ]
       }
     }
-  ],
-  "generatedAt": "2025-12-16T18:17:30.981Z"
+  ]
 }

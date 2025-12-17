@@ -1,14 +1,14 @@
 {
   "name": "client-mongodb",
   "specifier": "@probitas/client-mongodb",
-  "version": "0.4.0",
-  "moduleDoc": "MongoDB client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides a MongoDB client designed for integration testing of applications using MongoDB.\n\n## Features\n\n- **CRUD Operations**: find, findOne, insertOne, insertMany, updateOne, updateMany, deleteOne, deleteMany\n- **Aggregations**: Full aggregation pipeline support\n- **Sessions**: Transaction support with sessions\n- **Type Safety**: Generic type parameters for document types\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-mongodb\n```\n\n## Quick Start\n\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nconst client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\n// Get a collection\nconst users = client.collection<{ name: string; email: string }>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", email: \"alice@example.com\" });\nconsole.log(\"Inserted ID:\", insertResult.insertedId);\n\n// Find documents\nconst findResult = await users.find({ name: \"Alice\" });\nconsole.log(\"Found:\", findResult.documents);\n\n// Find one document\nconst user = await users.findOne({ name: \"Alice\" });\nconsole.log(\"User:\", user?.document);\n\nawait client.close();\n```\n\n## Transactions\n\n```ts\nawait client.withSession(async (session) => {\n  session.startTransaction();\n  try {\n    const accounts = client.collection(\"accounts\");\n    await accounts.updateOne(\n      { _id: \"from\" },\n      { $inc: { balance: -100 } },\n      { session }\n    );\n    await accounts.updateOne(\n      { _id: \"to\" },\n      { $inc: { balance: 100 } },\n      { session }\n    );\n    await session.commitTransaction();\n  } catch (error) {\n    await session.abortTransaction();\n    throw error;\n  }\n});\n```\n\n## Using with `using` Statement\n\n```ts\nawait using client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await client.collection(\"test\").findOne({});\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [MongoDB](https://www.mongodb.com/)\n",
+  "version": "0.4.1",
+  "moduleDoc": "MongoDB client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides a MongoDB client designed for integration testing of applications using MongoDB.\n\n## Features\n\n- **CRUD Operations**: find, findOne, insertOne, insertMany, updateOne, updateMany, deleteOne, deleteMany\n- **Aggregations**: Full aggregation pipeline support\n- **Sessions**: Transaction support with sessions\n- **Type Safety**: Generic type parameters for document types\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-mongodb\n```\n\n## Quick Start\n\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nconst client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\n// Get a collection\nconst users = client.collection<{ name: string; email: string }>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", email: \"alice@example.com\" });\nconsole.log(\"Inserted ID:\", insertResult.insertedId);\n\n// Find documents\nconst findResult = await users.find({ name: \"Alice\" });\nconsole.log(\"Found:\", findResult.docs);\n\n// Find one document\nconst user = await users.findOne({ name: \"Alice\" });\nconsole.log(\"User:\", user?.doc);\n\nawait client.close();\n```\n\n## Transactions\n\n```ts\nimport { createMongoClient, type MongoSession } from \"@probitas/client-mongodb\";\n\nconst client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nawait client.transaction(async (session: MongoSession) => {\n  const accounts = client.collection(\"accounts\");\n  await accounts.updateOne(\n    { _id: \"from\" },\n    { $inc: { balance: -100 } },\n  );\n  await accounts.updateOne(\n    { _id: \"to\" },\n    { $inc: { balance: 100 } },\n  );\n});\n\nawait client.close();\n```\n\n## Using with `using` Statement\n\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nawait using client = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await client.collection(\"test\").findOne({});\nconsole.log(result?.doc);\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [MongoDB](https://www.mongodb.com/)\n",
   "exports": [
     {
       "name": "MongoCountResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 133,
         "col": 0,
         "byteIndex": 2677
@@ -38,7 +38,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:count\"` for count operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 139,
               "col": 2,
               "byteIndex": 2835
@@ -63,7 +63,7 @@
               "doc": "Number of documents matching the filter."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 144,
               "col": 2,
               "byteIndex": 2926
@@ -89,7 +89,7 @@
       "name": "MongoDeleteResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 99,
         "col": 0,
         "byteIndex": 2036
@@ -119,7 +119,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:delete\"` for delete operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 105,
               "col": 2,
               "byteIndex": 2197
@@ -144,7 +144,7 @@
               "doc": "Number of documents deleted."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 110,
               "col": 2,
               "byteIndex": 2277
@@ -170,7 +170,7 @@
       "name": "MongoFindOneResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 116,
         "col": 0,
         "byteIndex": 2338
@@ -200,7 +200,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:find-one\"` for single document queries."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 122,
               "col": 2,
               "byteIndex": 2522
@@ -225,7 +225,7 @@
               "doc": "The found document (undefined if not found)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 127,
               "col": 2,
               "byteIndex": 2620
@@ -277,7 +277,7 @@
       "name": "MongoFindResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 8,
         "col": 0,
         "byteIndex": 210
@@ -307,7 +307,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:find\"` for MongoDB find operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 387
@@ -332,7 +332,7 @@
               "doc": "Array of documents matching the query.\n\nIncludes helper methods like first(), last(), etc."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 21,
               "col": 2,
               "byteIndex": 536
@@ -382,7 +382,7 @@
       "name": "MongoInsertManyResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 46,
         "col": 0,
         "byteIndex": 967
@@ -412,7 +412,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:insert-many\"` for batch inserts."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1133
@@ -437,7 +437,7 @@
               "doc": "Array of IDs for inserted documents.\n\nOrder matches the input array."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1267
@@ -470,7 +470,7 @@
               "doc": "Number of successfully inserted documents."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1371
@@ -496,7 +496,7 @@
       "name": "MongoInsertOneResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 27,
         "col": 0,
         "byteIndex": 598
@@ -526,7 +526,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:insert-one\"` for single document inserts."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 33,
               "col": 2,
               "byteIndex": 772
@@ -551,7 +551,7 @@
               "doc": "ID of the inserted document.\n\nSerialized as string for consistency."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 40,
               "col": 2,
               "byteIndex": 904
@@ -577,7 +577,7 @@
       "name": "MongoResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 151,
         "col": 0,
         "byteIndex": 3035
@@ -684,7 +684,7 @@
       "name": "MongoUpdateResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 70,
         "col": 0,
         "byteIndex": 1432
@@ -714,7 +714,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"mongo:update\"` for update operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 76,
               "col": 2,
               "byteIndex": 1593
@@ -739,7 +739,7 @@
               "doc": "Number of documents matching the filter."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 1685
@@ -761,7 +761,7 @@
               "doc": "Number of documents actually modified.\n\nMay be less than matchedCount if documents already had the target values."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 88,
               "col": 2,
               "byteIndex": 1859
@@ -783,7 +783,7 @@
               "doc": "ID of the upserted document (present only for upsert operations)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
               "line": 93,
               "col": 2,
               "byteIndex": 1977
@@ -809,7 +809,7 @@
       "name": "MongoConnectionConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 29,
         "col": 0,
         "byteIndex": 589
@@ -839,7 +839,7 @@
               "doc": "Database name to connect to."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 33,
               "col": 2,
               "byteIndex": 709
@@ -861,7 +861,7 @@
               "doc": "Authentication database."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 38,
               "col": 2,
               "byteIndex": 782
@@ -883,7 +883,7 @@
               "doc": "Replica set name."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 43,
               "col": 2,
               "byteIndex": 850
@@ -909,7 +909,7 @@
       "name": "Document",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 50,
         "col": 0,
         "byteIndex": 952
@@ -958,7 +958,7 @@
       "name": "MongoDocs",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 55,
         "col": 0,
         "byteIndex": 1054
@@ -994,7 +994,7 @@
             "name": "first",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 56,
               "col": 2,
               "byteIndex": 1113
@@ -1026,7 +1026,7 @@
             "name": "firstOrThrow",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 57,
               "col": 2,
               "byteIndex": 1139
@@ -1047,7 +1047,7 @@
             "name": "last",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1160
@@ -1079,7 +1079,7 @@
             "name": "lastOrThrow",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1185
@@ -1111,7 +1111,7 @@
       "name": "Filter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 67,
         "col": 0,
         "byteIndex": 1376
@@ -1148,7 +1148,7 @@
       "name": "UpdateFilter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 74,
         "col": 0,
         "byteIndex": 1601
@@ -1185,7 +1185,7 @@
       "name": "MongoFindOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 79,
         "col": 0,
         "byteIndex": 1682
@@ -1212,7 +1212,7 @@
           {
             "name": "sort",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 80,
               "col": 2,
               "byteIndex": 1742
@@ -1262,7 +1262,7 @@
           {
             "name": "limit",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 1784
@@ -1281,7 +1281,7 @@
           {
             "name": "skip",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 1811
@@ -1300,7 +1300,7 @@
           {
             "name": "projection",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 1837
@@ -1357,7 +1357,7 @@
       "name": "MongoUpdateOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 89,
         "col": 0,
         "byteIndex": 1919
@@ -1384,7 +1384,7 @@
           {
             "name": "upsert",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 90,
               "col": 2,
               "byteIndex": 1981
@@ -1410,7 +1410,7 @@
       "name": "MongoClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 118,
         "col": 0,
         "byteIndex": 2495
@@ -1450,7 +1450,7 @@
               "doc": "MongoDB connection URL or configuration object."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 122,
               "col": 2,
               "byteIndex": 2621
@@ -1486,7 +1486,7 @@
               "doc": "Database name to connect to."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 127,
               "col": 2,
               "byteIndex": 2716
@@ -1512,7 +1512,7 @@
       "name": "MongoSession",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 133,
         "col": 0,
         "byteIndex": 2802
@@ -1530,7 +1530,7 @@
             "name": "collection",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 134,
               "col": 2,
               "byteIndex": 2836
@@ -1598,7 +1598,7 @@
       "name": "MongoCollection",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 140,
         "col": 0,
         "byteIndex": 2956
@@ -1616,7 +1616,7 @@
             "name": "find",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 141,
               "col": 2,
               "byteIndex": 3013
@@ -1682,7 +1682,7 @@
             "name": "findOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 145,
               "col": 2,
               "byteIndex": 3108
@@ -1748,7 +1748,7 @@
             "name": "insertOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 149,
               "col": 2,
               "byteIndex": 3205
@@ -1822,7 +1822,7 @@
             "name": "insertMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 153,
               "col": 2,
               "byteIndex": 3308
@@ -1900,7 +1900,7 @@
             "name": "updateOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 157,
               "col": 2,
               "byteIndex": 3416
@@ -1970,7 +1970,7 @@
             "name": "updateMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 162,
               "col": 2,
               "byteIndex": 3542
@@ -2040,7 +2040,7 @@
             "name": "deleteOne",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 167,
               "col": 2,
               "byteIndex": 3669
@@ -2097,7 +2097,7 @@
             "name": "deleteMany",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 171,
               "col": 2,
               "byteIndex": 3764
@@ -2154,7 +2154,7 @@
             "name": "aggregate",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 175,
               "col": 2,
               "byteIndex": 3860
@@ -2236,7 +2236,7 @@
             "name": "countDocuments",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 179,
               "col": 2,
               "byteIndex": 3969
@@ -2312,7 +2312,7 @@
       "name": "MongoClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
         "line": 188,
         "col": 0,
         "byteIndex": 4106
@@ -2339,7 +2339,7 @@
             "name": "collection",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 191,
               "col": 2,
               "byteIndex": 4202
@@ -2400,7 +2400,7 @@
             "name": "db",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 192,
               "col": 2,
               "byteIndex": 4281
@@ -2432,7 +2432,7 @@
             "name": "transaction",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 193,
               "col": 2,
               "byteIndex": 4314
@@ -2512,7 +2512,7 @@
             "name": "close",
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 195,
               "col": 2,
               "byteIndex": 4388
@@ -2540,7 +2540,7 @@
           {
             "name": "config",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/types.ts",
               "line": 189,
               "col": 2,
               "byteIndex": 4163
@@ -2569,7 +2569,7 @@
       "name": "MongoErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 95
@@ -2596,7 +2596,7 @@
           {
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 7,
               "col": 2,
               "byteIndex": 155
@@ -2622,7 +2622,7 @@
       "name": "MongoError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 13,
         "col": 0,
         "byteIndex": 237
@@ -2680,7 +2680,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 361
@@ -2702,7 +2702,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 285
@@ -2721,7 +2721,7 @@
             "isStatic": false,
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 334
@@ -2740,7 +2740,7 @@
       "name": "MongoConnectionError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 30,
         "col": 0,
         "byteIndex": 608
@@ -2783,7 +2783,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 767
@@ -2805,7 +2805,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 31,
               "col": 2,
               "byteIndex": 665
@@ -2828,7 +2828,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 716
@@ -2847,7 +2847,7 @@
       "name": "MongoQueryError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 42,
         "col": 0,
         "byteIndex": 929
@@ -2900,7 +2900,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 47,
               "col": 2,
               "byteIndex": 1104
@@ -2922,7 +2922,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 43,
               "col": 2,
               "byteIndex": 981
@@ -2945,7 +2945,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1027
@@ -2964,7 +2964,7 @@
             "isStatic": false,
             "name": "collection",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1072
@@ -2983,7 +2983,7 @@
       "name": "MongoDuplicateKeyError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 60,
         "col": 0,
         "byteIndex": 1349
@@ -3074,7 +3074,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1608
@@ -3096,7 +3096,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 61,
               "col": 2,
               "byteIndex": 1408
@@ -3119,7 +3119,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 62,
               "col": 2,
               "byteIndex": 1461
@@ -3152,7 +3152,7 @@
             "isStatic": false,
             "name": "keyPattern",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 63,
               "col": 2,
               "byteIndex": 1514
@@ -3185,7 +3185,7 @@
             "isStatic": false,
             "name": "keyValue",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1561
@@ -3204,7 +3204,7 @@
       "name": "MongoValidationError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 81,
         "col": 0,
         "byteIndex": 1953
@@ -3268,7 +3268,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 86,
               "col": 2,
               "byteIndex": 2160
@@ -3290,7 +3290,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 2010
@@ -3313,7 +3313,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 2061
@@ -3343,7 +3343,7 @@
             "isStatic": false,
             "name": "validationErrors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2111
@@ -3362,7 +3362,7 @@
       "name": "MongoWriteError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 99,
         "col": 0,
         "byteIndex": 2424
@@ -3412,7 +3412,7 @@
                             {
                               "name": "index",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                                 "line": 110,
                                 "col": 28,
                                 "byteIndex": 2730
@@ -3430,7 +3430,7 @@
                             {
                               "name": "code",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                                 "line": 110,
                                 "col": 43,
                                 "byteIndex": 2745
@@ -3448,7 +3448,7 @@
                             {
                               "name": "message",
                               "location": {
-                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                                "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                                 "line": 110,
                                 "col": 57,
                                 "byteIndex": 2759
@@ -3487,7 +3487,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 108,
               "col": 2,
               "byteIndex": 2668
@@ -3509,7 +3509,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 100,
               "col": 2,
               "byteIndex": 2476
@@ -3532,7 +3532,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2522
@@ -3557,7 +3557,7 @@
                         {
                           "name": "index",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                             "line": 103,
                             "col": 4,
                             "byteIndex": 2604
@@ -3575,7 +3575,7 @@
                         {
                           "name": "code",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                             "line": 104,
                             "col": 4,
                             "byteIndex": 2623
@@ -3593,7 +3593,7 @@
                         {
                           "name": "message",
                           "location": {
-                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+                            "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
                             "line": 105,
                             "col": 4,
                             "byteIndex": 2641
@@ -3623,7 +3623,7 @@
             "isStatic": false,
             "name": "writeErrors",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 102,
               "col": 2,
               "byteIndex": 2567
@@ -3642,7 +3642,7 @@
       "name": "MongoNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
         "line": 121,
         "col": 0,
         "byteIndex": 2986
@@ -3685,7 +3685,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 125,
               "col": 2,
               "byteIndex": 3140
@@ -3707,7 +3707,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 122,
               "col": 2,
               "byteIndex": 3041
@@ -3730,7 +3730,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/errors.ts",
               "line": 123,
               "col": 2,
               "byteIndex": 3090
@@ -3749,7 +3749,7 @@
       "name": "createMongoDocs",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/results.ts",
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/results.ts",
         "line": 163,
         "col": 0,
         "byteIndex": 3295
@@ -3810,10 +3810,10 @@
       "name": "createMongoClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.0/client.ts",
-        "line": 306,
+        "filename": "https://jsr.io/@probitas/client-mongodb/0.4.1/client.ts",
+        "line": 349,
         "col": 0,
-        "byteIndex": 7924
+        "byteIndex": 9079
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3830,27 +3830,27 @@
           },
           {
             "kind": "example",
-            "doc": "Basic usage with connection string\n```ts\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst users = mongo.collection<{ name: string; age: number }>(\"users\");\nconst result = await users.find({ age: { $gte: 18 } });\nconsole.log(result.docs.first());\n\nawait mongo.close();\n```\n"
+            "doc": "Basic usage with connection string\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst users = mongo.collection<{ name: string; age: number }>(\"users\");\nconst result = await users.find({ age: { $gte: 18 } });\nconsole.log(result.docs.first());\n\nawait mongo.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using connection config object\n```ts\nconst mongo = await createMongoClient({\n  url: {\n    host: \"localhost\",\n    port: 27017,\n    username: \"admin\",\n    password: \"secret\",\n    authSource: \"admin\",\n  },\n  database: \"testdb\",\n});\n```\n"
+            "doc": "Using connection config object\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nconst mongo = await createMongoClient({\n  url: {\n    host: \"localhost\",\n    port: 27017,\n    username: \"admin\",\n    password: \"secret\",\n    authSource: \"admin\",\n  },\n  database: \"testdb\",\n});\n\nawait mongo.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Insert and query documents\n```ts\nconst users = mongo.collection<User>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nconsole.log(\"Inserted ID:\", insertResult.insertedId);\n\n// Find documents with projection and sorting\nconst findResult = await users.find(\n  { age: { $gte: 25 } },\n  { sort: { name: 1 }, limit: 10 }\n);\nconsole.log(\"Found:\", findResult.documents.length);\n```\n"
+            "doc": "Insert and query documents\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\ninterface User { name: string; age: number }\n\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\nconst users = mongo.collection<User>(\"users\");\n\n// Insert a document\nconst insertResult = await users.insertOne({ name: \"Alice\", age: 30 });\nconsole.log(\"Inserted ID:\", insertResult.insertedId);\n\n// Find documents with projection and sorting\nconst findResult = await users.find(\n  { age: { $gte: 25 } },\n  { sort: { name: 1 }, limit: 10 }\n);\nconsole.log(\"Found:\", findResult.docs.length);\n\nawait mongo.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Transaction with auto-commit/rollback\n```ts\nawait mongo.transaction(async (session) => {\n  const users = session.collection<User>(\"users\");\n  await users.insertOne({ name: \"Bob\", age: 25 });\n  await users.updateOne({ name: \"Alice\" }, { $inc: { age: 1 } });\n});\n```\n"
+            "doc": "Transaction with auto-commit/rollback\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\ninterface User { _id?: unknown; name: string; age: number }\n\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nawait mongo.transaction(async (session) => {\n  const users = session.collection<User>(\"users\");\n  await users.insertOne({ name: \"Bob\", age: 25 });\n  await users.updateOne({ name: \"Alice\" }, { $inc: { age: 1 } });\n});\n\nawait mongo.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Aggregation pipeline\n```ts\nconst result = await users.aggregate<{ _id: string; avgAge: number }>([\n  { $group: { _id: \"$department\", avgAge: { $avg: \"$age\" } } },\n  { $sort: { avgAge: -1 } },\n]);\n```\n"
+            "doc": "Aggregation pipeline\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\ninterface User { name: string; age: number; department: string }\n\nconst mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\nconst users = mongo.collection<User>(\"users\");\n\nconst result = await users.aggregate<{ _id: string; avgAge: number }>([\n  { $group: { _id: \"$department\", avgAge: { $avg: \"$age\" } } },\n  { $sort: { avgAge: -1 } },\n]);\nconsole.log(result.docs);\n\nawait mongo.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using `await using` for automatic cleanup\n```ts\nawait using mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await mongo.collection(\"users\").find({});\n// Client automatically closed when scope exits\n```"
+            "doc": "Using `await using` for automatic cleanup\n```ts\nimport { createMongoClient } from \"@probitas/client-mongodb\";\n\nawait using mongo = await createMongoClient({\n  url: \"mongodb://localhost:27017\",\n  database: \"testdb\",\n});\n\nconst result = await mongo.collection(\"users\").find({});\nconsole.log(result.docs);\n// Client automatically closed when scope exits\n```"
           }
         ]
       },
@@ -3894,6 +3894,5 @@
         "typeParams": []
       }
     }
-  ],
-  "generatedAt": "2025-12-16T18:17:31.066Z"
+  ]
 }

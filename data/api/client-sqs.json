@@ -1,14 +1,14 @@
 {
   "name": "client-sqs",
   "specifier": "@probitas/client-sqs",
-  "version": "0.3.0",
-  "moduleDoc": "AWS SQS client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides an AWS SQS client designed for integration testing of message-driven applications using Amazon Simple Queue Service.\n\n## Features\n\n- **Queue Management**: Create, delete, and purge queues\n- **Message Operations**: Send, receive, and delete messages (single and batch)\n- **Message Attributes**: Support for custom message attributes\n- **LocalStack Compatible**: Works with LocalStack for local development\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-sqs\n```\n\n## Quick Start\n\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\", // LocalStack\n  credentials: {\n    accessKeyId: \"test\",\n    secretAccessKey: \"test\",\n  },\n});\n\n// Ensure queue exists\nconst queueResult = await client.ensureQueue(\"test-queue\");\nconst queueUrl = queueResult.queueUrl;\n\n// Send a message\nconst sendResult = await client.send(queueUrl, \"Hello, World!\", {\n  attributes: {\n    type: { dataType: \"String\", stringValue: \"greeting\" },\n  },\n});\nconsole.log(\"Message ID:\", sendResult.messageId);\n\n// Receive messages\nconst receiveResult = await client.receive(queueUrl, {\n  maxMessages: 10,\n  waitTimeSeconds: 5,\n});\nconsole.log(\"Received:\", receiveResult.messages.length);\n\n// Delete message after processing\nfor (const msg of receiveResult.messages) {\n  await client.delete(queueUrl, msg.receiptHandle);\n}\n\nawait client.close();\n```\n\n## Batch Operations\n\n```ts\n// Send batch messages\nawait client.sendBatch(queueUrl, [\n  { body: \"Message 1\", id: \"msg-1\" },\n  { body: \"Message 2\", id: \"msg-2\" },\n  { body: \"Message 3\", id: \"msg-3\" },\n]);\n\n// Delete batch messages\nconst messages = await client.receive(queueUrl, { maxMessages: 10 });\nawait client.deleteBatch(\n  queueUrl,\n  messages.messages.map((m, i) => ({ id: `del-${i}`, receiptHandle: m.receiptHandle }))\n);\n```\n\n## Using with `using` Statement\n\n```ts\nawait using client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n});\n\nconst queue = await client.ensureQueue(\"test\");\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-rabbitmq`](https://jsr.io/@probitas/client-rabbitmq) | RabbitMQ client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [AWS SQS](https://aws.amazon.com/sqs/)\n- [LocalStack](https://localstack.cloud/)\n",
+  "version": "0.3.1",
+  "moduleDoc": "AWS SQS client for [Probitas](https://github.com/jsr-probitas/probitas) scenario testing framework.\n\nThis package provides an AWS SQS client designed for integration testing of message-driven applications using Amazon Simple Queue Service.\n\n## Features\n\n- **Queue Management**: Create, delete, and purge queues\n- **Message Operations**: Send, receive, and delete messages (single and batch)\n- **Message Attributes**: Support for custom message attributes\n- **LocalStack Compatible**: Works with LocalStack for local development\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-sqs\n```\n\n## Quick Start\n\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\", // LocalStack\n  credentials: {\n    accessKeyId: \"test\",\n    secretAccessKey: \"test\",\n  },\n});\n\n// Ensure queue exists\nconst queueResult = await client.ensureQueue(\"test-queue\");\nconst queueUrl = queueResult.queueUrl;\n\n// Send a message\nconst sendResult = await client.send(\"Hello, World!\", {\n  messageAttributes: {\n    type: { dataType: \"String\", stringValue: \"greeting\" },\n  },\n});\nconsole.log(\"Message ID:\", sendResult.messageId);\n\n// Receive messages\nconst receiveResult = await client.receive({\n  maxMessages: 10,\n  waitTimeSeconds: 5,\n});\nconsole.log(\"Received:\", receiveResult.messages.length);\n\n// Delete message after processing\nfor (const msg of receiveResult.messages) {\n  await client.delete(msg.receiptHandle);\n}\n\nawait client.close();\n```\n\n## Batch Operations\n\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\n\nconst queueResult = await client.ensureQueue(\"test-queue\");\nconst queueUrl = queueResult.queueUrl;\n\n// Send batch messages\nawait client.sendBatch([\n  { body: \"Message 1\", id: \"msg-1\" },\n  { body: \"Message 2\", id: \"msg-2\" },\n  { body: \"Message 3\", id: \"msg-3\" },\n]);\n\n// Delete batch messages\nconst messages = await client.receive({ maxMessages: 10 });\nconst handles = messages.messages.map((m: { receiptHandle: string }) => m.receiptHandle);\nawait client.deleteBatch(handles);\n\nawait client.close();\n```\n\n## Using with `using` Statement\n\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nawait using client = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\n\nconst queue = await client.ensureQueue(\"test\");\nconsole.log(\"Queue URL:\", queue.queueUrl);\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-rabbitmq`](https://jsr.io/@probitas/client-rabbitmq) | RabbitMQ client |\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas-client)\n- [Probitas Framework](https://github.com/jsr-probitas/probitas)\n- [AWS SQS](https://aws.amazon.com/sqs/)\n- [LocalStack](https://localstack.cloud/)\n",
   "exports": [
     {
       "name": "SqsDeleteBatchResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 91,
         "col": 0,
         "byteIndex": 1873
@@ -38,7 +38,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete-batch\"` for batch message delete operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 97,
               "col": 2,
               "byteIndex": 2055
@@ -63,7 +63,7 @@
               "doc": "Array of message IDs that were successfully deleted."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 102,
               "col": 2,
               "byteIndex": 2163
@@ -96,7 +96,7 @@
               "doc": "Array of messages that failed to delete."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 107,
               "col": 2,
               "byteIndex": 2264
@@ -136,7 +136,7 @@
       "name": "SqsDeleteQueueResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 130,
         "col": 0,
         "byteIndex": 2721
@@ -166,7 +166,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete-queue\"` for queue deletion operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 136,
               "col": 2,
               "byteIndex": 2897
@@ -195,7 +195,7 @@
       "name": "SqsDeleteResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 79,
         "col": 0,
         "byteIndex": 1623
@@ -225,7 +225,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:delete\"` for single message delete operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 85,
               "col": 2,
               "byteIndex": 1795
@@ -254,7 +254,7 @@
       "name": "SqsEnsureQueueResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 113,
         "col": 0,
         "byteIndex": 2362
@@ -284,7 +284,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:ensure-queue\"` for queue creation/verification operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 119,
               "col": 2,
               "byteIndex": 2551
@@ -309,7 +309,7 @@
               "doc": "URL of the queue (existing or newly created)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 124,
               "col": 2,
               "byteIndex": 2652
@@ -335,7 +335,7 @@
       "name": "SqsReceiveResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 60,
         "col": 0,
         "byteIndex": 1225
@@ -365,7 +365,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:receive\"` for message receive operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1393
@@ -390,7 +390,7 @@
               "doc": "Array of received messages (may be empty).\n\nIncludes helper methods like first(), last(), etc."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1547
@@ -419,7 +419,7 @@
       "name": "SqsResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 142,
         "col": 0,
         "byteIndex": 2982
@@ -499,7 +499,7 @@
       "name": "SqsSendBatchResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 38,
         "col": 0,
         "byteIndex": 753
@@ -529,7 +529,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:send-batch\"` for batch message send operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 929
@@ -554,7 +554,7 @@
               "doc": "Array of successfully sent messages."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 49,
               "col": 2,
               "byteIndex": 1019
@@ -590,7 +590,7 @@
               "doc": "Array of messages that failed to send."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 54,
               "col": 2,
               "byteIndex": 1132
@@ -630,7 +630,7 @@
       "name": "SqsSendResult",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
         "line": 11,
         "col": 0,
         "byteIndex": 199
@@ -660,7 +660,7 @@
               "doc": "Result kind discriminator.\n\nAlways `\"sqs:send\"` for single message send operations."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 365
@@ -685,7 +685,7 @@
               "doc": "Unique identifier for the sent message."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 22,
               "col": 2,
               "byteIndex": 452
@@ -707,7 +707,7 @@
               "doc": "MD5 hash of the message body (for integrity verification)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 27,
               "col": 2,
               "byteIndex": 559
@@ -729,7 +729,7 @@
               "doc": "Sequence number for FIFO queues (present only for FIFO queues)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/result.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/result.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 671
@@ -755,7 +755,7 @@
       "name": "SqsConnectionConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 29,
         "col": 0,
         "byteIndex": 572
@@ -791,7 +791,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 700
@@ -836,7 +836,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 40,
               "col": 2,
               "byteIndex": 825
@@ -858,7 +858,7 @@
               "doc": "AWS region (required for AWS, optional for LocalStack)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 925
@@ -884,7 +884,7 @@
       "name": "SqsClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 51,
         "col": 0,
         "byteIndex": 991
@@ -914,7 +914,7 @@
               "doc": "AWS region"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 53,
               "col": 2,
               "byteIndex": 1070
@@ -936,7 +936,7 @@
               "doc": "AWS credentials"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 55,
               "col": 2,
               "byteIndex": 1122
@@ -955,7 +955,7 @@
                   {
                     "name": "accessKeyId",
                     "location": {
-                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
                       "line": 56,
                       "col": 4,
                       "byteIndex": 1151
@@ -974,7 +974,7 @@
                   {
                     "name": "secretAccessKey",
                     "location": {
-                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+                      "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
                       "line": 57,
                       "col": 4,
                       "byteIndex": 1185
@@ -1003,7 +1003,7 @@
               "doc": "SQS queue URL (optional - can be set later or used with ensureQueue)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 60,
               "col": 2,
               "byteIndex": 1304
@@ -1025,7 +1025,7 @@
               "doc": "SQS endpoint URL (e.g., \"http://localhost:4566\" for LocalStack).\nCan be a string URL or a connection config object.\nOptional for real AWS (uses default endpoint), required for LocalStack."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1549
@@ -1065,7 +1065,7 @@
       "name": "SqsMessageAttribute",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 72,
         "col": 0,
         "byteIndex": 1632
@@ -1083,7 +1083,7 @@
           {
             "name": "dataType",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 1673
@@ -1127,7 +1127,7 @@
           {
             "name": "stringValue",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 74,
               "col": 2,
               "byteIndex": 1726
@@ -1146,7 +1146,7 @@
           {
             "name": "binaryValue",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 75,
               "col": 2,
               "byteIndex": 1759
@@ -1175,7 +1175,7 @@
       "name": "SqsMessage",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 81,
         "col": 0,
         "byteIndex": 1843
@@ -1193,7 +1193,7 @@
           {
             "name": "messageId",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 82,
               "col": 2,
               "byteIndex": 1875
@@ -1212,7 +1212,7 @@
           {
             "name": "body",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 1905
@@ -1231,7 +1231,7 @@
           {
             "name": "receiptHandle",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 1930
@@ -1250,7 +1250,7 @@
           {
             "name": "attributes",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 85,
               "col": 2,
               "byteIndex": 1964
@@ -1283,7 +1283,7 @@
           {
             "name": "messageAttributes",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 86,
               "col": 2,
               "byteIndex": 2011
@@ -1319,7 +1319,7 @@
           {
             "name": "md5OfBody",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 87,
               "col": 2,
               "byteIndex": 2079
@@ -1345,7 +1345,7 @@
       "name": "SqsMessages",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 93,
         "col": 0,
         "byteIndex": 2156
@@ -1384,7 +1384,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 95,
               "col": 2,
               "byteIndex": 2276
@@ -1419,7 +1419,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 97,
               "col": 2,
               "byteIndex": 2360
@@ -1443,7 +1443,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 99,
               "col": 2,
               "byteIndex": 2442
@@ -1478,7 +1478,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2524
@@ -1506,7 +1506,7 @@
       "name": "SqsSendOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 107,
         "col": 0,
         "byteIndex": 2596
@@ -1536,7 +1536,7 @@
               "doc": "Delay in seconds before the message becomes visible (0-900)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 109,
               "col": 2,
               "byteIndex": 2723
@@ -1558,7 +1558,7 @@
               "doc": "Message attributes"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 111,
               "col": 2,
               "byteIndex": 2785
@@ -1597,7 +1597,7 @@
               "doc": "Message group ID (required for FIFO queues)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 113,
               "col": 2,
               "byteIndex": 2906
@@ -1619,7 +1619,7 @@
               "doc": "Message deduplication ID (required for FIFO queues without content-based deduplication)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 115,
               "col": 2,
               "byteIndex": 3039
@@ -1645,7 +1645,7 @@
       "name": "SqsBatchMessage",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 121,
         "col": 0,
         "byteIndex": 3124
@@ -1663,7 +1663,7 @@
           {
             "name": "id",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 122,
               "col": 2,
               "byteIndex": 3161
@@ -1682,7 +1682,7 @@
           {
             "name": "body",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 123,
               "col": 2,
               "byteIndex": 3184
@@ -1701,7 +1701,7 @@
           {
             "name": "delaySeconds",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 124,
               "col": 2,
               "byteIndex": 3209
@@ -1720,7 +1720,7 @@
           {
             "name": "messageAttributes",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 125,
               "col": 2,
               "byteIndex": 3243
@@ -1763,7 +1763,7 @@
       "name": "SqsReceiveOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 131,
         "col": 0,
         "byteIndex": 3355
@@ -1793,7 +1793,7 @@
               "doc": "Maximum number of messages to receive (1-10, default: 1)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 133,
               "col": 2,
               "byteIndex": 3482
@@ -1815,7 +1815,7 @@
               "doc": "Wait time in seconds for long polling (0-20)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 135,
               "col": 2,
               "byteIndex": 3569
@@ -1837,7 +1837,7 @@
               "doc": "Visibility timeout in seconds (0-43200)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 137,
               "col": 2,
               "byteIndex": 3655
@@ -1859,7 +1859,7 @@
               "doc": "System attribute names to retrieve"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 139,
               "col": 2,
               "byteIndex": 3738
@@ -1892,7 +1892,7 @@
               "doc": "Message attribute names to retrieve"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 141,
               "col": 2,
               "byteIndex": 3830
@@ -1929,7 +1929,7 @@
       "name": "SqsBatchSuccessEntry",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 147,
         "col": 0,
         "byteIndex": 3925
@@ -1947,7 +1947,7 @@
           {
             "name": "messageId",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 148,
               "col": 2,
               "byteIndex": 3967
@@ -1966,7 +1966,7 @@
           {
             "name": "id",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 149,
               "col": 2,
               "byteIndex": 3997
@@ -1992,7 +1992,7 @@
       "name": "SqsBatchFailedEntry",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 155,
         "col": 0,
         "byteIndex": 4052
@@ -2010,7 +2010,7 @@
           {
             "name": "id",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 156,
               "col": 2,
               "byteIndex": 4093
@@ -2029,7 +2029,7 @@
           {
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 157,
               "col": 2,
               "byteIndex": 4116
@@ -2048,7 +2048,7 @@
           {
             "name": "message",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 158,
               "col": 2,
               "byteIndex": 4141
@@ -2074,7 +2074,7 @@
       "name": "SqsEnsureQueueOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 164,
         "col": 0,
         "byteIndex": 4218
@@ -2104,7 +2104,7 @@
               "doc": "Queue attributes (e.g., DelaySeconds, MessageRetentionPeriod)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 166,
               "col": 2,
               "byteIndex": 4354
@@ -2140,7 +2140,7 @@
               "doc": "Queue tags"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 168,
               "col": 2,
               "byteIndex": 4422
@@ -2180,7 +2180,7 @@
       "name": "SqsClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
         "line": 174,
         "col": 0,
         "byteIndex": 4498
@@ -2210,7 +2210,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 185,
               "col": 2,
               "byteIndex": 4790
@@ -2242,7 +2242,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 192,
               "col": 2,
               "byteIndex": 5056
@@ -2299,7 +2299,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 200,
               "col": 2,
               "byteIndex": 5208
@@ -2356,7 +2356,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 208,
               "col": 2,
               "byteIndex": 5357
@@ -2413,7 +2413,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 213,
               "col": 2,
               "byteIndex": 5504
@@ -2464,7 +2464,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 218,
               "col": 2,
               "byteIndex": 5626
@@ -2511,7 +2511,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 223,
               "col": 2,
               "byteIndex": 5744
@@ -2568,7 +2568,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 231,
               "col": 2,
               "byteIndex": 5920
@@ -2629,7 +2629,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 239,
               "col": 2,
               "byteIndex": 6083
@@ -2676,7 +2676,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 244,
               "col": 2,
               "byteIndex": 6201
@@ -2704,7 +2704,7 @@
           {
             "name": "config",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 175,
               "col": 2,
               "byteIndex": 4553
@@ -2729,7 +2729,7 @@
               "doc": "The current queue URL. Can be set via config, ensureQueue(), or setQueueUrl()."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/types.ts",
               "line": 180,
               "col": 2,
               "byteIndex": 4686
@@ -2766,7 +2766,7 @@
       "name": "SqsErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 91
@@ -2793,7 +2793,7 @@
           {
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 7,
               "col": 2,
               "byteIndex": 149
@@ -2819,7 +2819,7 @@
       "name": "SqsError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 13,
         "col": 0,
         "byteIndex": 227
@@ -2877,7 +2877,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 17,
               "col": 2,
               "byteIndex": 347
@@ -2899,7 +2899,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 14,
               "col": 2,
               "byteIndex": 273
@@ -2918,7 +2918,7 @@
             "isStatic": false,
             "name": "code",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 15,
               "col": 2,
               "byteIndex": 320
@@ -2937,7 +2937,7 @@
       "name": "SqsConnectionError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 30,
         "col": 0,
         "byteIndex": 587
@@ -2980,7 +2980,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 740
@@ -3002,7 +3002,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 31,
               "col": 2,
               "byteIndex": 640
@@ -3025,7 +3025,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 689
@@ -3044,7 +3044,7 @@
       "name": "SqsCommandErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 42,
         "col": 0,
         "byteIndex": 891
@@ -3071,7 +3071,7 @@
           {
             "name": "operation",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 43,
               "col": 2,
               "byteIndex": 959
@@ -3097,7 +3097,7 @@
       "name": "SqsCommandError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 49,
         "col": 0,
         "byteIndex": 1041
@@ -3140,7 +3140,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 54,
               "col": 2,
               "byteIndex": 1215
@@ -3162,7 +3162,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 50,
               "col": 2,
               "byteIndex": 1091
@@ -3185,7 +3185,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1137
@@ -3204,7 +3204,7 @@
             "isStatic": false,
             "name": "operation",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1184
@@ -3223,7 +3223,7 @@
       "name": "SqsQueueNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 63,
         "col": 0,
         "byteIndex": 1417
@@ -3276,7 +3276,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 68,
               "col": 2,
               "byteIndex": 1610
@@ -3298,7 +3298,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1473
@@ -3321,7 +3321,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 65,
               "col": 2,
               "byteIndex": 1525
@@ -3340,7 +3340,7 @@
             "isStatic": false,
             "name": "queueUrl",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 66,
               "col": 2,
               "byteIndex": 1580
@@ -3359,7 +3359,7 @@
       "name": "SqsMessageTooLargeError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 77,
         "col": 0,
         "byteIndex": 1834
@@ -3422,7 +3422,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 2057
@@ -3444,7 +3444,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 78,
               "col": 2,
               "byteIndex": 1892
@@ -3467,7 +3467,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 79,
               "col": 2,
               "byteIndex": 1946
@@ -3486,7 +3486,7 @@
             "isStatic": false,
             "name": "size",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 80,
               "col": 2,
               "byteIndex": 2003
@@ -3505,7 +3505,7 @@
             "isStatic": false,
             "name": "maxSize",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 2028
@@ -3524,7 +3524,7 @@
       "name": "SqsBatchError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 98,
         "col": 0,
         "byteIndex": 2338
@@ -3577,7 +3577,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 103,
               "col": 2,
               "byteIndex": 2508
@@ -3599,7 +3599,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 99,
               "col": 2,
               "byteIndex": 2386
@@ -3622,7 +3622,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 100,
               "col": 2,
               "byteIndex": 2430
@@ -3641,7 +3641,7 @@
             "isStatic": false,
             "name": "failedCount",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2475
@@ -3660,7 +3660,7 @@
       "name": "SqsMessageNotFoundError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
         "line": 112,
         "col": 0,
         "byteIndex": 2750
@@ -3703,7 +3703,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 116,
               "col": 2,
               "byteIndex": 2920
@@ -3725,7 +3725,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 113,
               "col": 2,
               "byteIndex": 2808
@@ -3748,7 +3748,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/errors.ts",
               "line": 114,
               "col": 2,
               "byteIndex": 2862
@@ -3767,10 +3767,10 @@
       "name": "createSqsClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/client.ts",
-        "line": 344,
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/client.ts",
+        "line": 382,
         "col": 0,
-        "byteIndex": 9421
+        "byteIndex": 10627
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3787,27 +3787,27 @@
           },
           {
             "kind": "example",
-            "doc": "Basic usage with existing queue\n```ts\nconst sqs = await createSqsClient({\n  region: \"ap-northeast-1\",\n  queueUrl: \"https://sqs.ap-northeast-1.amazonaws.com/123456789/my-queue\",\n});\n\n// Send a message\nconst sendResult = await sqs.send(JSON.stringify({\n  type: \"ORDER\",\n  orderId: \"123\",\n}));\nconsole.log(\"Message ID:\", sendResult.messageId);\n\nawait sqs.close();\n```\n"
+            "doc": "Basic usage with existing queue\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst sqs = await createSqsClient({\n  region: \"ap-northeast-1\",\n  queueUrl: \"https://sqs.ap-northeast-1.amazonaws.com/123456789/my-queue\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\n\n// Send a message\nconst sendResult = await sqs.send(JSON.stringify({\n  type: \"ORDER\",\n  orderId: \"123\",\n}));\nconsole.log(\"Message ID:\", sendResult.messageId);\n\nawait sqs.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using LocalStack for local development\n```ts\nconst sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: {\n    accessKeyId: \"test\",\n    secretAccessKey: \"test\",\n  },\n});\n\n// Create queue dynamically (also sets queueUrl)\nconst result = await sqs.ensureQueue(\"test-queue\");\nconsole.log(result.queueUrl);  // http://localhost:4566/000000000000/test-queue\n```\n"
+            "doc": "Using LocalStack for local development\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: {\n    accessKeyId: \"test\",\n    secretAccessKey: \"test\",\n  },\n});\n\n// Create queue dynamically (also sets queueUrl)\nconst result = await sqs.ensureQueue(\"test-queue\");\nconsole.log(result.queueUrl);  // http://localhost:4566/000000000000/test-queue\n\nawait sqs.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Receiving messages with long polling\n```ts\n// Long polling waits up to 20 seconds for messages\nconst receiveResult = await sqs.receive({\n  maxMessages: 10,\n  waitTimeSeconds: 20,\n  visibilityTimeout: 30,\n});\n\nconsole.log(\"Received:\", receiveResult.messages.length);\n\n// Process and acknowledge messages\nfor (const msg of receiveResult.messages) {\n  const data = JSON.parse(msg.body);\n  console.log(\"Processing:\", data);\n\n  // Delete after successful processing\n  await sqs.delete(msg.receiptHandle);\n}\n```\n"
+            "doc": "Receiving messages with long polling\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\nawait sqs.ensureQueue(\"test-queue\");\n\n// Long polling waits up to 20 seconds for messages\nconst receiveResult = await sqs.receive({\n  maxMessages: 10,\n  waitTimeSeconds: 20,\n  visibilityTimeout: 30,\n});\n\nconsole.log(\"Received:\", receiveResult.messages.length);\n\n// Process and acknowledge messages\nfor (const msg of receiveResult.messages) {\n  const data = JSON.parse(msg.body);\n  console.log(\"Processing:\", data);\n\n  // Delete after successful processing\n  await sqs.delete(msg.receiptHandle);\n}\n\nawait sqs.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Batch operations for high throughput\n```ts\n// Send multiple messages in a single API call\nconst batchResult = await sqs.sendBatch([\n  { id: \"1\", body: JSON.stringify({ event: \"user.created\", userId: \"a1\" }) },\n  { id: \"2\", body: JSON.stringify({ event: \"user.created\", userId: \"a2\" }) },\n  { id: \"3\", body: JSON.stringify({ event: \"user.updated\", userId: \"a3\" }) },\n]);\n\nconsole.log(`Sent: ${batchResult.successful.length}`);\nconsole.log(`Failed: ${batchResult.failed.length}`);\n\n// Batch delete processed messages\nconst handles = receiveResult.messages.map(m => m.receiptHandle);\nawait sqs.deleteBatch(handles);\n```\n"
+            "doc": "Batch operations for high throughput\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\nawait sqs.ensureQueue(\"test-queue\");\n\n// Send multiple messages in a single API call\nconst batchResult = await sqs.sendBatch([\n  { id: \"1\", body: JSON.stringify({ event: \"user.created\", userId: \"a1\" }) },\n  { id: \"2\", body: JSON.stringify({ event: \"user.created\", userId: \"a2\" }) },\n  { id: \"3\", body: JSON.stringify({ event: \"user.updated\", userId: \"a3\" }) },\n]);\n\nconsole.log(`Sent: ${batchResult.successful.length}`);\nconsole.log(`Failed: ${batchResult.failed.length}`);\n\n// Batch delete processed messages\nconst receiveResult = await sqs.receive({ maxMessages: 10 });\nconst handles = receiveResult.messages.map((m: { receiptHandle: string }) => m.receiptHandle);\nawait sqs.deleteBatch(handles);\n\nawait sqs.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "FIFO queue with deduplication\n```ts\nconst sqs = await createSqsClient({\n  region: \"ap-northeast-1\",\n  queueUrl: \"https://sqs.ap-northeast-1.amazonaws.com/123456789/orders.fifo\",\n});\n\n// FIFO queues require MessageGroupId and optionally MessageDeduplicationId\nawait sqs.send(JSON.stringify({ orderId: \"order-123\" }), {\n  messageGroupId: \"orders\",\n  messageDeduplicationId: \"order-123-v1\",\n});\n```\n"
+            "doc": "FIFO queue with deduplication\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nconst sqs = await createSqsClient({\n  region: \"ap-northeast-1\",\n  queueUrl: \"https://sqs.ap-northeast-1.amazonaws.com/123456789/orders.fifo\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\n\n// FIFO queues require MessageGroupId and optionally MessageDeduplicationId\nawait sqs.send(JSON.stringify({ orderId: \"order-123\" }), {\n  messageGroupId: \"orders\",\n  messageDeduplicationId: \"order-123-v1\",\n});\n\nawait sqs.close();\n```\n"
           },
           {
             "kind": "example",
-            "doc": "Using `await using` for automatic cleanup\n```ts\nawait using sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n});\n\nawait sqs.ensureQueue(\"test-queue\");\nawait sqs.send(\"Hello, SQS!\");\n// Client automatically closed when scope exits\n```"
+            "doc": "Using `await using` for automatic cleanup\n```ts\nimport { createSqsClient } from \"@probitas/client-sqs\";\n\nawait using sqs = await createSqsClient({\n  region: \"us-east-1\",\n  url: \"http://localhost:4566\",\n  credentials: { accessKeyId: \"test\", secretAccessKey: \"test\" },\n});\n\nawait sqs.ensureQueue(\"test-queue\");\nawait sqs.send(\"Hello, SQS!\");\n// Client automatically closed when scope exits\n```"
           }
         ]
       },
@@ -3855,7 +3855,7 @@
       "name": "createSqsMessages",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-sqs/0.3.0/messages.ts",
+        "filename": "https://jsr.io/@probitas/client-sqs/0.3.1/messages.ts",
         "line": 6,
         "col": 0,
         "byteIndex": 120
@@ -3899,6 +3899,5 @@
         "typeParams": []
       }
     }
-  ],
-  "generatedAt": "2025-12-16T18:17:31.307Z"
+  ]
 }
