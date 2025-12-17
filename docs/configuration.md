@@ -65,7 +65,8 @@ probitas run -s tag:smoke
 
 ## Scenario Options
 
-Configure scenarios using the options parameter of `scenario()`.
+Configure scenarios using the options parameter of
+[`scenario()`](/api/scenario/#scenario).
 
 ```typescript
 import { scenario } from "jsr:@probitas/probitas";
@@ -233,7 +234,7 @@ scenario("Retry Example")
 
 ## Client Configurations
 
-### HTTP Client
+### [HTTP Client](/api/client-http/#createHttpClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -254,7 +255,7 @@ client.http.createHttpClient({
 | `timeout`      | Request timeout (ms)                 | —          |
 | `redirect`     | `"follow"`, `"manual"`, or `"error"` | `"follow"` |
 
-### PostgreSQL Client
+### [PostgreSQL Client](/api/client-sql-postgres/#createPostgresClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -288,7 +289,7 @@ client.sql.postgres.createPostgresClient({
 });
 ```
 
-### gRPC Client
+### [gRPC Client](/api/client-grpc/#createGrpcClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -307,7 +308,7 @@ client.grpc.createGrpcClient({
 | `tls`      | TLS configuration              | —              |
 | `schema`   | Proto schema source            | `"reflection"` |
 
-### GraphQL Client
+### [GraphQL Client](/api/client-graphql/#createGraphqlClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -325,7 +326,7 @@ client.graphql.createGraphqlClient({
 | `wsUrl`        | WebSocket endpoint for subscriptions | —       |
 | `throwOnError` | Throw on GraphQL errors              | `true`  |
 
-### Redis Client
+### [Redis Client](/api/client-redis/#createRedisClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -339,7 +340,7 @@ client.redis.createRedisClient({
 | ------ | ---------------------------------------- | -------------------------- |
 | `url`  | Redis connection URL (redis://host:port) | `"redis://localhost:6379"` |
 
-### MongoDB Client
+### [MongoDB Client](/api/client-mongodb/#createMongoClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -355,7 +356,7 @@ client.mongodb.createMongoClient({
 | `uri`      | MongoDB connection URI | —       |
 | `database` | Default database name  | —       |
 
-### RabbitMQ Client
+### [RabbitMQ Client](/api/client-rabbitmq/#createRabbitMqClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -369,7 +370,7 @@ client.rabbitmq.createRabbitMqClient({
 | ------ | ------------------- | -------------------- |
 | `url`  | AMQP connection URL | `"amqp://localhost"` |
 
-### SQS Client
+### [SQS Client](/api/client-sqs/#createSqsClient)
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";

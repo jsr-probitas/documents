@@ -1,0 +1,313 @@
+# Expect
+
+Learn how to use Probitas assertions to validate responses from various clients.
+The [`expect()`](/api/expect/#expect) function provides a unified, type-safe API
+for asserting on results from HTTP, SQL, Redis, MongoDB, and other clients.
+
+## Overview
+
+Probitas provides a fluent assertion API that automatically dispatches to
+specialized expectations based on the input type:
+
+- **Type-safe**: Compile-time checks ensure correct method usage
+- **Auto-dispatch**: `expect()` detects the response type and provides
+  appropriate assertions
+- **Method chaining**: All assertions return `this` for fluent syntax
+- **Consistent naming**: Methods follow `toBeXxx` or `toHaveXxx` patterns
+
+```typescript
+import { client, expect, scenario } from "jsr:@probitas/probitas";
+
+export default scenario("Assertion Example")
+  .resource("http", () =>
+    client.http.createHttpClient({
+      url: "http://localhost:8080",
+    }))
+  .step("Validate response", async (ctx) => {
+    const { http } = ctx.resources;
+    const res = await http.get("/users/1");
+
+    // Chained assertions - each returns `this`
+    expect(res)
+      .toBeOk()
+      .toHaveStatus(200)
+      .toHaveDataMatching({ id: 1, name: "Alice" });
+  })
+  .build();
+```
+
+## Unified expect Function
+
+The [`expect()`](/api/expect/#expect) function automatically dispatches to the
+appropriate expectation based on the input type:
+
+| Input Type           | Expectation Class                                                             | Source Client |
+| -------------------- | ----------------------------------------------------------------------------- | ------------- |
+| `HttpResponse`       | [`HttpResponseExpectation`](/api/expect/#HttpResponseExpectation)             | HTTP          |
+| `GraphqlResponse`    | [`GraphqlResponseExpectation`](/api/expect/#GraphqlResponseExpectation)       | GraphQL       |
+| `GrpcResponse`       | [`GrpcResponseExpectation`](/api/expect/#GrpcResponseExpectation)             | gRPC          |
+| `ConnectRpcResponse` | [`ConnectRpcResponseExpectation`](/api/expect/#ConnectRpcResponseExpectation) | ConnectRPC    |
+| `SqlQueryResult`     | [`SqlQueryResultExpectation`](/api/expect/#SqlQueryResultExpectation)         | SQL           |
+| `RedisResult`        | [`RedisExpectation`](/api/expect/#RedisExpectation)                           | Redis         |
+| `MongoResult`        | [`MongoExpectation`](/api/expect/#MongoExpectation)                           | MongoDB       |
+| `DenoKvResult`       | [`DenoKvExpectation`](/api/expect/#DenoKvExpectation)                         | Deno KV       |
+| `RabbitMqResult`     | [`RabbitMqExpectation`](/api/expect/#RabbitMqExpectation)                     | RabbitMQ      |
+| `SqsResult`          | [`SqsExpectation`](/api/expect/#SqsExpectation)                               | SQS           |
+| Other values         | [`AnythingExpectation`](/api/expect/#AnythingExpectation)                     | Generic       |
+
+## HTTP Response Assertions
+
+Use [`HttpResponseExpectation`](/api/expect/#HttpResponseExpectation) for HTTP
+client responses:
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const http = client.http.createHttpClient({ url: "http://localhost:8080" });
+const res = await http.get("/users/1");
+
+// Status assertions
+expect(res)
+  .toBeOk() // ok === true
+  .toHaveStatus(200) // status === 200
+  .toHaveStatusText("OK"); // statusText === "OK"
+
+// Data assertions
+expect(res)
+  .toHaveData({ id: 1, name: "Alice" }) // exact match
+  .toHaveDataMatching({ id: 1 }) // partial match
+  .toHaveDataProperty("email"); // property exists
+
+// Header assertions
+expect(res)
+  .toHaveHeadersProperty("content-type")
+  .toHaveHeadersPropertyContaining("content-type", "json");
+```
+
+### Common HTTP Assertion Methods
+
+| Method                                  | Description                     |
+| --------------------------------------- | ------------------------------- |
+| `toBeOk()`                              | Response `ok` is `true`         |
+| `toHaveStatus(n)`                       | Status equals `n`               |
+| `toHaveStatusText(s)`                   | Status text equals `s`          |
+| `toHaveData(d)`                         | Data deeply equals `d`          |
+| `toHaveDataMatching(d)`                 | Data matches partial object `d` |
+| `toHaveDataProperty(k)`                 | Data has property `k`           |
+| `toHaveHeadersProperty(k)`              | Header `k` exists               |
+| `toHaveHeadersPropertyContaining(k, v)` | Header `k` contains `v`         |
+
+## SQL Query Assertions
+
+Use [`SqlQueryResultExpectation`](/api/expect/#SqlQueryResultExpectation) for
+SQL client results:
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const pg = await client.sql.postgres.createPostgresClient({
+  url: "postgres://user:pass@localhost/db",
+});
+const result = await pg.query("SELECT * FROM users WHERE active = $1", [true]);
+
+// Row count assertions
+expect(result)
+  .toHaveRowCount(5) // exactly 5 rows
+  .toHaveRowCountGreaterThan(0); // at least 1 row
+
+// Row content assertions
+expect(result)
+  .toHaveRowsMatching({ active: true }) // all rows have active=true
+  .toHaveRowsContaining({ name: "Alice" }); // at least one row has name=Alice
+```
+
+### Common SQL Assertion Methods
+
+| Method                         | Description                       |
+| ------------------------------ | --------------------------------- |
+| `toHaveRowCount(n)`            | Result has exactly `n` rows       |
+| `toHaveRowCountGreaterThan(n)` | Result has more than `n` rows     |
+| `toHaveRowsMatching(o)`        | All rows match partial object `o` |
+| `toHaveRowsContaining(o)`      | At least one row matches `o`      |
+| `toHaveColumns(cols)`          | Result has specified columns      |
+
+## GraphQL Response Assertions
+
+Use [`GraphqlResponseExpectation`](/api/expect/#GraphqlResponseExpectation) for
+GraphQL client responses:
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const gql = client.graphql.createGraphqlClient({
+  url: "http://localhost:4000/graphql",
+});
+const res = await gql.query(`query { user(id: 1) { name email } }`);
+
+expect(res)
+  .toBeOk()
+  .toHaveErrorsEmpty() // no GraphQL errors
+  .toHaveData({ user: { name: "Alice", email: "alice@example.com" } })
+  .toHaveDataMatching({ user: { name: "Alice" } });
+```
+
+### Common GraphQL Assertion Methods
+
+| Method                  | Description                     |
+| ----------------------- | ------------------------------- |
+| `toBeOk()`              | Response `ok` is `true`         |
+| `toHaveErrorsEmpty()`   | No GraphQL errors in response   |
+| `toHaveErrors(errs)`    | Has specific GraphQL errors     |
+| `toHaveData(d)`         | Data deeply equals `d`          |
+| `toHaveDataMatching(d)` | Data matches partial object `d` |
+
+## gRPC / ConnectRPC Assertions
+
+Use [`GrpcResponseExpectation`](/api/expect/#GrpcResponseExpectation) or
+[`ConnectRpcResponseExpectation`](/api/expect/#ConnectRpcResponseExpectation):
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const grpc = client.grpc.createGrpcClient({ url: "localhost:50051" });
+const res = await grpc.call("users.UserService", "GetUser", { id: "123" });
+
+expect(res)
+  .toBeOk()
+  .toHaveData({ id: "123", name: "Alice" })
+  .toHaveDataMatching({ id: "123" });
+```
+
+## Redis Assertions
+
+Use [`RedisExpectation`](/api/expect/#RedisExpectation) for Redis client
+results:
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const redis = await client.redis.createRedisClient({
+  url: "redis://localhost:6379",
+});
+
+// String operations
+await redis.set("user:1:name", "Alice");
+const name = await redis.get("user:1:name");
+expect(name).toHaveValue("Alice");
+
+// Counter operations
+await redis.set("counter", "0");
+const count = await redis.incr("counter");
+expect(count).toHaveValue(1);
+
+// Set operations
+await redis.sadd("tags", "a", "b", "c");
+const members = await redis.smembers("tags");
+expect(members).toHaveValueContaining("a");
+```
+
+### Common Redis Assertion Methods
+
+| Method                     | Description                     |
+| -------------------------- | ------------------------------- |
+| `toHaveValue(v)`           | Result value equals `v`         |
+| `toHaveValueContaining(v)` | Array result contains value `v` |
+| `toHaveValueEmpty()`       | Result is empty                 |
+
+## MongoDB Assertions
+
+Use [`MongoExpectation`](/api/expect/#MongoExpectation) for MongoDB client
+results:
+
+```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+const mongo = await client.mongodb.createMongoClient({
+  url: "mongodb://localhost:27017",
+  database: "testdb",
+});
+
+// Find operations
+const users = await mongo.collection("users").find({ active: true });
+expect(users)
+  .toHaveDocsCount(5)
+  .toHaveDocsContaining({ name: "Alice" });
+
+// Insert operations
+const insertResult = await mongo.collection("users").insertOne({
+  name: "Bob",
+  email: "bob@example.com",
+});
+expect(insertResult).toBeOk();
+```
+
+## Generic Assertions
+
+For values not matching specific client types,
+[`AnythingExpectation`](/api/expect/#AnythingExpectation) provides chainable
+wrappers around `@std/expect` matchers:
+
+```typescript
+import { expect } from "jsr:@probitas/probitas";
+
+// Numbers
+expect(42).toBe(42).toBeGreaterThan(40);
+
+// Strings
+expect("hello world").toContain("world").toMatch(/^hello/);
+
+// Objects
+expect({ a: 1, b: 2 }).toMatchObject({ a: 1 }).toHaveProperty("b");
+
+// Arrays
+expect([1, 2, 3]).toHaveLength(3).toContain(2);
+```
+
+### Common Generic Assertion Methods
+
+| Method               | Description                       |
+| -------------------- | --------------------------------- |
+| `toBe(v)`            | Strictly equals (`===`) `v`       |
+| `toEqual(v)`         | Deeply equals `v`                 |
+| `toStrictEqual(v)`   | Strictly deeply equals `v`        |
+| `toMatch(r)`         | String matches regex `r`          |
+| `toContain(v)`       | Array/string contains `v`         |
+| `toHaveLength(n)`    | Has length `n`                    |
+| `toHaveProperty(k)`  | Object has property `k`           |
+| `toMatchObject(o)`   | Object matches partial object `o` |
+| `toBeGreaterThan(n)` | Number is greater than `n`        |
+| `toBeLessThan(n)`    | Number is less than `n`           |
+| `toBeTruthy()`       | Value is truthy                   |
+| `toBeFalsy()`        | Value is falsy                    |
+| `toBeNull()`         | Value is `null`                   |
+| `toBeUndefined()`    | Value is `undefined`              |
+
+## Error Handling
+
+When an assertion fails, an [`ExpectationError`](/api/expect/#ExpectationError)
+is thrown. In scenario steps, these errors are caught and reported
+automatically:
+
+```typescript
+import { client, expect, scenario } from "jsr:@probitas/probitas";
+
+export default scenario("Error Example")
+  .resource(
+    "http",
+    () => client.http.createHttpClient({ url: "http://localhost:8080" }),
+  )
+  .step("Check status", async (ctx) => {
+    const { http } = ctx.resources;
+    const res = await http.get("/health");
+
+    // If this fails, the scenario reports which assertion failed
+    expect(res).toHaveStatus(200);
+  })
+  .build();
+```
+
+## Next Steps
+
+- [Overview](/docs/) - Get started with Probitas
+- [Scenario Guide](/docs/scenario/) - Learn how to write scenarios
+- [Client API](/docs/client/) - Detailed reference for each client

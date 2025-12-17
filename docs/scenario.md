@@ -63,7 +63,7 @@ export default [
 
 ## Scenario Builder API
 
-### `scenario(name, options?)`
+### [`scenario(name, options?)`](/api/scenario/#scenario)
 
 Creates a new scenario builder.
 
@@ -474,8 +474,8 @@ scenario("Cleanup Order Example")
 
 ### Skipping Scenarios
 
-Throw `Skip` to conditionally skip the remaining steps. This is useful for
-environment-specific tests.
+Throw [`Skip`](/api/scenario/#Skip) to conditionally skip the remaining steps.
+This is useful for environment-specific tests.
 
 ```typescript
 import { scenario, Skip } from "jsr:@probitas/probitas";

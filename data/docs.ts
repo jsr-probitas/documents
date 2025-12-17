@@ -41,6 +41,14 @@ export const docPages: DocPage[] = [
       "Client API reference for HTTP, SQL, gRPC, GraphQL, Redis, MongoDB, and more",
   },
   {
+    path: "/docs/expect/",
+    file: "./docs/expect.md",
+    title: "Expect",
+    label: "Expect",
+    description:
+      "Type-safe assertion API for HTTP, SQL, Redis, MongoDB, and other client responses",
+  },
+  {
     path: "/docs/configuration/",
     file: "./docs/configuration.md",
     title: "Configuration",

@@ -129,23 +129,23 @@ Choose output format based on your needs:
 
 ## Available Clients
 
-All clients are accessed via the `client` namespace:
+All clients are accessed via the [`client`](/api/client/) namespace:
 
-| Client     | Factory Function                             | Protocol              |
-| ---------- | -------------------------------------------- | --------------------- |
-| HTTP       | `client.http.createHttpClient()`             | HTTP/HTTPS            |
-| PostgreSQL | `client.sql.postgres.createPostgresClient()` | PostgreSQL            |
-| MySQL      | `client.sql.mysql.createMySqlClient()`       | MySQL                 |
-| SQLite     | `client.sql.sqlite.createSqliteClient()`     | SQLite                |
-| DuckDB     | `client.sql.duckdb.createDuckDbClient()`     | DuckDB                |
-| gRPC       | `client.grpc.createGrpcClient()`             | gRPC                  |
-| ConnectRPC | `client.connectrpc.createConnectRpcClient()` | Connect/gRPC/gRPC-Web |
-| GraphQL    | `client.graphql.createGraphqlClient()`       | GraphQL               |
-| Redis      | `client.redis.createRedisClient()`           | Redis                 |
-| MongoDB    | `client.mongodb.createMongoClient()`         | MongoDB               |
-| Deno KV    | `client.deno_kv.createDenoKvClient()`        | Deno KV               |
-| RabbitMQ   | `client.rabbitmq.createRabbitMqClient()`     | AMQP                  |
-| SQS        | `client.sqs.createSqsClient()`               | AWS SQS               |
+| Client     | Factory Function                                                                               | Protocol              |
+| ---------- | ---------------------------------------------------------------------------------------------- | --------------------- |
+| HTTP       | [`client.http.createHttpClient()`](/api/client-http/#createHttpClient)                         | HTTP/HTTPS            |
+| PostgreSQL | [`client.sql.postgres.createPostgresClient()`](/api/client-sql-postgres/#createPostgresClient) | PostgreSQL            |
+| MySQL      | [`client.sql.mysql.createMySqlClient()`](/api/client-sql-mysql/#createMySqlClient)             | MySQL                 |
+| SQLite     | [`client.sql.sqlite.createSqliteClient()`](/api/client-sql-sqlite/#createSqliteClient)         | SQLite                |
+| DuckDB     | [`client.sql.duckdb.createDuckDbClient()`](/api/client-sql-duckdb/#createDuckDbClient)         | DuckDB                |
+| gRPC       | [`client.grpc.createGrpcClient()`](/api/client-grpc/#createGrpcClient)                         | gRPC                  |
+| ConnectRPC | [`client.connectrpc.createConnectRpcClient()`](/api/client-connectrpc/#createConnectRpcClient) | Connect/gRPC/gRPC-Web |
+| GraphQL    | [`client.graphql.createGraphqlClient()`](/api/client-graphql/#createGraphqlClient)             | GraphQL               |
+| Redis      | [`client.redis.createRedisClient()`](/api/client-redis/#createRedisClient)                     | Redis                 |
+| MongoDB    | [`client.mongodb.createMongoClient()`](/api/client-mongodb/#createMongoClient)                 | MongoDB               |
+| Deno KV    | [`client.deno_kv.createDenoKvClient()`](/api/client-deno-kv/#createDenoKvClient)               | Deno KV               |
+| RabbitMQ   | [`client.rabbitmq.createRabbitMqClient()`](/api/client-rabbitmq/#createRabbitMqClient)         | AMQP                  |
+| SQS        | [`client.sqs.createSqsClient()`](/api/client-sqs/#createSqsClient)                             | AWS SQS               |
 
 ## Core Concepts
 
@@ -170,7 +170,8 @@ scenario(name, options?)
 
 ### Expect API
 
-The `expect()` function auto-dispatches based on result type:
+The [`expect()`](/api/expect/#expect) function auto-dispatches based on result
+type:
 
 ```typescript
 import { client, expect } from "jsr:@probitas/probitas";
@@ -229,6 +230,7 @@ import {
 
 ## Next Steps
 
-- [Scenario Guide](/docs/scenario) - Learn how to write scenarios in detail
-- [Client API](/docs/client) - Detailed reference for each client
-- [Configuration](/docs/configuration) - Timeout, retry, and other options
+- [Scenario Guide](/docs/scenario/) - Learn how to write scenarios in detail
+- [Client API](/docs/client/) - Detailed reference for each client
+- [Expect API](/docs/expect/) - Type-safe assertions for response validation
+- [Configuration](/docs/configuration/) - Timeout, retry, and other options

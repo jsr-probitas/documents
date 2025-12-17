@@ -66,7 +66,7 @@ await using http = client.http.createHttpClient({
 // Automatically closed when scope exits
 ```
 
-## HTTP Client
+## [HTTP Client](/api/client-http/#createHttpClient)
 
 The HTTP client provides a fluent API for making HTTP requests with built-in
 JSON handling and response assertions.
@@ -159,12 +159,12 @@ expect(res).toHaveDataPresent(); // Check if response has data
 
 Probitas supports multiple SQL databases with a consistent query interface.
 
-| Database   | Client Factory                               |
-| ---------- | -------------------------------------------- |
-| PostgreSQL | `client.sql.postgres.createPostgresClient()` |
-| MySQL      | `client.sql.mysql.createMySqlClient()`       |
-| SQLite     | `client.sql.sqlite.createSqliteClient()`     |
-| DuckDB     | `client.sql.duckdb.createDuckDbClient()`     |
+| Database   | Client Factory                                                                                 |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| PostgreSQL | [`client.sql.postgres.createPostgresClient()`](/api/client-sql-postgres/#createPostgresClient) |
+| MySQL      | [`client.sql.mysql.createMySqlClient()`](/api/client-sql-mysql/#createMySqlClient)             |
+| SQLite     | [`client.sql.sqlite.createSqliteClient()`](/api/client-sql-sqlite/#createSqliteClient)         |
+| DuckDB     | [`client.sql.duckdb.createDuckDbClient()`](/api/client-sql-duckdb/#createDuckDbClient)         |
 
 ```typescript
 import { client } from "jsr:@probitas/probitas";
@@ -266,7 +266,7 @@ expect(result).toHaveRowCountGreaterThan(0); // More than 0 rows
 expect(result).toHaveRowCountLessThanOrEqual(10); // At most 10 rows
 ```
 
-## gRPC Client
+## [gRPC Client](/api/client-grpc/#createGrpcClient)
 
 The gRPC client supports unary calls, server streaming, client streaming, and
 bidirectional streaming.
@@ -364,7 +364,7 @@ for await (
 }
 ```
 
-## ConnectRPC Client
+## [ConnectRPC Client](/api/client-connectrpc/#createConnectRpcClient)
 
 The ConnectRPC client supports Connect, gRPC, and gRPC-Web protocols with a
 unified API.
@@ -412,7 +412,7 @@ for await (
 }
 ```
 
-## GraphQL Client
+## [GraphQL Client](/api/client-graphql/#createGraphqlClient)
 
 The GraphQL client provides methods for queries, mutations, and subscriptions.
 
@@ -533,7 +533,7 @@ expect(res).toHaveExtensionsProperty("tracing"); // Has tracing extension
 expect(res).toHaveExtensionsPropertyContaining("tracing", { version: 1 }); // Extension with value
 ```
 
-## Redis Client
+## [Redis Client](/api/client-redis/#createRedisClient)
 
 The Redis client provides operations for strings, hashes, lists, and sets.
 
@@ -587,7 +587,7 @@ expect(result).toHaveValueContaining("substring"); // Value contains substring
 // expect(result).toHaveValueCount(5); // String length or collection size
 ```
 
-## MongoDB Client
+## [MongoDB Client](/api/client-mongodb/#createMongoClient)
 
 The MongoDB client provides document operations with a familiar API.
 
@@ -653,7 +653,7 @@ expect(allUsersResult).toHaveDocsMatching([{ name: "Alice" }]); // Match multipl
 expect(deleteResult).toHaveDeletedCount(1); // 1 document deleted
 ```
 
-## Deno KV Client
+## [Deno KV Client](/api/client-deno-kv/#createDenoKvClient)
 
 The Deno KV client provides access to Deno's built-in key-value store.
 
@@ -694,7 +694,7 @@ const commitResult = await atomic.commit();
 await kv.delete(["users", "1"]);
 ```
 
-## RabbitMQ Client
+## [RabbitMQ Client](/api/client-rabbitmq/#createRabbitMqClient)
 
 The RabbitMQ client provides AMQP messaging for publish/subscribe patterns.
 
@@ -736,7 +736,7 @@ if (result.message) {
 await channel.close();
 ```
 
-## SQS Client
+## [SQS Client](/api/client-sqs/#createSqsClient)
 
 The AWS SQS client provides cloud message queue operations.
 
@@ -783,21 +783,21 @@ for (const msg of receiveResult.messages) {
 
 ## Available Clients
 
-| Client     | Factory Function                             | Use Case             |
-| ---------- | -------------------------------------------- | -------------------- |
-| HTTP       | `client.http.createHttpClient()`             | REST APIs, webhooks  |
-| PostgreSQL | `client.sql.postgres.createPostgresClient()` | PostgreSQL databases |
-| MySQL      | `client.sql.mysql.createMySqlClient()`       | MySQL databases      |
-| SQLite     | `client.sql.sqlite.createSqliteClient()`     | Embedded databases   |
-| DuckDB     | `client.sql.duckdb.createDuckDbClient()`     | Analytics databases  |
-| gRPC       | `client.grpc.createGrpcClient()`             | gRPC services        |
-| ConnectRPC | `client.connectrpc.createConnectRpcClient()` | Connect/gRPC-Web     |
-| GraphQL    | `client.graphql.createGraphqlClient()`       | GraphQL APIs         |
-| Redis      | `client.redis.createRedisClient()`           | Cache, pub/sub       |
-| MongoDB    | `client.mongodb.createMongoClient()`         | Document databases   |
-| Deno KV    | `client.deno_kv.createDenoKvClient()`        | Deno KV store        |
-| RabbitMQ   | `client.rabbitmq.createRabbitMqClient()`     | AMQP message queues  |
-| SQS        | `client.sqs.createSqsClient()`               | AWS message queues   |
+| Client     | Factory Function                                                                               | Use Case             |
+| ---------- | ---------------------------------------------------------------------------------------------- | -------------------- |
+| HTTP       | [`client.http.createHttpClient()`](/api/client-http/#createHttpClient)                         | REST APIs, webhooks  |
+| PostgreSQL | [`client.sql.postgres.createPostgresClient()`](/api/client-sql-postgres/#createPostgresClient) | PostgreSQL databases |
+| MySQL      | [`client.sql.mysql.createMySqlClient()`](/api/client-sql-mysql/#createMySqlClient)             | MySQL databases      |
+| SQLite     | [`client.sql.sqlite.createSqliteClient()`](/api/client-sql-sqlite/#createSqliteClient)         | Embedded databases   |
+| DuckDB     | [`client.sql.duckdb.createDuckDbClient()`](/api/client-sql-duckdb/#createDuckDbClient)         | Analytics databases  |
+| gRPC       | [`client.grpc.createGrpcClient()`](/api/client-grpc/#createGrpcClient)                         | gRPC services        |
+| ConnectRPC | [`client.connectrpc.createConnectRpcClient()`](/api/client-connectrpc/#createConnectRpcClient) | Connect/gRPC-Web     |
+| GraphQL    | [`client.graphql.createGraphqlClient()`](/api/client-graphql/#createGraphqlClient)             | GraphQL APIs         |
+| Redis      | [`client.redis.createRedisClient()`](/api/client-redis/#createRedisClient)                     | Cache, pub/sub       |
+| MongoDB    | [`client.mongodb.createMongoClient()`](/api/client-mongodb/#createMongoClient)                 | Document databases   |
+| Deno KV    | [`client.deno_kv.createDenoKvClient()`](/api/client-deno-kv/#createDenoKvClient)               | Deno KV store        |
+| RabbitMQ   | [`client.rabbitmq.createRabbitMqClient()`](/api/client-rabbitmq/#createRabbitMqClient)         | AMQP message queues  |
+| SQS        | [`client.sqs.createSqsClient()`](/api/client-sqs/#createSqsClient)                             | AWS message queues   |
 
 ## Best Practices
 
