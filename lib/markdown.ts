@@ -2,6 +2,7 @@
  * Markdown rendering utilities
  */
 import { marked, type Tokens } from "marked";
+import { basePath } from "../data/docs.ts";
 
 /** Generate slug from text (for heading IDs) */
 function slugify(text: string): string {
@@ -13,7 +14,7 @@ function slugify(text: string): string {
     .replace(/\s+/g, "-");
 }
 
-// Configure marked with custom heading renderer for IDs
+// Configure marked with custom heading and link renderers
 marked.use({
   gfm: true, // GitHub Flavored Markdown
   breaks: false,
@@ -25,6 +26,15 @@ marked.use({
         ? (this as any).parser.parseInline(token.tokens)
         : token.text;
       return `<h${token.depth} id="${id}">${text}</h${token.depth}>\n`;
+    },
+    link(token: Tokens.Link): string {
+      // Add basePath to internal links (starting with /)
+      let href = token.href;
+      if (href.startsWith("/") && !href.startsWith("//")) {
+        href = `${basePath}${href}`;
+      }
+      const title = token.title ? ` title="${token.title}"` : "";
+      return `<a href="${href}"${title}>${token.text}</a>`;
     },
   },
 });
@@ -74,14 +84,14 @@ function processJsDocLinks(
 
     // Check if it's a local type in the current package
     if (localTypes?.has(name) && currentPackage) {
-      href = `/api/${currentPackage}#${name.toLowerCase()}`;
+      href = `${basePath}/api/${currentPackage}#${name.toLowerCase()}`;
     } // Check if it's in another package
     else if (typeToPackage?.has(name)) {
       const targetPackage = typeToPackage.get(name)!;
-      href = `/api/${targetPackage}#${name.toLowerCase()}`;
+      href = `${basePath}/api/${targetPackage}#${name.toLowerCase()}`;
     } // Default: link to current package anchor (best effort)
     else if (currentPackage) {
-      href = `/api/${currentPackage}#${name.toLowerCase()}`;
+      href = `${basePath}/api/${currentPackage}#${name.toLowerCase()}`;
     }
 
     // Format the display text
@@ -119,6 +129,21 @@ export async function readMarkdownFile(path: string): Promise<string> {
 export function extractTitle(content: string): string | undefined {
   const match = content.match(/^#\s+(.+)$/m);
   return match?.[1];
+}
+
+/**
+ * Rewrite internal links in markdown content to include basePath.
+ * Transforms [text](/path) to [text](/basePath/path) for internal links.
+ */
+export function rewriteMarkdownLinks(content: string): string {
+  if (!basePath) return content;
+
+  // Match markdown links: [text](url) or [text](url "title")
+  // Only rewrite internal links starting with /
+  return content.replace(
+    /\[([^\]]*)\]\((\/)([^)"'\s]*)((?:\s+"[^"]*")?\))/g,
+    (_, text, _slash, path, rest) => `[${text}](${basePath}/${path}${rest}`,
+  );
 }
 
 /** Extract table of contents from markdown headings (h2 only) */

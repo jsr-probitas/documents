@@ -5,6 +5,7 @@ import { docPages } from "./data/docs.ts";
 import type { PackageDoc } from "./lib/api-docs.ts";
 import { generateApiMarkdown } from "./lib/api-markdown.ts";
 import { generateLlmsTxt } from "./lib/llms.ts";
+import { rewriteMarkdownLinks } from "./lib/markdown.ts";
 import { ApiIndexPage, PackagePage } from "./templates/api/ApiPage.tsx";
 import { MarkdownDocFromFile } from "./templates/docs/MarkdownDoc.tsx";
 import { HomePage } from "./templates/home.tsx";
@@ -41,7 +42,7 @@ app.get("/index.md", async (c) => {
     "",
     content,
   ].join("\n");
-  return c.text(modified, 200, {
+  return c.text(rewriteMarkdownLinks(modified), 200, {
     "Content-Type": "text/markdown; charset=utf-8",
   });
 });
@@ -71,7 +72,7 @@ for (const doc of docPages) {
     : `${doc.path}.md`;
   app.get(mdPath, async (c) => {
     const content = await Deno.readTextFile(doc.file);
-    return c.text(content, 200, {
+    return c.text(rewriteMarkdownLinks(content), 200, {
       "Content-Type": "text/markdown; charset=utf-8",
     });
   });
