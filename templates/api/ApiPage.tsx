@@ -237,7 +237,7 @@ export async function PackagePage({ packageName }: PackagePageProps) {
                 {/* Render each kind group */}
                 {orderedKinds.map((kind) => (
                   <section key={kind} class="api-kind-section">
-                    <h2>{kindToTitle(kind)}</h2>
+                    <h2 id={kindInfoMap[kind]?.id}>{kindToTitle(kind)}</h2>
                     {grouped[kind].map((node) => {
                       const key = `${node.kind}:${node.name}`;
                       const overloads = overloadMap.get(key);
@@ -279,13 +279,21 @@ interface KindInfo {
   icon: string;
 }
 
-const kindInfoMap: Record<string, KindInfo> = {
-  class: { title: "Classes", icon: "ti-box" },
-  interface: { title: "Interfaces", icon: "ti-puzzle" },
-  function: { title: "Functions", icon: "ti-code" },
-  typeAlias: { title: "Type Aliases", icon: "ti-tag" },
-  variable: { title: "Variables", icon: "ti-variable" },
-  enum: { title: "Enums", icon: "ti-list" },
+const kindInfoMap: Record<string, KindInfo & { id: string }> = {
+  class: { title: "Classes", icon: "ti-box", id: "category-classes" },
+  interface: {
+    title: "Interfaces",
+    icon: "ti-puzzle",
+    id: "category-interfaces",
+  },
+  function: { title: "Functions", icon: "ti-code", id: "category-functions" },
+  typeAlias: { title: "Types", icon: "ti-tag", id: "category-types" },
+  variable: {
+    title: "Variables",
+    icon: "ti-variable",
+    id: "category-variables",
+  },
+  enum: { title: "Enums", icon: "ti-list", id: "category-enums" },
 };
 
 function kindToTitle(kind: string) {

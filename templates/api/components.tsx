@@ -1453,11 +1453,15 @@ interface TocGroupProps {
 function TocGroup({ title, icon, items }: TocGroupProps) {
   // Sort items alphabetically to match content order
   const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
+  // Create anchor ID from title (e.g., "Classes" -> "category-classes")
+  const anchorId = `category-${title.toLowerCase()}`;
 
   return (
     <div class="toc-group">
       <h4>
-        <i class={`ti ${icon}`} /> {title}
+        <a href={`#${anchorId}`}>
+          <i class={`ti ${icon}`} /> {title}
+        </a>
       </h4>
       <ul>
         {sortedItems.map((item) => (

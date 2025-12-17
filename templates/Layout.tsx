@@ -122,8 +122,10 @@ export function Layout(
         <Header showLogo={showLogo} />
         {children}
         <SearchModal />
+        <ScrollToTop />
         <script src={`${basePath}/pagefind/pagefind-ui.js`} />
         <script dangerouslySetInnerHTML={{ __html: searchScript }} />
+        <script dangerouslySetInnerHTML={{ __html: scrollToTopScript }} />
       </body>
     </html>
   );
@@ -153,6 +155,35 @@ function SearchModal() {
     </div>
   );
 }
+
+function ScrollToTop() {
+  return (
+    <button
+      type="button"
+      id="scroll-to-top"
+      class="scroll-to-top"
+      onclick="scrollToTop()"
+      aria-label="Scroll to top"
+    >
+      <i class="ti ti-chevron-up" />
+    </button>
+  );
+}
+
+const scrollToTopScript = `
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-to-top');
+  if (window.scrollY > 300) {
+    btn.classList.add('visible');
+  } else {
+    btn.classList.remove('visible');
+  }
+});
+`;
 
 const searchScript = `
 let searchInitialized = false;
