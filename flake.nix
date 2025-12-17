@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    probitas.url = "github:jsr-probitas/probitas";
+    probitas.url = "github:jsr-probitas/cli";
     probitas.inputs.nixpkgs.follows = "nixpkgs";
     probitas.inputs.flake-utils.follows = "flake-utils";
   };
