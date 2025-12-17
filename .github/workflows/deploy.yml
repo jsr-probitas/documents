@@ -24,20 +24,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
 
-      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
 
-      # Lint and type check
-      - run: nix develop --command deno fmt --check
-      - run: nix develop --command deno lint
-      - run: nix develop --command deno task check
+      - run: npm install -g pagefind
 
-      # Run tests
-      - run: nix develop --command deno task test
+      - run: deno fmt --check
+      - run: deno lint
+      - run: deno task check
+      - run: deno task test
 
-      # Build static site (BASE_PATH for GitHub Pages subdirectory)
-      - run: nix develop --command deno task build
+      - run: deno task build
         env:
           BASE_PATH: /documents
 
