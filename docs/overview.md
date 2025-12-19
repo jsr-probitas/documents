@@ -101,6 +101,65 @@ probitas run -s tag:example
 probitas run --reporter json
 ```
 
+## Code Quality Commands
+
+Probitas provides commands to maintain code quality in your scenario files:
+
+```bash
+# Format scenario files
+probitas fmt
+
+# Lint scenario files
+probitas lint
+
+# Type-check scenario files
+probitas check
+```
+
+These commands run Deno's built-in tools on discovered scenario files. They use
+the same file discovery mechanism as `probitas run`, respecting your `includes`
+and `excludes` configuration.
+
+### fmt
+
+Formats scenario files using `deno fmt`:
+
+```bash
+probitas fmt                    # Format all discovered scenarios
+probitas fmt probitas/auth/     # Format specific directory
+```
+
+### lint
+
+Lints scenario files using `deno lint`. Automatically excludes rules that
+conflict with scenario imports (`no-import-prefix`, `no-unversioned-import`):
+
+```bash
+probitas lint                   # Lint all discovered scenarios
+probitas lint probitas/auth/    # Lint specific directory
+```
+
+### check
+
+Type-checks scenario files using `deno check`:
+
+```bash
+probitas check                  # Type-check all discovered scenarios
+probitas check probitas/auth/   # Type-check specific directory
+```
+
+### Common Options
+
+All code quality commands support these options:
+
+```bash
+--include <pattern>   # Include pattern for file discovery (repeatable)
+--exclude <pattern>   # Exclude pattern for file discovery (repeatable)
+--config <path>       # Path to probitas config file
+-v, --verbose         # Verbose output
+-q, --quiet           # Suppress output
+```
+
 ### Tag-Based Filtering
 
 Organize scenarios with tags for easy filtering:

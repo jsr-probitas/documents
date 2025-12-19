@@ -39,15 +39,21 @@ The first file found is used. JSONC files support `//` and `/* */` comments.
 }
 ```
 
-| Option           | Description                               | Default                         |
-| ---------------- | ----------------------------------------- | ------------------------------- |
-| `includes`       | Glob patterns for scenario file discovery | `["probitas/**/*.probitas.ts"]` |
-| `excludes`       | Glob patterns to exclude from discovery   | `[]`                            |
-| `reporter`       | Output reporter: `list`, `json`           | `"list"`                        |
-| `maxConcurrency` | Maximum parallel scenario execution       | unlimited (`0`)                 |
-| `maxFailures`    | Maximum failures before stopping          | unlimited (`0`)                 |
-| `timeout`        | Default timeout for scenarios             | `"30s"`                         |
-| `selectors`      | Default selectors for filtering scenarios | `[]`                            |
+| Option           | Description                               | Default                               |
+| ---------------- | ----------------------------------------- | ------------------------------------- |
+| `includes`       | Glob patterns for scenario file discovery | `["probitas/**/*.probitas.ts"]`       |
+| `excludes`       | Glob patterns to exclude from discovery   | Common build/dependency directories\* |
+| `reporter`       | Output reporter: `list`, `json`           | `"list"`                              |
+| `maxConcurrency` | Maximum parallel scenario execution       | unlimited (`0`)                       |
+| `maxFailures`    | Maximum failures before stopping          | unlimited (`0`)                       |
+| `timeout`        | Default timeout for scenarios             | `"30s"`                               |
+| `selectors`      | Default selectors for filtering scenarios | `[]`                                  |
+
+\*Default exclude patterns:
+
+- `**/node_modules/**`, `**/target/**`, `**/.venv/**`, `**/venv/**`,
+  `**/__pycache__/**`, `**/vendor/**`, `**/build/**`, `**/bin/**`, `**/obj/**`,
+  `**/.git/**`, `**/dist/**`, `**/coverage/**`
 
 ### maxFailures
 
