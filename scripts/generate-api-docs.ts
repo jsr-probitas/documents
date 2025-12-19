@@ -57,7 +57,7 @@ async function getPackageDoc(
   specifier: string,
 ): Promise<DenoDocOutput | null> {
   const command = new Deno.Command("deno", {
-    args: ["doc", "--json", specifier],
+    args: ["doc", "--no-lock", "--json", specifier],
     stdout: "piped",
     stderr: "piped",
     env: {
