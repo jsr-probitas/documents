@@ -1,14 +1,14 @@
 {
   "name": "logger",
   "specifier": "@probitas/logger",
-  "version": "0.2.12",
+  "version": "0.3.0",
   "moduleDoc": "Unified logging interface for Probitas packages.\n\nThis package provides a centralized logging system built on LogTape. It offers\nconsistent logging across all Probitas packages with configurable log levels,\npretty formatting, and hierarchical categories.\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package (recommended for most users)\n- [LogTape](https://jsr.io/@logtape/logtape) - Underlying logging library\n\n## Related Packages\n\nAll Probitas packages use this logger internally:\n[@probitas/runner](https://jsr.io/@probitas/runner),\n[@probitas/reporter](https://jsr.io/@probitas/reporter),\n[@probitas/discover](https://jsr.io/@probitas/discover),\n[@probitas/cli](https://jsr.io/@probitas/cli)\n\n## Core Functions\n\n- {@linkcode configureLogging} - Initialize the logging system with a log level\n- {@linkcode getLogger} - Get a logger instance for a category\n- {@linkcode resetLogging} - Reset logging configuration (for testing)\n\n## Types\n\n- {@linkcode Logger} - Logger interface from LogTape\n- {@linkcode LogLevel} - Available log levels\n\n## Log Levels\n\nFrom least to most verbose:\n- `\"fatal\"` - Critical errors that stop execution\n- `\"error\"` - Errors that don't stop execution\n- `\"warning\"` - Potential issues (default level)\n- `\"info\"` - Informational messages about execution\n- `\"debug\"` - Detailed debugging information\n\n## Category Hierarchy\n\nLoggers use hierarchical categories following the package structure:\n- `[\"probitas\"]` - Root category for all Probitas logs\n- `[\"probitas\", \"runner\"]` - Runner package logs\n- `[\"probitas\", \"cli\", \"run\"]` - Specific command logs\n",
   "exports": [
     {
       "name": "Logger",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+        "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
         "line": 25,
         "col": 0,
         "byteIndex": 767
@@ -40,7 +40,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 55,
               "col": 2,
               "byteIndex": 1539
@@ -143,7 +143,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 85,
               "col": 2,
               "byteIndex": 2428
@@ -208,7 +208,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 98,
               "col": 2,
               "byteIndex": 2772
@@ -284,7 +284,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 125,
               "col": 2,
               "byteIndex": 3651
@@ -389,7 +389,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 159,
               "col": 2,
               "byteIndex": 4616
@@ -451,7 +451,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 173,
               "col": 2,
               "byteIndex": 5114
@@ -498,7 +498,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 185,
               "col": 2,
               "byteIndex": 5424
@@ -570,7 +570,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 211,
               "col": 2,
               "byteIndex": 6284
@@ -675,7 +675,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 245,
               "col": 2,
               "byteIndex": 7249
@@ -733,7 +733,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 258,
               "col": 2,
               "byteIndex": 7728
@@ -780,7 +780,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 270,
               "col": 2,
               "byteIndex": 8046
@@ -852,7 +852,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 296,
               "col": 2,
               "byteIndex": 8912
@@ -957,7 +957,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 330,
               "col": 2,
               "byteIndex": 9882
@@ -1015,7 +1015,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 344,
               "col": 2,
               "byteIndex": 10373
@@ -1062,7 +1062,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 356,
               "col": 2,
               "byteIndex": 10685
@@ -1134,7 +1134,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 382,
               "col": 2,
               "byteIndex": 11548
@@ -1239,7 +1239,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 416,
               "col": 2,
               "byteIndex": 12511
@@ -1297,7 +1297,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 430,
               "col": 2,
               "byteIndex": 12997
@@ -1348,7 +1348,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 443,
               "col": 2,
               "byteIndex": 13331
@@ -1424,7 +1424,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 470,
               "col": 2,
               "byteIndex": 14222
@@ -1529,7 +1529,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 504,
               "col": 2,
               "byteIndex": 15197
@@ -1591,7 +1591,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 519,
               "col": 2,
               "byteIndex": 15708
@@ -1638,7 +1638,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 531,
               "col": 2,
               "byteIndex": 16022
@@ -1710,7 +1710,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 557,
               "col": 2,
               "byteIndex": 16884
@@ -1815,7 +1815,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 591,
               "col": 2,
               "byteIndex": 17850
@@ -1873,7 +1873,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 605,
               "col": 2,
               "byteIndex": 18336
@@ -1920,7 +1920,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 617,
               "col": 2,
               "byteIndex": 18658
@@ -1992,7 +1992,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 643,
               "col": 2,
               "byteIndex": 19535
@@ -2097,7 +2097,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 677,
               "col": 2,
               "byteIndex": 20506
@@ -2155,7 +2155,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 691,
               "col": 2,
               "byteIndex": 21002
@@ -2201,7 +2201,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 722,
               "col": 2,
               "byteIndex": 21894
@@ -2254,7 +2254,7 @@
               "doc": "The category of the logger.  It is an array of strings."
             },
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 29,
               "col": 2,
               "byteIndex": 868
@@ -2287,7 +2287,7 @@
               "doc": "The logger with the supercategory of the current logger.  If the current\nlogger is the root logger, this is `null`."
             },
             "location": {
-              "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/logger.ts",
+              "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/logger.ts",
               "line": 35,
               "col": 2,
               "byteIndex": 1047
@@ -2327,7 +2327,7 @@
       "name": "LogLevel",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@logtape/logtape/1.3.1/src/level.ts",
+        "filename": "https://jsr.io/@logtape/logtape/1.3.5/src/level.ts",
         "line": 13,
         "col": 0,
         "byteIndex": 154
@@ -2362,7 +2362,7 @@
       "name": "configureLogging",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.12/logger.ts",
+        "filename": "https://jsr.io/@probitas/logger/0.3.0/logger.ts",
         "line": 51,
         "col": 0,
         "byteIndex": 1216
@@ -2436,7 +2436,7 @@
       "name": "getLogger",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.12/logger.ts",
+        "filename": "https://jsr.io/@probitas/logger/0.3.0/logger.ts",
         "line": 120,
         "col": 0,
         "byteIndex": 3042
@@ -2504,7 +2504,7 @@
       "name": "resetLogging",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/logger/0.2.12/logger.ts",
+        "filename": "https://jsr.io/@probitas/logger/0.3.0/logger.ts",
         "line": 143,
         "col": 0,
         "byteIndex": 3624
