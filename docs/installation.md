@@ -63,8 +63,7 @@ nix profile install github:jsr-probitas/cli
 
 ### Add to Project's flake.nix
 
-Add Probitas to your project's development environment. Create or update
-`flake.nix`:
+Add Probitas to your project's development environment using the overlay:
 
 ```nix
 {
@@ -79,12 +78,15 @@ Add Probitas to your project's development environment. Create or update
   outputs = { self, nixpkgs, flake-utils, probitas }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ probitas.overlays.default ];
+        };
       in {
         devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.deno
-            probitas.packages.${system}.default
+          packages = with pkgs; [
+            deno
+            probitas
           ];
         };
       });
@@ -96,6 +98,23 @@ Enter the development environment:
 ```bash
 nix develop
 ```
+
+### Why Use Overlays?
+
+The overlay pattern integrates `probitas` directly into your `pkgs`, enabling
+cleaner configuration:
+
+```nix
+overlays = [ probitas.overlays.default ];
+# ...
+packages = with pkgs; [ deno probitas ];  # probitas is now part of pkgs
+```
+
+Benefits:
+
+- **Unified namespace**: Access `probitas` like any nixpkgs package
+- **Composable**: Combine with other overlays seamlessly
+- **Consistent Deno**: Uses your project's nixpkgs Deno version automatically
 
 ### Why Use inputs.follows?
 
@@ -132,12 +151,13 @@ probitas.url = "github:jsr-probitas/cli/abc1234";
 
 The Probitas CLI flake provides:
 
-| Output                        | Description                 |
-| ----------------------------- | --------------------------- |
-| `packages.${system}.default`  | The `probitas` CLI package  |
-| `packages.${system}.probitas` | Alias for the CLI package   |
-| `apps.${system}.default`      | App for `nix run`           |
-| `devShells.${system}.default` | Development shell with Deno |
+| Output                        | Description                       |
+| ----------------------------- | --------------------------------- |
+| `overlays.default`            | Overlay adding `probitas` to pkgs |
+| `packages.${system}.default`  | The `probitas` CLI package        |
+| `packages.${system}.probitas` | Alias for the CLI package         |
+| `apps.${system}.default`      | App for `nix run`                 |
+| `devShells.${system}.default` | Development shell with Deno       |
 
 ## Verify Installation
 
