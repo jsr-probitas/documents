@@ -180,6 +180,8 @@ async function main(): Promise<void> {
   const packageInfos: PackageInfo[] = [];
   const results: PackageDoc[] = [];
 
+  await updatePackageDependencies(packages);
+
   for (const pkg of packages) {
     // Skip excluded packages
     if (EXCLUDED_PACKAGES.has(pkg.name)) {
@@ -215,6 +217,35 @@ async function main(): Promise<void> {
   await formatGeneratedFiles();
 
   console.log("\nDone!");
+}
+
+/**
+ * Update package dependencies by forcing a cache refresh
+ *
+ * This ensures we have the latest versions of all packages
+ * before generating documentation.
+ */
+async function updatePackageDependencies(
+  packages: JsrPackage[],
+): Promise<void> {
+  const specifiers = packages.map(
+    (pkg) => `jsr:@${pkg.scope}/${pkg.name}@${pkg.latestVersion}`,
+  );
+
+  console.log("Updating package dependencies...");
+
+  const command = new Deno.Command("deno", {
+    args: ["cache", "--no-lock", "-r", ...specifiers],
+    stdout: "inherit",
+    stderr: "inherit",
+  });
+
+  const { code } = await command.output();
+  if (code !== 0) {
+    throw new Error("Failed to update package dependencies");
+  }
+
+  console.log("Package dependencies updated\n");
 }
 
 /**
