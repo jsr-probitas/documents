@@ -12,13 +12,33 @@ export const themeInitScript = `(function() {
 
 /** Main page scripts */
 export const mainScript = `
+const HLJS_CDN = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build';
 const HLJS_THEMES = {
   dark: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css',
   light: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css'
 };
 
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+async function ensureHljs() {
+  if (window.hljs) return;
+  await loadScript(\`\${HLJS_CDN}/highlight.min.js\`);
+  await loadScript(\`\${HLJS_CDN}/languages/typescript.min.js\`);
+}
+
 function updateHljsTheme(theme) {
-  document.getElementById('hljs-theme').href = HLJS_THEMES[theme];
+  const themeLink = document.getElementById('hljs-theme');
+  if (!themeLink) return;
+  themeLink.href = HLJS_THEMES[theme];
 }
 
 function toggleTheme() {
@@ -57,9 +77,11 @@ function initCarousel() {
     tabs[index].classList.add('active');
     slides.forEach(s => s.classList.remove('active'));
     slides[index].classList.add('active');
-    slides[index].querySelectorAll('pre code:not([data-highlighted])').forEach(block => {
-      hljs.highlightElement(block);
-    });
+    if (window.hljs) {
+      slides[index].querySelectorAll('pre code:not([data-highlighted])').forEach(block => {
+        hljs.highlightElement(block);
+      });
+    }
   }
 
   function getCurrentIndex() {
@@ -152,12 +174,19 @@ function initSignatureScrollFade() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  hljs.highlightAll();
+document.addEventListener('DOMContentLoaded', async () => {
   updateHljsTheme(document.documentElement.getAttribute('data-theme') || 'dark');
   initCarousel();
   initScrollableNavFade();
   initCodeCopyButtons();
   initSignatureScrollFade();
+  try {
+    await ensureHljs();
+    if (window.hljs) {
+      hljs.highlightAll();
+    }
+  } catch (err) {
+    console.warn('Failed to load highlight.js', err);
+  }
 });
 `;
