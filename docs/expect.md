@@ -460,6 +460,13 @@ Use fluent assertions instead of `if/throw` logic or `JSON.stringify` checks.
 Assertions provide clearer diffs and consistent failure output.
 
 ```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+await using http = client.http.createHttpClient({
+  url: "http://localhost:8080",
+});
+const res = await http.get("/users/1");
+
 // Avoid - manual validation
 if (res.status !== 200) {
   throw new Error(`Expected 200, got ${res.status}`);
@@ -520,6 +527,13 @@ For nested fields, prefer array paths over dot notation and keep positive and
 negative checks in the same chain.
 
 ```typescript
+import { client, expect } from "jsr:@probitas/probitas";
+
+await using http = client.http.createHttpClient({
+  url: "http://localhost:8080",
+});
+const res = await http.get("/users/1");
+
 expect(res)
   .toBeOk()
   .toHaveJsonProperty("metadata")

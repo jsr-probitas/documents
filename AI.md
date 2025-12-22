@@ -35,9 +35,9 @@ Enable it in `.claude/settings.json`:
 
 Example prompt snippet:
 
-> Write a Probitas scenario for POST /users that returns `{ id: number }`.
-> Use API_URL env, tag as `api`. Step 1: create user, return id. Step 2: GET
-> by id, expect 200 and name match. Use fluent expect chain.
+> Write a Probitas scenario for POST /users that returns `{ id: number }`. Use
+> API_URL env, tag as `api`. Step 1: create user, return id. Step 2: GET by id,
+> expect 200 and name match. Use fluent expect chain.
 
 ## Scenario Authoring Rules (What the AI must follow)
 
@@ -82,4 +82,5 @@ Local probitas CLI tasks:
 ## Links
 
 - Claude plugin marketplace: https://github.com/jsr-probitas/claude-plugins
-- Probitas plugin docs: https://github.com/jsr-probitas/claude-plugins/tree/main/plugins/probitas
+- Probitas plugin docs:
+  https://github.com/jsr-probitas/claude-plugins/tree/main/plugins/probitas

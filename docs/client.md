@@ -819,7 +819,7 @@ for (const msg of receiveResult.messages ?? []) {
 Always register clients as resources for automatic cleanup:
 
 ```typescript
-import { client, scenario } from "jsr:@probitas/probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 // Good - automatic lifecycle management
 scenario("Example")
@@ -845,7 +845,7 @@ Parameterize service URLs so scenarios run consistently across environments and
 avoid hard-coded localhost values.
 
 ```typescript
-import { client, scenario } from "jsr:@probitas/probitas";
+import { client, expect, scenario } from "jsr:@probitas/probitas";
 
 const apiUrl = Deno.env.get("API_URL") ?? "http://localhost:8080";
 

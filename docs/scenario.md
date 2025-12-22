@@ -779,17 +779,18 @@ export default scenario("Full Stack Test", {
 
 ### Make Step Dependencies Explicit
 
-Keep steps in the same scenario only when they need data from `ctx.previous`.
-If a step does not read the previous result, extract it into its own scenario
-and share a resource factory instead.
+Keep steps in the same scenario only when they need data from `ctx.previous`. If
+a step does not read the previous result, extract it into its own scenario and
+share a resource factory instead.
 
 ```typescript
 import { client, scenario } from "jsr:@probitas/probitas";
 
-const http = () =>
-  client.http.createHttpClient({
+function http() {
+  return client.http.createHttpClient({
     url: Deno.env.get("API_URL") ?? "http://localhost:8080",
   });
+}
 
 // Avoid - unrelated steps bundled together
 scenario("User checks")
@@ -815,8 +816,14 @@ Every scenario must end with `.build()` and be exported as `export default`,
 either as a single scenario or an array of scenarios.
 
 ```typescript
+import { scenario } from "jsr:@probitas/probitas";
+
 // Correct - single scenario
 export default scenario("Example").step(() => {}).build();
+```
+
+```typescript
+import { scenario } from "jsr:@probitas/probitas";
 
 // Correct - multiple scenarios
 export default [
@@ -1241,8 +1248,8 @@ export default [
 ## Common Mistakes
 
 - Forgetting `export default` or `.build()` when returning the scenario builder
-- Bundling independent tests in one scenario instead of splitting them when
-  they do not use `ctx.previous`
+- Bundling independent tests in one scenario instead of splitting them when they
+  do not use `ctx.previous`
 - Hard-coding endpoints instead of using environment-driven URLs
 - Using manual `if/throw` checks instead of fluent `expect()` chains
 - Omitting cleanup functions from `.setup()` when creating external fixtures
