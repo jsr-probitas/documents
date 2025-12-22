@@ -3,7 +3,7 @@
  */
 import type { Child } from "hono/jsx";
 import { basePath, docPages, siteMetadata } from "../data/docs.ts";
-import { themeInitScript } from "./scripts.ts";
+import { mainScript, themeInitScript } from "./scripts.ts";
 
 const GITHUB_URL = "https://github.com/jsr-probitas/probitas";
 
@@ -114,8 +114,6 @@ export function Layout(
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script src={`${CDN.hljs}/highlight.min.js`} />
-        <script src={`${CDN.hljs}/languages/typescript.min.js`} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body>
@@ -126,6 +124,7 @@ export function Layout(
         <script src={`${basePath}/pagefind/pagefind-ui.js`} />
         <script dangerouslySetInnerHTML={{ __html: searchScript }} />
         <script dangerouslySetInnerHTML={{ __html: scrollToTopScript }} />
+        <script dangerouslySetInnerHTML={{ __html: mainScript }} />
       </body>
     </html>
   );
