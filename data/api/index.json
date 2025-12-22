@@ -3,7 +3,7 @@
     {
       "name": "builder",
       "specifier": "@probitas/builder",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "exportCount": 4,
       "counts": {
         "classes": 0,
@@ -227,7 +227,7 @@
     {
       "name": "core",
       "specifier": "@probitas/core",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "exportCount": 9,
       "counts": {
         "classes": 0,
@@ -241,11 +241,11 @@
     {
       "name": "discover",
       "specifier": "@probitas/discover",
-      "version": "0.3.0",
-      "exportCount": 2,
+      "version": "0.3.3",
+      "exportCount": 3,
       "counts": {
         "classes": 0,
-        "interfaces": 1,
+        "interfaces": 2,
         "functions": 1,
         "types": 0,
         "variables": 0,
@@ -255,7 +255,7 @@
     {
       "name": "expect",
       "specifier": "@probitas/expect",
-      "version": "0.3.0",
+      "version": "0.3.2",
       "exportCount": 503,
       "counts": {
         "classes": 141,
@@ -269,7 +269,7 @@
     {
       "name": "logger",
       "specifier": "@probitas/logger",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "exportCount": 5,
       "counts": {
         "classes": 0,
@@ -283,7 +283,7 @@
     {
       "name": "probitas",
       "specifier": "@probitas/probitas",
-      "version": "0.6.0",
+      "version": "0.6.1",
       "exportCount": 84,
       "counts": {
         "classes": 6,
@@ -297,7 +297,7 @@
     {
       "name": "reporter",
       "specifier": "@probitas/reporter",
-      "version": "0.6.0",
+      "version": "0.6.1",
       "exportCount": 5,
       "counts": {
         "classes": 2,
@@ -311,7 +311,7 @@
     {
       "name": "runner",
       "specifier": "@probitas/runner",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "exportCount": 11,
       "counts": {
         "classes": 2,

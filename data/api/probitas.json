@@ -1,14 +1,14 @@
 {
   "name": "probitas",
   "specifier": "@probitas/probitas",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "moduleDoc": "Probitas - Scenario-based testing and workflow execution framework.\n\nThis is the main entry point for the Probitas framework. It provides a fluent API\nfor building and executing scenario-based tests with support for:\n\n- **Sequential steps**: Define test steps that execute in order with type-safe context passing\n- **Skip conditions**: Conditionally skip steps or entire scenarios\n- **Rich assertions**: Built-in expect utilities for comprehensive assertions\n- **External clients**: Pre-configured clients for HTTP, databases, message queues, and more\n- **Test utilities**: Faker for test data, time mocking, and function spies\n\n## Links\n\n- [GitHub Repository](https://github.com/jsr-probitas/probitas)\n- [Documentation](./.claude/README.md)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/builder](https://jsr.io/@probitas/builder) | Fluent API for building scenario definitions |\n| [@probitas/runner](https://jsr.io/@probitas/runner) | Test execution engine with retry and concurrency |\n| [@probitas/reporter](https://jsr.io/@probitas/reporter) | Output formatters (list, dot, TAP, JSON) |\n| [@probitas/core](https://jsr.io/@probitas/core) | Core type definitions and utilities |\n| [@probitas/discover](https://jsr.io/@probitas/discover) | Scenario file discovery |\n| [@probitas/logger](https://jsr.io/@probitas/logger) | Unified logging interface |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | Command-line interface |\n\n## Core Exports\n\n- {@linkcode scenario} - Factory function to create scenario builders\n- {@linkcode Skip} - Utility to skip steps or scenarios conditionally\n- {@linkcode StepContext} - Type representing the context passed to each step\n- {@linkcode client} - Namespace containing all available client implementations\n- {@linkcode expect} - Assertion utilities (from `@std/expect`)\n\n## Re-exported Utilities\n\nFor convenience, this module also re-exports commonly used testing utilities:\n\n- `faker` - Fake data generation from `@faker-js/faker`\n- `FakeTime` - Time mocking utilities from `@std/testing/time`\n- `spy`, `stub`, `assertSpyCalls` - Mock utilities from `@std/testing/mock`\n- `tryOr`, `raise` - Error handling utilities from `@core/errorutil`\n- `outdent` - Template literal tag for removing indentation\n",
   "exports": [
     {
       "name": "client",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/probitas/0.6.0/mod.ts",
+        "filename": "https://jsr.io/@probitas/probitas/0.6.1/mod.ts",
         "line": 112,
         "col": 7,
         "byteIndex": 4528
@@ -39,7 +39,7 @@
       "name": "scenario",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.4.0/scenario_builder.ts",
+        "filename": "https://jsr.io/@probitas/builder/0.4.1/scenario_builder.ts",
         "line": 644,
         "col": 0,
         "byteIndex": 20517
@@ -133,7 +133,7 @@
       "name": "Skip",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/runner/0.4.0/skip.ts",
+        "filename": "https://jsr.io/@probitas/runner/0.4.1/skip.ts",
         "line": 76,
         "col": 0,
         "byteIndex": 2082
@@ -191,7 +191,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.4.0/skip.ts",
+              "filename": "https://jsr.io/@probitas/runner/0.4.1/skip.ts",
               "line": 101,
               "col": 2,
               "byteIndex": 2897
@@ -215,7 +215,7 @@
             "isStatic": false,
             "name": "reason",
             "location": {
-              "filename": "https://jsr.io/@probitas/runner/0.4.0/skip.ts",
+              "filename": "https://jsr.io/@probitas/runner/0.4.1/skip.ts",
               "line": 84,
               "col": 2,
               "byteIndex": 2336
@@ -234,7 +234,7 @@
       "name": "StepContext",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/builder/0.4.0/types.ts",
+        "filename": "https://jsr.io/@probitas/builder/0.4.1/types.ts",
         "line": 44,
         "col": 0,
         "byteIndex": 1337
@@ -295,7 +295,7 @@
                       "doc": "Result from the previous step.\n\nFully typed based on what the previous step returned.\nFor the first step, this is `unknown`."
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.4.0/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.4.1/types.ts",
                       "line": 55,
                       "col": 2,
                       "byteIndex": 1678
@@ -320,7 +320,7 @@
                       "doc": "All accumulated results as a typed tuple.\n\nAllows accessing any previous result by index:\n- `ctx.results[0]` - First step's result\n- `ctx.results[1]` - Second step's result"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.4.0/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.4.1/types.ts",
                       "line": 64,
                       "col": 2,
                       "byteIndex": 1912
@@ -345,7 +345,7 @@
                       "doc": "Named resources registered with `.resource()`.\n\nResources are typed based on their registration:\n```ts\nimport { scenario } from \"@probitas/builder\";\n\n// Mock database connection for example\nconst createDbConnection = () => ({ query: (_sql: string) => [{ id: 1 }] });\n\nscenario(\"test\")\n  .resource(\"db\", () => createDbConnection())\n  .step((ctx) => ctx.resources.db.query(\"SELECT 1\"))\n  .build();\n```"
                     },
                     "location": {
-                      "filename": "https://jsr.io/@probitas/builder/0.4.0/types.ts",
+                      "filename": "https://jsr.io/@probitas/builder/0.4.1/types.ts",
                       "line": 82,
                       "col": 2,
                       "byteIndex": 2415
@@ -463,10 +463,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 61,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 64,
         "col": 0,
-        "byteIndex": 2294
+        "byteIndex": 2397
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -486,11 +486,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -524,10 +533,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 64,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 67,
         "col": 0,
-        "byteIndex": 2382
+        "byteIndex": 2493
       },
       "declarationKind": "export",
       "kind": "function",
@@ -538,11 +547,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -576,10 +594,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 67,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 70,
         "col": 0,
-        "byteIndex": 2482
+        "byteIndex": 2601
       },
       "declarationKind": "export",
       "kind": "function",
@@ -590,11 +608,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -628,10 +655,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 70,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 73,
         "col": 0,
-        "byteIndex": 2576
+        "byteIndex": 2703
       },
       "declarationKind": "export",
       "kind": "function",
@@ -642,11 +669,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -680,10 +716,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 73,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 76,
         "col": 0,
-        "byteIndex": 2668
+        "byteIndex": 2803
       },
       "declarationKind": "export",
       "kind": "function",
@@ -694,11 +730,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -741,10 +786,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 76,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 79,
         "col": 0,
-        "byteIndex": 2753
+        "byteIndex": 2896
       },
       "declarationKind": "export",
       "kind": "function",
@@ -755,11 +800,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -802,10 +856,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 79,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 82,
         "col": 0,
-        "byteIndex": 2836
+        "byteIndex": 2987
       },
       "declarationKind": "export",
       "kind": "function",
@@ -816,11 +870,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -863,10 +926,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 82,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 85,
         "col": 0,
-        "byteIndex": 2919
+        "byteIndex": 3078
       },
       "declarationKind": "export",
       "kind": "function",
@@ -877,11 +940,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -924,10 +996,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 85,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 88,
         "col": 0,
-        "byteIndex": 3008
+        "byteIndex": 3175
       },
       "declarationKind": "export",
       "kind": "function",
@@ -938,11 +1010,20 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "T",
+              "repr": "NotAny",
               "kind": "typeRef",
               "typeRef": {
-                "typeParams": null,
-                "typeName": "T"
+                "typeParams": [
+                  {
+                    "repr": "T",
+                    "kind": "typeRef",
+                    "typeRef": {
+                      "typeParams": null,
+                      "typeName": "T"
+                    }
+                  }
+                ],
+                "typeName": "NotAny"
               }
             }
           }
@@ -985,10 +1066,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 88,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 92,
         "col": 0,
-        "byteIndex": 3087
+        "byteIndex": 3298
       },
       "declarationKind": "export",
       "kind": "function",
@@ -999,9 +1080,9 @@
             "name": "value",
             "optional": false,
             "tsType": {
-              "repr": "unknown",
+              "repr": "any",
               "kind": "keyword",
-              "keyword": "unknown"
+              "keyword": "any"
             }
           }
         ],
@@ -1022,10 +1103,10 @@
       "name": "expect",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/expect/0.3.0/expect.ts",
-        "line": 89,
+        "filename": "https://jsr.io/@probitas/expect/0.3.2/expect.ts",
+        "line": 93,
         "col": 0,
-        "byteIndex": 3148
+        "byteIndex": 3355
       },
       "declarationKind": "export",
       "kind": "function",
