@@ -37,11 +37,12 @@ jobs:
       - run: deno fmt --check
       - run: deno lint
       - run: deno task check
-      - run: deno task test
 
       - run: deno task build
         env:
           BASE_PATH: /documents
+
+      - run: deno task test
 
       # Upload artifact for GitHub Pages
       - name: Upload artifact
