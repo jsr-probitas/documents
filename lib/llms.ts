@@ -39,6 +39,9 @@ async function getPackageDescription(packageName: string): Promise<string> {
 export async function generateLlmsTxt(): Promise<string> {
   const groups = await getPackageGroups();
 
+  const resolveDocMarkdownPath = (path: string): string =>
+    path.endsWith("/") ? `${path}index.md` : `${path}.md`;
+
   const lines: string[] = [
     `# ${siteMetadata.name}`,
     "",
@@ -47,7 +50,9 @@ export async function generateLlmsTxt(): Promise<string> {
     "## Documentation",
     "",
     ...docPages.map((doc) =>
-      `- [${doc.title}](${basePath}${doc.path}index.md): ${doc.description}`
+      `- [${doc.title}](${basePath}${
+        resolveDocMarkdownPath(doc.path)
+      }): ${doc.description}`
     ),
     "",
     "## API Reference",

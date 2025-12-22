@@ -34,6 +34,7 @@ import {
   formatMethodSignature,
   formatTypeAliasSignature,
 } from "./signature-formatters.ts";
+import { siteMetadata } from "../data/docs.ts";
 
 // ============================================================================
 // Type Reference Collector
@@ -61,7 +62,7 @@ class TypeReferenceCollector {
     localTypes: Set<string>,
     typeToPackage: Map<string, string>,
     currentPackage: string,
-    baseUrl = "https://jsr-probitas.github.io/documents",
+    baseUrl = siteMetadata.baseUrl,
   ) {
     this.localTypes = localTypes;
     this.typeToPackage = typeToPackage;
@@ -525,7 +526,7 @@ export function generateApiMarkdown(
   const lines: string[] = [];
   const {
     allPackages = [],
-    baseUrl = "https://jsr-probitas.github.io/documents",
+    baseUrl = siteMetadata.baseUrl,
     updatedAt,
   } = options;
 

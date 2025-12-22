@@ -81,7 +81,8 @@ export const siteMetadata = {
     "Probitas is a scenario-based testing framework for Deno that enables declarative, readable integration tests for APIs, databases, message queues, and other backend services.",
   github: "https://github.com/jsr-probitas/probitas",
   jsr: "https://jsr.io/@probitas/probitas",
-  baseUrl: "https://jsr-probitas.github.io/documents",
+  baseUrl: Deno.env.get("BASE_URL") ??
+    "https://jsr-probitas.github.io/documents",
 };
 
 /**

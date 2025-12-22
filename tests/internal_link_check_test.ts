@@ -5,6 +5,7 @@ import {
   Element,
 } from "https://deno.land/x/deno_dom@v0.1.47/deno-dom-wasm.ts";
 import { dirname, fromFileUrl, resolve } from "jsr:@std/path@^1.0.1";
+import { basePath, siteMetadata } from "../data/docs.ts";
 
 const SRC_ROOT = fromFileUrl(import.meta.resolve("../"));
 const SITE_ROOT = resolve(SRC_ROOT, "dist");
@@ -55,13 +56,39 @@ function isTargetLink(link: string): boolean {
 function normalizeLink(link: string, htmlMode: boolean): Link {
   const [path, fragment = null] = link.split("#");
   const cleanPath = path.split("?")[0];
+  const basePaths = new Set<string>();
+  if (basePath) {
+    basePaths.add(basePath);
+  }
+  try {
+    const { pathname } = new URL(siteMetadata.baseUrl);
+    if (pathname && pathname !== "/") {
+      basePaths.add(pathname);
+    }
+  } catch {
+    // Ignore invalid baseUrl; basePaths will rely on BASE_PATH.
+  }
+  let normalizedPath = cleanPath;
+  for (const candidate of basePaths) {
+    const normalizedCandidate = candidate.endsWith("/")
+      ? candidate.slice(0, -1)
+      : candidate;
+    if (
+      normalizedCandidate &&
+      normalizedPath.startsWith(normalizedCandidate)
+    ) {
+      const nextPath = normalizedPath.slice(normalizedCandidate.length);
+      normalizedPath = nextPath || "/";
+      break;
+    }
+  }
   if (!cleanPath) {
     return ["", fragment];
   }
-  if (htmlMode && cleanPath.endsWith("/")) {
-    return [`${cleanPath}index.html`, fragment];
+  if (htmlMode && normalizedPath.endsWith("/")) {
+    return [`${normalizedPath}index.html`, fragment];
   }
-  return [cleanPath, fragment];
+  return [normalizedPath, fragment];
 }
 
 function readFile(filePath: string): File {
