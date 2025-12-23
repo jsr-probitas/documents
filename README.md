@@ -47,11 +47,30 @@ documents/
 ├── deno.json            # Project configuration
 ├── docs/                # Markdown documentation source
 ├── data/
-│   └── api/             # Generated API JSON (deno doc --json)
+│   ├── api/             # Generated API JSON (deno doc --json)
+│   ├── index/           # Example scenario index files
+│   └── docs.ts          # Documentation pages configuration
 ├── templates/           # JSX page templates
+│   ├── api/             # API reference templates
+│   ├── docs/            # Documentation page templates
+│   ├── Layout.tsx       # Main layout component
+│   ├── HomeLayout.tsx   # Home page layout
+│   ├── components.tsx   # Shared UI components
+│   ├── home.tsx         # Home page template
+│   └── scripts.ts       # Client-side JavaScript
 ├── lib/                 # Utility modules
-├── static/              # Static assets
-└── scripts/             # Build scripts
+│   ├── api-docs.ts      # API documentation types & utilities
+│   ├── api-markdown.ts  # API markdown generation
+│   ├── markdown.ts      # Markdown processing
+│   ├── llms.ts          # LLM-friendly endpoints
+│   ├── signature-formatters.ts  # Type signature formatting
+│   └── type-references.ts       # Type reference resolution
+├── static/              # Static assets (CSS, images, favicon)
+├── scripts/             # Build & generation scripts
+│   ├── build.ts         # Static site generation & Pagefind indexing
+│   └── generate-api-docs.ts  # API documentation fetching
+├── tests/               # Integration tests
+└── probitas/            # Example Probitas scenarios
 ```
 
 ## Routes
@@ -82,8 +101,34 @@ API documentation is generated from JSR packages using `deno doc`:
 deno task generate-api
 ```
 
-This fetches the latest API information from all `@probitas/*` packages and
-saves them to `data/api/`.
+This script:
+
+1. Fetches all `@probitas/*` packages from JSR API
+2. Runs `deno doc --json` for each package
+3. Processes and saves the output to `data/api/`
+4. Formats the generated JSON files
+
+The generated files are then used by the build process to create API reference
+pages.
+
+### Build Process
+
+The `deno task build` command performs the following steps:
+
+1. **Static Site Generation**: Uses Hono's SSG to generate HTML, JSON, and
+   Markdown files
+2. **Asset Copying**: Copies static assets (CSS, images, favicon) to `dist/`
+3. **Search Indexing**: Runs [Pagefind](https://pagefind.app/) to generate a
+   search index
+
+The build requires Pagefind to be installed. On macOS:
+
+```bash
+brew install pagefind
+```
+
+For other platforms, see
+[Pagefind installation guide](https://pagefind.app/docs/installation/).
 
 ## Deployment
 
