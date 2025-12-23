@@ -273,7 +273,7 @@ scenario("Retry Example")
         },
       },
     });
-    return res.json();
+    return res.json;
   })
   .build();
 ```

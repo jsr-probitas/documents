@@ -365,7 +365,7 @@ for await (
   )
 ) {
   expect(res).toBeOk();
-  console.log("Received:", res.data());
+  console.log("Received:", res.data);
 }
 ```
 

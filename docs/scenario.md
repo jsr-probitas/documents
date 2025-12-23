@@ -31,7 +31,7 @@ export default scenario("User API CRUD", {
     const { http } = ctx.resources;
     const res = await http.get("/users/test-user");
     expect(res).toHaveStatus(200);
-    return res.json();
+    return res.json;
   })
   .build();
 ```
@@ -553,7 +553,7 @@ scenario("Retry Example")
       const { http } = ctx.resources;
       const res = await http.get("/sometimes-fails");
       expect(res).toBeOk();
-      return res.json();
+      return res.json;
     },
     {
       retry: { maxAttempts: 3, backoff: "exponential" },
