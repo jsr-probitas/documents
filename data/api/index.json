@@ -3,7 +3,7 @@
     {
       "name": "builder",
       "specifier": "@probitas/builder",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "exportCount": 4,
       "counts": {
         "classes": 0,
@@ -31,7 +31,7 @@
     {
       "name": "client-connectrpc",
       "specifier": "@probitas/client-connectrpc",
-      "version": "0.5.1",
+      "version": "0.6.0",
       "exportCount": 34,
       "counts": {
         "classes": 5,
@@ -59,7 +59,7 @@
     {
       "name": "client-graphql",
       "specifier": "@probitas/client-graphql",
-      "version": "0.4.1",
+      "version": "0.5.0",
       "exportCount": 20,
       "counts": {
         "classes": 5,
@@ -87,7 +87,7 @@
     {
       "name": "client-http",
       "specifier": "@probitas/client-http",
-      "version": "0.4.1",
+      "version": "0.5.0",
       "exportCount": 22,
       "counts": {
         "classes": 5,
@@ -227,7 +227,7 @@
     {
       "name": "core",
       "specifier": "@probitas/core",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "exportCount": 9,
       "counts": {
         "classes": 0,
@@ -241,7 +241,7 @@
     {
       "name": "discover",
       "specifier": "@probitas/discover",
-      "version": "0.3.3",
+      "version": "0.3.4",
       "exportCount": 3,
       "counts": {
         "classes": 0,
@@ -255,7 +255,7 @@
     {
       "name": "expect",
       "specifier": "@probitas/expect",
-      "version": "0.3.2",
+      "version": "0.3.4",
       "exportCount": 503,
       "counts": {
         "classes": 141,
@@ -269,7 +269,7 @@
     {
       "name": "logger",
       "specifier": "@probitas/logger",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "exportCount": 5,
       "counts": {
         "classes": 0,
@@ -283,7 +283,7 @@
     {
       "name": "probitas",
       "specifier": "@probitas/probitas",
-      "version": "0.6.1",
+      "version": "0.6.2",
       "exportCount": 84,
       "counts": {
         "classes": 6,
@@ -297,7 +297,7 @@
     {
       "name": "reporter",
       "specifier": "@probitas/reporter",
-      "version": "0.6.1",
+      "version": "0.6.2",
       "exportCount": 5,
       "counts": {
         "classes": 2,
@@ -311,7 +311,7 @@
     {
       "name": "runner",
       "specifier": "@probitas/runner",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "exportCount": 11,
       "counts": {
         "classes": 2,
