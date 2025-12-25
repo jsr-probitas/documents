@@ -1,17 +1,17 @@
 {
   "name": "client-connectrpc",
   "specifier": "@probitas/client-connectrpc",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "moduleDoc": "ConnectRPC client for [Probitas](https://github.com/probitas-test/probitas) scenario testing framework.\n\nThis package provides a ConnectRPC-based client with Server Reflection support,\ndesigned for integration testing of gRPC and Connect protocol services.\n\n## Features\n\n- **Protocol Support**: Connect, gRPC, and gRPC-Web protocols\n- **Server Reflection**: Auto-discover services and methods at runtime\n- **TLS Support**: Configure secure connections with custom certificates\n- **Duration Tracking**: Built-in timing for performance monitoring\n- **Error Handling**: Test error responses without throwing exceptions\n- **Resource Management**: Implements `AsyncDisposable` for proper cleanup\n\n## Installation\n\n```bash\ndeno add jsr:@probitas/client-connectrpc\n```\n\n## Quick Start\n\n```ts\nimport { createConnectRpcClient } from \"@probitas/client-connectrpc\";\n\n// Create client (uses reflection by default)\nconst client = createConnectRpcClient({\n  url: \"http://localhost:50051\",\n});\n\n// Discover services via reflection\nconst services = await client.reflection.listServices();\nconsole.log(\"Available services:\", services);\n\n// Get service info\nconst info = await client.reflection.getServiceInfo(\"echo.EchoService\");\nconsole.log(\"Methods:\", info.methods);\n\n// Call a method\nconst response = await client.call(\n  \"echo.EchoService\",\n  \"echo\",\n  { message: \"Hello!\" }\n);\nconsole.log(response.data);\n\nawait client.close();\n```\n\n## Testing Error Responses\n\n```ts\nimport { createConnectRpcClient } from \"@probitas/client-connectrpc\";\n\nconst client = createConnectRpcClient({ url: \"http://localhost:50051\" });\n\n// Test error responses without throwing\nconst errorResponse = await client.call(\n  \"echo.EchoService\",\n  \"echo\",\n  { invalid: true },\n  { throwOnError: false }\n);\n\nif (!errorResponse.ok) {\n  console.log(\"Error code:\", errorResponse.statusCode);  // INVALID_ARGUMENT = 3\n}\nawait client.close();\n```\n\n## Using with `using` Statement\n\n```ts\nimport { createConnectRpcClient } from \"@probitas/client-connectrpc\";\n\nawait using client = createConnectRpcClient({ url: \"http://localhost:50051\" });\n\nconst res = await client.call(\"echo.EchoService\", \"echo\", { message: \"test\" });\nconsole.log(res.data);\n// Client automatically closed when block exits\n```\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [`@probitas/client`](https://jsr.io/@probitas/client) | Core utilities and types |\n| [`@probitas/client-grpc`](https://jsr.io/@probitas/client-grpc) | gRPC client (wrapper with `protocol: \"grpc\"`) |\n\n## Links\n\n- [GitHub Repository](https://github.com/probitas-test/probitas-client)\n- [Probitas Framework](https://github.com/probitas-test/probitas)\n- [ConnectRPC](https://connectrpc.com/)\n",
   "exports": [
     {
       "name": "ConnectRpcResponse",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 185,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 232,
         "col": 0,
-        "byteIndex": 4685
+        "byteIndex": 6489
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -92,10 +92,10 @@
       "name": "ConnectRpcResponseError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 117,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 164,
         "col": 0,
-        "byteIndex": 2880
+        "byteIndex": 4684
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -128,10 +128,10 @@
           {
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 119,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 166,
               "col": 2,
-              "byteIndex": 2970
+              "byteIndex": 4774
             },
             "params": [],
             "readonly": true,
@@ -150,10 +150,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 120,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 167,
               "col": 2,
-              "byteIndex": 2998
+              "byteIndex": 4802
             },
             "params": [],
             "readonly": true,
@@ -172,10 +172,10 @@
           {
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 121,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 168,
               "col": 2,
-              "byteIndex": 3020
+              "byteIndex": 4824
             },
             "params": [],
             "readonly": true,
@@ -197,10 +197,10 @@
               "doc": "gRPC status code (1-16)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 124,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 171,
               "col": 2,
-              "byteIndex": 3090
+              "byteIndex": 4894
             },
             "params": [],
             "readonly": true,
@@ -222,10 +222,10 @@
               "doc": "Status message describing the error."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 127,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 174,
               "col": 2,
-              "byteIndex": 3182
+              "byteIndex": 4986
             },
             "params": [],
             "readonly": true,
@@ -244,10 +244,10 @@
               "doc": "Response headers."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 130,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 177,
               "col": 2,
-              "byteIndex": 3244
+              "byteIndex": 5048
             },
             "params": [],
             "readonly": true,
@@ -269,10 +269,10 @@
               "doc": "Response trailers (sent at end of RPC)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 133,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 180,
               "col": 2,
-              "byteIndex": 3323
+              "byteIndex": 5127
             },
             "params": [],
             "readonly": true,
@@ -294,10 +294,10 @@
               "doc": "Raw ConnectError."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 136,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 183,
               "col": 2,
-              "byteIndex": 3381
+              "byteIndex": 5185
             },
             "params": [],
             "readonly": true,
@@ -319,10 +319,10 @@
               "doc": "No data for error responses."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 139,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 186,
               "col": 2,
-              "byteIndex": 3450
+              "byteIndex": 5254
             },
             "params": [],
             "readonly": true,
@@ -354,10 +354,10 @@
       "name": "ConnectRpcResponseFailure",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 148,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 195,
         "col": 0,
-        "byteIndex": 3639
+        "byteIndex": 5443
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -390,10 +390,10 @@
           {
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 150,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 197,
               "col": 2,
-              "byteIndex": 3731
+              "byteIndex": 5535
             },
             "params": [],
             "readonly": true,
@@ -412,10 +412,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 151,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 198,
               "col": 2,
-              "byteIndex": 3760
+              "byteIndex": 5564
             },
             "params": [],
             "readonly": true,
@@ -434,10 +434,10 @@
           {
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 152,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 199,
               "col": 2,
-              "byteIndex": 3782
+              "byteIndex": 5586
             },
             "params": [],
             "readonly": true,
@@ -459,10 +459,10 @@
               "doc": "Status code (null for network failures)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 155,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 202,
               "col": 2,
-              "byteIndex": 3875
+              "byteIndex": 5679
             },
             "params": [],
             "readonly": true,
@@ -481,10 +481,10 @@
               "doc": "Status message (null for network failures)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 158,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 205,
               "col": 2,
-              "byteIndex": 3958
+              "byteIndex": 5762
             },
             "params": [],
             "readonly": true,
@@ -503,10 +503,10 @@
               "doc": "Response headers (null for failures)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 161,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 208,
               "col": 2,
-              "byteIndex": 4038
+              "byteIndex": 5842
             },
             "params": [],
             "readonly": true,
@@ -525,10 +525,10 @@
               "doc": "Response trailers (null for failures)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 164,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 211,
               "col": 2,
-              "byteIndex": 4113
+              "byteIndex": 5917
             },
             "params": [],
             "readonly": true,
@@ -547,10 +547,10 @@
               "doc": "No raw response (request didn't reach server)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 167,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 214,
               "col": 2,
-              "byteIndex": 4197
+              "byteIndex": 6001
             },
             "params": [],
             "readonly": true,
@@ -569,10 +569,10 @@
               "doc": "No data (request didn't reach server)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 170,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 217,
               "col": 2,
-              "byteIndex": 4268
+              "byteIndex": 6072
             },
             "params": [],
             "readonly": true,
@@ -604,10 +604,10 @@
       "name": "ConnectRpcResponseSuccess",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 86,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 133,
         "col": 0,
-        "byteIndex": 2137
+        "byteIndex": 3877
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -640,10 +640,10 @@
           {
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 88,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 135,
               "col": 2,
-              "byteIndex": 2229
+              "byteIndex": 3969
             },
             "params": [],
             "readonly": true,
@@ -662,10 +662,10 @@
           {
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 89,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 136,
               "col": 2,
-              "byteIndex": 2257
+              "byteIndex": 3997
             },
             "params": [],
             "readonly": true,
@@ -684,10 +684,10 @@
           {
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 90,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 137,
               "col": 2,
-              "byteIndex": 2278
+              "byteIndex": 4018
             },
             "params": [],
             "readonly": true,
@@ -706,10 +706,10 @@
               "doc": "gRPC status code (always 0 for success)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 93,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 140,
               "col": 2,
-              "byteIndex": 2353
+              "byteIndex": 4093
             },
             "params": [],
             "readonly": true,
@@ -731,10 +731,10 @@
               "doc": "Status message (null for successful responses)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 96,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 143,
               "col": 2,
-              "byteIndex": 2437
+              "byteIndex": 4177
             },
             "params": [],
             "readonly": true,
@@ -753,10 +753,10 @@
               "doc": "Response headers."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 99,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 146,
               "col": 2,
-              "byteIndex": 2497
+              "byteIndex": 4237
             },
             "params": [],
             "readonly": true,
@@ -778,10 +778,10 @@
               "doc": "Response trailers (sent at end of RPC)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 102,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 149,
               "col": 2,
-              "byteIndex": 2576
+              "byteIndex": 4316
             },
             "params": [],
             "readonly": true,
@@ -800,13 +800,13 @@
           {
             "name": "raw",
             "jsDoc": {
-              "doc": "Raw response."
+              "doc": "Raw protobuf Message object."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 105,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 152,
               "col": 2,
-              "byteIndex": 2630
+              "byteIndex": 4385
             },
             "params": [],
             "readonly": true,
@@ -822,13 +822,13 @@
           {
             "name": "data",
             "jsDoc": {
-              "doc": "Response data."
+              "doc": "Response data as plain JavaScript object (JSON representation)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 108,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 155,
               "col": 2,
-              "byteIndex": 2680
+              "byteIndex": 4484
             },
             "params": [],
             "readonly": true,
@@ -874,7 +874,7 @@
       "name": "FileDescriptorSet",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 28,
         "col": 0,
         "byteIndex": 705
@@ -906,7 +906,7 @@
       "name": "ConnectProtocol",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 33,
         "col": 0,
         "byteIndex": 837
@@ -954,7 +954,7 @@
       "name": "HttpVersion",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 38,
         "col": 0,
         "byteIndex": 940
@@ -994,7 +994,7 @@
       "name": "TlsConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 43,
         "col": 0,
         "byteIndex": 1037
@@ -1015,7 +1015,7 @@
               "doc": "Root CA certificate (PEM format)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 45,
               "col": 2,
               "byteIndex": 1111
@@ -1040,7 +1040,7 @@
               "doc": "Client certificate (PEM format)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 47,
               "col": 2,
               "byteIndex": 1188
@@ -1065,7 +1065,7 @@
               "doc": "Client private key (PEM format)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 49,
               "col": 2,
               "byteIndex": 1266
@@ -1090,7 +1090,7 @@
               "doc": "Skip server certificate verification (use only for testing)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 51,
               "col": 2,
               "byteIndex": 1371
@@ -1116,7 +1116,7 @@
       "name": "ConnectRpcConnectionConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 59,
         "col": 0,
         "byteIndex": 1522
@@ -1152,7 +1152,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 64,
               "col": 2,
               "byteIndex": 1656
@@ -1197,7 +1197,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1752
@@ -1223,7 +1223,7 @@
       "name": "ConnectRpcClientConfig",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 76,
         "col": 0,
         "byteIndex": 1838
@@ -1263,7 +1263,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 96,
               "col": 2,
               "byteIndex": 2507
@@ -1305,7 +1305,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 102,
               "col": 2,
               "byteIndex": 2616
@@ -1336,7 +1336,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 108,
               "col": 2,
               "byteIndex": 2712
@@ -1361,7 +1361,7 @@
               "doc": "TLS configuration. If not provided, uses insecure credentials."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 111,
               "col": 2,
               "byteIndex": 2823
@@ -1386,7 +1386,7 @@
               "doc": "Default metadata to send with every request."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 114,
               "col": 2,
               "byteIndex": 2906
@@ -1417,7 +1417,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 124,
               "col": 2,
               "byteIndex": 3315
@@ -1475,7 +1475,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 130,
               "col": 2,
               "byteIndex": 3471
@@ -1503,7 +1503,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 137,
               "col": 2,
               "byteIndex": 3697
@@ -1529,7 +1529,7 @@
       "name": "ConnectRpcOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 143,
         "col": 0,
         "byteIndex": 3785
@@ -1559,7 +1559,7 @@
               "doc": "Metadata to send with the request."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 145,
               "col": 2,
               "byteIndex": 3890
@@ -1590,7 +1590,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 152,
               "col": 2,
               "byteIndex": 4142
@@ -1616,7 +1616,7 @@
       "name": "ServiceInfo",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 158,
         "col": 0,
         "byteIndex": 4226
@@ -1637,7 +1637,7 @@
               "doc": "Fully qualified service name (e.g., \"echo.EchoService\")"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 160,
               "col": 2,
               "byteIndex": 4324
@@ -1659,7 +1659,7 @@
               "doc": "Proto file name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 162,
               "col": 2,
               "byteIndex": 4374
@@ -1685,7 +1685,7 @@
       "name": "MethodInfo",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 168,
         "col": 0,
         "byteIndex": 4447
@@ -1706,7 +1706,7 @@
               "doc": "Method name (e.g., \"Echo\")"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 170,
               "col": 2,
               "byteIndex": 4515
@@ -1728,7 +1728,7 @@
               "doc": "Local name (camelCase)"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 172,
               "col": 2,
               "byteIndex": 4572
@@ -1750,7 +1750,7 @@
               "doc": "Method kind"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 174,
               "col": 2,
               "byteIndex": 4623
@@ -1805,7 +1805,7 @@
               "doc": "Input message type name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 180,
               "col": 2,
               "byteIndex": 4761
@@ -1827,7 +1827,7 @@
               "doc": "Output message type name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 182,
               "col": 2,
               "byteIndex": 4825
@@ -1849,7 +1849,7 @@
               "doc": "Whether the method is idempotent"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 184,
               "col": 2,
               "byteIndex": 4898
@@ -1875,7 +1875,7 @@
       "name": "ServiceDetail",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
         "line": 190,
         "col": 0,
         "byteIndex": 4972
@@ -1896,7 +1896,7 @@
               "doc": "Service name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 192,
               "col": 2,
               "byteIndex": 5029
@@ -1918,7 +1918,7 @@
               "doc": "Fully qualified service name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 194,
               "col": 2,
               "byteIndex": 5092
@@ -1940,7 +1940,7 @@
               "doc": "Package name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 196,
               "col": 2,
               "byteIndex": 5143
@@ -1962,7 +1962,7 @@
               "doc": "Proto file name"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 198,
               "col": 2,
               "byteIndex": 5200
@@ -1984,7 +1984,7 @@
               "doc": "All methods"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/types.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/types.ts",
               "line": 200,
               "col": 2,
               "byteIndex": 5251
@@ -2024,7 +2024,7 @@
       "name": "ConnectRpcStatus",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
         "line": 13,
         "col": 13,
         "byteIndex": 317
@@ -2045,7 +2045,7 @@
               {
                 "name": "OK",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 14,
                   "col": 2,
                   "byteIndex": 340
@@ -2063,7 +2063,7 @@
               {
                 "name": "CANCELLED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 15,
                   "col": 2,
                   "byteIndex": 349
@@ -2081,7 +2081,7 @@
               {
                 "name": "UNKNOWN",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 16,
                   "col": 2,
                   "byteIndex": 365
@@ -2099,7 +2099,7 @@
               {
                 "name": "INVALID_ARGUMENT",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 17,
                   "col": 2,
                   "byteIndex": 379
@@ -2117,7 +2117,7 @@
               {
                 "name": "DEADLINE_EXCEEDED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 18,
                   "col": 2,
                   "byteIndex": 402
@@ -2135,7 +2135,7 @@
               {
                 "name": "NOT_FOUND",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 19,
                   "col": 2,
                   "byteIndex": 426
@@ -2153,7 +2153,7 @@
               {
                 "name": "ALREADY_EXISTS",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 20,
                   "col": 2,
                   "byteIndex": 442
@@ -2171,7 +2171,7 @@
               {
                 "name": "PERMISSION_DENIED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 21,
                   "col": 2,
                   "byteIndex": 463
@@ -2189,7 +2189,7 @@
               {
                 "name": "RESOURCE_EXHAUSTED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 22,
                   "col": 2,
                   "byteIndex": 487
@@ -2207,7 +2207,7 @@
               {
                 "name": "FAILED_PRECONDITION",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 23,
                   "col": 2,
                   "byteIndex": 512
@@ -2225,7 +2225,7 @@
               {
                 "name": "ABORTED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 24,
                   "col": 2,
                   "byteIndex": 538
@@ -2243,7 +2243,7 @@
               {
                 "name": "OUT_OF_RANGE",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 25,
                   "col": 2,
                   "byteIndex": 553
@@ -2261,7 +2261,7 @@
               {
                 "name": "UNIMPLEMENTED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 26,
                   "col": 2,
                   "byteIndex": 573
@@ -2279,7 +2279,7 @@
               {
                 "name": "INTERNAL",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 27,
                   "col": 2,
                   "byteIndex": 594
@@ -2297,7 +2297,7 @@
               {
                 "name": "UNAVAILABLE",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 28,
                   "col": 2,
                   "byteIndex": 610
@@ -2315,7 +2315,7 @@
               {
                 "name": "DATA_LOSS",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 29,
                   "col": 2,
                   "byteIndex": 629
@@ -2333,7 +2333,7 @@
               {
                 "name": "UNAUTHENTICATED",
                 "location": {
-                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+                  "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
                   "line": 30,
                   "col": 2,
                   "byteIndex": 646
@@ -2360,7 +2360,7 @@
       "name": "ConnectRpcStatusCode",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
         "line": 37,
         "col": 0,
         "byteIndex": 766
@@ -2406,7 +2406,7 @@
       "name": "getStatusName",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
         "line": 58,
         "col": 0,
         "byteIndex": 1349
@@ -2453,7 +2453,7 @@
       "name": "isConnectRpcStatusCode",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/status.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/status.ts",
         "line": 72,
         "col": 0,
         "byteIndex": 1677
@@ -2511,7 +2511,7 @@
       "name": "ConnectRpcNetworkError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 18,
         "col": 0,
         "byteIndex": 578
@@ -2554,7 +2554,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 22,
               "col": 2,
               "byteIndex": 750
@@ -2576,7 +2576,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 19,
               "col": 2,
               "byteIndex": 638
@@ -2599,7 +2599,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 20,
               "col": 2,
               "byteIndex": 699
@@ -2618,7 +2618,7 @@
       "name": "ErrorDetail",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 33,
         "col": 0,
         "byteIndex": 1070
@@ -2639,7 +2639,7 @@
               "doc": "Type URL identifying the error detail type.\nCommon types include:\n- \"type.googleapis.com/google.rpc.BadRequest\"\n- \"type.googleapis.com/google.rpc.DebugInfo\"\n- \"type.googleapis.com/google.rpc.RetryInfo\"\n- \"type.googleapis.com/google.rpc.QuotaFailure\""
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 42,
               "col": 2,
               "byteIndex": 1395
@@ -2661,7 +2661,7 @@
               "doc": "Decoded error detail value.\nThe structure depends on the typeUrl."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 48,
               "col": 2,
               "byteIndex": 1512
@@ -2687,7 +2687,7 @@
       "name": "ConnectRpcErrorOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 54,
         "col": 0,
         "byteIndex": 1593
@@ -2717,7 +2717,7 @@
               "doc": "Headers/metadata from the ConnectRPC response."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 58,
               "col": 2,
               "byteIndex": 1722
@@ -2753,7 +2753,7 @@
               "doc": "Rich error details from google.rpc.Status."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 63,
               "col": 2,
               "byteIndex": 1821
@@ -2804,7 +2804,7 @@
       "name": "ConnectRpcError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 71,
         "col": 0,
         "byteIndex": 1999
@@ -2870,7 +2870,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 79,
               "col": 2,
               "byteIndex": 2317
@@ -2892,7 +2892,7 @@
             "isOverride": true,
             "name": "name",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 72,
               "col": 2,
               "byteIndex": 2052
@@ -2915,7 +2915,7 @@
             "isOverride": true,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 73,
               "col": 2,
               "byteIndex": 2106
@@ -2937,7 +2937,7 @@
             "isStatic": false,
             "name": "statusCode",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 74,
               "col": 2,
               "byteIndex": 2156
@@ -2956,7 +2956,7 @@
             "isStatic": false,
             "name": "statusMessage",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 75,
               "col": 2,
               "byteIndex": 2201
@@ -2989,7 +2989,7 @@
             "isStatic": false,
             "name": "metadata",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 76,
               "col": 2,
               "byteIndex": 2235
@@ -3022,7 +3022,7 @@
             "isStatic": false,
             "name": "details",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
               "line": 77,
               "col": 2,
               "byteIndex": 2272
@@ -3041,7 +3041,7 @@
       "name": "fromConnectError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 100,
         "col": 0,
         "byteIndex": 2922
@@ -3114,7 +3114,7 @@
       "name": "ConnectRpcFailureError",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/errors.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/errors.ts",
         "line": 130,
         "col": 0,
         "byteIndex": 3917
@@ -3162,10 +3162,10 @@
       "name": "ConnectRpcErrorType",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 23,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 28,
         "col": 0,
-        "byteIndex": 546
+        "byteIndex": 798
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3202,10 +3202,10 @@
       "name": "ConnectRpcResponseSuccessParams",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 194,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 241,
         "col": 0,
-        "byteIndex": 4930
+        "byteIndex": 6734
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3220,10 +3220,10 @@
           {
             "name": "response",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 195,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 242,
               "col": 2,
-              "byteIndex": 4992
+              "byteIndex": 6796
             },
             "params": [],
             "readonly": true,
@@ -3251,12 +3251,45 @@
             "typeParams": []
           },
           {
+            "name": "schema",
+            "location": {
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 243,
+              "col": 2,
+              "byteIndex": 6827
+            },
+            "params": [],
+            "readonly": true,
+            "computed": false,
+            "optional": false,
+            "tsType": {
+              "repr": "",
+              "kind": "union",
+              "union": [
+                {
+                  "repr": "DescMessage",
+                  "kind": "typeRef",
+                  "typeRef": {
+                    "typeParams": null,
+                    "typeName": "DescMessage"
+                  }
+                },
+                {
+                  "repr": "null",
+                  "kind": "keyword",
+                  "keyword": "null"
+                }
+              ]
+            },
+            "typeParams": []
+          },
+          {
             "name": "headers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 196,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 244,
               "col": 2,
-              "byteIndex": 5023
+              "byteIndex": 6866
             },
             "params": [],
             "readonly": true,
@@ -3275,10 +3308,10 @@
           {
             "name": "trailers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 197,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 245,
               "col": 2,
-              "byteIndex": 5052
+              "byteIndex": 6895
             },
             "params": [],
             "readonly": true,
@@ -3297,10 +3330,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 198,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 246,
               "col": 2,
-              "byteIndex": 5082
+              "byteIndex": 6925
             },
             "params": [],
             "readonly": true,
@@ -3332,10 +3365,10 @@
       "name": "ConnectRpcResponseErrorParams",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 204,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 252,
         "col": 0,
-        "byteIndex": 5176
+        "byteIndex": 7019
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3350,10 +3383,10 @@
           {
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 205,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 253,
               "col": 2,
-              "byteIndex": 5227
+              "byteIndex": 7070
             },
             "params": [],
             "readonly": true,
@@ -3372,10 +3405,10 @@
           {
             "name": "rpcError",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 206,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 254,
               "col": 2,
-              "byteIndex": 5259
+              "byteIndex": 7102
             },
             "params": [],
             "readonly": true,
@@ -3394,10 +3427,10 @@
           {
             "name": "headers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 207,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 255,
               "col": 2,
-              "byteIndex": 5297
+              "byteIndex": 7140
             },
             "params": [],
             "readonly": true,
@@ -3416,10 +3449,10 @@
           {
             "name": "trailers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 208,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 256,
               "col": 2,
-              "byteIndex": 5326
+              "byteIndex": 7169
             },
             "params": [],
             "readonly": true,
@@ -3438,10 +3471,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 209,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 257,
               "col": 2,
-              "byteIndex": 5356
+              "byteIndex": 7199
             },
             "params": [],
             "readonly": true,
@@ -3464,10 +3497,10 @@
       "name": "ConnectRpcResponseFailureParams",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 215,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 263,
         "col": 0,
-        "byteIndex": 5451
+        "byteIndex": 7294
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3482,10 +3515,10 @@
           {
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 216,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 264,
               "col": 2,
-              "byteIndex": 5504
+              "byteIndex": 7347
             },
             "params": [],
             "readonly": true,
@@ -3504,10 +3537,10 @@
           {
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 217,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 265,
               "col": 2,
-              "byteIndex": 5546
+              "byteIndex": 7389
             },
             "params": [],
             "readonly": true,
@@ -3530,10 +3563,10 @@
       "name": "ConnectRpcResponseSuccessImpl",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 224,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 272,
         "col": 0,
-        "byteIndex": 5645
+        "byteIndex": 7488
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3577,10 +3610,10 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 238,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 286,
               "col": 2,
-              "byteIndex": 6083
+              "byteIndex": 7932
             }
           }
         ],
@@ -3601,10 +3634,10 @@
             "isStatic": false,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 226,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 274,
               "col": 2,
-              "byteIndex": 5737
+              "byteIndex": 7580
             }
           },
           {
@@ -3623,10 +3656,10 @@
             "isStatic": false,
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 227,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 275,
               "col": 2,
-              "byteIndex": 5778
+              "byteIndex": 7621
             }
           },
           {
@@ -3645,10 +3678,10 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 228,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 276,
               "col": 2,
-              "byteIndex": 5816
+              "byteIndex": 7659
             }
           },
           {
@@ -3664,10 +3697,10 @@
             "isStatic": false,
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 229,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 277,
               "col": 2,
-              "byteIndex": 5847
+              "byteIndex": 7690
             }
           },
           {
@@ -3686,10 +3719,10 @@
             "isStatic": false,
             "name": "statusCode",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 230,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 278,
               "col": 2,
-              "byteIndex": 5872
+              "byteIndex": 7715
             }
           },
           {
@@ -3705,10 +3738,10 @@
             "isStatic": false,
             "name": "statusMessage",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 231,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 279,
               "col": 2,
-              "byteIndex": 5908
+              "byteIndex": 7751
             }
           },
           {
@@ -3727,10 +3760,10 @@
             "isStatic": false,
             "name": "headers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 232,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 280,
               "col": 2,
-              "byteIndex": 5941
+              "byteIndex": 7784
             }
           },
           {
@@ -3749,10 +3782,10 @@
             "isStatic": false,
             "name": "trailers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 233,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 281,
               "col": 2,
-              "byteIndex": 5970
+              "byteIndex": 7813
             }
           },
           {
@@ -3768,10 +3801,10 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 234,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 282,
               "col": 2,
-              "byteIndex": 6000
+              "byteIndex": 7843
             }
           },
           {
@@ -3801,10 +3834,10 @@
             "isStatic": false,
             "name": "data",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 235,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 283,
               "col": 2,
-              "byteIndex": 6029
+              "byteIndex": 7872
             }
           },
           {
@@ -3813,12 +3846,9 @@
               "kind": "union",
               "union": [
                 {
-                  "repr": "T",
-                  "kind": "typeRef",
-                  "typeRef": {
-                    "typeParams": null,
-                    "typeName": "T"
-                  }
+                  "repr": "unknown",
+                  "kind": "keyword",
+                  "keyword": "unknown"
                 },
                 {
                   "repr": "null",
@@ -3834,10 +3864,10 @@
             "isStatic": false,
             "name": "raw",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 236,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 284,
               "col": 2,
-              "byteIndex": 6056
+              "byteIndex": 7899
             }
           }
         ],
@@ -3875,10 +3905,10 @@
       "name": "ConnectRpcResponseErrorImpl",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 251,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 318,
         "col": 0,
-        "byteIndex": 6389
+        "byteIndex": 8870
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -3913,10 +3943,10 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 265,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 332,
               "col": 2,
-              "byteIndex": 6845
+              "byteIndex": 9326
             }
           }
         ],
@@ -3937,10 +3967,10 @@
             "isStatic": false,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 253,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 320,
               "col": 2,
-              "byteIndex": 6477
+              "byteIndex": 8958
             }
           },
           {
@@ -3959,10 +3989,10 @@
             "isStatic": false,
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 254,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 321,
               "col": 2,
-              "byteIndex": 6518
+              "byteIndex": 8999
             }
           },
           {
@@ -3981,10 +4011,10 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 255,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 322,
               "col": 2,
-              "byteIndex": 6556
+              "byteIndex": 9037
             }
           },
           {
@@ -4003,10 +4033,10 @@
             "isStatic": false,
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 256,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 323,
               "col": 2,
-              "byteIndex": 6588
+              "byteIndex": 9069
             }
           },
           {
@@ -4025,10 +4055,10 @@
             "isStatic": false,
             "name": "statusCode",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 257,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 324,
               "col": 2,
-              "byteIndex": 6623
+              "byteIndex": 9104
             }
           },
           {
@@ -4044,10 +4074,10 @@
             "isStatic": false,
             "name": "statusMessage",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 258,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 325,
               "col": 2,
-              "byteIndex": 6668
+              "byteIndex": 9149
             }
           },
           {
@@ -4066,10 +4096,10 @@
             "isStatic": false,
             "name": "headers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 259,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 326,
               "col": 2,
-              "byteIndex": 6702
+              "byteIndex": 9183
             }
           },
           {
@@ -4088,10 +4118,10 @@
             "isStatic": false,
             "name": "trailers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 260,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 327,
               "col": 2,
-              "byteIndex": 6731
+              "byteIndex": 9212
             }
           },
           {
@@ -4107,10 +4137,10 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 261,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 328,
               "col": 2,
-              "byteIndex": 6761
+              "byteIndex": 9242
             }
           },
           {
@@ -4126,10 +4156,10 @@
             "isStatic": false,
             "name": "data",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 262,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 329,
               "col": 2,
-              "byteIndex": 6790
+              "byteIndex": 9271
             }
           },
           {
@@ -4148,10 +4178,10 @@
             "isStatic": false,
             "name": "raw",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 263,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 330,
               "col": 2,
-              "byteIndex": 6814
+              "byteIndex": 9295
             }
           }
         ],
@@ -4189,10 +4219,10 @@
       "name": "ConnectRpcResponseFailureImpl",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-        "line": 280,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+        "line": 347,
         "col": 0,
-        "byteIndex": 7252
+        "byteIndex": 9733
       },
       "declarationKind": "export",
       "jsDoc": {
@@ -4227,10 +4257,10 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 294,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 361,
               "col": 2,
-              "byteIndex": 7693
+              "byteIndex": 10174
             }
           }
         ],
@@ -4251,10 +4281,10 @@
             "isStatic": false,
             "name": "kind",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 282,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 349,
               "col": 2,
-              "byteIndex": 7344
+              "byteIndex": 9825
             }
           },
           {
@@ -4273,10 +4303,10 @@
             "isStatic": false,
             "name": "processed",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 283,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 350,
               "col": 2,
-              "byteIndex": 7385
+              "byteIndex": 9866
             }
           },
           {
@@ -4295,10 +4325,10 @@
             "isStatic": false,
             "name": "ok",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 284,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 351,
               "col": 2,
-              "byteIndex": 7424
+              "byteIndex": 9905
             }
           },
           {
@@ -4317,10 +4347,10 @@
             "isStatic": false,
             "name": "error",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 285,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 352,
               "col": 2,
-              "byteIndex": 7456
+              "byteIndex": 9937
             }
           },
           {
@@ -4336,10 +4366,10 @@
             "isStatic": false,
             "name": "statusCode",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 286,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 353,
               "col": 2,
-              "byteIndex": 7498
+              "byteIndex": 9979
             }
           },
           {
@@ -4355,10 +4385,10 @@
             "isStatic": false,
             "name": "statusMessage",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 287,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 354,
               "col": 2,
-              "byteIndex": 7528
+              "byteIndex": 10009
             }
           },
           {
@@ -4374,10 +4404,10 @@
             "isStatic": false,
             "name": "headers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 288,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 355,
               "col": 2,
-              "byteIndex": 7561
+              "byteIndex": 10042
             }
           },
           {
@@ -4393,10 +4423,10 @@
             "isStatic": false,
             "name": "trailers",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 289,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 356,
               "col": 2,
-              "byteIndex": 7588
+              "byteIndex": 10069
             }
           },
           {
@@ -4412,10 +4442,10 @@
             "isStatic": false,
             "name": "duration",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 290,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 357,
               "col": 2,
-              "byteIndex": 7616
+              "byteIndex": 10097
             }
           },
           {
@@ -4431,10 +4461,10 @@
             "isStatic": false,
             "name": "data",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 291,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 358,
               "col": 2,
-              "byteIndex": 7645
+              "byteIndex": 10126
             }
           },
           {
@@ -4450,10 +4480,10 @@
             "isStatic": false,
             "name": "raw",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/response.ts",
-              "line": 292,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/response.ts",
+              "line": 359,
               "col": 2,
-              "byteIndex": 7669
+              "byteIndex": 10150
             }
           }
         ],
@@ -4491,7 +4521,7 @@
       "name": "ReflectionApi",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
         "line": 73,
         "col": 0,
         "byteIndex": 1960
@@ -4519,7 +4549,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
               "line": 83,
               "col": 2,
               "byteIndex": 2182
@@ -4568,7 +4598,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
               "line": 90,
               "col": 2,
               "byteIndex": 2423
@@ -4624,7 +4654,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
               "line": 97,
               "col": 2,
               "byteIndex": 2643
@@ -4684,7 +4714,7 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
               "line": 104,
               "col": 2,
               "byteIndex": 2850
@@ -4726,7 +4756,7 @@
               "doc": "Check if reflection is enabled."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
               "line": 77,
               "col": 2,
               "byteIndex": 2044
@@ -4752,14 +4782,20 @@
       "name": "ConnectRpcClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-        "line": 110,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+        "line": 136,
         "col": 0,
-        "byteIndex": 2944
+        "byteIndex": 4080
       },
       "declarationKind": "export",
       "jsDoc": {
-        "doc": "ConnectRPC client interface."
+        "doc": "ConnectRPC client interface.\n\n## Field Name Conventions\n\nThis client automatically handles field name conversion between protobuf and JavaScript:\n\n- **Request fields**: Accept both `snake_case` (protobuf style) and `camelCase` (JavaScript style)\n- **Response fields**: Converted to JavaScript conventions based on response type:\n  - `response.data`: Plain JSON object with `camelCase` field names (no `$typeName`)\n  - `response.raw`: Original protobuf Message object with all metadata (includes `$typeName`)\n",
+        "tags": [
+          {
+            "kind": "example",
+            "doc": "```ts\nconst client = createConnectRpcClient({ url: \"http://localhost:50051\" });\n\n// Request: Both formats work\nawait client.call(\"echo.Echo\", \"echoWithDelay\", {\n  message: \"hello\",\n  delayMs: 100,        // camelCase (recommended)\n  // delay_ms: 100,    // snake_case also works\n});\n\n// Response: data is JSON, raw is protobuf Message\nconst response = await client.call(\"echo.Echo\", \"echo\", { message: \"test\" });\nconsole.log(response.data);  // { message: \"test\", metadata: {...} }\nconsole.log(response.raw);   // { $typeName: \"echo.EchoResponse\", message: \"test\", ... }\n```"
+          }
+        ]
       },
       "kind": "interface",
       "interfaceDef": {
@@ -4804,10 +4840,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 124,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 150,
               "col": 2,
-              "byteIndex": 3417
+              "byteIndex": 4553
             },
             "params": [
               {
@@ -4910,10 +4946,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 138,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 164,
               "col": 2,
-              "byteIndex": 3775
+              "byteIndex": 4911
             },
             "params": [
               {
@@ -5016,10 +5052,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 152,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 178,
               "col": 2,
-              "byteIndex": 4167
+              "byteIndex": 5303
             },
             "params": [
               {
@@ -5131,10 +5167,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 166,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 192,
               "col": 2,
-              "byteIndex": 4576
+              "byteIndex": 5712
             },
             "params": [
               {
@@ -5224,10 +5260,10 @@
             },
             "kind": "method",
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 176,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 202,
               "col": 2,
-              "byteIndex": 4808
+              "byteIndex": 5944
             },
             "params": [],
             "optional": false,
@@ -5255,10 +5291,10 @@
               "doc": "Client configuration"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 112,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 138,
               "col": 2,
-              "byteIndex": 3036
+              "byteIndex": 4172
             },
             "params": [],
             "readonly": true,
@@ -5280,10 +5316,10 @@
               "doc": "Reflection API (only available when schema: \"reflection\")"
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-              "line": 115,
+              "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+              "line": 141,
               "col": 2,
-              "byteIndex": 3147
+              "byteIndex": 4283
             },
             "params": [],
             "readonly": true,
@@ -5309,10 +5345,10 @@
       "name": "createConnectRpcClient",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.0/client.ts",
-        "line": 373,
+        "filename": "https://jsr.io/@probitas/client-connectrpc/0.6.2/client.ts",
+        "line": 399,
         "col": 0,
-        "byteIndex": 10134
+        "byteIndex": 11270
       },
       "declarationKind": "export",
       "jsDoc": {

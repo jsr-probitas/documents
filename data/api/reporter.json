@@ -1,14 +1,14 @@
 {
   "name": "reporter",
   "specifier": "@probitas/reporter",
-  "version": "0.6.2",
+  "version": "0.6.4",
   "moduleDoc": "Test result reporting and formatting for Probitas.\n\nThis package provides multiple reporter implementations for formatting and\ndisplaying test execution results. All reporters implement the {@linkcode Reporter}\ninterface from `@probitas/runner` and can be passed to `ScenarioRunner.run()`.\n\n## Links\n\n- [GitHub Repository](https://github.com/probitas-test/probitas)\n- [@probitas/probitas](https://jsr.io/@probitas/probitas) - Main package (recommended for most users)\n\n## Related Packages\n\n| Package | Description |\n|---------|-------------|\n| [@probitas/runner](https://jsr.io/@probitas/runner) | Uses reporters for output |\n| [@probitas/cli](https://jsr.io/@probitas/cli) | CLI that uses these reporters |\n| [@probitas/logger](https://jsr.io/@probitas/logger) | Logging used during execution |\n\n## Available Reporters\n\n- {@linkcode ListReporter} - Detailed hierarchical output showing scenario and step names\n- {@linkcode JSONReporter} - JSON output for machine-readable results\n",
   "exports": [
     {
       "name": "ListReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
         "line": 39,
         "col": 0,
         "byteIndex": 1146
@@ -38,7 +38,7 @@
               "doc": "Custom theme for styling output.\nIf not provided, uses defaultTheme (or noColorTheme if Deno.noColor is set)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
               "line": 44,
               "col": 2,
               "byteIndex": 1341
@@ -62,7 +62,7 @@
               "doc": "Base directory for making paths relative in output.\nIf not provided, absolute paths are displayed as-is."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
               "line": 49,
               "col": 2,
               "byteIndex": 1485
@@ -87,7 +87,7 @@
       "name": "ListReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
         "line": 84,
         "col": 0,
         "byteIndex": 2427
@@ -141,7 +141,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
               "line": 94,
               "col": 2,
               "byteIndex": 2644
@@ -220,7 +220,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
               "line": 139,
               "col": 2,
               "byteIndex": 3787
@@ -303,7 +303,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/list_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/list_reporter.ts",
               "line": 200,
               "col": 2,
               "byteIndex": 5872
@@ -329,7 +329,7 @@
       "name": "JSONReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
         "line": 19,
         "col": 0,
         "byteIndex": 419
@@ -359,7 +359,7 @@
       "name": "JSONReporter",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
         "line": 21,
         "col": 0,
         "byteIndex": 482
@@ -394,7 +394,7 @@
               }
             ],
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 24,
               "col": 2,
               "byteIndex": 552
@@ -458,7 +458,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 32,
               "col": 2,
               "byteIndex": 750
@@ -531,7 +531,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 41,
               "col": 2,
               "byteIndex": 911
@@ -580,7 +580,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 52,
               "col": 2,
               "byteIndex": 1105
@@ -642,7 +642,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 59,
               "col": 2,
               "byteIndex": 1254
@@ -704,7 +704,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 70,
               "col": 2,
               "byteIndex": 1450
@@ -779,7 +779,7 @@
               "typeParams": []
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/json_reporter.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/json_reporter.ts",
               "line": 81,
               "col": 2,
               "byteIndex": 1636
@@ -805,7 +805,7 @@
       "name": "ReporterOptions",
       "isDefault": false,
       "location": {
-        "filename": "https://jsr.io/@probitas/reporter/0.6.2/types.ts",
+        "filename": "https://jsr.io/@probitas/reporter/0.6.4/types.ts",
         "line": 28,
         "col": 0,
         "byteIndex": 616
@@ -842,7 +842,7 @@
               ]
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/types.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/types.ts",
               "line": 34,
               "col": 2,
               "byteIndex": 745
@@ -867,7 +867,7 @@
               "doc": "Custom theme for styling output.\n\nIf not provided, uses {@linkcode defaultTheme} (or {@linkcode noColorTheme}\nif `Deno.noColor` is true)."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/types.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/types.ts",
               "line": 42,
               "col": 2,
               "byteIndex": 951
@@ -892,7 +892,7 @@
               "doc": "Base directory for making paths relative in output.\n\nIf provided, absolute paths in source locations will be displayed\nrelative to this directory."
             },
             "location": {
-              "filename": "https://jsr.io/@probitas/reporter/0.6.2/types.ts",
+              "filename": "https://jsr.io/@probitas/reporter/0.6.4/types.ts",
               "line": 50,
               "col": 2,
               "byteIndex": 1156
