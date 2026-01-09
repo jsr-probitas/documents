@@ -54,19 +54,24 @@ Example prompt snippet:
 
 ## Running and Checking via AI
 
-Claude Code commands:
+Claude Code plugin commands:
 
 - `/probitas-init` — initialize a project
-- `/probitas-new <type>` — scaffold scenario templates
-- `/probitas-check` — format, lint, and type-check scenarios
 - `/probitas-run [selector]` — run scenarios (use selectors/tags to scope)
+- `/probitas-list` — list available scenarios
+- `/probitas-check` — format, lint, and type-check scenarios
+- `/probitas-expect-methods` — get available expect methods
 
-Local probitas CLI tasks:
+Local probitas CLI commands:
 
-- `probitas fmt` — format scenarios
-- `probitas lint` — lint scenarios
-- `probitas check` — type-check scenarios
-- `probitas run [selector]` — run scenarios (use selectors/tags to scope)
+- `probitas init` — initialize a new Probitas project
+- `probitas run [paths...] [options]` — run scenarios (use `-s/--selector`)
+- `probitas list [paths...]` — list available scenarios
+- `probitas fmt` — format scenario files
+- `probitas lint` — lint scenario files
+- `probitas check` — type-check scenario files
+
+See `probitas <command> -h` for detailed CLI options.
 
 ## References to Share with AI
 
@@ -81,6 +86,7 @@ Local probitas CLI tasks:
 
 ## Links
 
-- Claude plugin marketplace: https://github.com/probitas-test/claude-plugins
-- Probitas plugin docs:
-  https://github.com/probitas-test/claude-plugins/tree/main/plugins/probitas
+- Claude Code plugin: https://github.com/probitas-test/claude-plugins
+- Probitas documentation: https://probitas-test.github.io/documents
+- Probitas repository: https://github.com/probitas-test/probitas
+- JSR package: https://jsr.io/@probitas/probitas
