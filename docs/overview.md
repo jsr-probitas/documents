@@ -159,6 +159,29 @@ All code quality commands support these options:
 -q, --quiet           # Suppress output
 ```
 
+## Dependency Caching
+
+Pre-download and cache dependencies for your scenario files using
+`probitas cache`. This is useful for CI/CD pipelines and offline work.
+
+```bash
+# Cache dependencies for all discovered scenarios
+probitas cache
+
+# Cache specific directory
+probitas cache probitas/api/
+
+# Force re-download all dependencies
+probitas cache -r
+
+# Cache with custom include pattern
+probitas cache --include "e2e/**/*.probitas.ts"
+```
+
+The cache command uses the same file discovery as `probitas run`, respecting
+your `includes` and `excludes` configuration. All common options (`--include`,
+`--exclude`, `--config`, `-v`, `-q`) are supported.
+
 ### Tag-Based Filtering
 
 Organize scenarios with tags for easy filtering:
