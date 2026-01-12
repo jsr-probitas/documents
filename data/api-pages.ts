@@ -4,14 +4,22 @@
  * Loads pre-generated API documentation from data/api/ directory.
  */
 
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   type ApiDocsIndex,
   isPublic,
   type PackageDoc,
   type PackageInfo,
-} from "../lib/api-docs.ts";
+} from "../app/lib/api-docs.js";
 
-const API_DATA_DIR = new URL("./api/", import.meta.url);
+// Re-export for convenience
+export type { PackageDoc, PackageInfo, ApiDocsIndex };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const API_DATA_DIR = path.resolve(__dirname, "./api/");
 
 let cachedIndex: ApiDocsIndex | null = null;
 const packageCache = new Map<string, PackageDoc>();
@@ -22,8 +30,8 @@ const packageCache = new Map<string, PackageDoc>();
 export async function loadApiIndex(): Promise<ApiDocsIndex> {
   if (cachedIndex) return cachedIndex;
 
-  const indexPath = new URL("index.json", API_DATA_DIR);
-  const content = await Deno.readTextFile(indexPath);
+  const indexPath = path.join(API_DATA_DIR, "index.json");
+  const content = await readFile(indexPath, "utf-8");
   cachedIndex = JSON.parse(content);
   return cachedIndex!;
 }
@@ -37,8 +45,8 @@ export async function loadPackageDoc(name: string): Promise<PackageDoc | null> {
   }
 
   try {
-    const filePath = new URL(`${name}.json`, API_DATA_DIR);
-    const content = await Deno.readTextFile(filePath);
+    const filePath = path.join(API_DATA_DIR, `${name}.json`);
+    const content = await readFile(filePath, "utf-8");
     const doc = JSON.parse(content) as PackageDoc;
     packageCache.set(name, doc);
     return doc;

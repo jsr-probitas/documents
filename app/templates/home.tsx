@@ -1,10 +1,10 @@
 /**
  * Home page JSX template
  */
-import { clients } from "../data/clients.ts";
-import { basePath } from "../data/docs.ts";
-import { features } from "../data/features.ts";
-import { loadSampleCodes, type SampleCode } from "../data/sample_codes.ts";
+import { clients } from "../../data/clients.ts";
+import { features } from "../../data/features.ts";
+import { loadSampleCodes, type SampleCode } from "../../data/sample_codes.ts";
+import { basePath } from "../lib/path.ts";
 import { HomeLayout } from "./HomeLayout.tsx";
 import { mainScript } from "./scripts.ts";
 
@@ -82,10 +82,10 @@ function Hero({ sampleCodes }: { sampleCodes: SampleCode[] }) {
         queue testing
       </p>
       <div class="cta-group">
-        <a href={`${basePath}/docs/`} class="btn btn-primary">
+        <a href={basePath("/docs")} class="btn btn-primary">
           Get Started
         </a>
-        <a href={`${basePath}/docs/scenario/`} class="btn btn-secondary">
+        <a href={basePath("/docs/scenario")} class="btn btn-secondary">
           Learn Scenarios
         </a>
       </div>
@@ -167,7 +167,7 @@ function AiFriendlySection() {
             An index of all documentation pages with descriptions. AI agents use
             this as a "sitemap" to discover available content.
           </p>
-          <a href={`${basePath}/llms.txt`} class="ai-friendly-link">
+          <a href={basePath("/llms.txt")} class="ai-friendly-link">
             View llms.txt <i class="ti ti-arrow-right" />
           </a>
         </div>
@@ -180,10 +180,10 @@ function AiFriendlySection() {
           <p>
             Every documentation page has an <code>index.md</code>{" "}
             endpoint (e.g., <code>/docs/index.md</code>,{" "}
-            <code>/docs/quickstart/index.md</code>) returning clean Markdown
+            <code>/docs/installation/index.md</code>) returning clean Markdown
             source for easy LLM consumption.
           </p>
-          <a href={`${basePath}/docs/index.md`} class="ai-friendly-link">
+          <a href={basePath("/docs/index.md")} class="ai-friendly-link">
             Example: /docs/index.md <i class="ti ti-arrow-right" />
           </a>
         </div>

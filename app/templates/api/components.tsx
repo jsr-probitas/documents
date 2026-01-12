@@ -41,7 +41,7 @@ import {
   extractTypeParamRefs,
   extractTypeRefs,
 } from "../../lib/type-references.ts";
-import { basePath } from "../../data/docs.ts";
+import { basePath } from "../../lib/path.ts";
 
 // ============================================================================
 // Type Display Components (with linking)
@@ -237,7 +237,7 @@ function renderTypeName(name: string, ctx: TypeLinkContext): Child {
     if (targetPackage !== currentPackage) {
       return (
         <a
-          href={`${basePath}/api/${targetPackage}/#${name}`}
+          href={basePath(`/api/${targetPackage}/#${name}`)}
           class="type-link type-link-cross-package"
         >
           {name}
@@ -288,7 +288,7 @@ function getLinkableTypes(
       if (targetPackage !== currentPackage) {
         result.push({
           name,
-          href: `${basePath}/api/${targetPackage}/#${name}`,
+          href: basePath(`/api/${targetPackage}/#${name}`),
           isCrossPackage: true,
         });
       }
@@ -1493,7 +1493,7 @@ export function PackageSidebar(
         <i class="ti ti-package" />
         <select
           class="api-package-select"
-          onchange={`location.href = '${basePath}/api/' + this.value + '/'`}
+          onchange={`location.href = '${basePath("/api/")}' + this.value`}
           aria-label="Select package"
         >
           <option value="" disabled selected={!currentPackage}>
@@ -1528,7 +1528,7 @@ export function PackageSidebar(
                   key={pkg.name}
                   class={pkg.name === currentPackage ? "active" : ""}
                 >
-                  <a href={`${basePath}/api/${pkg.name}/`}>{pkg.name}</a>
+                  <a href={basePath(`/api/${pkg.name}`)}>{pkg.name}</a>
                 </li>
               ))}
             </ul>

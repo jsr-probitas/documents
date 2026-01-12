@@ -34,7 +34,17 @@ import {
   formatMethodSignature,
   formatTypeAliasSignature,
 } from "./signature-formatters.ts";
-import { siteMetadata } from "../data/docs.ts";
+
+/**
+ * Get the base URL for the site from environment variable.
+ * Falls back to the default GitHub Pages URL.
+ */
+function getBaseUrl(): string {
+  return (
+    import.meta.env?.BASE_URL_FULL ??
+      "https://probitas-test.github.io/documents"
+  );
+}
 
 // ============================================================================
 // Type Reference Collector
@@ -52,29 +62,29 @@ interface TypeLinkInfo {
  * Collects type references and resolves them to links
  */
 class TypeReferenceCollector {
-  private refs = new Set<string>();
-  private localTypes: Set<string>;
-  private typeToPackage: Map<string, string>;
-  private currentPackage: string;
-  private baseUrl: string;
+  #refs = new Set<string>();
+  #localTypes: Set<string>;
+  #typeToPackage: Map<string, string>;
+  #currentPackage: string;
+  #baseUrl: string;
 
   constructor(
     localTypes: Set<string>,
     typeToPackage: Map<string, string>,
     currentPackage: string,
-    baseUrl = siteMetadata.baseUrl,
+    baseUrl = getBaseUrl(),
   ) {
-    this.localTypes = localTypes;
-    this.typeToPackage = typeToPackage;
-    this.currentPackage = currentPackage;
-    this.baseUrl = baseUrl;
+    this.#localTypes = localTypes;
+    this.#typeToPackage = typeToPackage;
+    this.#currentPackage = currentPackage;
+    this.#baseUrl = baseUrl;
   }
 
   /**
    * Add a type reference
    */
   add(typeName: string): void {
-    this.refs.add(typeName);
+    this.#refs.add(typeName);
   }
 
   /**
@@ -144,7 +154,7 @@ class TypeReferenceCollector {
   getLinks(): TypeLinkInfo[] {
     const links: TypeLinkInfo[] = [];
 
-    for (const name of this.refs) {
+    for (const name of this.#refs) {
       // Check if built-in type
       if (name in BUILTIN_TYPE_LINKS) {
         links.push({
@@ -158,10 +168,10 @@ class TypeReferenceCollector {
       }
 
       // Check if local type
-      if (this.localTypes.has(name)) {
+      if (this.#localTypes.has(name)) {
         links.push({
           name,
-          href: `${this.baseUrl}/api/${this.currentPackage}#${name}`,
+          href: `${this.#baseUrl}/api/${this.#currentPackage}#${name}`,
           isBuiltin: false,
           isLocal: true,
           isCrossPackage: false,
@@ -170,12 +180,12 @@ class TypeReferenceCollector {
       }
 
       // Check if cross-package type
-      if (this.typeToPackage.has(name)) {
-        const pkg = this.typeToPackage.get(name)!;
-        if (pkg !== this.currentPackage) {
+      if (this.#typeToPackage.has(name)) {
+        const pkg = this.#typeToPackage.get(name)!;
+        if (pkg !== this.#currentPackage) {
           links.push({
             name,
-            href: `${this.baseUrl}/api/${pkg}#${name}`,
+            href: `${this.#baseUrl}/api/${pkg}#${name}`,
             isBuiltin: false,
             isLocal: false,
             isCrossPackage: true,
@@ -526,7 +536,7 @@ export function generateApiMarkdown(
   const lines: string[] = [];
   const {
     allPackages = [],
-    baseUrl = siteMetadata.baseUrl,
+    baseUrl = getBaseUrl(),
     updatedAt,
   } = options;
 
@@ -707,8 +717,8 @@ export function generateApiMarkdown(
       lines.push("### Other Packages");
       lines.push("");
       for (const link of crossPkgLinks) {
-        const pkg = typeToPackage.get(link.name);
-        lines.push(`- [\`${link.name}\`](${link.href}) (@probitas/${pkg})`);
+        const pkgName = typeToPackage.get(link.name);
+        lines.push(`- [\`${link.name}\`](${link.href}) (@probitas/${pkgName})`);
       }
       lines.push("");
     }

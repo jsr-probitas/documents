@@ -16,7 +16,7 @@ import type {
   ExportCounts,
   PackageDoc,
   PackageInfo,
-} from "../lib/api-docs.ts";
+} from "../app/lib/api-docs.ts";
 
 const API_DIR = new URL("../data/api/", import.meta.url);
 

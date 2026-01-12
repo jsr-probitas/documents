@@ -2,6 +2,10 @@
  * Sample codes displayed in the hero section carousel
  */
 
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 export interface SampleCode {
   /** Filename displayed in the code header */
   title: string;
@@ -16,12 +20,15 @@ interface SampleMeta {
   order: number;
 }
 
-const INDEX_DIR = new URL("./index/", import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const INDEX_DIR = path.resolve(__dirname, "./index/");
 
 async function discoverSampleFiles(): Promise<string[]> {
+  const entries = await readdir(INDEX_DIR, { withFileTypes: true });
   const files: string[] = [];
-  for await (const entry of Deno.readDir(INDEX_DIR)) {
-    if (entry.isFile && entry.name.endsWith(".probitas.ts")) {
+  for (const entry of entries) {
+    if (entry.isFile() && entry.name.endsWith(".probitas.ts")) {
       files.push(entry.name);
     }
   }
@@ -33,9 +40,10 @@ interface SampleCodeWithOrder extends SampleCode {
 }
 
 async function loadSampleCode(filename: string): Promise<SampleCodeWithOrder> {
-  const code = await Deno.readTextFile(new URL(filename, INDEX_DIR));
-  const metaText = await Deno.readTextFile(
-    new URL(`${filename}.json`, INDEX_DIR),
+  const code = await readFile(path.join(INDEX_DIR, filename), "utf-8");
+  const metaText = await readFile(
+    path.join(INDEX_DIR, `${filename}.json`),
+    "utf-8",
   );
   const meta: SampleMeta = JSON.parse(metaText);
 

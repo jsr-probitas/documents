@@ -1,8 +1,13 @@
 /**
  * Markdown documentation page template
  */
-import { basePath } from "../../data/docs.ts";
-import { extractTitle, extractToc, parseMarkdown } from "../../lib/markdown.ts";
+import { readFile } from "node:fs/promises";
+import { basePath } from "../../lib/path.ts";
+import {
+  extractTitle,
+  extractToc,
+  parseMarkdown,
+} from "../../lib/markdown.ts";
 import { DocLayout, TableOfContents } from "../components.tsx";
 import { Layout } from "../Layout.tsx";
 import { mainScript } from "../scripts.ts";
@@ -32,9 +37,9 @@ export function MarkdownDoc(
     label: item.label,
   }));
 
-  // Alternate markdown URL (path ends with /, so append index.md)
+  // Alternate markdown URL (e.g., /docs → /docs/index.md, /docs/ → /docs/index.md)
   const alternateMarkdown = markdownPath
-    ? `${basePath}${markdownPath}index.md`
+    ? basePath(`${markdownPath.replace(/\/$/, "")}/index.md`)
     : undefined;
 
   // Build header extra HTML (toolbelt with source link)
@@ -74,6 +79,6 @@ export async function MarkdownDocFromFile(
   markdownPath?: string,
   description?: string,
 ) {
-  const content = await Deno.readTextFile(filePath);
+  const content = await readFile(filePath, "utf-8");
   return MarkdownDoc({ content, titleSuffix, markdownPath, description });
 }

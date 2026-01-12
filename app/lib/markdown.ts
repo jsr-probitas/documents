@@ -1,8 +1,9 @@
 /**
  * Markdown rendering utilities
  */
+import { readFile } from "node:fs/promises";
 import { marked, type Tokens } from "marked";
-import { basePath } from "../data/docs.ts";
+import { basePath } from "./path.ts";
 
 /** Generate slug from text (for heading IDs) */
 function slugify(text: string): string {
@@ -31,7 +32,7 @@ marked.use({
       // Add basePath to internal links (starting with /)
       let href = token.href;
       if (href.startsWith("/") && !href.startsWith("//")) {
-        href = `${basePath}${href}`;
+        href = basePath(href);
       }
       const title = token.title ? ` title="${token.title}"` : "";
       return `<a href="${href}"${title}>${token.text}</a>`;
@@ -117,6 +118,7 @@ function processJsDocLinks(
   options: ApiMarkdownOptions,
 ): string {
   const { typeToPackage, localTypes, currentPackage } = options;
+  const base = basePath("/");
 
   // Match {@link name} or {@linkcode name} with optional description
   // Pattern: {@link(code)? name (optional description)}
@@ -132,14 +134,14 @@ function processJsDocLinks(
 
     // Check if it's a local type in the current package
     if (localTypes?.has(name) && currentPackage) {
-      href = `${basePath}/api/${currentPackage}#${name.toLowerCase()}`;
+      href = `${base}api/${currentPackage}#${name.toLowerCase()}`;
     } // Check if it's in another package
     else if (typeToPackage?.has(name)) {
       const targetPackage = typeToPackage.get(name)!;
-      href = `${basePath}/api/${targetPackage}#${name.toLowerCase()}`;
+      href = `${base}api/${targetPackage}#${name.toLowerCase()}`;
     } // Default: link to current package anchor (best effort)
     else if (currentPackage) {
-      href = `${basePath}/api/${currentPackage}#${name.toLowerCase()}`;
+      href = `${base}api/${currentPackage}#${name.toLowerCase()}`;
     }
 
     // Format the display text
@@ -169,7 +171,7 @@ export function parseApiMarkdown(
 
 /** Read and parse a markdown file */
 export async function readMarkdownFile(path: string): Promise<string> {
-  const content = await Deno.readTextFile(path);
+  const content = await readFile(path, "utf-8");
   return parseMarkdown(content);
 }
 
@@ -184,6 +186,7 @@ export function extractTitle(content: string): string | undefined {
  * Transforms [text](/path) to [text](/basePath/path) for internal links.
  */
 export function rewriteMarkdownLinks(content: string): string {
+  const base = basePath("/");
   // Match markdown links: [text](url) or [text](url "title")
   // Only rewrite internal links starting with /
   return content.replace(
@@ -199,8 +202,12 @@ export function rewriteMarkdownLinks(content: string): string {
       let nextHref = fragment
         ? `${normalizedPath}#${fragment}`
         : normalizedPath;
-      if (basePath) {
-        nextHref = `${basePath}${nextHref}`;
+      if (base && base !== "/") {
+        // Remove leading slash from nextHref to avoid double slashes
+        const cleanPath = nextHref.startsWith("/")
+          ? nextHref.slice(1)
+          : nextHref;
+        nextHref = `${base}${cleanPath}`;
       }
 
       const titlePart = title ?? "";

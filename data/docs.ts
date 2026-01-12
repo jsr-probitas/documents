@@ -2,6 +2,8 @@
  * Documentation pages configuration
  */
 
+import process from "node:process";
+
 export interface DocPage {
   /** URL path (e.g., "/docs/scenario") */
   path: string;
@@ -17,7 +19,7 @@ export interface DocPage {
 
 export const docPages: DocPage[] = [
   {
-    path: "/AI/",
+    path: "/AI",
     file: "./AI.md",
     title: "AI Scenario Testing",
     label: "AI",
@@ -25,14 +27,14 @@ export const docPages: DocPage[] = [
       "How to have AI write and run Probitas scenario tests with Claude plugins",
   },
   {
-    path: "/docs/",
+    path: "/docs",
     file: "./docs/overview.md",
     title: "Overview",
     label: "Overview",
     description: "Introduction to Probitas, quick start, and core concepts",
   },
   {
-    path: "/docs/installation/",
+    path: "/docs/installation",
     file: "./docs/installation.md",
     title: "Installation",
     label: "Installation",
@@ -40,7 +42,7 @@ export const docPages: DocPage[] = [
       "Install Probitas CLI via shell script, Homebrew, or Nix flake with project integration",
   },
   {
-    path: "/docs/scenario/",
+    path: "/docs/scenario",
     file: "./docs/scenario.md",
     title: "Scenario",
     label: "Scenario",
@@ -48,7 +50,7 @@ export const docPages: DocPage[] = [
       "How to write test scenarios with resources, setup hooks, and steps",
   },
   {
-    path: "/docs/client/",
+    path: "/docs/client",
     file: "./docs/client.md",
     title: "Client",
     label: "Client",
@@ -56,7 +58,7 @@ export const docPages: DocPage[] = [
       "Client API reference for HTTP, SQL, gRPC, GraphQL, Redis, MongoDB, and more",
   },
   {
-    path: "/docs/expect/",
+    path: "/docs/expect",
     file: "./docs/expect.md",
     title: "Expect",
     label: "Expect",
@@ -64,7 +66,7 @@ export const docPages: DocPage[] = [
       "Type-safe assertion API for HTTP, SQL, Redis, MongoDB, and other client responses",
   },
   {
-    path: "/docs/configuration/",
+    path: "/docs/configuration",
     file: "./docs/configuration.md",
     title: "Configuration",
     label: "Configuration",
@@ -81,12 +83,11 @@ export const siteMetadata = {
     "Probitas is a scenario-based testing framework for Deno that enables declarative, readable integration tests for APIs, databases, message queues, and other backend services.",
   github: "https://github.com/probitas-test/probitas",
   jsr: "https://jsr.io/@probitas/probitas",
-  baseUrl: Deno.env.get("BASE_URL") ??
-    "https://probitas-test.github.io/documents",
+  baseUrl: process.env.BASE_URL ?? "https://probitas-test.github.io/documents",
 };
 
 /**
  * Base path for all URLs (e.g., "/documents" for GitHub Pages).
  * Set via BASE_PATH environment variable, defaults to empty string.
  */
-export const basePath = Deno.env.get("BASE_PATH") ?? "";
+export const basePath = process.env.BASE_PATH ?? "";

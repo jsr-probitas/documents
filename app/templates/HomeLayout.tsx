@@ -7,8 +7,11 @@
  * - Full-width sections
  */
 import type { Child } from "hono/jsx";
-import { basePath, siteMetadata } from "../data/docs.ts";
+import { siteMetadata } from "../../data/docs.ts";
+import { basePath } from "../lib/path.ts";
 import { themeInitScript } from "./scripts.ts";
+import { SearchModal } from "../components/SearchModal.js";
+import { ScrollToTop } from "../components/ScrollToTop.js";
 
 const GITHUB_URL = "https://github.com/probitas-test/probitas";
 
@@ -61,9 +64,9 @@ export function HomeLayout({ title, children }: HomeLayoutProps) {
         />
         <link href={CDN.fonts} rel="stylesheet" />
         <link rel="stylesheet" href={CDN.tablerIcons} />
-        <link rel="stylesheet" href={`${basePath}/static/common.css`} />
-        <link rel="stylesheet" href={`${basePath}/static/home.css`} />
-        <link rel="icon" href={`${basePath}/static/favicon.ico`} />
+        <link rel="stylesheet" href={basePath("/common.css")} />
+        <link rel="stylesheet" href={basePath("/home.css")} />
+        <link rel="icon" href={basePath("/favicon.ico")} />
         <link
           id="hljs-theme"
           rel="stylesheet"
@@ -82,9 +85,7 @@ export function HomeLayout({ title, children }: HomeLayoutProps) {
         {children}
         <SearchModal />
         <ScrollToTop />
-        <script src={`${basePath}/pagefind/pagefind-ui.js`} />
-        <script dangerouslySetInnerHTML={{ __html: searchScript }} />
-        <script dangerouslySetInnerHTML={{ __html: scrollToTopScript }} />
+        <script src={basePath("/pagefind/pagefind-ui.js")} />
       </body>
     </html>
   );
@@ -118,103 +119,3 @@ function HomeHeader() {
     </header>
   );
 }
-
-function SearchModal() {
-  return (
-    <div
-      id="search-modal"
-      class="search-modal"
-      onclick="closeSearchOnBackdrop(event)"
-    >
-      <div class="search-modal-content">
-        <div class="search-modal-header">
-          <span class="search-modal-title">Search Documentation</span>
-          <button
-            type="button"
-            class="search-modal-close"
-            onclick="closeSearch()"
-            aria-label="Close search"
-          >
-            <i class="ti ti-x" />
-          </button>
-        </div>
-        <div id="search-container" />
-      </div>
-    </div>
-  );
-}
-
-function ScrollToTop() {
-  return (
-    <button
-      type="button"
-      id="scroll-to-top"
-      class="scroll-to-top"
-      onclick="scrollToTop()"
-      aria-label="Scroll to top"
-    >
-      <i class="ti ti-chevron-up" />
-    </button>
-  );
-}
-
-const scrollToTopScript = `
-function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-window.addEventListener('scroll', () => {
-  const btn = document.getElementById('scroll-to-top');
-  if (window.scrollY > 300) {
-    btn.classList.add('visible');
-  } else {
-    btn.classList.remove('visible');
-  }
-});
-`;
-
-const searchScript = `
-let searchInitialized = false;
-
-function openSearch() {
-  const modal = document.getElementById('search-modal');
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  if (!searchInitialized && typeof PagefindUI !== 'undefined') {
-    new PagefindUI({
-      element: '#search-container',
-      showSubResults: true,
-      showImages: false,
-    });
-    searchInitialized = true;
-  }
-
-  setTimeout(() => {
-    const input = modal.querySelector('.pagefind-ui__search-input');
-    if (input) input.focus();
-  }, 100);
-}
-
-function closeSearch() {
-  const modal = document.getElementById('search-modal');
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function closeSearchOnBackdrop(event) {
-  if (event.target.id === 'search-modal') {
-    closeSearch();
-  }
-}
-
-document.addEventListener('keydown', (e) => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault();
-    openSearch();
-  }
-  if (e.key === 'Escape') {
-    closeSearch();
-  }
-});
-`;

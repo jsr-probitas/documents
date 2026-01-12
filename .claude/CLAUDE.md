@@ -4,16 +4,19 @@ Documentation for Probitas - a scenario-based testing framework for Deno.
 
 ## Quick Reference
 
-- **Runtime**: Deno 2.x
-- **Framework**: Hono
+- **Runtime**: Node.js + HonoX + Vite SSG
+- **API Generation**: Deno (for generate-api-docs.ts)
 - **Deploy**: GitHub Pages
 
 ## Commands
 
 ```bash
-deno task dev      # Dev server with watch
-deno task verify   # Run fmt, lint, check, test
-deno task build    # Build static site
+npm run dev        # Dev server with HMR
+npm run build      # Build static site (client + SSG + Pagefind)
+npm run preview    # Preview production build
+
+# API docs generation (requires Deno)
+deno run -A scripts/generate-api-docs.ts
 ```
 
 ## Pre-Completion Verification
@@ -21,7 +24,7 @@ deno task build    # Build static site
 BEFORE reporting task completion, run and ensure zero errors:
 
 ```bash
-deno task verify
+npm run build
 ```
 
 ## Reference Probitas Packages
