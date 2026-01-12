@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting... | Probitas</title>
+  <script>
+    (function() {
+      var path = window.location.pathname;
+      // Redirect /documents/** to /**
+      if (path === '/documents' || path.startsWith('/documents/')) {
+        var newPath = path.replace(/^\/documents/, '') || '/';
+        window.location.replace(newPath + window.location.search + window.location.hash);
+      }
+    })();
+  </script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0 0 1rem;
+      color: #666;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0 0 2rem;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <p>Page not found</p>
+    <p><a href="/">Go to homepage</a></p>
+  </div>
+</body>
+</html>
